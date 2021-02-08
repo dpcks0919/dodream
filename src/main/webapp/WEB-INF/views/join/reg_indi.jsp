@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">비밀번호</span><br><input class="text-input" type="password" name="userpw" id="uswerpw" placeholder="비밀번호 입력">
+                                        <span class="input-title">비밀번호</span><br><input class="text-input" type="password" name="userpw" id="userpw" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="input-content">
                                         <span class="input-title">비밀번호 확인</span><br><input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력">
@@ -78,7 +78,7 @@
                                             <div style="width:2%;"></div>
                                             <div class="select-sex" id="femaleuser" onclick="selectSex(this)">여자</div>
                                         </div>
-                                        <input id="input_sex" type="text" name="usersex" value="male" id="usersex" style="display:none;">
+                                        <input id="input_sex" type="text" name="input_sex" value="male" style="display:none;">
                                     </div>
                                     <div class="input-content">
                                         <span class="input-title">생년월일</span><br>
@@ -95,8 +95,8 @@
                                         <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
-                                            <label><input type="radio" name="mail_rcv" value="agr" id="mail_rcv" checked> 예</label>&nbsp;&nbsp;
-                                            <label><input type="radio" name="mail_rcv" value="dis" id="mail_rcv"> 아니요</label>
+                                            <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked> 예</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="mail_rcv" value="0" id="mail_rcv"> 아니요</label>
                                         </span></span>
                                     </div>
                                     <div class="input-content">
@@ -111,16 +111,19 @@
                                         주변 이웃들의 필요를 문자로 받으실 수 있습니다.
                                         <br>SMS 수신 동의&nbsp;&nbsp;
                                         <span>
-                                            <label><input type="radio" name="sms_rcv" value="agr" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
-                                            <label><input type="radio" name="sms_rcv" value="dis" id="sms_rcv" > 아니요</label>
+                                            <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv" > 아니요</label>
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력">
+	                                     <div class="flex-center">
+	                                        <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력">
+	                                        <div class="input-check"  id="btn-addr-search" style="width:50px;">검색</div>
+	                                    </div>
                                         <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">소속되어 있는 단체</span><br><input class="text-input" type="text" name="usercom" id="usercom" placeholder="정확한 명칭을 적어주세요.">
+                                        <span class="input-title">소속되어 있는 단체</span><br><input class="text-input" type="text" name="orgname" id="orgname" placeholder="정확한 명칭을 적어주세요.">
                                     </div>
                                     <div class="input-content">
                                         <span class="input-title">직위/역할</span><br><input class="text-input" type="text" name="userpos" id="userpos" placeholder="소속이 있다면 직위나 역할을 작성해주세요.">
@@ -146,11 +149,11 @@
             if($sex == "maleuser") {
               $("#maleuser").addClass("selected");
               $("#femaleuser").removeClass("selected");
-              $("#input_sex").val("male");
+              $("#input_sex").val("1");	// 1: male
             } else {
               $("#femaleuser").addClass("selected");
               $("#maleuser").removeClass("selected");
-              $("#input_sex").val("female");
+              $("#input_sex").val("2");	// 2: female
             }
           }
         </script>

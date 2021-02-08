@@ -79,7 +79,7 @@
                       <div class="reg-card request-bgcolor">
                           <div class="card-title"><h4>사회복지기관</h4></div>
                           <p class="select-info">사회복지사들의<br>소속 기관인 경우</p>
-                          <div class="reg-button" onclick="document.location.href='joinForm/org'">가입하기</div>
+                          <div class="reg-button" onclick="document.location.href='/joinForm/org'">가입하기</div>
                       </div>
                       </div>
                   </div>

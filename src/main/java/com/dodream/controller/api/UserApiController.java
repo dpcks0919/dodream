@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.dto.ResponseDto;
+import com.dodream.model.RoleType;
 import com.dodream.model.User;
 import com.dodream.service.UserService;
 
@@ -21,7 +22,18 @@ public class UserApiController {
 	@PostMapping("/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		userService.joinUser(user, principalDetails);
+		//4가지 경우 나눠서 분리 
+		if(user.getUserType().equals(RoleType.INDIVIDUAL)) userService.joinIndividual(user, principalDetails);
+		else if(user.getUserType().equals(RoleType.GROUP)) userService.joinGroup(user, principalDetails);
+		else if(user.getUserType().equals(RoleType.SOCIAL_WORKER)) userService.joinSocialWorker(user, principalDetails);
+		else if(user.getUserType().equals(RoleType.INSTITUTION)) userService.joinInstitution(user, principalDetails);
+		else if(user.getUserType().equals(RoleType.ADMIN)) userService.joinGroup(user, principalDetails);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/addrSearchProc")
+	public ResponseDto<Integer> addrSearch(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
