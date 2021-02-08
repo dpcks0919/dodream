@@ -48,25 +48,26 @@
                         <div class="input-card">
                             <div style="text-align:left;">
                                 <form method="post" action="">
+                                	<input type="hidden" id="type" value="SOCIAL_WORKER"><!--  UserType hidden으로 건네줌 -->
                                     <div class="divider-custom" style="margin-top:0;">
                                         <div class="divider-custom-line" style="background-color: rgb(175, 218, 231);border-color: rgb(175, 218, 231) !important;"></div>
                                         <div style="color:rgb(175, 218, 231)"><h4>추가정보</h4></div>
                                         <div class="divider-custom-line" style="background-color: rgb(175, 218, 231);border-color: rgb(175, 218, 231) !important;"></div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">이메일주소</span><br><input class="text-input" type="text" name="usermail" placeholder="이메일주소 입력">
+                                        <span class="input-title">이메일주소</span><br><input class="text-input" type="text" name="usermail" id="useremail" "placeholder="이메일주소 입력" id="useremail">
                                         <span class="extra-info">응답이 왔을 때 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
-                                            <label><input type="radio" name="mail_rcv" value="agr" checked> 예</label>&nbsp;&nbsp;
-                                            <label><input type="radio" name="mail_rcv" value="dis"> 아니요</label>
+                                            <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked> 예</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="mail_rcv" value="0" id="mail_rcv"> 아니요</label>
                                         </span></span>
                                     </div>
                                     <div class="input-content">
                                         <span class="input-title">전화번호</span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 50px);">
-                                                <input class="text-input" type="text" name="userphone" placeholder="전화번호 입력">
+                                                <input class="text-input" type="text" name="userphone" placeholder="전화번호 입력" id="userphone" >
                                             </div>
                                             <div class="input-check" style="width:50px;">인증</div>
                                         </div>
@@ -74,23 +75,24 @@
                                         응답이 왔을 때 문자로 받으실 수 있습니다.
                                         <br>SMS 수신 동의&nbsp;&nbsp;
                                         <span>
-                                            <label><input type="radio" name="sms_rcv" value="agr" checked> 예</label>&nbsp;&nbsp;
-                                            <label><input type="radio" name="sms_rcv" value="dis"> 아니요</label>
+                                            <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv" > 아니요</label>
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">기관명</span><br><input class="text-input" type="text" name="orgname" placeholder="기관명 입력">
+                                        <span class="input-title">기관명</span><br><input class="text-input" type="text" name="orgname" id="orgname" placeholder="기관명 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">기관전화번호</span><br><input class="text-input" type="text" name="orgphone" placeholder="기관전화번호 입력">
+                                        <span class="input-title">기관전화번호</span><br><input class="text-input" type="text" name="orgphone" id="orgphone" placeholder="기관전화번호 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">기관주소</span><br><input class="text-input" type="text" name="orgaddr" placeholder="도로명 주소 입력">
+                                        <span class="input-title">기관주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력"><!-- 기관주소이지만 useraddr로 들어간다 -->
                                     </div>
                                     <div style="width:100%;">
-                                        <input class="sign-submit-s" type="submit" value="가입하기">
+                                    	<!-- <input class="sign-submit-s" type="submit" value="가입하기"> -->
                                     </div>
                                 </form>
+                                <button id="btn-save" class="sign-submit">가입하기</button>
                             </div>
                         </div>
                     </div>
@@ -126,5 +128,6 @@
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
         <script src="/js/modal.js"></script>
+        <script type="text/javascript" src="/js/join.js"></script>
     </body>
 </html>
