@@ -78,7 +78,7 @@
                                             <div style="width:2%;"></div>
                                             <div class="select-sex" id="femaleuser" onclick="selectSex(this)">여자</div>
                                         </div>
-                                        <input id="input_sex" type="text" name="input_sex" value="male" style="display:none;">
+                                        <input id="input_sex" type="text" name="input_sex" value="1" style="display:none;">
                                     </div>
                                     <div class="input-content">
                                         <span class="input-title">생년월일</span><br>

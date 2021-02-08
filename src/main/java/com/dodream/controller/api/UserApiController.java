@@ -22,6 +22,7 @@ public class UserApiController {
 	@PostMapping("/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
+		System.out.println("usrAPi");
 		//4가지 경우 나눠서 분리 
 		if(user.getUserType().equals(RoleType.INDIVIDUAL)) userService.joinIndividual(user, principalDetails);
 		else if(user.getUserType().equals(RoleType.GROUP)) userService.joinGroup(user, principalDetails);
