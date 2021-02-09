@@ -171,6 +171,8 @@ let index = {
 					else{
 			    		verifyCode = data;	// assigning the rand number(verification code): 전역 변수에 할당 
 						alert("할당된 확인코드: " + verifyCode);
+						/* TimeOut */
+						/*$("#btn-send-text").off("click");*/
 					}
 				}).fail(function(){
 					alert("에러 발생!");
