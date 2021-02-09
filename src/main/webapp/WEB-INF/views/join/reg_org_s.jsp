@@ -48,30 +48,39 @@
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">대표 전화번호</span><br>
+                                        <span class="input-title">대표 전화번호</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 50px);">
-                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">                               
+                                            </div>
+                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>                                          
+                                        </div>
+                                        <div style="height:5px;"></div>
+                                        <div class="flex-center">
+                                            <div style="width:calc(100% - 50px);">                                                
                                                	<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
                                             </div>
-                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>
                                             <div class="input-check" id="btn-code-verify" style="width:50px;">확인</div>
                                         </div>
                                         <span class="extra-info">
-                                        주변 이웃들의 필요를 문자로 받으실 수 있습니다.
-                                        <br>SMS 수신 동의&nbsp;&nbsp;
+                                       		 주변 이웃들의 필요를 문자로 받으실 수 있습니다.
+                                        	<br>SMS 수신 동의&nbsp;&nbsp;
                                         <span>
                                             <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
                                             <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv" > 아니요</label>
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-                                      		<span class="input-title">기관 도로명주소</span><br><input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력">
-	                                        <span class="input-title">상세 주소</span><br><input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="도로명 주소 입력">
+                                    	<span class="input-title">기관 도로명주소</span><span>&nbsp;<em>*</em></span><br>
+	                                    <div class="flex-center">
+	                                    	<div style="width:calc(100% - 50px);">
+	                                        	<input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력" disabled>                           
+	                                        </div>
 	                                        <div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width:50px;">검색</div>
 	                                    </div>
-                                    <div style="width:100%;">
-                                        <!-- <input class="sign-submit-s" type="submit" value="가입하기"> -->
+	                                    <div style="height:5px;"></div>
+	                                    <input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력">
+                                        <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
                                     </div>
                                 </form>
                                 <button id="btn-save" class="sign-submit">가입하기</button>

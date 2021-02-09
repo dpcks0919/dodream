@@ -39,7 +39,29 @@ body {
 										<div class="divider-custom-line"></div>
 									</div>
 									<div class="input-content">
-										<span class="input-title">이메일주소</span><br>
+                                        <span class="input-title">성별</span><span>&nbsp;<em>*</em></span><br>
+                                        <div class="flex-center"style="margin-top:0.5rem;">
+                                            <div class="select-sex selected" id="maleuser" onclick="selectSex(this)">남자</div>
+                                            <div style="width:2%;"></div>
+                                            <div class="select-sex" id="femaleuser" onclick="selectSex(this)">여자</div>
+                                        </div>
+                                        <input id="input_sex" type="text" name="input_sex" value="male" style="display:none;">
+                                    </div>
+                                    <div class="input-content">
+                                        <span class="input-title">생년월일</span><span>&nbsp;<em>*</em></span><br>
+                                        <div class="flex-center" style="margin-top:0.5rem;">
+                                        	<select class="select-date" id="selectyear"><option>2021</option></select>
+                                            <input class="input-date" type="hidden" name="birthyear" id="birthyear">
+                                            <div style="width:0.5%;"></div>
+                                            <select class="select-date" id="selectmonth"><option>02</option></select>
+                                            <input class="input-date" type="hidden" name="birthmonth" id="birthmonth" placeholder="01">
+                                            <div style="width:0.5%;"></div>
+                                            <select class="select-date" id="selectdate"><option>09</option></select>
+                                            <input class="input-date" type="hidden" name="birthdate" id="birthdate" placeholder="19">
+                                        </div>
+                                    </div>
+									<div class="input-content">
+										<span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br>
 										<input class="text-input" type="text" name="usermail" placeholder="이메일주소 입력" id="useremail"> <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. 
 										<br>메일 수신 동의&nbsp;&nbsp;
 											<span> 
@@ -49,30 +71,38 @@ body {
 										</span>
 									</div>
 									<div class="input-content">
-                                        <span class="input-title">전화번호</span><br>
+                                        <span class="input-title">전화번호</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 50px);">
-                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">                               
+                                            </div>
+                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>                                          
+                                        </div>
+                                        <div style="height:5px;"></div>
+                                        <div class="flex-center">
+                                            <div style="width:calc(100% - 50px);">                                                
                                                	<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
                                             </div>
-                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>
                                             <div class="input-check" id="btn-code-verify" style="width:50px;">확인</div>
                                         </div>
                                         <span class="extra-info">
-                                        주변 이웃들의 필요를 문자로 받으실 수 있습니다.
-                                        <br>SMS 수신 동의&nbsp;&nbsp;
+                                       		 주변 이웃들의 필요를 문자로 받으실 수 있습니다.
+                                        	<br>SMS 수신 동의&nbsp;&nbsp;
                                         <span>
                                             <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
                                             <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv" > 아니요</label>
                                         </span></span>
                                     </div>
 									<div class="input-content">
-	                                     <div class="flex-center">
-	                                        <!-- <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력"> -->
-	                                        <span class="input-title">도로명주소</span><br><input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력">
-	                                        <span class="input-title">상세 주소</span><br><input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="도로명 주소 입력">
+                                    	<span class="input-title">도로명주소</span><span>&nbsp;<em>*</em></span><br>
+	                                    <div class="flex-center">
+	                                    	<div style="width:calc(100% - 50px);">
+	                                        	<input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력" disabled>                           
+	                                        </div>
 	                                        <div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width:50px;">검색</div>
 	                                    </div>
+	                                    <div style="height:5px;"></div>
+	                                    <input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력">
                                         <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
                                     </div>
 									<div class="input-content">
