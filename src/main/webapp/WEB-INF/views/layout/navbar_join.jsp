@@ -14,6 +14,7 @@
 			class="navbar-brand js-scroll-trigger" href="#page-top">소식 보기</a> <a class="navbar-brand js-scroll-trigger" href="#page-top">두드림 터치</a> -->
 		<!-- 로그인하기 / 가입하기 -->
 
+
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<!-- <ul class="navbar-nav ml-auto">
 				<li class="nav-item mx-0 mx-lg-1"><a class="py-2 px-0 px-lg-3 rounded js-scroll-trigger nav-link" href="/logout">로그아웃</a></li>
