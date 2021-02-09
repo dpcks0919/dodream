@@ -1,23 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Freelancer - Start Bootstrap Theme</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="/css/styles.css" rel="stylesheet" />
-<link href="/css/register.css" rel="stylesheet" />
-<link href="/css/nav_footer.css" rel="stylesheet" />
+<%@include file="../layout/header_join.jsp" %>    
+
 
 <style>
 body {
@@ -32,7 +15,7 @@ body {
 	<%@include file="../layout/sidebar_front.jsp"%>
 
 	<div id="Wrapper">
-		<%@include file="../layout/navbar.jsp"%>
+		<%@include file="../layout/navbar_join.jsp"%>
 
 		<section class="page-section text-white text-center" id="contact">
 			<div class="container d-flex flex-column">
@@ -46,7 +29,7 @@ body {
 						</div>
 						<div class="input-card">
 							<div style="text-align: left;">
-								<form method="post" action="">
+                                <form method="post" name="regForm" action="">
 									<input type="hidden" id="type" value="INDIVIDUAL">
 									<div class="divider-custom" style="margin-top: 0;">
 										<div class="divider-custom-line"></div>
@@ -66,25 +49,32 @@ body {
 										</span>
 									</div>
 									<div class="input-content">
-										<span class="input-title">전화번호</span><br>
-										<div class="flex-center">
-											<div style="width: calc(100% - 50px);">
-												<input class="text-input" type="text" name="userphone" placeholder="전화번호 입력" id="userphone">
-											</div>
-											<div class="input-check" style="width: 50px;">인증</div>
-										</div>
-										<span class="extra-info"> 주변 이웃들의 필요를 문자로 받으실 수 있습니다. 
-										<br>SMS 수신 동의&nbsp;&nbsp; 
-											<span> 
-												<label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked>예</label>&nbsp;&nbsp; 
-												<label><input type="radio" name="sms_rcv" value="0" id="sms_rcv"> 아니요</label>
-											</span>
-										</span>
-									</div>
+                                        <span class="input-title">전화번호</span><br>
+                                        <div class="flex-center">
+                                            <div style="width:calc(100% - 50px);">
+                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+                                               	<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
+                                            </div>
+                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>
+                                            <div class="input-check" id="btn-code-verify" style="width:50px;">확인</div>
+                                        </div>
+                                        <span class="extra-info">
+                                        주변 이웃들의 필요를 문자로 받으실 수 있습니다.
+                                        <br>SMS 수신 동의&nbsp;&nbsp;
+                                        <span>
+                                            <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv" > 아니요</label>
+                                        </span></span>
+                                    </div>
 									<div class="input-content">
-										<span class="input-title">내 주소</span><br>
-										<input class="text-input" type="text" name="useraddr" placeholder="도로명 주소 입력" id="useraddr"> <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
-									</div>
+	                                     <div class="flex-center">
+	                                        <!-- <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력"> -->
+	                                        <span class="input-title">도로명주소</span><br><input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력">
+	                                        <span class="input-title">상세 주소</span><br><input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="도로명 주소 입력">
+	                                        <div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width:50px;">검색</div>
+	                                    </div>
+                                        <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
+                                    </div>
 									<div class="input-content">
 										<span class="input-title">소속되어 있는 단체</span><br>
 										<input class="text-input" type="text" name="orgname" id="orgname" placeholder="정확한 명칭을 적어주세요.">

@@ -6,9 +6,9 @@
           <div class="footer-left ">
             <div class="" style="text-align:left; line-height:30px; padding:0;">
               <img class="footer-logo" src="image/Logo2.png">
-              <img class="footer-facebook" src="image/footer-facebook.png">
-              <img class="footer-instagram" src="image/footer-instagram.png">
-              <img class="footer-youtube" src="image/footer-youtube.png">
+              <img class="footer-facebook" src="/image/footer-facebook.png">
+              <img class="footer-instagram" src="/image/footer-instagram.png">
+              <img class="footer-youtube" src="/image/footer-youtube.png">
             </div>
             <div class="footer-text">
               <p style="margin-top:3%;" >주소: 경북 포항시 북구 흥해읍 한동로 513번길 43-1 202호 (우편번호: 37553)</p>
@@ -38,7 +38,7 @@
       <div class="copyright py-4 text-center dodream-copyright">
             <img class="footer-logo" src="image/Logo2.png">
             <small>대표 이종민 | 전화: 054-262-1070 이메일 dodream.touch@gmail.com</small>
-            <img class="footer-facebook" src="image/footer-facebook.png">
-            <img class="footer-instagram" src="image/footer-instagram.png">
-            <img class="footer-youtube" src="image/footer-youtube.png">
+            <img class="footer-facebook" src="/image/footer-facebook.png">
+            <img class="footer-instagram" src="/image/footer-instagram.png">
+            <img class="footer-youtube" src="/image/footer-youtube.png">
       </div>

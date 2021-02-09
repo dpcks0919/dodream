@@ -83,7 +83,10 @@ spring:
            
 social:
   password: dodream1234
-            
-            
-
-           
+  
+api:
+  sms:
+    api-key: NCSOSP7IP6LI47WT
+    api-secret: EVJACJDVXCTXW2ODT28UXRDIZHPZ9TUL
+    send-phone: '01068363758'
+  

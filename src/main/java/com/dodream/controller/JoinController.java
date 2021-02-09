@@ -3,6 +3,7 @@ package com.dodream.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JoinController {
@@ -31,6 +32,11 @@ public class JoinController {
 	public String joinForm(@PathVariable(value="type") String type) {
 		System.out.println(type);
 		return "join/reg_"+type; 
+	}
+	
+	@RequestMapping(value="/jusoPopup")
+	public String jusoPopup() {
+		return "join/jusoPopup";
 	}
 
 }

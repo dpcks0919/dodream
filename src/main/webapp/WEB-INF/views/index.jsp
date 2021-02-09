@@ -1,230 +1,259 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"/>
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>두드림 터치 메인 페이지</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/css/styles.css" rel="stylesheet" />
-        <link href="/css/main.css" rel="stylesheet" />
-        <link href="/css/nav_footer.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>두드림 터치 메인 페이지</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/styles.css" rel="stylesheet" />
+<link href="/css/main.css" rel="stylesheet" />
+<link href="/css/nav_footer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4407e6aa270afe5752d07352835fb75f"></script>
 
-    <body id="page-top">
-      <div id="menu-back" onclick="closeNav()"></div>
-      <%@include file="layout/sidebar_front.jsp" %>
+</head>
 
-      <div id="Wrapper" style="width:100%;">
-             <!-- Navigation-->
-             <%@include file="layout/navbar.jsp" %>
+<body id="page-top">
+	<div id="menu-back" onclick="closeNav()"></div>
+	<%@include file="layout/sidebar_front.jsp"%>
 
-            <!-- Carousel header -->
-            <header class="carousel-masthead text-white text-center">
-              <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" >
-                <ol class="carousel-indicators">
-                  <li class="first-link" data-target="#carouselExampleCaptions" data-slide-to="0"></li>
-                  <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="image/Main1.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-md-block">
-                      <a class=" rounded main1-register" href="#about">소식보기</a>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <img src="image/Main2.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption2 d-md-block">
-                      <a class="py-2 rounded js-scroll-trigger main3-register " href="#about">자세히보기</a>
-                    </div>
-                    <iframe class="carousel-youtube" src="https://www.youtube.com/embed/9Yfaj0oTw18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  </div>
-                  <div class="carousel-item">
-                    <img src="image/Main3.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption3 d-md-block">
-                      <a class="py-2 rounded js-scroll-trigger main3-register" href="request/request_list.html">요청보기</a>
-                    </div>
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
-            </header>
-            <!-- map Section -->
-            <section class="page-section3 help text-center " id="portfolio">
-              <p class="text-center text-uppercase text-secondary mb-0 page-section3-title">내 주변에는 어떤 이웃이 도움을 필요로 할까요?<br>지금 바로 지도를 통해 확인해 보세요!</p>
-              <div class="container ">
-                  <div style="text-align:right;">
-                    <input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요.">
-                    <i class="fas fa-search search-icon"></i>
-                  </div>
-                  <div class="sec3-middle ">
-                    <div class="left sec3-middle-left">
-                      <span class="sec3-text1">돕고 싶은 이웃</span>
-                      <button class="tbox-center tbox-small">노인</button>
-                      <button class="tbox-center tbox-small">아이</button>
-                      <button class="tbox-center tbox-small">장애인</button>
-                      <button class="tbox-center tbox-small">기타</button>
-                    </div>
-                    <div class="left sec3-middle-right">
-                      <span class="sec3-text1">돕고 싶은 재화</span>
-                      <button class="tbox-center tbox-small">노인</button>
-                      <button class="tbox-center tbox-small">아이</button>
-                      <button class="tbox-center tbox-small">장애인</button>
-                      <button class="tbox-center tbox-small">기타</button>
-                    </div>
-                    <br>
-                  </div>
-                  <!-- <div style="position:absolute;bottom:0;width:70%;left:24%;transform:translate(45%,-150%);background-color: rgba(255, 255, 255, 0.2);border:1px solid white;border-radius:16px;padding:2px 20px 2px 20px;font-size:14pt;font-weight:bold;cursor:pointer;">회원가입</div> -->
-                  <div class="text-center main-map ">지도 들어갈 예정</div>
-                <div class="container-sec3">
-                  <div class="sec3-bottom-right-tmp left">
-                    <p style="color:white;" class="sec3-bottom-right-title">어떤 도움이든, <br>당신의 도움은 시작이 됩니다.</p>
-                    <span style="color:white; margin-bottom:7vw; font-weight:bold;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</span>
-                    <a class="py-2 rounded js-scroll-trigger main4-register" href="#about">시작하기</a>
-                  </div>
-                  <div class="sec3-bottom-left left ">
-                    <div class="four_box">
-                      <img class="fbox-image" src="image/product.png">
-                      <p class="fbox-title">물품</p>
-                      <p class="fbox-content">나에게 작은 것이 누군가에게는</p>
-                      <p class="fbox-content">소중한 것이 될 수 있습니다.</p>
-                    </div>
-                    <div class="four_box">
-                      <img class="fbox-image" src="image/money.png">
-                      <p class="fbox-title">재정</p>
-                      <p class="fbox-content">작은 금액이라도</p>
-                      <p class="fbox-content">누군가의 삶을 바꾸실 수 있습니다.</p>
-                    </div>
-                    <div class="four_box">
-                      <img class="fbox-image" src="image/service.png">
-                      <p class="fbox-title">서비스</p>
-                      <p class="fbox-content">우리 주변에는 봉사, 멘토링 등을</p>
-                      <p class="fbox-content">필요로 하는 곳이 많습니다.</p>
-                    </div>
-                    <div class="four_box">
-                      <img class="fbox-image" src="image/plus.png">
-                      <p class="fbox-title">기타</p>
-                      <p class="fbox-content">두드림 터치는 주변의 다양한 필요를 </p>
-                      <p class="fbox-content">확인할 수 있게 해줍니다.</p>
-                    </div>
-                  </div>
-                  <div class="sec3-bottom-right left ">
-                    <p style="color:white;" class="sec3-bottom-right-title">어떤 도움이든, <br>당신의 도움은 시작이 됩니다.</p>
-                    <h4 style="color:white; margin-bottom:7vw;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</h3>
-                    <a class="py-2 rounded js-scroll-trigger main4-register" href="#about">시작하기</a>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <!-- news Section-->
-            <section class="page-section-news" id="about" style="text-align:center;">
-                <div class="container-news">
-                    <!-- About Section Heading-->
-                    <div class="news-title-div">
-                      <div class="news-title-line"></div>
-                      <div class="news-title">두드림터치 소식</div>
-                      <div class="news-title-line"></div>
-                    </div>
-                    <div class="news-body ">
-                      <div class="news-body-left">
-                        <div class="image-inline">
-                        <div class="four_box-news">
-                          <img class="news-image" src="image/news1.jpg">
-                          <div class="news-image-title">이 게시물의 제목</div>
-                        </div>
-                        <div class="four_box-news">
-                          <img class="news-image" src="image/news2.jpeg">
-                          <div class="news-image-title">이 게시물의 제목</div>
-                        </div>
-                      </div>
-                      <div class="image-inline">
-                        <div class="four_box-news">
-                          <img class="news-image" src="image/news3.jpg">
-                          <div class="news-image-title">이 게시물의 제목</div>
-                        </div>
-                        <div class="four_box-news">
-                          <img class="news-image" src="image/news4.jpg">
-                          <div class="news-image-title">이 게시물의 제목asdasdas</div>
-                        </div>
-                      </div>
-                      </div>
-                      <div class="news-body-right">
-                        <!-- 소식에 대한 리스트 -->
-                        <p class="news-body-right-content">[9.30 두드림터치 소식] 두드림터치, 한동대학교</p>
-                        <p class="news-body-right-content">[9.8 두드림터치 소식] 경북포항지역자활센터와</p>
-                        <p class="news-body-right-content">...</p>
-                        <p class="news-body-right-content">...</p>
-                        <p class="news-body-right-content">...</p>
-                        <p class="news-body-right-content">...</p>
-                        <p class="news-body-right-content">...</p>
-                        <p class="news-body-right-content">...</p>
-                        <p class="news-body-right-content">...</p>
-                      </div>
-                    </div>
-                </div>
-            </section>
+	<div id="Wrapper" style="width: 100%;">
+		<!-- Navigation-->
+		<%@include file="layout/navbar.jsp"%>
 
-            <!-- Contact Section-->
-            <section class="page-section-join" id="join">
-                <div class="container text-center">
-                  <div class="container-join">
-                    <!-- Contact Section Heading-->
-                    <div class="join-title text-white">두드림터치와 함께 하기</div>
-                    <div class="join-body">
-                      <div class="join-body-left">
-                        <p class="join-text1">개인 / 단체</p>
-                        <p class="join-text2">개인, 교회, 동호회 등</p>
-                        <p class="join-text3">우리 지역은 내가/우리가<br>돌보고 싶을 때</p>
-                        <a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
-                      </div>
-                      <div class="join-body-right">
-                        <p class="join-text1">사회복지사 / 기관</p>
-                        <p class="join-text2">민간, 공공 등</p>
-                        <p class="join-text3">자원이 없어<br>이웃을 돌보지 못할 때</p>
-                        <a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </section>
+		<!-- Carousel header -->
+		<header class="carousel-masthead text-white text-center">
+			<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li class="first-link" data-target="#carouselExampleCaptions" data-slide-to="0"></li>
+					<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+					<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="image/Main1.png" class="d-block w-100" alt="...">
+						<div class="carousel-caption d-md-block">
+							<a class=" rounded main1-register" href="#about">소식보기</a>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="image/Main2.png" class="d-block w-100" alt="...">
+						<div class="carousel-caption2 d-md-block">
+							<a class="py-2 rounded js-scroll-trigger main3-register " href="#about">자세히보기</a>
+						</div>
+						<iframe class="carousel-youtube" src="https://www.youtube.com/embed/9Yfaj0oTw18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen></iframe>
+					</div>
+					<div class="carousel-item">
+						<img src="image/Main3.png" class="d-block w-100" alt="...">
+						<div class="carousel-caption3 d-md-block">
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="request/request_list.html">요청보기</a>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+				</a>
+			</div>
+		</header>
+		<!-- map Section -->
+		<section class="page-section3 help text-center " id="portfolio">
+			<p class="text-center text-uppercase text-secondary mb-0 page-section3-title">
+				내 주변에는 어떤 이웃이 도움을 필요로 할까요?<br>지금 바로 지도를 통해 확인해 보세요!
+			</p>
+			<div class="container ">
+				<div style="text-align: right;">
+					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요."> <i class="fas fa-search search-icon"></i>
+				</div>
+				<div class="sec3-middle ">
+					<div class="left sec3-middle-left">
+						<span class="sec3-text1">돕고 싶은 이웃</span>
+						<button class="tbox-center tbox-small">노인</button>
+						<button class="tbox-center tbox-small">아이</button>
+						<button class="tbox-center tbox-small">장애인</button>
+						<button class="tbox-center tbox-small">기타</button>
+					</div>
+					<div class="left sec3-middle-right">
+						<span class="sec3-text1">돕고 싶은 재화</span>
+						<button class="tbox-center tbox-small">노인</button>
+						<button class="tbox-center tbox-small">아이</button>
+						<button class="tbox-center tbox-small">장애인</button>
+						<button class="tbox-center tbox-small">기타</button>
+					</div>
+					<br>
+				</div>
+				<!-- <div style="position:absolute;bottom:0;width:70%;left:24%;transform:translate(45%,-150%);background-color: rgba(255, 255, 255, 0.2);border:1px solid white;border-radius:16px;padding:2px 20px 2px 20px;font-size:14pt;font-weight:bold;cursor:pointer;">회원가입</div> -->
+				<div class="text-center main-map" id="map"></div>
+				<div class="container-sec3">
+					<div class="sec3-bottom-right-tmp left">
+						<p style="color: white;" class="sec3-bottom-right-title">
+							어떤 도움이든, <br>당신의 도움은 시작이 됩니다.
+						</p>
+						<span style="color: white; margin-bottom: 7vw; font-weight: bold;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</span> <a class="py-2 rounded js-scroll-trigger main4-register"
+							href="#about">시작하기</a>
+					</div>
+					<div class="sec3-bottom-left left ">
+						<div class="four_box">
+							<img class="fbox-image" src="image/product.png">
+							<p class="fbox-title">물품</p>
+							<p class="fbox-content">나에게 작은 것이 누군가에게는</p>
+							<p class="fbox-content">소중한 것이 될 수 있습니다.</p>
+						</div>
+						<div class="four_box">
+							<img class="fbox-image" src="image/money.png">
+							<p class="fbox-title">재정</p>
+							<p class="fbox-content">작은 금액이라도</p>
+							<p class="fbox-content">누군가의 삶을 바꾸실 수 있습니다.</p>
+						</div>
+						<div class="four_box">
+							<img class="fbox-image" src="image/service.png">
+							<p class="fbox-title">서비스</p>
+							<p class="fbox-content">우리 주변에는 봉사, 멘토링 등을</p>
+							<p class="fbox-content">필요로 하는 곳이 많습니다.</p>
+						</div>
+						<div class="four_box">
+							<img class="fbox-image" src="image/plus.png">
+							<p class="fbox-title">기타</p>
+							<p class="fbox-content">두드림 터치는 주변의 다양한 필요를</p>
+							<p class="fbox-content">확인할 수 있게 해줍니다.</p>
+						</div>
+					</div>
+					<div class="sec3-bottom-right left ">
+						<p style="color: white;" class="sec3-bottom-right-title">
+							어떤 도움이든, <br>당신의 도움은 시작이 됩니다.
+						</p>
+						<h4 style="color: white; margin-bottom: 7vw;" class="sec3-bottom-right-content">
+							나의 손길이 하나의 시작이 되다.
+							</h3>
+							<a class="py-2 rounded js-scroll-trigger main4-register" href="#about">시작하기</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- news Section-->
+		<section class="page-section-news" id="about" style="text-align: center;">
+			<div class="container-news">
+				<!-- About Section Heading-->
+				<div class="news-title-div">
+					<div class="news-title-line"></div>
+					<div class="news-title">두드림터치 소식</div>
+					<div class="news-title-line"></div>
+				</div>
+				<div class="news-body ">
+					<div class="news-body-left">
+						<div class="image-inline">
+							<div class="four_box-news">
+								<img class="news-image" src="image/news1.jpg">
+								<div class="news-image-title">이 게시물의 제목</div>
+							</div>
+							<div class="four_box-news">
+								<img class="news-image" src="image/news2.jpeg">
+								<div class="news-image-title">이 게시물의 제목</div>
+							</div>
+						</div>
+						<div class="image-inline">
+							<div class="four_box-news">
+								<img class="news-image" src="image/news3.jpg">
+								<div class="news-image-title">이 게시물의 제목</div>
+							</div>
+							<div class="four_box-news">
+								<img class="news-image" src="image/news4.jpg">
+								<div class="news-image-title">이 게시물의 제목</div>
+							</div>
+						</div>
+					</div>
+					<div class="news-body-right">
+						<!-- 소식에 대한 리스트 -->
+						<p class="news-body-right-content">[9.30 두드림터치 소식] 두드림터치, 한동대학교</p>
+						<p class="news-body-right-content">[9.8 두드림터치 소식] 경북포항지역자활센터와</p>
+						<p class="news-body-right-content">...</p>
+						<p class="news-body-right-content">...</p>
+						<p class="news-body-right-content">...</p>
+						<p class="news-body-right-content">...</p>
+						<p class="news-body-right-content">...</p>
+						<p class="news-body-right-content">...</p>
+						<p class="news-body-right-content">...</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-            <!-- Footer-->
-            <%@include file="layout/footer.jsp" %>
-  </div>
-      <%@include file="layout/sidebar_back.jsp" %>
+		<!-- Contact Section-->
+		<section class="page-section-join" id="join">
+			<div class="container text-center">
+				<div class="container-join">
+					<!-- Contact Section Heading-->
+					<div class="join-title text-white">두드림터치와 함께 하기</div>
+					<div class="join-body">
+						<div class="join-body-left">
+							<p class="join-text1">개인 / 단체</p>
+							<p class="join-text2">개인, 교회, 동호회 등</p>
+							<p class="join-text3">
+								우리 지역은 내가/우리가<br>돌보고 싶을 때
+							</p>
+							<a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
+						</div>
+						<div class="join-body-right">
+							<p class="join-text1">사회복지사 / 기관</p>
+							<p class="join-text2">민간, 공공 등</p>
+							<p class="join-text3">
+								자원이 없어<br>이웃을 돌보지 못할 때 ${principal.user.loginCount}
+							</p>
+							<a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Footer-->
+		<%@include file="layout/footer.jsp"%>
+	</div>
+	<%@include file="layout/sidebar_back.jsp"%>
 
+	<script>
+	var lati, longi;
+	
+	<c:choose>
+		<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+			lati = 36.1023014256562;
+			longi = 129.389266058166;
+		</c:when>
+		<c:otherwise>
+			lati = ${principal.user.latitude};
+		  	longi = ${principal.user.longitude};
+		</c:otherwise>
+	</c:choose>
+	
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
-        <!-- Core theme JS-->
-        <script src="/js/scripts.js"></script>
-        <script src="/js/modal.js"></script>
-    </body>
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+	</script>
+	<!-- Bootstrap core JS-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Third party plugin JS-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+	<!-- Contact form JS-->
+	<script src="assets/mail/jqBootstrapValidation.js"></script>
+	<script src="assets/mail/contact_me.js"></script>
+	<!-- Core theme JS-->
+	<script src="/js/scripts.js"></script>
+	<script src="/js/modal.js"></script>
+</body>
 </html>
- 
