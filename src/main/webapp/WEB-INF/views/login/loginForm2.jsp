@@ -146,7 +146,7 @@
           <%@include file="../layout/sidebar_front.jsp" %>
  
         <div id="Wrapper" style="height:auto;overflow:visible;">
-           <%@include file="../layout/navbar.jsp" %>
+           <%@include file="../layout/navbar_join.jsp" %>
            <%@include file="../layout/sidebar_back.jsp" %> 
 
         <!-- Masthead-->

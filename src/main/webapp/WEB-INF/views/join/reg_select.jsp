@@ -29,7 +29,7 @@
 
         <div id="Wrapper">
         <!-- Navigation-->
-		<%@include file="../layout/navbar.jsp" %> 
+		<%@include file="../layout/navbar_join.jsp" %> 
 
         <!-- Masthead-->
         <header class="bg-primary text-white text-center gradient-bgcolor">

@@ -1,25 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"/>
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/css/styles.css" rel="stylesheet" />
-        <link href="/css/register.css" rel="stylesheet" />
-        <link href="/css/nav_footer.css" rel="stylesheet" />
-        
+<%@include file="../layout/header_join.jsp" %>    
+    
         <style>
           body {
             background-color: rgb(175, 218, 231);
@@ -34,7 +16,7 @@
 
 
         <div id="Wrapper">
-          <%@include file="../layout/navbar.jsp" %> 
+          <%@include file="../layout/navbar_join.jsp" %> 
 
         <section class="page-section text-white text-center" id="contact">
             <div class="container d-flex flex-column">
@@ -46,15 +28,15 @@
                         </div>
                         <div class="input-card">
                             <div style="text-align:left;">
-                                <form method="post" action="">
+                                <form method="post" name="regForm" action="">
                                 	<input type="hidden" id="type" value="INDIVIDUAL">
                                     <div class="input-content">
-                                        <span class="input-title">아이디</span><br>
+                                        <span class="input-title" >아이디</span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 60px);">
                                                 <input class="text-input" type="text" name="userid" id="userid" placeholder="아이디 입력">
                                             </div>
-                                            <div class="input-check">중복 확인</div>
+                                            <div class="input-check" id="btn-id-check" >중복 확인</div>
                                         </div>
                                     </div>
                                     <div class="input-content">
@@ -116,9 +98,11 @@
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-	                                     <div class="flex-center">
-	                                        <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력">
-	                                        <div class="input-check"  id="btn-addr-search" style="width:50px;">검색</div>
+	                                    <div class="flex-center">
+	                                        <!-- <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력"> -->
+	                                        <span class="input-title">도로명주소</span><br><input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력">
+	                                        <span class="input-title">상세 주소</span><br><input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="도로명 주소 입력">
+	                                        <div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width:50px;">검색</div>
 	                                    </div>
                                         <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
                                     </div>

@@ -63,13 +63,13 @@ public class User {
 	
 	@Column(nullable = false)
 	private String address;
-//	
-//	@Column(nullable = false)
-//	private double latitude;
-//	
-//	@Column(nullable = false)
-//	private double longitude;
-//	
+	
+	@Column(nullable = false)
+	private double latitude;
+	
+	@Column(nullable = false)
+	private double longitude;
+	
 	@Column(columnDefinition = "int default 0")
 	private int showFlag;
 	
