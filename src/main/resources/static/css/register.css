@@ -179,6 +179,7 @@ input[type='radio']:checked {
 }
 .select-sex, .select-addr {
   width:49%;
+  height:1.5rem;
   padding:1px 2px 1px 2px;
   border:1.8px solid lightgray;
   color:lightgray;
@@ -192,6 +193,7 @@ input[type='radio']:checked {
 }
 .select-date {
   width:33%;
+  height:1.5rem;
   padding:1px 2px 1px 2px;
   border:1.8px solid lightgray;
   text-align:center;
