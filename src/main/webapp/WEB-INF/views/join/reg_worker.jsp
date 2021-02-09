@@ -65,11 +65,11 @@
                                     <div class="input-content">
                                         <span class="input-title">생년월일</span><br>
                                         <div class="flex-center" style="margin-top:0.5rem;">
-                                            <div class="select-date"><input class="input-date" type="text" name="birthyear"  id="birthyear" placeholder="2020"></div>
+                                            <div class="select-date"><input class="input-date" type="number" name="birthyear"  id="birthyear" placeholder="2020"></div>
                                             <div style="width:0.5%;"></div>
-                                            <div class="select-date"><input class="input-date" type="text" name="birthmonth" id="birthmonth" placeholder="01"></div>
+                                            <div class="select-date"><input class="input-date" type="number" name="birthmonth" id="birthmonth" placeholder="01"></div>
                                             <div style="width:0.5%;"></div>
-                                            <div class="select-date"><input class="input-date" type="text" name="birthdate" id="birthdate" placeholder="19"></div>
+                                            <div class="select-date"><input class="input-date" type="number" name="birthdate" id="birthdate" placeholder="19"></div>
                                         </div>
                                     </div>
                                     <div class="input-content">
