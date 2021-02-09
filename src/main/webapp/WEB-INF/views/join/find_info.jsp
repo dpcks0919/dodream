@@ -20,7 +20,7 @@
         <link href="/css/register.css" rel="stylesheet" />
         <link href="/css/nav_footer.css" rel="stylesheet" />
     </head>
-	<!-- younghwan -->
+	<!-- younghwan11 -->
     <body id="page-top">
         <!-- Navigation-->
         <div id="menu-back" onclick="closeNav()"></div>
