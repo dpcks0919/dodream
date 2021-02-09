@@ -4,6 +4,10 @@
   font-family: "NanumSquareR";
 }
 
+em {
+  color: red;	
+}
+
 input[type=password] {
   font-family: "Noto Sans";
 }
