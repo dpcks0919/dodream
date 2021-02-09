@@ -31,7 +31,7 @@
                                 <form method="post" name="regForm" action="">
                                 	<input type="hidden" id="type" value="INDIVIDUAL">
                                     <div class="input-content">
-                                        <span class="input-title" >아이디</span><br>
+                                        <span class="input-title">아이디</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 60px);">
                                                 <input class="text-input" type="text" name="userid" id="userid" placeholder="아이디 입력">
@@ -40,10 +40,10 @@
                                         </div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">비밀번호</span><br><input class="text-input" type="password" name="userpw" id="userpw" placeholder="비밀번호 입력">
+                                        <span class="input-title">비밀번호</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpw" id="userpw" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">비밀번호 확인</span><br><input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력">
+                                        <span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -51,10 +51,10 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">이름</span><br><input class="text-input" type="text" name="username" id="username" placeholder="이름 입력">
+                                        <span class="input-title">이름</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="username" id="username" placeholder="이름 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">성별</span><br>
+                                        <span class="input-title">성별</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center"style="margin-top:0.5rem;">
                                             <div class="select-sex selected" id="maleuser" onclick="selectSex(this)">남자</div>
                                             <div style="width:2%;"></div>
@@ -63,17 +63,20 @@
                                         <input id="input_sex" type="text" name="input_sex" value="1" style="display:none;">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">생년월일</span><br>
+                                        <span class="input-title">생년월일</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center" style="margin-top:0.5rem;">
-                                            <div class="select-date"><input class="input-date" type="text" name="birthyear" id="birthyear" placeholder="2020"></div>
+                                        	<select class="select-date" id="selectyear"><option>2021</option></select>
+                                            <input class="input-date" type="hidden" name="birthyear" id="birthyear">
                                             <div style="width:0.5%;"></div>
-                                            <div class="select-date"><input class="input-date" type="text" name="birthmonth" id="birthmonth" placeholder="01"></div>
+                                            <select class="select-date" id="selectmonth"><option>02</option></select>
+                                            <input class="input-date" type="hidden" name="birthmonth" id="birthmonth" placeholder="01">
                                             <div style="width:0.5%;"></div>
-                                            <div class="select-date"><input class="input-date" type="text" name="birthdate" id="birthdate" placeholder="19"></div>
+                                            <select class="select-date" id="selectdate"><option>09</option></select>
+                                            <input class="input-date" type="hidden" name="birthdate" id="birthdate" placeholder="19">
                                         </div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">이메일주소</span><br><input class="text-input" type="text" name="usermail" id="useremail" placeholder="이메일주소 입력">
+                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="usermail" id="useremail" placeholder="이메일주소 입력">
                                         <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
@@ -82,30 +85,38 @@
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">전화번호</span><br>
+                                        <span class="input-title">전화번호</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 50px);">
-                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+                                                <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">                               
+                                            </div>
+                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>                                          
+                                        </div>
+                                        <div style="height:5px;"></div>
+                                        <div class="flex-center">
+                                            <div style="width:calc(100% - 50px);">                                                
                                                	<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
                                             </div>
-                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>
                                             <div class="input-check" id="btn-code-verify" style="width:50px;">확인</div>
                                         </div>
                                         <span class="extra-info">
-                                        주변 이웃들의 필요를 문자로 받으실 수 있습니다.
-                                        <br>SMS 수신 동의&nbsp;&nbsp;
+                                       		 주변 이웃들의 필요를 문자로 받으실 수 있습니다.
+                                        	<br>SMS 수신 동의&nbsp;&nbsp;
                                         <span>
                                             <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked> 예</label>&nbsp;&nbsp;
                                             <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv" > 아니요</label>
                                         </span></span>
                                     </div>
                                     <div class="input-content">
+                                    	<span class="input-title">도로명주소</span><span>&nbsp;<em>*</em></span><br>
 	                                    <div class="flex-center">
-	                                        <!-- <span class="input-title">내 주소</span><br><input class="text-input" type="text" name="useraddr" id="useraddr" placeholder="도로명 주소 입력"> -->
-	                                        <span class="input-title">도로명주소</span><br><input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력">
-	                                        <span class="input-title">상세 주소</span><br><input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="도로명 주소 입력">
+	                                    	<div style="width:calc(100% - 50px);">
+	                                        	<input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력" disabled>                           
+	                                        </div>
 	                                        <div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width:50px;">검색</div>
 	                                    </div>
+	                                    <div style="height:5px;"></div>
+	                                    <input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력">
                                         <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
                                     </div>
                                     <div class="input-content">
@@ -113,9 +124,6 @@
                                     </div>
                                     <div class="input-content">
                                         <span class="input-title">직위/역할</span><br><input class="text-input" type="text" name="userpos" id="userpos" placeholder="소속이 있다면 직위나 역할을 작성해주세요.">
-                                    </div>
-                                    <div style="width:100%;">
-                                       <!--  <input class="sign-submit" type="submit" value="가입하기"> -->
                                     </div>
                                 </form>
                                 <button id="btn-save" class="sign-submit">가입하기</button>
@@ -129,7 +137,6 @@
         <%@include file="../layout/sidebar_back.jsp" %>
 
         <script>
-
           function selectSex(sex){
             var $sex = sex.id;
             if($sex == "maleuser") {
