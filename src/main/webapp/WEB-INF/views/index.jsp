@@ -57,7 +57,7 @@
 					<div class="carousel-item">
 						<img src="image/Main3.png" class="d-block w-100" alt="...">
 						<div class="carousel-caption3 d-md-block">
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="request/request_list.html">요청보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
 						</div>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 							어떤 도움이든, <br>당신의 도움은 시작이 됩니다.
 						</p>
 						<span style="color: white; margin-bottom: 7vw; font-weight: bold;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</span> <a class="py-2 rounded js-scroll-trigger main4-register"
-							href="#about">시작하기</a>
+							href="/loginForm">시작하기</a>
 					</div>
 					<div class="sec3-bottom-left left ">
 						<div class="four_box">
@@ -135,7 +135,7 @@
 						<h4 style="color: white; margin-bottom: 7vw;" class="sec3-bottom-right-content">
 							나의 손길이 하나의 시작이 되다.
 							</h3>
-							<a class="py-2 rounded js-scroll-trigger main4-register" href="#about">시작하기</a>
+							<a class="py-2 rounded js-scroll-trigger main4-register" href="/loginForm">시작하기</a>
 					</div>
 				</div>
 			</div>
@@ -201,7 +201,7 @@
 							<p class="join-text3">
 								우리 지역은 내가/우리가<br>돌보고 싶을 때
 							</p>
-							<a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
+							<a class="py-2 rounded js-scroll-trigger join-button" href="/joinForm">가입하기</a>
 						</div>
 						<div class="join-body-right">
 							<p class="join-text1">사회복지사 / 기관</p>
@@ -209,7 +209,7 @@
 							<p class="join-text3">
 								자원이 없어<br>이웃을 돌보지 못할 때 ${principal.user.loginCount}
 							</p>
-							<a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
+							<a class="py-2 rounded js-scroll-trigger join-button" href="/joinForm">가입하기</a>
 						</div>
 					</div>
 				</div>
