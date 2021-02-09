@@ -44,7 +44,7 @@ public class UserService {
 	public void joinIndividual(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
 		if( principalDetails != null ) {
-			System.out.println("(개인)소설 회원가입"); 
+			System.out.println("(개인),소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setUserName(principalDetails.getUser().getUserName());
