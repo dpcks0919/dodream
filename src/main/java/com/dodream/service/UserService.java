@@ -55,7 +55,7 @@ public class UserService {
 			user.setLoginPassword(encPassword);
 		}
 		
-		user.setStateFlag(StatusType.WAITING);
+		user.setStateFlag(StatusType.APPROVED);
 		user.setLoginCount(1);
 
 		userRepository.save(user);
@@ -78,7 +78,7 @@ public class UserService {
 		// 공통 사항 
 		user.setOrgPhone(user.getUserPhone());
 		user.setOrgName(user.getUserName());
-		user.setStateFlag(StatusType.WAITING);
+		user.setStateFlag(StatusType.APPROVED);
 		user.setLoginCount(1);
 		
 		System.out.println("OrgPhone: " + user.getOrgPhone());

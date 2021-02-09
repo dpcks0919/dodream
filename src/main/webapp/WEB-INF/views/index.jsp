@@ -207,7 +207,7 @@
 							<p class="join-text1">사회복지사 / 기관</p>
 							<p class="join-text2">민간, 공공 등</p>
 							<p class="join-text3">
-								자원이 없어<br>이웃을 돌보지 못할 때 ${principal.user.loginCount}
+								자원이 없어<br>이웃을 돌보지 못할 때
 							</p>
 							<a class="py-2 rounded js-scroll-trigger join-button" href="#about">가입하기</a>
 						</div>
