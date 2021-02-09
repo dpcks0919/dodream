@@ -65,6 +65,7 @@ public class UserService {
 	public void joinGroup(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {	
 
 		if( principalDetails != null ) {
+			System.out.println("SJTest");
 			System.out.println("(그룹)소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
