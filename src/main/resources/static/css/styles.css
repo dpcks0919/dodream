@@ -3,6 +3,13 @@
   src : url("../fonts/NanumSquareR.ttf");
   font-family: "NanumSquareR";
 }
+
+input[type=password] {
+  font-family: "Noto Sans";
+}
+input[type=password]::placeholder {
+  font-family: "NanumSquareR";
+}
 /*!
 * Start Bootstrap - Freelancer v6.0.5 (https://startbootstrap.com/theme/freelancer)
 * Copyright 2013-2020 Start Bootstrap
