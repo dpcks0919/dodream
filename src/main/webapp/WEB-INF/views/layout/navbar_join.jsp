@@ -9,7 +9,11 @@
 
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top shadow" id="mainNav">
 	<div class="container">
-		<img src="/image/Logo.png" class="logo" onclick="document.location.href='/'">
+		<img src="/image/Logo.png" class="logo" onclick="document.location.href='/'"> 
+		<!-- <a class="navbar-brand js-scroll-trigger" href="/user/request">요청 보기</a> <a
+			class="navbar-brand js-scroll-trigger" href="#page-top">소식 보기</a> <a class="navbar-brand js-scroll-trigger" href="#page-top">두드림 터치</a> -->
+		<!-- 로그인하기 / 가입하기 -->
+
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<!-- <ul class="navbar-nav ml-auto">
