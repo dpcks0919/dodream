@@ -86,8 +86,10 @@
                                         <div class="flex-center">
                                             <div style="width:calc(100% - 50px);">
                                                 <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+                                               	<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
                                             </div>
-                                            <div class="input-check" style="width:50px;">인증</div>
+                                            <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>
+                                            <div class="input-check" id="btn-code-verify" style="width:50px;">확인</div>
                                         </div>
                                         <span class="extra-info">
                                         주변 이웃들의 필요를 문자로 받으실 수 있습니다.
