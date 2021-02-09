@@ -126,8 +126,20 @@ body {
 		</section>
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
-
-
+	<script>
+      function selectSex(sex){
+        var $sex = sex.id;
+        if($sex == "maleuser") {
+          $("#maleuser").addClass("selected");
+          $("#femaleuser").removeClass("selected");
+          $("#input_sex").val("1");	// 1: male
+        } else {
+          $("#femaleuser").addClass("selected");
+          $("#maleuser").removeClass("selected");
+          $("#input_sex").val("2");	// 2: female
+        }
+      }
+    </script>
 	<!-- Bootstrap core JS-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
