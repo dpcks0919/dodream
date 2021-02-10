@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="usermail" id="useremail" "placeholder="이메일주소 입력" id="useremail">
+                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="email" name="usermail" id="useremail" "placeholder="이메일주소 입력" id="useremail">
                                         <span class="extra-info">응답이 왔을 때 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
