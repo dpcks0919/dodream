@@ -43,7 +43,7 @@
                                         <span class="input-title">비밀번호</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpw" id="userpw" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력">
+                                        <span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpwchk" id="userpwchk" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -56,9 +56,9 @@
                                     <div class="input-content">
                                         <span class="input-title">성별</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center"style="margin-top:0.5rem;">
-                                            <div class="select-sex selected" id="maleuser" onclick="selectSex(this)">남자</div>
+                                            <div class="select-sex selected" id="maleuser" onclick="index.selectSex(this)">남자</div>
                                             <div style="width:2%;"></div>
-                                            <div class="select-sex" id="femaleuser" onclick="selectSex(this)">여자</div>
+                                            <div class="select-sex" id="femaleuser" onclick="index.selectSex(this)">여자</div>
                                         </div>
                                         <input id="input_sex" type="text" name="input_sex" value="1" style="display:none;">
                                     </div>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="usermail" id="useremail" placeholder="이메일주소 입력">
+                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력">
                                         <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
@@ -135,20 +135,6 @@
         </section>
         </div>
         <%@include file="../layout/sidebar_back.jsp" %>
-        <script>
-          function selectSex(sex){
-            var $sex = sex.id;
-            if($sex == "maleuser") {
-              $("#maleuser").addClass("selected");
-              $("#femaleuser").removeClass("selected");
-              $("#input_sex").val("1");	// 1: male
-            } else {
-              $("#femaleuser").addClass("selected");
-              $("#maleuser").removeClass("selected");
-              $("#input_sex").val("2");	// 2: female
-            }
-          }
-        </script>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
