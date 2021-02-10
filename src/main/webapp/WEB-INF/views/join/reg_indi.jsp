@@ -65,13 +65,13 @@
                                     <div class="input-content">
                                         <span class="input-title">생년월일</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center" style="margin-top:0.5rem;">
-                                        	<select class="select-date" id="selectyear"><option>2021</option></select>
+                                        	<select class="select-date" id="birthyear"><option>2021</option></select>
                                             <input class="input-date" type="hidden" name="birthyear" id="birthyear">
                                             <div style="width:0.5%;"></div>
-                                            <select class="select-date" id="selectmonth"><option>02</option></select>
+                                            <select class="select-date" id="birthmonth"><option>02</option></select>
                                             <input class="input-date" type="hidden" name="birthmonth" id="birthmonth" placeholder="01">
                                             <div style="width:0.5%;"></div>
-                                            <select class="select-date" id="selectdate"><option>09</option></select>
+                                            <select class="select-date" id="birthdate"><option>09</option></select>
                                             <input class="input-date" type="hidden" name="birthdate" id="birthdate" placeholder="19">
                                         </div>
                                     </div>
@@ -135,7 +135,6 @@
         </section>
         </div>
         <%@include file="../layout/sidebar_back.jsp" %>
-
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
