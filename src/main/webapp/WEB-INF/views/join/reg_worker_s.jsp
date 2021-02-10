@@ -49,14 +49,14 @@
                                     <div class="input-content">
                                         <span class="input-title">생년월일</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center" style="margin-top:0.5rem;">
-                                        	<select class="select-date" id="selectyear"><option>2021</option></select>
+                                        	<select class="select-date" id="selectyear"></select>
                                             <input class="input-date" type="hidden" name="birthyear" id="birthyear">
                                             <div style="width:0.5%;"></div>
-                                            <select class="select-date" id="selectmonth"><option>02</option></select>
-                                            <input class="input-date" type="hidden" name="birthmonth" id="birthmonth" placeholder="01">
+                                            <select class="select-date" id="selectmonth"></select>
+                                            <input class="input-date" type="hidden" name="birthmonth" id="birthmonth">
                                             <div style="width:0.5%;"></div>
-                                            <select class="select-date" id="selectdate"><option>09</option></select>
-                                            <input class="input-date" type="hidden" name="birthdate" id="birthdate" placeholder="19">
+                                            <select class="select-date" id="selectdate"></select>
+                                            <input class="input-date" type="hidden" name="birthdate" id="birthdate">
                                         </div>
                                     </div>
                                     <div class="input-content">
