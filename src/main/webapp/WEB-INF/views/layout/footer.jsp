@@ -5,7 +5,7 @@
         <div class="container-footer ">
           <div class="footer-left ">
             <div class="" style="text-align:left; line-height:30px; padding:0;">
-              <img class="footer-logo" src="image/Logo2.png">
+              <img class="footer-logo" src="/image/Logo2.png">
               <img class="footer-facebook" src="/image/footer-facebook.png" onclick="document.location.href='https://www.facebook.com/%EB%91%90%EB%93%9C%EB%A6%BC%ED%84%B0%EC%B9%98-108099077647721/'">
               <img class="footer-instagram" src="/image/footer-instagram.png" onclick="document.location.href='https://www.instagram.com/dodream.touch/'">
               <img class="footer-youtube" src="/image/footer-youtube.png" onclick="document.location.href='https://youtu.be/9Yfaj0oTw18'">
