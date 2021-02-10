@@ -47,7 +47,7 @@ body {
 									</div>
 									<div class="input-content">
 										<span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br>
-										<input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력">
+										<input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력" id="userpwchk">
 									</div>
 									<div class="divider-custom">
 										<div class="divider-custom-line"></div>
@@ -62,7 +62,7 @@ body {
 									</div>
 									<div class="input-content">
 										<span class="input-title">대표 이메일주소</span><span>&nbsp;<em>*</em></span><br>
-										<input class="text-input" type="text" name="usermail" id="useremail" placeholder="이메일주소 입력"> 
+										<input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력"> 
 										<span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. 
 										<br>메일 수신 동의&nbsp;&nbsp; <span>
 												<label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked> 예</label>&nbsp;&nbsp; 
