@@ -35,6 +35,7 @@ var verifyCode;
 let index = {
 	init: function(){
 		this.dobInputSetup();
+		this.selectBirth();
 		
 		$("#btn-save").on("click", () => { 
 			if(this.validation()) this.save();
@@ -52,6 +53,18 @@ let index = {
 			this.idCheck();		
 		});
 
+	},
+	
+	selectBirth:function(){
+		$('#selectyear').change(function() {
+    		$('#birthyear').val($('#selectyear').val());
+    	});
+    	$('#selectmonth').change(function() {
+    		$('#birthmonth').val($('#selectmonth').val());
+    	});
+    	$('#selectdate').change(function() {
+    		$('#birthdate').val($('#selectdate').val());
+    	});
 	},
 	
 	selectSex:function(sex){
@@ -74,7 +87,6 @@ let index = {
               let month = today.getMonth() + 1;
               let day = today.getDate();
               
-              let str = "";
               for(var i = year; i >= limit; i--) {
                  $("#selectyear").append("<option value='" + i + "'>" + i + "</option>");
               }
