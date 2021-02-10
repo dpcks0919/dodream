@@ -16,5 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Modifying
 	@Query(value = " update user set login_count = login_count + 1 where id = ?1 ", nativeQuery = true)
 	public void increaseLoginCount(int id);
+
+	public User findByLoginIdAndLoginPassword(String loginId, String loginPassword);
 	
 }
