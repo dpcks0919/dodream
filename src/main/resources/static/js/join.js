@@ -51,6 +51,9 @@ let index = {
 		$("#btn-id-check").on("click", () => { 
 			this.idCheck();		
 		});
+		$("#btn-login").on("click", () => { 
+			this.login();
+		});
 
 	},
 	
@@ -84,7 +87,38 @@ let index = {
               for(var i = 1; i <= 31; i++) {
                  $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
               }
+			$('#selectmonth').val(month).attr('selected', 'selected');
+			$('#selectdate').val(day).attr('selected', 'selected');
 	},	
+	
+	login:function(){
+		let data = {
+			loginId : $("#loginid").val(),
+			loginPassword : $("#loginpw").val(),
+		}
+		
+		alert("LogInID: " + data.loginId);
+		alert("LoginPW: " + data.loginPassword);
+		
+		$.ajax({
+			//로그인 수행 요청.
+			type: "POST",
+			url: "/loginProc",
+			data: JSON.stringify(data), //json으로 변경, 
+			contentType: "application/json; charset = utf-8 ",  // body 데이터가 어떤 타입인지
+			dataType: "json" 
+		}).done(function(resp){
+			if(resp.status == 500){
+				alert("로그인 실패! 아이디, 비밀번호를 다시 확인해주세요.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+			}else{
+				alert("로그인 되었습니다.");
+				location.href = "/";
+			}
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
+		
+	},
 	
 	save:function(){
 
