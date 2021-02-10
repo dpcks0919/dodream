@@ -157,16 +157,17 @@
                         <h4 align="left" style="color:#e95378;margin-top:1.8vh;">로그인</h4>
                         <form method="post">
                           <div class="idpw-container" style="margin-top: 4vh;color:black;">
-                              <input class="input-id" type="text" name="userid" placeholder="아이디 입력" style="width:100%;height:2.5rem;border:none;border-bottom:2px solid lightgray;">
-                              <input class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" style="width:100%;height:2.5rem;border:none;border-bottom:2px solid lightgray;"><br>
+                              <input class="input-id" type="text" name="userid" placeholder="아이디 입력" style="width:100%;height:2.5rem;border:none;border-bottom:2px solid lightgray;" id="loginid">
+                              <input class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" style="width:100%;height:2.5rem;border:none;border-bottom:2px solid lightgray;" id="loginpw"><br>
                           </div>
                           <div class="checkbox-container">
                               <input type="checkbox" id="is-subscription">
                               <label for="is-subscription">아이디 기억하기</label>
                           </div>
                           <div class="find-container" style="width:100%;text-align:right;font-size:9pt;margin-top:1vh;"><a href="" style="color:black;"><U>아이디/비밀번호 찾기</U></a></div>
-                          <input class="login-submit" type="submit" value="로그인" style="width:100%;padding:6px 1px 6px 1px;background-color:#ed7e95;border:none;border-radius:16px;color:white;font-size:14pt;margin-top:1.5vh;">
-                        </form>
+<!--                           <input class="login-submit" type="submit" value="로그인" style="width:100%;padding:6px 1px 6px 1px;background-color:#ed7e95;border:none;border-radius:16px;color:white;font-size:14pt;margin-top:1.5vh;">
+ -->                        </form>
+                           <button id="btn-login" class="login-submit" type="submit" style="width:100%;padding:6px 1px 6px 1px;background-color:#ed7e95;border:none;border-radius:16px;color:white;font-size:14pt;margin-top:1.5vh;">로그인</button>
                         <div class="login-sns" style="margin-top:5.5vh;">
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -201,5 +202,6 @@
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
         <script src="/js/modal.js"></script>
+        <script type="text/javascript" src="/js/join.js"></script>
     </body>
 </html>
