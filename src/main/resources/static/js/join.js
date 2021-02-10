@@ -34,8 +34,10 @@ var verifyCode;
 
 let index = {
 	init: function(){
-		$("#btn-save").on("click", () => { 		
-			this.save();
+		this.dobInputSetup();
+		
+		$("#btn-save").on("click", () => { 
+			if(this.validation()) this.save();
 		});
 		$("#btn-update").on("click", () => { 
 			this.update();
@@ -51,7 +53,38 @@ let index = {
 		});
 
 	},
+	
+	selectSex:function(sex){
+		let $sex = sex.id;
+			if($sex == "maleuser") {
+			  $("#maleuser").addClass("selected");
+			  $("#femaleuser").removeClass("selected");
+			  $("#input_sex").val("1");	// 1: male
+			} else {
+			  $("#femaleuser").addClass("selected");
+			  $("#maleuser").removeClass("selected");
+			  $("#input_sex").val("2");	// 2: female
+		}
+	},
 		
+	dobInputSetup:function(){
+              let today = new Date()
+              let year = today.getFullYear();
+              let limit = year - 90;
+              let month = today.getMonth() + 1;
+              let day = today.getDate();
+              
+              let str = "";
+              for(var i = year; i >= limit; i--) {
+                 $("#selectyear").append("<option value='" + i + "'>" + i + "</option>");
+              }
+              for(var i = 1; i <= 12; i++) {
+                 $("#selectmonth").append("<option value='" + i + "'>" + i + "</option>");
+              }
+              for(var i = 1; i <= 31; i++) {
+                 $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+              }
+	},	
 	
 	save:function(){
 
@@ -81,6 +114,8 @@ let index = {
 			latitude: Lat,
 			longitude: Lng,
 		};	 
+		
+		alert("SelectedSex: " + data.userSex);
 						
 		//ajax호출 시 default가 비동기 호출. 
 		$.ajax({
@@ -129,28 +164,90 @@ let index = {
 	},
 	*/
 	
+	validation:function(){	// Valditaion
+		if($('#userid').length){	// 아이디 
+			if(!$("#userid").attr('disabled'))	 {
+				alert("아이디 중복 확인 눌러주세요."); // 1.아이디 체크 여부 확인
+				return false;
+			}
+		}
+		 if($("#userpw").length){ // 패스워드
+			if($("#userpw").val() == "" || $("#userpw").val() != $("#userpwchk").val()){
+				alert("비밀번호를 다시 확인해주세요.");	// 2.pw 체크
+				return false;
+			}
+		}
+		if($("#username").length){	// 이름
+			if(!$("#username").val()){
+				alert("이름(혹은 단체명)을 입력해주세요."); // 4. username 공백 체크 
+				return false;
+			}
+		}/*
+		if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
+			alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
+			return false;
+		} */
+		if($("#useremail").length){	// userEmail
+			if(!$("#useremail").val()){
+				alert("이메일을 입력해주세요.");
+				return false;
+			}
+		}  
+		if($("#type").val() != "INSTITUTION" && !$("#userphone").attr('disabled')){	// userPhone
+			alert("문자 인증을 진행해 주세요."); 
+			return false;
+		}
+		if($("#type").val() == "INSTITUTION" && !$("#userphone").val()){	 // 기관 전화번호인 경우
+			alert("기관 전화번호를 입력하세요."); 
+			return false;
+		}
+		if(!$("#roadAddrPart1").val()){	// user addr
+			alert("주소 검색을 진행해 주세요.");
+			return false;
+		}
+		if($("#type").val() == "SOCIAL_WORKER"){	// 사회복지사의 경우
+			if(!$("#orgname").val()){
+				alert("소속 기관을 적어주세요!");
+				return false;
+			}
+			
+			if(!$("#orgphone").val()){
+				alert("소속 기관 연락처를 적어주세요!");
+				return false;
+			}
+		}
+		
+		alert("성공");
+		return true;
+	},
+	
 	idCheck:function(){	// 코드 확인 함수 
 		let userId;
 		
 		userId = $("#userid").val();
 		
-		$.ajax({
-				url: "/idCheckProc",	// 보내기 
-				data: {userId: userId},
-				type: "POST",
-				}).done(function(data){	// verify code를 data로 리턴
-					if(!data) {
-						alert("동일 아이디가 존재합니다!");
-						$("#userid").val("");
-					}
-					else{
-						alert("아이디 사용 가능"); 
-						$("#userid").attr('disabled', true);
-						$("#btn-id-check").off("click");
-					}
-				}).fail(function(){
-					alert("에러 발생!");
-			});
+		if(!userId){
+			alert("아이디를 입력해주세요.");
+		}
+		else{
+			$.ajax({
+					url: "/idCheckProc",	// 보내기 
+					data: {userId: userId},
+					type: "POST",
+					}).done(function(data){	// verify code를 data로 리턴
+						if(!data) {
+							alert("동일 아이디가 존재합니다!");
+							$("#userid").val("");
+						}
+						else{
+							alert("아이디 사용 가능"); 
+							$("#userid").attr('disabled', true);
+							$("#btn-id-check").off("click");
+						}
+					}).fail(function(){
+						alert("에러 발생!");
+				});
+			}
 	},
 		
 				
