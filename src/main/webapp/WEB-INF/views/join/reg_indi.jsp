@@ -43,7 +43,7 @@
                                         <span class="input-title">비밀번호</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpw" id="userpw" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpwchk" placeholder="비밀번호 입력">
+                                        <span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="password" name="userpwchk" id="userpwchk" placeholder="비밀번호 입력">
                                     </div>
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="usermail" id="useremail" placeholder="이메일주소 입력">
+                                        <span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력">
                                         <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
@@ -136,7 +136,7 @@
         </div>
         <%@include file="../layout/sidebar_back.jsp" %>
 
-        <script>
+<!--         <script>
           function selectSex(sex){
             var $sex = sex.id;
             if($sex == "maleuser") {
@@ -149,7 +149,7 @@
               $("#input_sex").val("2");	// 2: female
             }
           }
-        </script>
+        </script> -->
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
