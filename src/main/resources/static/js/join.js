@@ -114,9 +114,7 @@ let index = {
 			latitude: Lat,
 			longitude: Lng,
 		};	 
-		
-		alert("SelectedSex: " + data.userSex);
-						
+								
 		//ajax호출 시 default가 비동기 호출. 
 		$.ajax({
 			//회원가입 수행 요청.
