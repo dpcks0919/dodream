@@ -457,8 +457,8 @@
                     newHtml += "<input type='text' class='response-item-count-big' name='request' value='0' id='"+curCount+"' onkeyup='numberWithCommas(this)'/>원";
                   }
                   else {
-                    newHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
-                    newHtml += "<i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this);'></i>";
+                    newHtml += "<i class='fas fa-minus minus-icon' id='"+"tr"+curCnt+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+                    newHtml += "<i class='fas fa-plus plus-icon' id='"+"tr"+curCnt+"' onclick='plusCount(this);'></i>";
                   }
                   document.getElementById(curDiv).innerHTML = newHtml;
                 }
