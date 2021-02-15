@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable();
 		http.authorizeRequests()
-			.antMatchers("/user/**").access("hasRole('ROLE_INDIVIDUAL') or hasRole('ROLE_GROUP')")
+			.antMatchers("/user/**").access("hasRole('ROLE_INDIVIDUAL') or hasRole('ROLE_GROUP') or hasRole('ROLE_SOCIAL_WORKER') or hasRole('ROLE_INSTITUTION')")
 			.antMatchers("/social/**").access("hasRole('ROLE_SOCIAL_WORKER') or hasRole('ROLE_INSTITUTION')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll()
@@ -66,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.userService(principalOauth2UserService) // 구글 로그인이 완료된 뒤 후처리 필요! --> 구글로그인은 코드가 아니라 액세스토큰 과 사용자 프로필정보를 바로 받아옴
 			.and()
 			.successHandler(oAuth2AuthenticationSuccessHandler)
+			.and()
+		    .exceptionHandling().accessDeniedPage("/WEB-INF/views/accessDenied.jsp");
 			;
 	}
 }

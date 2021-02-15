@@ -95,7 +95,7 @@
                                         <span class="input-title">기관명</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="orgname" id="orgname" placeholder="기관명 입력">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">기관전화번호</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="orgphone" id="orgphone" placeholder="기관전화번호 입력">
+                                        <span class="input-title">기관 전화번호</span><span>&nbsp;<em>*</em></span><br><input class="text-input" type="text" name="orgphone" id="orgphone" placeholder="기관전화번호 입력">
                                     </div>
                                     <div class="input-content">
                                     	<span class="input-title">기관 도로명주소</span><span>&nbsp;<em>*</em></span><br>
