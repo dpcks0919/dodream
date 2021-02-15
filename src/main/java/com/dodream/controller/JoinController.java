@@ -10,7 +10,7 @@ public class JoinController {
 	
 	@GetMapping("/loginForm")
 	public String loginForm() {
-		return "login/loginForm2";
+		return "login/loginForm";
 	}
 	
 	@GetMapping("/joinForm")
