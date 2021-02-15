@@ -36,10 +36,12 @@
                                         <div class="divider-custom-line" style="background-color: rgb(175, 218, 231);border-color: rgb(175, 218, 231) !important;"></div>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">기관명</span><br><input class="text-input" type="text" name="username" placeholder="기관명 입력" id="username">
+                                        <span class="input-title">기관명</span><span>&nbsp;<em>*</em></span><br>
+                                        <input class="text-input" type="text" name="username" placeholder="기관명 입력" id="username">
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">대표 이메일주소</span><br><input class="text-input" type="email" name="useremail" placeholder="이메일주소 입력" id="useremail">
+                                        <span class="input-title">대표 이메일주소</span><span>&nbsp;<em>*</em></span><br>
+                                        <input class="text-input" type="email" name="useremail" placeholder="이메일주소 입력" id="useremail">
                                         <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다.
                                         <br>메일 수신 동의&nbsp;&nbsp;
                                         <span>
@@ -48,7 +50,7 @@
                                         </span></span>
                                     </div>
                                     <div class="input-content">
-                                        <span class="input-title">대표 전화번호</span><span>&nbsp;<em>*</em></span><br>
+                                        <span class="input-title">기관 전화번호</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center">
                                             <div style="width:calc(100%);">
                                                 <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">                               
