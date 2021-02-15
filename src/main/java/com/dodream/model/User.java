@@ -71,6 +71,9 @@ public class User {
 	private double longitude;
 	
 	@Column(columnDefinition = "int default 0")
+	private int notificationRadius;
+	
+	@Column(columnDefinition = "int default 0")
 	private int showFlag;
 	
 	@Column(nullable = false)

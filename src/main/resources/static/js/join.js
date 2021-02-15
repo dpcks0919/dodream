@@ -178,6 +178,7 @@ let index = {
 			orgPhone: $("#orgphone").val(),
 			latitude: Lat,
 			longitude: Lng,
+			notificationRadius: $("#notification_radius").val(),
 		};	 
 								
 		//ajax호출 시 default가 비동기 호출. 
@@ -246,9 +247,11 @@ let index = {
 				return false;
 			}
 		}
-		if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
-			alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
-			return false;
+		if($("#birthyear").length){	// 이름
+			if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
+				alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
+				return false;
+			}
 		} 
 		if($("#useremail").length){	// userEmail
 			if(!$("#useremail").val()){
@@ -280,7 +283,6 @@ let index = {
 			}
 		}
 		
-		alert("성공");
 		return true;
 	},
 	
