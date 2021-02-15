@@ -1,4 +1,4 @@
-var Lat, Lng; 
+var Lat, Lng, idFlag; 
 
 function goPopup(){
 
@@ -54,6 +54,9 @@ let index = {
 		});
 		$("#btn-login").on("click", () => { 
 			this.login();
+		});
+		$("#userid").change(function(){
+			idFlag = 0;
 		});
 
 	},
@@ -140,8 +143,8 @@ let index = {
 			var birthyear = $("#birthyear").val();
 			var birthmonth =  $("#birthmonth").val();
 		 	var birthdate =  $("#birthdate").val();	
-			var birthdob = new Date(birthyear+ "-" + birthmonth + "-" + birthdate);
-			
+			var birthdob = new Date(birthyear+ "/" + birthmonth + "/" + birthdate);
+						
 			var fullAddr = $("#roadAddrPart1").val()+ " " + $("#addrDetail").val();
 		
 		let data = {
@@ -213,7 +216,7 @@ let index = {
 	
 	validation:function(){	// Valditaion
 		if($('#userid').length){	// 아이디 
-			if(!$("#userid").attr('disabled'))	 {
+			if( idFlag == 0 ){
 				alert("아이디 중복 확인 눌러주세요."); // 1.아이디 체크 여부 확인
 				return false;
 			}
@@ -283,13 +286,14 @@ let index = {
 					type: "POST",
 					}).done(function(data){	// verify code를 data로 리턴
 						if(!data) {
-							alert("동일 아이디가 존재합니다!");
-							$("#userid").val("");
+							alert("동일 아이디가 이미 존재합니다!");
+							//$("#userid").val("");
 						}
 						else{
 							alert("아이디 사용 가능"); 
-							$("#userid").attr('disabled', true);
-							$("#btn-id-check").off("click");
+							idFlag = 1;
+							//$("#userid").attr('disabled', true);
+							//$("#btn-id-check").off("click");
 						}
 					}).fail(function(){
 						alert("에러 발생!");
