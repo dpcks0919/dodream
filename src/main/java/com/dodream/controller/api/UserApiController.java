@@ -33,7 +33,7 @@ public class UserApiController {
 	
 	@PostMapping("/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
+				
 		String password;
 		
 		if(principalDetails != null) {

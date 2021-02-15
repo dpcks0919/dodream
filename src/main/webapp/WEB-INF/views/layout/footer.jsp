@@ -20,7 +20,7 @@
           </div>
           <div class="footer-right">
             <div class="footer-link">
-              <a class="text-white" href="/user/request">요청 보기</a>
+              <a class="text-white" href="/user/requestList">요청 보기</a>
             </div>
             <div class="footer-link">
               <a class="text-white">소식 보기</a>
