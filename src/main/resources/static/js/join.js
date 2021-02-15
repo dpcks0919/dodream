@@ -226,11 +226,11 @@ let index = {
 				alert("이름(혹은 단체명)을 입력해주세요."); // 4. username 공백 체크 
 				return false;
 			}
-		}/*
+		}
 		if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
 			alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
 			return false;
-		} */
+		} 
 		if($("#useremail").length){	// userEmail
 			if(!$("#useremail").val()){
 				alert("이메일을 입력해주세요.");
