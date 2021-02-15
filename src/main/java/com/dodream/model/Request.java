@@ -59,8 +59,6 @@ public class Request {
 	@Column(nullable = false)
 	private int urgentLevel;
 	
-	private int expectedCost;
-	
 	@Lob
 	@Column(nullable = false)
 	private String description;
@@ -71,9 +69,6 @@ public class Request {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private StatusType status;
-	
-	@Column(nullable = false)
-	private int distance;
 	
 	private String comment;
 	
