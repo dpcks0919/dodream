@@ -48,7 +48,7 @@
                   <span class="section2-text1">개인정보수정</span>
                 </div>
                 <div class="section2-box-right">
-                  <a class="section2-text2">더 보기 <i class="fas fa-chevron-right"></i></a>
+                  <a class="section2-text2" href="editInfo">더 보기 <i class="fas fa-chevron-right"></i></a>
                 </div>
               </div>
               <div class="section2-box">
@@ -56,7 +56,7 @@
                   <span class="section2-text1">나의 두드림</span>
                 </div>
                 <div class="section2-box-right">
-                  <a class="section2-text2">더 보기 <i class="fas fa-chevron-right"></i></a>
+                  <a class="section2-text2" href="/user/mydodream">더 보기 <i class="fas fa-chevron-right"></i></a>
                 </div>
               </div>
               <div class="section2-box">
@@ -66,7 +66,7 @@
                   <p class="section2-text2" style="margin-bottom:0;">지난 응답 10</p>
                 </div>
                 <div class="section2-box-right">
-                  <a class="section2-text2">더 보기 <i class="fas fa-chevron-right"></i></a>
+                  <a class="section2-text2" href="/user/myresponse">더 보기 <i class="fas fa-chevron-right"></i></a>
                 </div>
               </div>
             </div>
