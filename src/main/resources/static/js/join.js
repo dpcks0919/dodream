@@ -36,6 +36,7 @@ let index = {
 	init: function(){
 		this.dobInputSetup();
 		this.selectBirth();
+		this.radiusInputSetUp();
 		
 		$("#btn-save").on("click", () => { 
 			if(this.validation()) this.save();
@@ -107,7 +108,19 @@ let index = {
 			$('#birthyear').val($('#selectyear').val());
 			$('#birthmonth').val($('#selectmonth').val());
 			$('#birthdate').val($('#selectdate').val());
-	},	
+	},
+	
+	radiusInputSetUp:function(){
+		$('#selectradius').append("<option value='3'>3</option>");
+		$('#selectradius').append("<option value='5' selected>5</option>");
+		$('#selectradius').append("<option value='7'>7</option>");
+		$('#selectradius').append("<option value='10'>10</option>");
+		$('#selectradius').append("<option value='15'>15</option>");
+		$('#notification_radius').val($('#selectradius').val());
+		$('#selectradius').change(function() {
+    		$('#notification_radius').val($('#selectradius').val());
+    	});	
+	},
 	
 	login:function(){
 		let data = {
