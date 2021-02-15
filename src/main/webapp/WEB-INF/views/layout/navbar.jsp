@@ -17,7 +17,7 @@
 			<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item mx-0 mx-lg-1"><a class="py-2 px-0 px-lg-3 rounded js-scroll-trigger nav-link" href="/loginForm">로그인</a></li>
+						<li class="nav-item mx-0 mx-lg-1"><a class="py-2 px-0 px-lg-3 rounded js-scroll-trigger nav-link" href="/loginForm">로그인하기</a></li>
 						<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-2 px-0 px-lg-3 rounded js-scroll-trigger register" href="/joinForm">가입하기</a></li>
 					</ul>
 				</div>
