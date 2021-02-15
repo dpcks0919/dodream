@@ -28,7 +28,7 @@
 	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail">
 		<div class="modal-content">
-			<h5>독거어르신 주거환경개선 도움 요청</h5>
+			<h5>독거어르신 주거환경개선 도움 요청입니다.</h5>
 			<div class="content-info">
 				<table class="info-table">
 					<tr>

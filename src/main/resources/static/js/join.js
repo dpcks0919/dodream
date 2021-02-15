@@ -101,6 +101,9 @@ let index = {
               }
 			$('#selectmonth').val(month).attr('selected', 'selected');
 			$('#selectdate').val(day).attr('selected', 'selected');
+			$('#birthyear').val($('#selectyear').val());
+			$('#birthmonth').val($('#selectmonth').val());
+			$('#birthdate').val($('#selectdate').val());
 	},	
 	
 	login:function(){
@@ -226,11 +229,11 @@ let index = {
 				alert("이름(혹은 단체명)을 입력해주세요."); // 4. username 공백 체크 
 				return false;
 			}
-		}/*
+		}
 		if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
 			alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
 			return false;
-		} */
+		} 
 		if($("#useremail").length){	// userEmail
 			if(!$("#useremail").val()){
 				alert("이메일을 입력해주세요.");
@@ -331,6 +334,7 @@ let index = {
 			$("#verify-input").val("휴대폰 인증 완료!");
 			$("#btn-send-text").off("click");	// div 추가 클릭 방지
 			$("#btn-code-verify").off("click");	 // div 추가 클릭 방지
+			alert("휴대폰 인증 성공!");
 		}
 		else{
 			$("#verify-input").val("코드 불일치!");

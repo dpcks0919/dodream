@@ -12,4 +12,10 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping( {"social/test" } )
+	public String socialtest() {
+
+		return "index";
+	}
+	
 }
