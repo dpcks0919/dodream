@@ -103,6 +103,11 @@ body {
 	                                    <div style="height:5px;"></div>
 	                                    <input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력">
                                         <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
+                                        <br><span class="extra-info">
+                                       		알림 반경 :
+                                       		<select class="select-radius" id="selectradius"></select>
+                                       		<input type="hidden" name="radius" id="notification_radius">&nbsp;km
+                                        </span>
                                     </div>
 								</form>
 								<button id="btn-save" class="sign-submit">가입하기</button>
