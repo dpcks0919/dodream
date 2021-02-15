@@ -233,7 +233,7 @@
 			</div>
 			<div class="text-center main-map" id="map"> </div>
 			<div class="container ">
-				<div class="map-content test">
+				<div class="map-content ">
 					<div class="map-left">
 						<p class="help-content">주거환경개선 도움</p>
 						<p class="help-date">등록일 2020/12/25</p>
