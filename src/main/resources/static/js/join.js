@@ -285,6 +285,7 @@ let index = {
 			$("#verify-input").val("휴대폰 인증 완료!");
 			$("#btn-send-text").off("click");	// div 추가 클릭 방지
 			$("#btn-code-verify").off("click");	 // div 추가 클릭 방지
+			alert("휴대폰 인증 성공!");
 		}
 		else{
 			$("#verify-input").val("코드 불일치!");
