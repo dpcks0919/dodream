@@ -56,3 +56,7 @@
               document.getElementById("view-detail").style.display="block";
               document.getElementById("view-responseForm").style.display="none";
             }
+            
+            
+// 성민 request.jsp
+

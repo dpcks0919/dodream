@@ -105,8 +105,8 @@ let index = {
 			$('#selectmonth').val(month).attr('selected', 'selected');
 			$('#selectdate').val(day).attr('selected', 'selected');
 			$('#birthyear').val($('#selectyear').val());
-        	$('#birthmonth').val($('#selectmonth').val());
-      	    $('#birthdate').val($('#selectdate').val());
+			$('#birthmonth').val($('#selectmonth').val());
+			$('#birthdate').val($('#selectdate').val());
 	},	
 	
 	login:function(){
