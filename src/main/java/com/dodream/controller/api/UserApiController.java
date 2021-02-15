@@ -56,6 +56,46 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	@PostMapping("/loginProc")
+	public ResponseDto<Integer> login(@RequestBody User loginInfo, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		System.out.println("loginProc 진입");
+		System.out.println(principalDetails);
+		
+		if(userService.loginService(loginInfo, principalDetails)) {	// true 리턴시 로그인 처리 
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
+			SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+		}
+		else {	// false 리턴시 에러 송출
+			return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
+		}
+//				
+//		// 로그인이 안되어 있는 경우
+//		if(principalDetails != null && principalDetails.getUser().getLoginCount() == 0) {	// 소셜 계정 세션은 유지되는데, 회원가입은 하지 않고 일반계정 로그인으로 진행하는 경우 
+//			if(userService.loginService(loginInfo)) {
+//				Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
+//				SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+//			}
+//			else {	// 계정이 존재하지 않을때(500에러 리턴) 
+//				return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
+//			}
+//		}
+//		else if(principalDetails == null) {	// 소셜 세션이 아예 없는 경우 
+//			if(userService.loginService(loginInfo)) {	// 계정이 존재할때
+//				Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
+//				SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+//			}
+//			else {	// 계정이 존재하지 않을때(500에러 리턴) 
+//				return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
+//			}
+//			
+//			System.out.println("loginProc 완료");
+//		}
+	
+		System.out.println("loginProc 완료");
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);	// 로그인 성공
+	}
+	
 	@PostMapping("/textProc")
 	public String sendText(@RequestParam(value = "userPhone") String userPhone) {	// verifyCode(스트링) 리턴 
 		return userService.sendTextService(userPhone);
