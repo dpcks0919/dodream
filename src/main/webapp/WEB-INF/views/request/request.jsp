@@ -66,39 +66,12 @@
           </div>
       </div>
 
-
       <div id="menu-back" onclick="closeNav()"></div>
-      <div id="mySidebar" class="sidebar">
-        <h2>두드림터치</h2>
-        <div style="padding-top:20%;padding-left:7%; padding-right:7%; text-align:left;">
-          <a href="../request/request_list.html" class="menu-item-top">요청보기</a>
-          <a href="#" class="menu-item">소식보기</a>
-          <a href="#" class="menu-item">두드림터치</a>
-        </div>
-      </div>
+      	<%@include file="../layout/sidebar_front.jsp"%>
 
       <div id="Wrapper">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top shadow" id="mainNav">
-          <div class="container">
-            <img src="../image/Logo.png" class="logo" onclick="document.location.href='../main.html'">
-            <a class="navbar-brand js-scroll-trigger" href="../request/request_list.html">요청 보기</a>
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">소식 보기</a>
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">두드림 터치</a>
-            <!-- 로그인하기 / 가입하기 -->
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-2 px-0 px-lg-3 rounded js-scroll-trigger" href="../login/login.html">로그인하기</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-2 px-0 px-lg-3 rounded js-scroll-trigger register" href="../login/reg_select.html">가입하기</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="responsive-container">
-            <a class="menu-bar" onclick="openMenu()" id="nav-burger"><i class="fa fa-bars" aria-hidden="true"></i></a>
-            <img src="../image/Logo.png" class="logo" id="nav-logo" onclick="document.location.href='../main.html'">
-            <a class="profile" id="nav-profile" onclick="openProfile()"><i class="fa fa-user" aria-hidden="true"></i></a>
-          </div>
-        </nav>
+   		<%@include file="../layout/navbar.jsp"%>
 
         <header class="text-white text-center request-bgcolor">
             <div class="container d-flex flex-column title-info">
@@ -159,57 +132,10 @@
         </section>
 
         <!-- Footer-->
-        <footer class="dodream-footer text-center">
-          <div class="container-footer">
-            <div class="footer-left">
-              <div class="" style="text-align:left; line-height:30px; padding:0;">
-              <img class="footer-logo" src="../image/Logo2.png">
-              <img class="footer-facebook" src="../image/footer-facebook.png">
-              <img class="footer-instagram" src="../image/footer-instagram.png">
-              <img class="footer-youtube" src="../image/footer-youtube.png">
-            </div>
-              <div class="footer-text">
-                <p style="margin-top:3%;" >주소: 경북 포항시 북구 흥해읍 한동로 513번길 43-1 202호 (우편번호: 37553)</p>
-                <p style="margin-top:5%; margin-bottom:1%;">대표: 이종민 | 고유번호 : 401-82-75942</p>
-                <p style="margin-bottom:1%;">전화: 054-262-1070 | 팩스: 054-491-0339</p>
-                <p style="margin-bottom:1%;">이메일: dodream.touch@gmail.com</p>
-                <p>두드림터치© All Rights Reserved</p>
-              </div>
-            </div>
-            <div class="footer-right">
-              <div class="footer-link">
-                <a class="text-white">요청 보기</a>
-              </div>
-              <div class="footer-link">
-                <a class="text-white">소식 보기</a>
-              </div>
-              <div class="footer-link">
-                <a class="text-white">두드림터치</a>
-                <!-- <a class="footer-link-list">두드림터치</a>
-                <a class="footer-link-list">인사말</a>
-                <a class="footer-link-list">오시는길</a> -->
-              </div>
-            </div>
-          </div>
-        </footer>
-        <!-- Copyright Section-->
-        <div class="copyright py-4 text-center dodream-copyright">
-              <img class="footer-logo" src="../image/Logo2.png">
-              <small>대표 이종민 | 전화: 054-262-1070 이메일 dodream.touch@gmail.com</small>
-              <img class="footer-facebook" src="../image/footer-facebook.png">
-              <img class="footer-instagram" src="../image/footer-instagram.png">
-              <img class="footer-youtube" src="../image/footer-youtube.png">
-        </div>
+   		<%@include file="../layout/footer.jsp"%>
 
-        <div id="mySidebar2" class="sidebar2">
-        <h1 style="font-size:8rem!important; position:relative; left:50%; transform: translateX(-50%);"><i class="fa fa-user" aria-hidden="true"></i></h2>
-          <!-- <span class="login"><a style="font-size:1rem!important; display:inline; padding-right:4vh;">로그인</a>|<a style="font-size:1rem!important; display:inline; padding-left:4vh;">회원가입</a></span> -->
-          <span class="logout"><a style="font-size:1rem!important; display:inline;  position:relative; left:-1.5%;">로그아웃</a></span>
-        <div class="logout" style="padding-top:4%;padding-left:7%; padding-right:7%; text-align:left;">
-          <a href="../mypage/edit_info.html" class="menu-item-top">개인정보 수정</a>
-          <a href="../mypage/mydodream.html" class="menu-item">나의 두드림</a>
-          <a href="../mypage/myresponse.html" class="menu-item">응답 내역</a>
-        </div>
+		<%@include file="../layout/sidebar_back.jsp"%>
+		
       </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -220,10 +146,11 @@
         <script src="assets/mail/jqBootstrapValidation.js"></script>
         <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="/js/scripts.js"></script>
+       	<script src="/js/modal.js"></script>
         <script>
                 // 모달
-                function goDetail(title, period_text, contents, totalCnt, itemList) {
+                function goRequestDetail(title, period_text, contents, totalCnt, itemList) {
                   document.getElementById("modal-bg").style.display="block";
                   document.getElementById("view-detail").style.display="block";
                   document.getElementById("page-top").style.overflow="hidden";
@@ -253,58 +180,6 @@
                     innerHtml += "</tr>";
                     $('#modal-reset').append(innerHtml);
                   }
-                }
-
-                function closeModal() {
-                  document.getElementById("modal-bg").style.display="none";
-                  document.getElementById("view-detail").style.display="none";
-                  document.getElementById("page-top").style.overflow="visible";
-                  document.getElementById("menu-back").style.filter = "none";
-                  document.getElementById("Wrapper").style.filter = "none";
-                }
-
-                function goResponse() {
-                  document.getElementById("view-responseForm").style.display="block";
-                  document.getElementById("view-detail").style.display="none";
-                  document.getElementById("page-top").style.overflow="hidden";
-                }
-                function goBack() {
-                  document.getElementById("view-detail").style.display="block";
-                  document.getElementById("view-responseForm").style.display="none";
-                }
-
-                function openMenu() {
-                  document.getElementById("Wrapper").style.marginLeft = "70%";
-                  document.getElementById("mySidebar").style.width = "70%";
-                  document.getElementById("mainNav").style.left = "70%";
-                  document.getElementById("page-top").style.overflow = "hidden";
-                  document.getElementById("nav-profile").style.color="white";
-                  document.getElementById("nav-logo").style.display="none";
-                  document.getElementById("menu-back").style.display="block";
-                }
-
-                function openProfile() {
-                  document.getElementById("Wrapper").style.marginLeft = "-70%";
-                  document.getElementById("mySidebar2").style.width = "70%";
-                  document.getElementById("mainNav").style.right = "70%";
-                  document.getElementById("page-top").style.overflow = "hidden";
-                  document.getElementById("nav-burger").style.color="white";
-                  document.getElementById("nav-logo").style.display="none";
-                  document.getElementById("menu-back").style.display="block";
-                }
-
-                function closeNav() {
-                  document.getElementById("mySidebar").style.width = "0";
-                  document.getElementById("mySidebar2").style.width = "0";
-                  document.getElementById("Wrapper").style.marginLeft= "0";
-                  document.getElementById("Wrapper").style.marginRight= "0";
-                  document.getElementById("mainNav").style.left = "0";
-                  document.getElementById("mainNav").style.right = "0";
-                  document.getElementById("page-top").style.overflow = "visible";
-                  document.getElementById("nav-profile").style.color="#e95378";
-                  document.getElementById("nav-burger").style.color="#e95378";
-                  document.getElementById("nav-logo").style.display="initial";
-                  document.getElementById("menu-back").style.display="none";
                 }
 
                 function rowAdd() {
@@ -431,7 +306,7 @@
                     // console.log(itemList);
 
                     // 모달 실행 + 모달에 내용 불러오기.
-                    goDetail(title, period_text, contents, totalCnt, itemList);
+                    goRequestDetail(title, period_text, contents, totalCnt, itemList);
                   }
                   else {
                     alert('물품을 입력해주세요');
