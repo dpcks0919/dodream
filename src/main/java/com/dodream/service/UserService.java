@@ -1,16 +1,21 @@
-package com.dodream.service;
+	package com.dodream.service;
 
 import java.util.HashMap;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.dto.ResponseDto;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
@@ -182,6 +187,18 @@ public class UserService {
 		else return false;	//있으면(중복) false
 	}
 	
-	
+	@Transactional
+	public Boolean loginService(User loginInfo, PrincipalDetails principalDetails) {
+		
+		if((principalDetails != null && principalDetails.getUser().getLoginCount() == 0) || principalDetails == null) {	// 1. 소셜 계정 세션은 유지되는데, 회원가입은 하지 않고 일반계정 로그인으로 진행하는 경우 2. 세션이 없고 그냥 쌩으로 로그인 하는 경우 
+			try {
+				return encoder.matches(loginInfo.getLoginPassword(), userRepository.findByLoginId(loginInfo.getLoginId()).getLoginPassword());	//매치시 true / 매치안되면 false
+			}catch(NullPointerException e) {	// NullPointerException 나면 해당 아이디가 db에 없다는 뜻 
+				return false;
+			}
+		}
+		return false;	// 뭣도 다 아니면 빼액
+	}
+
 
 }
