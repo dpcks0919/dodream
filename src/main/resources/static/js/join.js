@@ -36,6 +36,7 @@ let index = {
 	init: function(){
 		this.dobInputSetup();
 		this.selectBirth();
+		this.radiusInputSetUp();
 		
 		$("#btn-save").on("click", () => { 
 			if(this.validation()) this.save();
@@ -105,9 +106,21 @@ let index = {
 			$('#selectmonth').val(month).attr('selected', 'selected');
 			$('#selectdate').val(day).attr('selected', 'selected');
 			$('#birthyear').val($('#selectyear').val());
-        	$('#birthmonth').val($('#selectmonth').val());
-      	    $('#birthdate').val($('#selectdate').val());
-	},	
+			$('#birthmonth').val($('#selectmonth').val());
+			$('#birthdate').val($('#selectdate').val());
+	},
+	
+	radiusInputSetUp:function(){
+		$('#selectradius').append("<option value='3'>3</option>");
+		$('#selectradius').append("<option value='5' selected>5</option>");
+		$('#selectradius').append("<option value='7'>7</option>");
+		$('#selectradius').append("<option value='10'>10</option>");
+		$('#selectradius').append("<option value='15'>15</option>");
+		$('#notification_radius').val($('#selectradius').val());
+		$('#selectradius').change(function() {
+    		$('#notification_radius').val($('#selectradius').val());
+    	});	
+	},
 	
 	login:function(){
 		let data = {
@@ -165,6 +178,7 @@ let index = {
 			orgPhone: $("#orgphone").val(),
 			latitude: Lat,
 			longitude: Lng,
+			notificationRadius: $("#notification_radius").val(),
 		};	 
 								
 		//ajax호출 시 default가 비동기 호출. 
@@ -233,9 +247,11 @@ let index = {
 				return false;
 			}
 		}
-		if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
-			alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
-			return false;
+		if($("#birthyear").length){	// 이름
+			if(!$("#birthyear").val() || !$("#birthmonth").val()  || !$("#birthdate").val()){ 
+				alert("생년월일을 선택하세요.");// 4. dob 입력 체크 
+				return false;
+			}
 		} 
 		if($("#useremail").length){	// userEmail
 			if(!$("#useremail").val()){
@@ -267,7 +283,6 @@ let index = {
 			}
 		}
 		
-		alert("성공");
 		return true;
 	},
 	
