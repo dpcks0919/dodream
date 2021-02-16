@@ -1,4 +1,4 @@
-	package com.dodream.service;
+package com.dodream.service;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -146,7 +146,6 @@ public class UserService {
 		System.out.println("OrgPhone: " + user.getOrgPhone());
 
 		userRepository.save(user);
-		
 	}
 	
 	public String sendTextService(String userPhone) {	 //랜덤으로 verifyCode 생성 후 문자 발송 및 리턴하는 메소드 
