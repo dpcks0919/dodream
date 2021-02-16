@@ -168,6 +168,22 @@
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
         <script src="/js/modal.js"></script>
-
+	
+	<script>
+    function openModal(item) {
+        document.getElementById("m-background").style.display = "block";
+        document.getElementById("m-container").style.display = "block";
+        document.getElementById("mainNav").style.zIndex = "9";
+        document.getElementById("menu-back").style.filter = "blur(5px)";
+        document.getElementById("Wrapper").style.filter = "blur(5px)";
+      }
+      function closeModal() {
+        document.getElementById("m-background").style.display = "none";
+        document.getElementById("m-container").style.display = "none";
+        document.getElementById("menu-back").style.filter = "none";
+        document.getElementById("Wrapper").style.filter = "none";
+      }
+	
+	</script>
     </body>
 </html>
