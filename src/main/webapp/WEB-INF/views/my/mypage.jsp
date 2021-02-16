@@ -45,10 +45,10 @@
             <div class="container">
               <div class="section2-box">
                 <div class="section2-box-left">
-                  <span class="section2-text1">개인정보수정</span>
+                  <span class="section2-text1">내 정보 </span>
                 </div>
                 <div class="section2-box-right">
-                  <a class="section2-text2" href="editInfo">더 보기 <i class="fas fa-chevron-right"></i></a>
+                  <a class="section2-text2" href="/user/infoCheck">더 보기 <i class="fas fa-chevron-right"></i></a>
                 </div>
               </div>
               <div class="section2-box">
