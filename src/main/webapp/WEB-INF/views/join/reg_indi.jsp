@@ -1,19 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../layout/header_join.jsp" %>    
-    
         <style>
           body {
             background-color: rgb(175, 218, 231);
           }
-          .select-radius {
-          	margin-left: 0.3rem;
-          	text-align: right;
-          	border: 1px solid black;
-          	font-weight: bold;
-          }
         </style>
-    </head>
 
     <body id="page-top">
         <!-- Navigation-->
@@ -93,18 +85,19 @@
                                     <div class="input-content">
                                         <span class="input-title">전화번호</span><span>&nbsp;<em>*</em></span><br>
                                         <div class="flex-center">
-                                            <div style="width:calc(100% - 50px);">
+                                            <div id="sms_confirm" style="width:calc(100% - 50px);">
                                                 <input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">                               
                                             </div>
                                             <div class="input-check" id="btn-send-text" style="width:50px;">인증</div>                                          
                                         </div>
                                         <div style="height:5px;"></div>
                                         <div class="flex-center">
-                                            <div style="width:calc(100% - 50px);">                                                
+                                            <div id="sms_check" style="width:calc(100% - 50px);">                                                
                                                	<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
                                             </div>
                                             <div class="input-check" id="btn-code-verify" style="width:50px;">확인</div>
                                         </div>
+                                        <div class="extra-info timer-info" id="smstimer"></div>
                                         <span class="extra-info">
                                        		 주변 이웃들의 필요를 문자로 받으실 수 있습니다.
                                         	<br>SMS 수신 동의&nbsp;&nbsp;
@@ -146,6 +139,8 @@
         </section>
         </div>
         <%@include file="../layout/sidebar_back.jsp" %>
+        <script>
+        </script>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
