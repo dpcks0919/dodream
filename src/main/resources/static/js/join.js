@@ -31,7 +31,8 @@ function goPopup(){
 		 }); 
 }   
 
-var verifyCode;
+var verifyCode; 
+
 
 let index = {
 	init: function(){
@@ -259,6 +260,13 @@ let index = {
 		if($("#useremail").length){	// userEmail
 			if(!$("#useremail").val()){
 				alert("이메일을 입력해주세요.");
+				return false;
+			}
+			
+			// 이메일 정규식 체크
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(!regex.test($("#useremail").val())){
+				alert("이메일 형식에 맞게 작성해주세요.");
 				return false;
 			}
 		}  
