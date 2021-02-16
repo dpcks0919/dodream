@@ -1,4 +1,5 @@
 var Lat, Lng, idFlag; 
+let smsFlag = 0;
 
 function goPopup(){
 
@@ -34,6 +35,8 @@ var verifyCode;
 
 let index = {
 	init: function(){
+		$("#btn-code-verify").css('display', 'none');
+		$("#sms_check").css('width', '100%');
 		this.dobInputSetup();
 		this.selectBirth();
 		this.radiusInputSetUp();
@@ -315,8 +318,7 @@ let index = {
 				});
 			}
 	},
-		
-				
+					
 	sendText:function(){	// 해당 번호로 verify 코드 보내기
 		let userPhone;
 
@@ -335,7 +337,41 @@ let index = {
 			    		verifyCode = data;	// assigning the rand number(verification code): 전역 변수에 할당 
 						alert("할당된 확인코드: " + verifyCode);
 						/* TimeOut */
-						/*$("#btn-send-text").off("click");*/
+						let count = 120;
+						let min = 0;
+						let second = 0;
+						let counter = setInterval(timer, 1000);
+						$("#userphone").attr('disabled', true);
+						$("#btn-send-text").css('display', 'none');
+						$("#sms_confirm").css('width', '100%');
+						$("#sms_check").css('width', '-=50px');
+						$("#btn-code-verify").css('display', 'block');
+						
+						function timer() {
+							count--;
+							min = parseInt(count / 60);
+							second = count % 60;
+							if(count <= 0) {			
+								if(smsFlag == 1) {
+									return;
+								}	
+								clearInterval(counter);
+								$('#smstimer').html('<em>인증 시간 초과</em>');
+								$("#sms_confirm").css('width', '-=50px');
+								$("#btn-send-text").css('display', 'block');
+								$("#btn-code-verify").css('display', 'none');
+								$("#sms_check").css('width', '100%');
+								$("#userphone").attr('disabled', false);
+								return;
+							}
+							let text = "";
+							if(min > 0) {
+								text = "<em>남은시간: " + min + "분 " + second + "초</em>"
+							} else {
+								text = "<em>남은시간: " + second + "초</em>";
+							}
+							$('#smstimer').html(text);
+						}
 					}
 				}).fail(function(){
 					alert("에러 발생!");
@@ -348,11 +384,15 @@ let index = {
 		verifyInput = $("#verify-input").val();
 		
 		if(verifyInput == verifyCode){
+			smsFlag = 1;
+			$("#sms_check").css('width', '100%');
+			$("#btn-code-verify").css('display', 'none');
 			$("#userphone").attr('disabled', true);	// 코드 확인 후 비활성화
 			$("#verify-input").attr('disabled', true);
 			$("#verify-input").val("휴대폰 인증 완료!");
 			$("#btn-send-text").off("click");	// div 추가 클릭 방지
 			$("#btn-code-verify").off("click");	 // div 추가 클릭 방지
+			$('#smstimer').css('display', 'none');
 			alert("휴대폰 인증 성공!");
 		}
 		else{
