@@ -96,4 +96,5 @@ public class User {
 	
 	@UpdateTimestamp 
 	private Timestamp updateDate; // update 시 시간 자동 저장
+
 }

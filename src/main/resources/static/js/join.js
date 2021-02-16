@@ -1,4 +1,4 @@
-var Lat, Lng, idFlag; 
+var Lat, Lng, idFlag, verifyCode; 
 
 function goPopup(){
 
@@ -29,8 +29,6 @@ function goPopup(){
 		  }
 		 }); 
 }   
-
-var verifyCode;
 
 let index = {
 	init: function(){
@@ -128,8 +126,8 @@ let index = {
 			loginPassword : $("#loginpw").val(),
 		}
 		
-		alert("LogInID: " + data.loginId);
-		alert("LoginPW: " + data.loginPassword);
+		//alert("LogInID: " + data.loginId);
+		//alert("LoginPW: " + data.loginPassword);
 		
 		$.ajax({
 			//로그인 수행 요청.
@@ -140,7 +138,7 @@ let index = {
 			dataType: "json" 
 		}).done(function(resp){
 			if(resp.status == 500){
-				alert("로그인 실패! 아이디, 비밀번호를 다시 확인해주세요.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+				alert("로그인 실패! \n아이디, 비밀번호를 다시 확인해주세요.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
 			}else{
 				alert("로그인 되었습니다.");
 				location.href = "/";
@@ -200,33 +198,6 @@ let index = {
 			alert(JSON.stringify(error));
 		}); // ajax통신을 이용해서 3개의 데이터를 json으로 변겨해서 insert 요청  
 	},
-
-	/*
-	update:function(){
-		let data = {
-			id : $("#id").val(),
-			username : $("#username").val(),
-			password: $("#password").val(),
-			email: $("#email").val()
-		};	 
-		
-		console.log(data);
-		
-		$.ajax({
-			type: "PUT",
-			url: "/user",
-			data: JSON.stringify(data), //json으로 변경, 
-			contentType: "application/json; charset = utf-8 ",  // body 데이터가 어떤 타입인지
-			dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열, (생긴게 json이라면 => javascript로 변경해줌)
-		}).done(function(resp){ // 응답의 결과를 받아주는 parameter
-			console.log(resp);
-			alert("회원수정이 완료되었습니다.");
-			location.href = "/";
-		}).fail(function(error){
-			alert(JSON.stringify(error));
-		});
-	},
-	*/
 	
 	validation:function(){	// Valditaion
 		if($('#userid').length){	// 아이디 
@@ -281,8 +252,7 @@ let index = {
 				alert("소속 기관 연락처를 적어주세요!");
 				return false;
 			}
-		}
-		
+		}	
 		return true;
 	},
 	
@@ -299,23 +269,23 @@ let index = {
 					url: "/idCheckProc",	// 보내기 
 					data: {userId: userId},
 					type: "POST",
-					}).done(function(data){	// verify code를 data로 리턴
-						if(!data) {
+					}).done(function(resp){	// verify code를 data로 리턴
+					if(resp.status == 500){
+						alert("다시 한번 확인해주세요!");
+					}else{
+						if(!resp.data) {
 							alert("동일 아이디가 이미 존재합니다!");
-							//$("#userid").val("");
 						}
 						else{
 							alert("아이디 사용 가능"); 
 							idFlag = 1;
-							//$("#userid").attr('disabled', true);
-							//$("#btn-id-check").off("click");
 						}
+					}					
 					}).fail(function(){
 						alert("에러 발생!");
 				});
 			}
 	},
-		
 				
 	sendText:function(){	// 해당 번호로 verify 코드 보내기
 		let userPhone;
@@ -327,15 +297,17 @@ let index = {
 				url: "/textProc",	// 보내기 
 				data: {userPhone: userPhone},
 				type: "POST",
-				}).done(function(data){	// verify code를 data로 리턴
-					if(!data) {
-						alert("발송 실패! 전화번호를 다시 확인하세요.");
-					}
-					else{
-			    		verifyCode = data;	// assigning the rand number(verification code): 전역 변수에 할당 
-						alert("할당된 확인코드: " + verifyCode);
-						/* TimeOut */
-						/*$("#btn-send-text").off("click");*/
+				}).done(function(resp){	// verify code를 data로 리턴
+					if(resp.status == 500){
+						alert("다시 한번 확인해주세요!");
+					}else{
+						if(!resp.data) {
+							alert("발송 실패! 전화번호를 다시 확인하세요.");
+						}
+						else{
+				    		verifyCode = resp.data;	// assigning the rand number(verification code): 전역 변수에 할당 
+							alert("할당된 확인코드: " + verifyCode);
+						}
 					}
 				}).fail(function(){
 					alert("에러 발생!");
@@ -356,7 +328,7 @@ let index = {
 			alert("휴대폰 인증 성공!");
 		}
 		else{
-			$("#verify-input").val("코드 불일치!");
+			alert("인증 번호가 맞지 않습니다!");
 		}
 	},
 }
