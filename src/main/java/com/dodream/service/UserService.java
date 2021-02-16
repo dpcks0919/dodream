@@ -5,17 +5,12 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
-import com.dodream.dto.ResponseDto;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
@@ -197,7 +192,18 @@ public class UserService {
 				return false;
 			}
 		}
-		return false;	// 뭣도 다 아니면 빼액
+		return false;
+	}
+
+	public void update(User user) {
+		
+		User persistance = userRepository.findByLoginId(user.getLoginId());
+		
+	}
+
+	public boolean passwordCheckService(String password, String dbPassword) {
+		
+		return encoder.matches(password, dbPassword);
 	}
 
 

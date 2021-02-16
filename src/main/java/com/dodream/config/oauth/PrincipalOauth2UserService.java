@@ -42,7 +42,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
 		OAuth2User oauth2User = super.loadUser(userRequest);
-		System.out.println(oauth2User.getAttributes()); // 계정에 대한 정보!
+		//System.out.println(oauth2User.getAttributes()); // 계정에 대한 정보!
 		
 		OAuth2UserInfo oAuth2UserInfo = null;
 		if(userRequest.getClientRegistration().getRegistrationId().equals("google")) {
@@ -68,9 +68,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 			oAuth2UserInfo = new KakaoUserInfo(kakaoOauth); 
 		} 																						 
-		else {
-			System.out.println("-------이 외 ----------");
-		}
 		
 		String userName = oAuth2UserInfo.getName();
 		String provider = oAuth2UserInfo.getProvider();
