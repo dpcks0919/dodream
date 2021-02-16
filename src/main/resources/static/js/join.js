@@ -32,6 +32,7 @@ function goPopup(){
 
 var verifyCode; 
 
+
 let index = {
 	init: function(){
 		this.dobInputSetup();
