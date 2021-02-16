@@ -1,4 +1,6 @@
+
 var Lat, Lng, idFlag, verifyCode; 
+let smsFlag = 0;
 
 function goPopup(){
 
@@ -32,6 +34,8 @@ function goPopup(){
 
 let index = {
 	init: function(){
+		$("#btn-code-verify").css('display', 'none');
+		$("#sms_check").css('width', '100%');
 		this.dobInputSetup();
 		this.selectBirth();
 		this.radiusInputSetUp();
@@ -229,6 +233,13 @@ let index = {
 				alert("이메일을 입력해주세요.");
 				return false;
 			}
+			
+			// 이메일 정규식 체크
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(!regex.test($("#useremail").val())){
+				alert("이메일 형식에 맞게 작성해주세요.");
+				return false;
+			}
 		}  
 		if($("#type").val() != "INSTITUTION" && !$("#userphone").attr('disabled')){	// userPhone
 			alert("문자 인증을 진행해 주세요."); 
@@ -286,7 +297,7 @@ let index = {
 				});
 			}
 	},
-				
+
 	sendText:function(){	// 해당 번호로 verify 코드 보내기
 		let userPhone;
 
@@ -297,16 +308,48 @@ let index = {
 				url: "/textProc",	// 보내기 
 				data: {userPhone: userPhone},
 				type: "POST",
-				}).done(function(resp){	// verify code를 data로 리턴
-					if(resp.status == 500){
-						alert("다시 한번 확인해주세요!");
-					}else{
-						if(!resp.data) {
-							alert("발송 실패! 전화번호를 다시 확인하세요.");
-						}
-						else{
-				    		verifyCode = resp.data;	// assigning the rand number(verification code): 전역 변수에 할당 
-							alert("할당된 확인코드: " + verifyCode);
+				}).done(function(data){	// verify code를 data로 리턴
+					if(!data.data) {
+						alert("발송 실패! 전화번호를 다시 확인하세요.");
+					}
+					else{
+			    		verifyCode = data.data;	// assigning the rand number(verification code): 전역 변수에 할당 
+						alert("할당된 확인코드: " + verifyCode);
+						/* TimeOut */
+						let count = 120;
+						let min = 0;
+						let second = 0;
+						let counter = setInterval(timer, 1000);
+						$("#userphone").attr('disabled', true);
+						$("#btn-send-text").css('display', 'none');
+						$("#sms_confirm").css('width', '100%');
+						$("#sms_check").css('width', '-=50px');
+						$("#btn-code-verify").css('display', 'block');
+						
+						function timer() {
+							count--;
+							min = parseInt(count / 60);
+							second = count % 60;
+							if(count <= 0) {			
+								if(smsFlag == 1) {
+									return;
+								}	
+								clearInterval(counter);
+								$('#smstimer').html('<em>인증 시간 초과</em>');
+								$("#sms_confirm").css('width', '-=50px');
+								$("#btn-send-text").css('display', 'block');
+								$("#btn-code-verify").css('display', 'none');
+								$("#sms_check").css('width', '100%');
+								$("#userphone").attr('disabled', false);
+								return;
+							}
+							let text = "";
+							if(min > 0) {
+								text = "<em>남은시간: " + min + "분 " + second + "초</em>"
+							} else {
+								text = "<em>남은시간: " + second + "초</em>";
+							}
+							$('#smstimer').html(text);
 						}
 					}
 				}).fail(function(){
@@ -320,11 +363,15 @@ let index = {
 		verifyInput = $("#verify-input").val();
 		
 		if(verifyInput == verifyCode){
+			smsFlag = 1;
+			$("#sms_check").css('width', '100%');
+			$("#btn-code-verify").css('display', 'none');
 			$("#userphone").attr('disabled', true);	// 코드 확인 후 비활성화
 			$("#verify-input").attr('disabled', true);
 			$("#verify-input").val("휴대폰 인증 완료!");
 			$("#btn-send-text").off("click");	// div 추가 클릭 방지
 			$("#btn-code-verify").off("click");	 // div 추가 클릭 방지
+			$('#smstimer').css('display', 'none');
 			alert("휴대폰 인증 성공!");
 		}
 		else{

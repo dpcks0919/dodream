@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class RequestItem {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -36,7 +35,7 @@ public class RequestItem {
 	@Column(nullable = false)
 	private int itemNum;
 	
-	@Column(nullable = false)
+	@Column(columnDefinition = "int default 0")
 	private int receivedNum;
 	
 	@Enumerated(EnumType.STRING)
