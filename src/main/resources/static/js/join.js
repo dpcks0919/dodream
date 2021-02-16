@@ -30,7 +30,7 @@ function goPopup(){
 		 }); 
 }   
 
-var verifyCode;
+var verifyCode; 
 
 let index = {
 	init: function(){
