@@ -258,6 +258,13 @@ let index = {
 				alert("이메일을 입력해주세요.");
 				return false;
 			}
+			
+			// 이메일 정규식 체크
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(!regex.test($("#useremail").val())){
+				alert("이메일 형식에 맞게 작성해주세요.");
+				return false;
+			}
 		}  
 		if($("#type").val() != "INSTITUTION" && !$("#userphone").attr('disabled')){	// userPhone
 			alert("문자 인증을 진행해 주세요."); 
