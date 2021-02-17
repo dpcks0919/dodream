@@ -41,7 +41,8 @@ public class UserController {
 	}
 
 	@GetMapping("user/mypage")
-	public String mypage() {
+	public String mypage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("user", principalDetails.getUser());
 		return "my/mypage";
 	}
 	
@@ -55,15 +56,42 @@ public class UserController {
 		return "my/myresponse";
 	}
 	
-	@GetMapping("user/infoCheck")
-	public String infoCheck() {
-		return "my/infoCheck";
+	@GetMapping("user/pwCheck")
+	public String pwCheck() {
+		return "my/pwCheck";
+	}
+	@GetMapping("user/pwChange")
+	public String pwChange() {
+		return "my/pwChange";
 	}
 	
-	@GetMapping("user/editInfo")
-	public String editInfo(Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		model.addAttribute("user", principalDetails.getUser());
-		return "my/edit_info_indi";
+	@GetMapping("user/infoCheck/{type}")
+	public String infoCheck(@PathVariable(value="type") String type, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		int isSocial = principalDetails.getUser().getIsSocial();
+		model.addAttribute("userType", principalDetails.getUser().getUserType());
+		
+		if( isSocial == 0 ) {
+			//hidden 타입으로 받아서 my.js에서 editInfo로 보낼 때 type이랑 같이 보내야됨.
+			return "my/infoCheck";
+		}else {
+			return "redirect:/user/editInfo/"+type ;
+		}
 	}
+	
+	@GetMapping("user/editInfo/{type}")
+	public String editInfo(@PathVariable(value="type") String type, Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("user", principalDetails.getUser());
+		System.out.println(type);
+		
+		return "my/edit_info_"+type;
+	}
+	
+	// test
+//	@GetMapping("user/infoCheck")
+//	public String infoCheck(Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		model.addAttribute("user", principalDetails.getUser());
+//		return "my/edit_info_indi";
+//	}
 	
 }
