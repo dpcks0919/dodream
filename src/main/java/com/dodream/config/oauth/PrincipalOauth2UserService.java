@@ -84,6 +84,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 					.loginPassword(password)
 					.userName(userName)
 					//.userEmail(userEmail)
+					.isSocial(1)
 					.build();
 		}else {
 			userService.increaseLoginCount(userEntity.getId());
