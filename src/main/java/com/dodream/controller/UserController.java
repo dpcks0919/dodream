@@ -4,6 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.dodream.config.auth.PrincipalDetails;
 
@@ -11,17 +12,18 @@ import com.dodream.config.auth.PrincipalDetails;
 public class UserController {
 //	요청 목록 페이지
 	@GetMapping("user/requestList")
-	public String userTest() {
+	public String requestList() {
 		return "request/request_list";
 	}
 //	요청하기 페이지 
 	@GetMapping("user/request")
-	public String requestTest() {
+	public String request() {
 		return "request/request";
 	}
 
 	@GetMapping("user/mypage")
-	public String mypage() {
+	public String mypage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("user", principalDetails.getUser());
 		return "my/mypage";
 	}
 	
@@ -35,15 +37,33 @@ public class UserController {
 		return "my/myresponse";
 	}
 	
-	@GetMapping("user/infoCheck")
-	public String infoCheck() {
-		return "my/infoCheck";
+	@GetMapping("user/infoCheck/{type}")
+	public String infoCheck(@PathVariable(value="type") String type, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		int isSocial = principalDetails.getUser().getIsSocial();
+		model.addAttribute("userType", principalDetails.getUser().getUserType());
+		
+		if( isSocial == 0 ) {
+			//hidden 타입으로 받아서 my.js에서 editInfo로 보낼 때 type이랑 같이 보내야됨.
+			return "my/infoCheck";
+		}else {
+			return "redirect:/user/editInfo/"+type ;
+		}
 	}
 	
-	@GetMapping("user/editInfo")
-	public String editInfo(Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
+	@GetMapping("user/editInfo/{type}")
+	public String editInfo(@PathVariable(value="type") String type, Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("user", principalDetails.getUser());
-		return "my/edit_info_indi";
+		System.out.println(type);
+		
+		return "my/edit_info_"+type;
 	}
+	
+	// test
+//	@GetMapping("user/infoCheck")
+//	public String infoCheck(Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		model.addAttribute("user", principalDetails.getUser());
+//		return "my/edit_info_indi";
+//	}
 	
 }
