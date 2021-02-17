@@ -81,6 +81,9 @@ public class User {
 	
 	@Column(nullable = false)
 	private int emailFlag;
+	
+	@Column(columnDefinition = "int default 0")
+	private int isSocial;
 		
 	@Column(columnDefinition = "int default 0")
 	private int loginCount;

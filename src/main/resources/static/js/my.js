@@ -1,4 +1,4 @@
-var raw, Lat, Lng;
+var Lat, Lng;
 
 function goPopup(){
 
@@ -43,6 +43,9 @@ let index = {
 		});
 		$("#btn-check").on("click", () => { 
 			this.passwordCheck();
+		});
+		$("#btn-addr-search").on("click", () => { 
+			jQuery('#addrDetail').css("display", "block");
 		});
 	},
 	
@@ -96,7 +99,7 @@ let index = {
 	
 	radiusInputSetUp:function(){
 		$('#selectradius').append("<option value='3'>3</option>");
-		$('#selectradius').append("<option value='5' selected>5</option>");
+		$('#selectradius').append("<option value='5'>5</option>");
 		$('#selectradius').append("<option value='7'>7</option>");
 		$('#selectradius').append("<option value='10'>10</option>");
 		$('#selectradius').append("<option value='15'>15</option>");
@@ -107,7 +110,7 @@ let index = {
 	},
 		
 	update:function(){
-		alert("ss");
+			
 		var birthyear = $("#birthyear").val();
 		var birthmonth =  $("#birthmonth").val();
 	 	var birthdate =  $("#birthdate").val();	
@@ -115,7 +118,8 @@ let index = {
 		var fullAddr = $("#roadAddrPart1").val()+ " " + $("#addrDetail").val();
 		
 		let data = {
-			loginPassword : $("#userpw").val(),
+			loginId : $("#loginId").val(),
+			userName : $("#username").val(),
 			userSex : $("#input_sex").val(),
 			userDob : birthdob,
 			userEmail: $("#useremail").val(),
@@ -131,7 +135,7 @@ let index = {
 			longitude: Lng,
 			notificationRadius: $("#notification_radius").val(),
 		};	
-		
+				
 		$.ajax({
 			type: "PUT",
 			url: "/updateProc",
@@ -158,13 +162,15 @@ let index = {
 			data: {password: password},
 			url: "/passwordCheckProc",
 		}).done(function(resp){ // 응답의 결과를 받아주는 parameter
-			if( resp.status ){
-				raw = resp.data
-				location.href = "/user/editInfo";
+			if( resp.status == 500){ 
+				alert("에러가 발생하였습니다.\n다시 한번 시도해주세요!");
 			}else{
-				alert("비밀번호가 틀렸습니다.");
-				location.href = "/user/infoCheck";	
-			}	
+				if( resp.data ){
+					location.href = "/user/editInfo/indi";
+				}else{
+					alert("비밀번호가 틀렸습니다.");
+				}	
+			}
 		});
 	},
 	

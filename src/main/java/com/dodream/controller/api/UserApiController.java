@@ -23,6 +23,7 @@ import com.dodream.service.UserService;
 @RestController
 public class UserApiController {
 	
+	
 	@Autowired
 	private UserService userService;
 	
@@ -32,6 +33,8 @@ public class UserApiController {
 	@Value("${social.password}")
 	private String socialPassword;
 	
+	private String rawPassword;
+
 	@PostMapping("/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 				
@@ -109,24 +112,32 @@ public class UserApiController {
 	}
 	
 	@PostMapping("/passwordCheckProc")
-	public ResponseDto<String> passwordCheck(@RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails) {	// boolean 값 리턴(false: 아이디 중복)
+	public ResponseDto<Boolean> passwordCheck(@RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails) {	// boolean 값 리턴(false: 아이디 중복)
 	
-		int status = userService.passwordCheckService(password, principalDetails.getUser().getLoginPassword()) ? 1: 0;
+		Boolean status = userService.passwordCheckService(password, principalDetails.getUser().getLoginPassword());
+		rawPassword = password;
 		
-		return new ResponseDto<String>( status, password);
+		return new ResponseDto<Boolean>( HttpStatus.OK.value(), status);
 	}
 	
 	@PutMapping("/updateProc")
-	public ResponseDto<Integer> updateUser(@RequestBody User user){
+	public ResponseDto<Integer> updateUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
 		
-		System.out.println(user);
-//		
-//		userService.update(user);
-//		
-//		Authentication authentication = authenticationManager.
-//				authenticate(new UsernamePasswordAuthenticationToken(user.getLoginId(), user.getLoginPassword()));
-//		SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
-//		
+		int isSocial = principalDetails.getUser().getIsSocial();
+		Authentication authentication;
+
+		userService.update(user);
+		
+		if( isSocial == 0 ) {
+			authentication = authenticationManager.
+					authenticate(new UsernamePasswordAuthenticationToken(user.getLoginId(), rawPassword));
+		}else {
+			authentication = authenticationManager.
+					authenticate(new UsernamePasswordAuthenticationToken(user.getLoginId(), socialPassword));
+		}
+		
+		SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
