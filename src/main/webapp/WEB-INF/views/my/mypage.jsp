@@ -50,8 +50,10 @@
 							<div class="section2-box-left">
 								<span class="section2-text1">내 정보 (개인)</span>
 							</div>
-							<div class="section2-box-right">
-								<a class="section2-text2" href="/user/infoCheck/indi">더 보기 <i class="fas fa-chevron-right"></i></a>
+							<div class="section2-box-right" style="line-height:initial;text-align:right;margin-top:2.3rem;">
+								<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/infoCheck/indi">정보 수정 <i class="fas fa-chevron-right"></i></a></p>
+								<div style="height:0.5rem;"></div>
+								<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/pwCheck">비밀번호 변경 <i class="fas fa-chevron-right"></i></a></p>
 							</div>
 						</div>
 					</c:when>
@@ -61,7 +63,8 @@
 								<span class="section2-text1">내 정보 (단체)</span>
 							</div>
 							<div class="section2-box-right">
-								<a class="section2-text2" href="/user/infoCheck/group">더 보기 <i class="fas fa-chevron-right"></i></a>
+								<a class="section2-text2" href="/user/infoCheck/group">정보 수정 <i class="fas fa-chevron-right"></i></a>
+								
 							</div>
 						</div>
 					</c:when>
@@ -71,7 +74,7 @@
 								<span class="section2-text1">내 정보 (사회복지사)</span>
 							</div>
 							<div class="section2-box-right">
-								<a class="section2-text2" href="/user/infoCheck/worker">더 보기 <i class="fas fa-chevron-right"></i></a>
+								<a class="section2-text2" href="/user/infoCheck/worker">정보 수정 <i class="fas fa-chevron-right"></i></a>
 							</div>
 						</div>
 					</c:when>
@@ -81,7 +84,7 @@
 								<span class="section2-text1">내 정보 (기관)</span>
 							</div>
 							<div class="section2-box-right">
-								<a class="section2-text2" href="/user/infoCheck/org">더 보기 <i class="fas fa-chevron-right"></i></a>
+								<a class="section2-text2" href="/user/infoCheck/org">정보 수정 <i class="fas fa-chevron-right"></i></a>
 							</div>
 						</div>
 					</c:when>
@@ -95,10 +98,10 @@
 					</div>
 				</div>
 				<div class="section2-box">
-					<div class="section2-box-left" style="line-height: initial; margin-top: 1vw;">
+					<div class="section2-box-left" style="line-height:initial;margin-top:1.25rem;">
 						<p class="section2-text1">응답 내역</p>
-						<p class="section2-text2" style="margin-bottom: 0;">새로운 응답 1</p>
-						<p class="section2-text2" style="margin-bottom: 0;">지난 응답 10</p>
+						<p class="section2-text2" style="margin-bottom:0;">새로운 응답 1</p>
+						<p class="section2-text2" style="margin-bottom:0;">지난 응답 10</p>
 					</div>
 					<div class="section2-box-right">
 						<a class="section2-text2" href="/user/myresponse">더 보기 <i class="fas fa-chevron-right"></i></a>

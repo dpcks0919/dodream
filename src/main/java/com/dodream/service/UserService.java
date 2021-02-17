@@ -222,6 +222,13 @@ public class UserService {
 		}
 
 	}
+	
+	@Transactional
+	public void updatepw(String currentId, String password) {		
+		User persistance = userRepository.findByLoginId(currentId);
+		String encPassword =  encoder.encode(password);
+		persistance.setLoginPassword(encPassword);
+	}
 
 	public boolean passwordCheckService(String password, String dbPassword) {
 		

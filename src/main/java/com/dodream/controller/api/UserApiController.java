@@ -141,4 +141,19 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	@PutMapping("/updatepwProc")
+	public ResponseDto<Integer> updateUserpw(@RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails){
+		
+		Authentication authentication;
+		String currentId = principalDetails.getUser().getLoginId();
+		userService.updatepw(currentId, password);
+		
+		authentication = authenticationManager.
+				authenticate(new UsernamePasswordAuthenticationToken(currentId, password));
+		
+		SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
 }
