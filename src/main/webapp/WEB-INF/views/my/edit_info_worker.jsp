@@ -33,7 +33,7 @@
 
 
 		<!-- Masthead-->
-		<header class="text-white text-center response-bgcolor">
+		<header class="text-white text-center request-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info">
 					<h4>개인정보 수정</h4>
@@ -47,12 +47,12 @@
 						<form method="post" name="regForm" action="">
 							<div class="divider-custom" style="margin-top: 0">
 								<div class="divider-custom-line"></div>
-								<div style="color: #e95378;">
+								<div style="color: #ed7e95;">
 									<h4>개인정보</h4>
 								</div>
 								<div class="divider-custom-line"></div>
 							</div>
-							<input type="hidden" id="loginId"> 
+							<input type="hidden" id="loginId">
 							<div class="input-content">
 								<span class="input-title">이름</span><br> <input class="text-input" type="text" name="username" id="username" placeholder="이름 입력" disabled="disabled">
 							</div>
@@ -68,21 +68,17 @@
 							<div class="input-content">
 								<span class="input-title">생년월일</span><span>&nbsp;<em>*</em></span><br>
 								<div class="flex-center" style="margin-top: 0.5rem;">
-									<select class="select-date" id="selectyear"></select> 
-									<input class="input-date" type="hidden" name="birthyear" id="birthyear">
+									<select class="select-date" id="selectyear"></select> <input class="input-date" type="hidden" name="birthyear" id="birthyear">
 									<div style="width: 0.5%;"></div>
-									<select class="select-date" id="selectmonth"></select> 
-									<input class="input-date" type="hidden" name="birthmonth" id="birthmonth">
+									<select class="select-date" id="selectmonth"></select> <input class="input-date" type="hidden" name="birthmonth" id="birthmonth">
 									<div style="width: 0.5%;"></div>
-									<select class="select-date" id="selectdate"></select> 
-									<input class="input-date" type="hidden" name="birthdate" id="birthdate">
+									<select class="select-date" id="selectdate"></select> <input class="input-date" type="hidden" name="birthdate" id="birthdate">
 								</div>
 							</div>
 							<div class="input-content">
-								<span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br>
-								<input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력"> <span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. <br>메일 수신 동의&nbsp;&nbsp;
-									<span> <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked> 예</label>&nbsp;&nbsp; <label><input type="radio" name="mail_rcv" value="0"
-											id="mail_rcv"> 아니요</label>
+								<span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br> <input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력"> <span
+									class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. <br>메일 수신 동의&nbsp;&nbsp; <span> <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked> 예</label>&nbsp;&nbsp;
+										<label><input type="radio" name="mail_rcv" value="0" id="mail_rcv"> 아니요</label>
 								</span></span>
 							</div>
 							<div class="input-content">
@@ -93,14 +89,22 @@
 									</div>
 								</div>
 								<div style="height: 5px;"></div>
-								
+
 								<div class="extra-info timer-info" id="smstimer"></div>
 								<span class="extra-info"> 주변 이웃들의 필요를 문자로 받으실 수 있습니다. <br>SMS 수신 동의&nbsp;&nbsp; <span> <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked>
 											예</label>&nbsp;&nbsp; <label><input type="radio" name="sms_rcv" value="0" id="sms_rcv"> 아니요</label>
 								</span></span>
 							</div>
 							<div class="input-content">
-								<span class="input-title">도로명주소</span><span>&nbsp;<em>*</em></span><br>
+								<span class="input-title">기관명</span><span>&nbsp;<em>*</em></span><br>
+								<input class="text-input" type="text" name="orgname" id="orgname" placeholder="기관명 입력" id="o">
+							</div>
+							<div class="input-content">
+								<span class="input-title">기관전화번호</span><span>&nbsp;<em>*</em></span><br>
+								<input class="text-input" type="text" name="orgphone" id="orgphone" placeholder="기관전화번호 입력">
+							</div>
+							<div class="input-content">
+								<span class="input-title">기관 도로명주소</span><span>&nbsp;<em>*</em></span><br>
 								<div class="flex-center">
 									<div style="width: calc(100% - 50px);">
 										<input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력" disabled>
@@ -108,18 +112,7 @@
 									<div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width: 50px;">변경</div>
 								</div>
 								<div style="height: 5px;"></div>
-								<input class="text-input" type="text" style="display:none" name="addrDetail" id="addrDetail" placeholder="상세주소 입력"> 
-								<span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span> <br>
-								<span class="extra-info"> 알림 반경 : <select class="select-radius" id="selectradius"></select> <input type="hidden" name="radius" id="notification_radius">&nbsp;km
-								</span>
-							</div>
-							<div class="input-content">
-								<span class="input-title">소속되어 있는 단체</span><br>
-								<input class="text-input" type="text" name="orgname" id="orgname" placeholder="정확한 명칭을 적어주세요.">
-							</div>
-							<div class="input-content">
-								<span class="input-title">직위/역할</span><br>
-								<input class="text-input" type="text" name="userpos" id="userpos" placeholder="소속이 있다면 직위나 역할을 작성해주세요.">
+								<input class="text-input" type="text" style="display: none" name="addrDetail" id="addrDetail" placeholder="상세주소 입력"> <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span> <br> </span>
 							</div>
 						</form>
 						<div style="width: 100%;">
@@ -167,7 +160,7 @@
 				$("#maleuser").removeClass("selected");
 				$("#input_sex").val("2");	// 2: female
 			}
-						
+					
 			if( ${user.emailFlag} == 1 ){
 				document.regForm.mail_rcv[0].checked = true;
 			}else{
