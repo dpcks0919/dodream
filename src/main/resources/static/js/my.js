@@ -44,6 +44,9 @@ let index = {
 		$("#btn-check").on("click", () => { 
 			this.passwordCheck();
 		});
+		$("#btn-change").on("click", () => { 
+			this.passwordChange();
+		});
 		$("#btn-addr-search").on("click", () => { 
 			jQuery('#addrDetail').css("display", "block");
 		});
@@ -156,6 +159,7 @@ let index = {
 	
 	passwordCheck:function(){
 		var password =  $("#password").val();
+		var pwchange = $('#pwchange').val();
 		
 		$.ajax({
 			type: "POST",
@@ -166,13 +170,44 @@ let index = {
 				alert("에러가 발생하였습니다.\n다시 한번 시도해주세요!");
 			}else{
 				if( resp.data ){
-					location.href = "/user/editInfo/indi";
+					if(pwchange == 1) {
+						location.href = "/user/pwChange";
+					} else {
+						location.href = "/user/editInfo/indi";	
+					}
 				}else{
 					alert("비밀번호가 틀렸습니다.");
 				}	
 			}
 		});
 	},
+	
+	passwordChange:function(){
+		var password = "";
+		if($("#userpw").length){ // 패스워드
+			if($("#userpw").val() == "" || $("#userpw").val() != $("#userpwchk").val()){
+				alert("비밀번호를 다시 확인해주세요.");
+				return false;
+			} else {
+				password = $("#userpw").val();
+			}
+		}
+		
+
+		$.ajax({
+			//회원가입 수행 요청.
+			type: "PUT",
+			url: "/updatepwProc",
+			data: {password: password}, //json으로 변경, 
+		}).done(function(resp){ // 응답의 결과를 받아주는 parameter
+			if(resp.status == 500){
+				alert("비밀번호 변경에 실패하였습니다.");
+			}else{
+				alert("비밀번호 변경이 완료되었습니다.");
+				location.href = "/user/mypage";
+			}
+		});
+	}
 	
 }
 

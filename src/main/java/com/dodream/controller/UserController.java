@@ -37,6 +37,15 @@ public class UserController {
 		return "my/myresponse";
 	}
 	
+	@GetMapping("user/pwCheck")
+	public String pwCheck() {
+		return "my/pwCheck";
+	}
+	@GetMapping("user/pwChange")
+	public String pwChange() {
+		return "my/pwChange";
+	}
+	
 	@GetMapping("user/infoCheck/{type}")
 	public String infoCheck(@PathVariable(value="type") String type, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
