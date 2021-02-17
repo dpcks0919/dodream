@@ -20,7 +20,8 @@ public class RequestApiController {
 
 	@PostMapping("/requestSaveProc")
 	public ResponseDto<Request> save(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		Request newRequest = requestService.saveRequest(request,  principalDetails);
+		Request newRequest = requestService.saveRequest(request, principalDetails);
+		System.out.println(newRequest);
 		return new ResponseDto<Request> (HttpStatus.OK.value(), newRequest);
 	}
 	

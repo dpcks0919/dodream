@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +23,23 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4407e6aa270afe5752d07352835fb75f"></script>
 </head>
+<style>
+	.paging-left, .paging-right {
+		border-style:none!important;
+		outline:none!important;
+	}
+	.paging-left:hover, .paging-right:hover {
+		background-color:white!important;
+		outline:none!important;
+	}
+	.selected_page {
+		background-color: #ed7e95;
+	  	color: white;
+	  	border: 1px solid #ed7e95;
+	}
+
+
+</style>
 
 <body id="page-top">
 	<div class="modal-bg" id="modal-bg" onclick="closeModal()"></div>
@@ -28,7 +47,7 @@
 	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail">
 		<div class="modal-content">
-			<h5>독거어르신 주거환경개선 도움 요청입니다.</h5>
+			<h5>독거어르신 주거환경개선 도움 요청입니다.${isDetail}</h5>
 			<div class="content-info">
 				<table class="info-table">
 					<tr>
@@ -286,44 +305,82 @@
 					<thead>
 						<tr style="border-bottom: 3px solid #d3d3d3;">
 							<th class="table-num">등록번호</th>
-							<th class="table-title">응답 내용</th>
+							<th class="table-title">요청 내용</th>
 							<th class="table-date">등록일</th>
 							<th class="table-status">상태</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td onclick="goDetail();" class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">미승인</td>
-						</tr>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">승인</td>
-						</tr>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
+						<c:forEach var="request" items="${requests.content}">	
+							<tr>
+								<td class="table-num">${request.id}</td>
+								<td onclick="goDetail(${request.id});" href="/user/" class="table-title fbold">${request.description}</td>
+								<td class="table-date">${request.regDate}</td>
+								<td class="table-status">
+									<c:choose>
+										<c:when test="${request.status eq 'APPROVED'}">
+											승인
+										</c:when>
+										<c:when test="${request.status eq 'NON_APPROVED'}">
+											미승인
+										</c:when>								
+										<c:when test="${request.status eq 'WAITING'}">
+											대기
+										</c:when>
+										<c:when test="${request.status eq 'CLOSED'}">
+											마감
+										</c:when>
+									</c:choose>
+								</td>
+							</tr>
+						</c:forEach>			
 					</tbody>
 				</table>
+	
+	<!-- 페이징할때 주의할 점 : requests.number는 0부터 시작하기 때부터 그걸 고려해서 밑에 다 수정했음. 
+	그래서 화면에 보이는 것만 1부터 보이게 설정함.
+	-->
+	<c:set var="page" value="${requests.number}"/>
+	<!-- 첫번째 페이지 -->
+	<c:set var="startNum" value="${page - (page) % 5}"/>
+	<!-- 마지막 페이지 -->
+	<c:set var="lastNum" value="${requests.totalPages-1}" />
+	<c:set var="isLast" value="5" />
+	<div class="pagination">
+	<c:if test="${startNum >= 5}">
+		<a href="?page=${startNum - 1}" style="float:left;" class="btn btn-prev paging-left">&laquo;</a>
+	</c:if>
+	
+	<c:if test="${startNum == 0}">
+		<span class="btn btn-prev" style="color:#e3e3e3; float:left; cursor:initial;" disabled>&laquo;</span>
+	</c:if>
+
+	<!-- 마지막수 - 첫번째수 -->
+	<c:if test="${startNum + 5 >= lastNum }">
+		<c:set var="isLast" value="${lastNum - startNum + 1}" />	
+	</c:if>
+
+		<c:forEach var="i" begin="0" end="${isLast-1}">
+			<c:choose>
+				<c:when test="${i eq page%5}">
+					<a class="-text- orange bold selected_page" href="?page=${startNum + i}" >${startNum + i + 1}</a>
+				</c:when>
+				<c:otherwise>
+					<a class="-text- orange bold" href="?page=${startNum + i}" >${startNum + i + 1}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>			
+		
+<!-- 마지막번호는 DB레코드 수와 연관이 있다!
+     우선은 lastpage 개수를 임의로 지정. -->
+	<c:if test="${startNum + 4 <= lastNum }">
+		<a href="?page=${startNum + 5}" class="btn btn-next paging-right">&raquo;</a>
+	</c:if>
+	<c:if test="${startNum + 4 > lastNum }">
+		<span class="btn btn-next" style="color:#e3e3e3; cursor:initial;" disabled>&raquo;</span>
+	</c:if>
+	</div>
+
 			</div>
 		</section>
 
@@ -333,6 +390,7 @@
 		<%@include file="../layout/sidebar_back.jsp"%>
 
 	</div>
+	
 	<!-- Wrapper -->
 	<script>
 	var lati, longi;
@@ -370,5 +428,6 @@
 	<!-- Core theme JS-->
 	<script src="/js/scripts.js"></script>
 	<script src="/js/modal.js"></script>
+	<script src="/js/request.js"></script>
 </body>
 </html>
