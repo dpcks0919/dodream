@@ -107,24 +107,24 @@
 			</div>
 			<div class="content-info" style="text-align: center;">
 				<div style="border-top: 3px solid black; padding-top: 1vh; padding-bottom: 1vh;">
-					<button class="info-btn">내 정보 가져오기</button>
-					<button class="new-btn click_event">새로 작성하기</button>
+					<button class="info-btn " id="myInfo" onclick="bringInfo('myInfo')">내 정보 가져오기</button>
+					<button class="new-btn click_event" id="newInfo" onclick="bringInfo('newInfo')">새로 작성하기</button>
 				</div>
 				<div class="div-inline">
 					<div class="response-info ">
 						<div class="info-title">
 							이름<span style="color: white;">이름</span>
 						</div>
-						<input class="info-text" name="response-name" type="text" placeholder="이름 입력"></input>
+						<input class="info-name info-text" name="response-name" type="text" placeholder="이름 입력"></input>
 					</div>
 					<div class="response-info">
 						<div class="info-title">소속단체</div>
-						<input class="info-text" name="response-org" type="text" placeholder="소속단체 입력"></input>
+						<input class="info-group info-text" name="response-org" type="text" placeholder="소속단체 입력"></input>
 					</div>
 				</div>
 				<div class="response-info">
 					<div class="info-title">전화번호</div>
-					<input class="info-text" name="response-phone" type="text" placeholder="전화번호 입력"></input>
+					<input class="info-phone info-text" name="response-phone" type="text" placeholder="전화번호 입력"></input>
 				</div>
 				<!-- 공간 맞추기 여백 -->
 				<div class="response-info" style="visibility: hidden !important;">
@@ -340,6 +340,10 @@
 				<!-- 마지막 페이지 -->
 				<c:set var="lastNum" value="${requests.totalPages-1}" />
 				<c:set var="isLast" value="5" />
+				<c:if test="${requests.totalPages == 0}">
+					<div style="margin-bottom:2vh;"><br>요청 내용이 존재하지 않습니다.</div>
+					<c:set var="isLast" value="1" />
+				</c:if>
 				<div class="pagination">
 					<c:if test="${startNum >= 5}">
 						<a href="?page=${startNum - 1}" style="float: left;" class="btn btn-prev paging-left">&laquo;</a>
@@ -348,12 +352,12 @@
 					<c:if test="${startNum == 0}">
 						<span class="btn btn-prev" style="color: #e3e3e3; float: left; cursor: initial;" disabled>&laquo;</span>
 					</c:if>
-
-					<!-- 마지막수 - 첫번째수 -->
-					<c:if test="${startNum + 5 >= lastNum }">
-						<c:set var="isLast" value="${lastNum - startNum + 1}" />
+					<c:if test="${requests.totalPages ne 0}">
+						<!-- 마지막수 - 첫번째수 -->
+						<c:if test="${startNum + 5 >= lastNum }">
+							<c:set var="isLast" value="${lastNum - startNum + 1}" />
+						</c:if>
 					</c:if>
-
 					<c:forEach var="i" begin="0" end="${isLast-1}">
 						<c:choose>
 							<c:when test="${i eq page%5}">
@@ -386,7 +390,7 @@
 	</div>
 
 	<%@include file="../layout/jsFile.jsp"%>
-	<script src="/js/request.js"></script>
+	<script src="/js/request.js"></script>	
 	<script>
 	var lati, longi;
 	
