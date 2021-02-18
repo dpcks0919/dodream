@@ -103,28 +103,28 @@
 		<div class="modal-content">
 			<div class="" style="vertical-align: text-bottom !important;">
 				<h5 style="float: left">응답하기</h5>
-				<span class="request-name"><br>독거어르신 주거환경개선 도움 요청</span>
+				<span class="request-name" id="rq_title2"><br></span>
 			</div>
 			<div class="content-info" style="text-align: center;">
 				<div style="border-top: 3px solid black; padding-top: 1vh; padding-bottom: 1vh;">
-					<button class="info-btn " id="myInfo" onclick="bringInfo('myInfo')">내 정보 가져오기</button>
-					<button class="new-btn click_event" id="newInfo" onclick="bringInfo('newInfo')">새로 작성하기</button>
+					<button class="info-btn " id="myInfo" onclick="bringInfo('myInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">내 정보 가져오기</button>
+					<button class="new-btn click_event" id="newInfo" onclick="bringInfo('newInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">새로 작성하기</button>
 				</div>
 				<div class="div-inline">
 					<div class="response-info ">
 						<div class="info-title">
 							이름<span style="color: white;">이름</span>
 						</div>
-						<input class="info-name info-text" name="response-name" type="text" placeholder="이름 입력"></input>
+						<input class="info-name info-text" name="response-name" type="text" value="${user.userName}" placeholder="이름 입력"></input>
 					</div>
 					<div class="response-info">
 						<div class="info-title">소속단체</div>
-						<input class="info-group info-text" name="response-org" type="text" placeholder="소속단체 입력"></input>
+						<input class="info-group info-text" name="response-org" type="text" value="${user.userPhone}" placeholder="소속단체 입력"></input>
 					</div>
 				</div>
 				<div class="response-info">
 					<div class="info-title">전화번호</div>
-					<input class="info-phone info-text" name="response-phone" type="text" placeholder="전화번호 입력"></input>
+					<input class="info-phone info-text" name="response-phone" type="text" value="${user.orgName}" placeholder="전화번호 입력"></input>
 				</div>
 				<!-- 공간 맞추기 여백 -->
 				<div class="response-info" style="visibility: hidden !important;">
