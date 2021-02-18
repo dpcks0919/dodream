@@ -160,7 +160,7 @@ let index = {
 	passwordCheck:function(){
 		var password =  $("#password").val();
 		var pwchange = $('#pwchange').val();
-		
+		var infotype = $('#info_type').val();
 		$.ajax({
 			type: "POST",
 			data: {password: password},
@@ -173,7 +173,7 @@ let index = {
 					if(pwchange == 1) {
 						location.href = "/user/pwChange";
 					} else {
-						location.href = "/user/editInfo/indi";	
+						location.href = "/user/editInfo/" + infotype;	
 					}
 				}else{
 					alert("비밀번호가 틀렸습니다.");
