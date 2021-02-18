@@ -3,7 +3,6 @@
 
 <link href="/css/main.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<%@include file="layout/kakaoMap.jsp"%>
 
 </head>
 
@@ -206,7 +205,10 @@
 		<%@include file="layout/footer.jsp"%>
 	</div>
 	<%@include file="layout/sidebar_back.jsp"%>
-
+	
+	<%@include file="layout/jsFile.jsp"%>
+	<%@include file="layout/kakaoMap.jsp"%>
+	<script type="text/javascript" src="/js/map.js"></script>
 	<script>
 	var lati, longi;
 	
@@ -231,7 +233,6 @@
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 	</script>
-	<%@include file="layout/jsFile.jsp"%>
-	<script type="text/javascript" src="/js/map.js"></script>
+
 </body>
 </html>
