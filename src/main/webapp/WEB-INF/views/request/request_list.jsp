@@ -31,29 +31,29 @@
 	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail">
 		<div class="modal-content">
-			<h5>독거어르신 주거환경개선 도움 요청입니다.${isDetail}</h5>
+			<div id="rq_title"></div>
 			<div class="content-info">
 				<table class="info-table">
 					<tr>
 						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td style="width: 27.5%;">#10011</td>
+						<td id="rq_id" style="width: 27.5%;">#10011</td>
 						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td style="width: 37.5%;">2020.10.21.</td>
+						<td id="rq_date" style="width: 37.5%;">2020.10.21.</td>
 					</tr>
 					<tr>
 						<td><b>상태</b></td>
-						<td>응답 대기중</td>
+						<td id="rq_status">응답 대기중</td>
 						<td><b>주소</b></td>
-						<td>경상북도 포항시 북구 흥해읍</td>
+						<td id="rq_addr">경상북도 포항시 북구 흥해읍</td>
 					</tr>
 					<tr>
 						<td><b>기간</b></td>
-						<td>보통(한 달 이내)</td>
+						<td id="rq_level" >보통(한 달 이내)</td>
 						<td><b>요청자</b></td>
-						<td>요청을 올린 사회복지사/기관</td>
+						<td id="rq_user">요청을 올린 사회복지사/기관</td>
 					</tr>
 				</table>
-				<div class="content-text">여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는
+				<div id="rq_desc" class="content-text">여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는
 					어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이
 					노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는
 					사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한
@@ -296,9 +296,21 @@
 					</thead>
 					<tbody>
 						<c:forEach var="request" items="${requests.content}">
+							<script>
+								const rq${request.id} = {
+									id: ${request.id},
+									title: '${request.title}',
+									date: '${request.regDate}',
+									status: '${request.status}',
+									address: '${request.requestAddress}',
+									level: '${request.urgentLevel}',
+									writer: '${request.user}',
+									contents: '${request.description}',
+								};
+							</script>
 							<tr>
 								<td class="table-num">${request.id}</td>
-								<td onclick="goDetail();" href="/user/" class="table-title fbold">${request.description}</td>
+								<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold">${request.title}</td>
 								<td class="table-date">${request.regDate}</td>
 								<td class="table-status"><c:choose>
 										<c:when test="${request.status eq 'APPROVED'}">
