@@ -60,6 +60,7 @@
 		</section>
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
+	<%@include file="../layout/jsFile.jsp"%>
 
 	<script>
 		function selectEmail(ele) {
@@ -86,7 +87,5 @@
 		}
 	</script>
 
-	<%@include file="../layout/jsFile.jsp"%>
-	<script src="/js/modal.js"></script>
 </body>
 </html>

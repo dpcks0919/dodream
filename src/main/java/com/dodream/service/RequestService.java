@@ -38,7 +38,7 @@ public class RequestService {
 		System.out.println("saveRequestItem");
 	}
 	
-	@Transactional
+	@Transactional(readOnly = true)
 	public Page<Request> readRequestList(Pageable pageable) {
 		return requestRepository.findAll(pageable);
 	}
