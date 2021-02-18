@@ -19,7 +19,7 @@
 <link href="/css/main.css" rel="stylesheet" />
 <link href="/css/nav_footer.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4407e6aa270afe5752d07352835fb75f"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4407e6aa270afe5752d07352835fb75f&libraries=services"></script>
 
 </head>
 
@@ -73,22 +73,23 @@
 			</p>
 			<div class="container ">
 				<div style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요."> <i class="fas fa-search search-icon"></i>
+					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요." id="input-addr"> 
+					<div id="btn-search"><i class="fas fa-search search-icon" id="btn-search"></i></div>
 				</div>
 				<div class="sec3-middle ">
 					<div class="left sec3-middle-left">
 						<span class="sec3-text1">돕고 싶은 이웃</span>
-						<button class="tbox-center tbox-small">노인</button>
-						<button class="tbox-center tbox-small">아이</button>
-						<button class="tbox-center tbox-small">장애인</button>
-						<button class="tbox-center tbox-small">기타</button>
+						<button class="tbox-center tbox-small" id="btn-elderly'">노인</button>
+						<button class="tbox-center tbox-small" id="btn-child">아이</button>
+						<button class="tbox-center tbox-small" id="btn-disabled">장애인</button>
+						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
 					<div class="left sec3-middle-right">
 						<span class="sec3-text1">돕고 싶은 재화</span>
-						<button class="tbox-center tbox-small">노인</button>
-						<button class="tbox-center tbox-small">아이</button>
-						<button class="tbox-center tbox-small">장애인</button>
-						<button class="tbox-center tbox-small">기타</button>
+						<button class="tbox-center tbox-small" id="btn-goods">물품</button>
+						<button class="tbox-center tbox-small" id="btn-finance">재정</button>
+						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
+						<button class="tbox-center tbox-small" id="btn-others">기타</button>
 					</div>
 					<br>
 				</div>
@@ -255,5 +256,6 @@
 	<!-- Core theme JS-->
 	<script src="/js/scripts.js"></script>
 	<script src="/js/modal.js"></script>
+	<script type="text/javascript" src="/js/map.js"></script>
 </body>
 </html>

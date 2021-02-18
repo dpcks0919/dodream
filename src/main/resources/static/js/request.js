@@ -155,11 +155,6 @@ function upload(step) {
         itemNum : document.getElementById(_count).value,
       });
     }
-  }
-  else {
-    alert('물품을 입력해주세요');
-  }
-
 	// Modal 창 켜짐 
 	if(step == 1) {
     	goRequestDetail(title, period_text, contents, totalCnt, itemList);
@@ -168,6 +163,11 @@ function upload(step) {
 	else if(step == 2) {
     	index.saveRequest(totalCnt, itemList);
 	}
+  }
+  else {
+    alert('물품을 입력해주세요');
+  }
+
 
   // 갯수만큼 for문을 돌려서 배열에 저장해놓고
 }
@@ -213,17 +213,15 @@ let index = {
 		let data = {
 			title: document.getElementById('requestTitle').value,
 			// 노인 아동 장애인 기타 : 일단 임시로 1
-			clientType: "SENIOR",
-			// 임시 주소
+			clientType: "ELDERLY",
+			// request에서 새로 주소를 받아오기로 함. (form 한개 더 만들어져야 함)
 			requestAddress : "temp",
 			latitude : 125,
 			longitude : 125,
 			urgentLevel : period,
 			description : document.getElementById('requestContents').value,
 			status : "NON_APPROVED",			
-			// 지도에 표시 여부 일단 0
-			showFlag : 0,
-			distance : 10,
+			showFlag : 0
 		};
 		console.log(data);
 		$.ajax({
@@ -233,6 +231,7 @@ let index = {
 			contentType: "application/json; charset = utf-8 ",
 			dataType: "json"
 		}).done(function(resp){
+			console.log(data);
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
@@ -243,6 +242,7 @@ let index = {
 				}
 				closeModal_request();
 			    location.reload();
+				window.scrollTo(0,0);
 			}
 		}).fail(function(error){
 			alert(JSON.stringify(error));

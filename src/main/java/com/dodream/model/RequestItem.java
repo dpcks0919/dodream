@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +29,7 @@ public class RequestItem {
 	
 	@ManyToOne
 	@JoinColumn(name ="requestId")
+	@JsonBackReference	//본질적인 루프참조 해결방법 
 	private Request request;
 	
 	@Column(nullable = false)

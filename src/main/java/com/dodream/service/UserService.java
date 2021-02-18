@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.model.Request;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
@@ -194,9 +195,22 @@ public class UserService {
 		return false;
 	}
 
+	@Transactional
 	public void update(User user) {
-		
+				
 		User persistance = userRepository.findByLoginId(user.getLoginId());
+		
+		persistance.setUserName(user.getUserName());
+		persistance.setUserSex(user.getUserSex());
+		persistance.setUserDob(user.getUserDob());
+		persistance.setUserPhone(user.getUserPhone());
+		persistance.setUserEmail(user.getUserEmail());
+		persistance.setOrgName(user.getOrgName());
+		persistance.setOrgUserRole(user.getOrgUserRole());
+		persistance.setNotificationRadius(user.getNotificationRadius());
+		persistance.setMsgFlag(user.getMsgFlag());
+		persistance.setEmailFlag(user.getEmailFlag());
+		persistance.setOrgPhone(user.getOrgPhone());
 		
 	}
 
