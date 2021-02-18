@@ -50,11 +50,20 @@
 							<div class="section2-box-left">
 								<span class="section2-text1">내 정보 (개인)</span>
 							</div>
-							<div class="section2-box-right" style="line-height:initial;text-align:right;margin-top:2.3rem;">
-								<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/infoCheck/indi">정보 수정 <i class="fas fa-chevron-right"></i></a></p>
-								<div style="height:0.5rem;"></div>
-								<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/pwCheck">비밀번호 변경 <i class="fas fa-chevron-right"></i></a></p>
-							</div>
+							<c:choose>
+								<c:when test="${user.isSocial eq 0 }">
+									<div class="section2-box-right" style="line-height:initial;text-align:right;margin-top:2.3rem;">
+										<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/infoCheck/indi">정보 수정 <i class="fas fa-chevron-right"></i></a></p>
+										<div style="height:0.5rem;"></div>
+										<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/pwCheck">비밀번호 변경 <i class="fas fa-chevron-right"></i></a></p>
+									</div>
+								</c:when>
+								<c:when test="${user.isSocial eq 1 }">
+									<div class="section2-box-right">
+										<a class="section2-text2" href="/user/infoCheck/indi">정보 수정 <i class="fas fa-chevron-right"></i></a>
+									</div>
+								</c:when>
+							</c:choose>
 						</div>
 					</c:when>
 					<c:when test="${user.userType eq 'GROUP' }">
@@ -62,10 +71,20 @@
 							<div class="section2-box-left">
 								<span class="section2-text1">내 정보 (단체)</span>
 							</div>
-							<div class="section2-box-right">
-								<a class="section2-text2" href="/user/infoCheck/group">정보 수정 <i class="fas fa-chevron-right"></i></a>
-								
-							</div>
+							<c:choose>
+								<c:when test="${user.isSocial eq 0 }">
+									<div class="section2-box-right" style="line-height:initial;text-align:right;margin-top:2.3rem;">
+										<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/infoCheck/group">정보 수정 <i class="fas fa-chevron-right"></i></a></p>
+										<div style="height:0.5rem;"></div>
+										<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/pwCheck">비밀번호 변경 <i class="fas fa-chevron-right"></i></a></p>
+									</div>
+								</c:when>
+								<c:when test="${user.isSocial eq 1 }">
+									<div class="section2-box-right">
+										<a class="section2-text2" href="/user/infoCheck/group">정보 수정 <i class="fas fa-chevron-right"></i></a>
+									</div>
+								</c:when>
+							</c:choose>
 						</div>
 					</c:when>
 					<c:when test="${user.userType eq 'SOCIAL_WORKER' }">
