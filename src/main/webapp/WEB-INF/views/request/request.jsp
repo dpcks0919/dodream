@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
-<%@include file="../layout/summernote.jsp"%>
 <link href="/css/request.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
 </head>
@@ -129,21 +128,21 @@
 
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
+	<%@include file="../layout/summernote.jsp"%>
 	<script src="/js/request.js"></script>
-	
+
 	<script>
 		$(document).ready(function() {
 			$('.summernote').summernote({
-				  height: 300,                 // 에디터 높이
-				  minHeight: null,             // 최소 높이
-				  maxHeight: null,             // 최대 높이
-				  focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
-				  lang: "ko-KR",					// 한글 설정
-				  placeholder: '사연을 작성해주세요'	//placeholder 설정
-		          
+				height : 300, // 에디터 높이
+				minHeight : null, // 최소 높이
+				maxHeight : null, // 최대 높이
+				focus : false, // 에디터 로딩후 포커스를 맞출지 여부
+				lang : "ko-KR", // 한글 설정
+				placeholder : '사연을 작성해주세요' //placeholder 설정
+
 			});
 		});
 	</script>
-	</div>
 </body>
 </html>

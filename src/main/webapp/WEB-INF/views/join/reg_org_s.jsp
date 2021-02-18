@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
-<%@include file="../layout/kakaoMap.jsp"%>
 
 <link href="/css/register.css" rel="stylesheet" /> 
 
@@ -84,6 +83,7 @@ body {
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
 	<%@include file="../layout/jsFile.jsp"%>
+	<%@include file="../layout/kakaoMap.jsp"%>
 	<script type="text/javascript" src="/js/join.js"></script>
 </body>
 </html>
