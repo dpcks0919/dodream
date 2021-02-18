@@ -197,6 +197,23 @@ var alert_select_value = function (select_obj, curCnt) {
   document.getElementById(curDiv).innerHTML = newHtml;
 }
 
+function bringInfo(type) {
+	if(type == "myInfo" && $("")) {
+		$("#myInfo").removeClass("click_event");
+		$("#newInfo").addClass("click_event");
+		bringMy();
+	}
+	else if(type == "newInfo") {
+		$("#newInfo").removeClass("click_event");
+		$("#myInfo").addClass("click_event");
+		bringNew();
+	}
+}
+
+function bringNew() {
+	$(".info-text").val('');
+	$(".response-info-content").val('');
+}
 
 let index = {
 	init: function() {

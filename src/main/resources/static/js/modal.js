@@ -46,6 +46,7 @@
 	  document.getElementById("rq_level").innerHTML = rq.level;
 	  document.getElementById("rq_user").innerHTML = rq.user;
     }
+
     function closeModal() {
       document.getElementById("modal-bg").style.display="none";
       document.getElementById("view-detail").style.display="none";
