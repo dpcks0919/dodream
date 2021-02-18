@@ -197,22 +197,22 @@ var alert_select_value = function (select_obj, curCnt) {
   document.getElementById(curDiv).innerHTML = newHtml;
 }
 
-function bringInfo(type) {
-	if(type == "myInfo" && $("")) {
+function bringInfo(type, userName, userPhone, orgName) {
+	if(type == "myInfo") {
 		$("#myInfo").removeClass("click_event");
 		$("#newInfo").addClass("click_event");
-		bringMy();
+		
+		$(".info-name").val(userName);
+		$(".info-phone").val(userPhone);
+		$(".info-group").val(orgName);
 	}
-	else if(type == "newInfo") {
+	else if(type == "newInfo" && $("#newInfo").hasClass("click_event")) {
 		$("#newInfo").removeClass("click_event");
 		$("#myInfo").addClass("click_event");
-		bringNew();
+		
+		$(".info-text").val('');
+		$(".response-info-content").val('');
 	}
-}
-
-function bringNew() {
-	$(".info-text").val('');
-	$(".response-info-content").val('');
 }
 
 let index = {
