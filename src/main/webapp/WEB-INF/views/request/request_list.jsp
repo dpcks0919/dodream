@@ -373,7 +373,8 @@
 
 	</div>
 
-	<!-- Wrapper -->
+	<%@include file="../layout/jsFile.jsp"%>
+	<script src="/js/request.js"></script>
 	<script>
 	var lati, longi;
 	
@@ -399,9 +400,5 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 	</script>
 
-	<%@include file="../layout/jsFile.jsp"%>
-
-	<script src="/js/modal.js"></script>
-	<script src="/js/request.js"></script>
 </body>
 </html>

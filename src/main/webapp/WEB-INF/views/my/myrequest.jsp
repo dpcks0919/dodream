@@ -192,12 +192,8 @@ table td {
 		<%@include file="../layout/sidebar_back.jsp"%>
 
 	</div>
-	<!-- Wrapper -->
 
 	<%@include file="../layout/jsFile.jsp"%>
-
-	<script src="/js/modal.js"></script>
-
 	<script>
 		function response_detail(ele) {
 			var id = "#" + $(ele).attr('id');

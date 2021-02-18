@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
-
+<%@include file="../layout/summernote.jsp"%>
 <link href="/css/request.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body id="page-top">
@@ -81,8 +80,8 @@
 							<option name="p3">매우 긴급(3일 이내)</option>
 						</select>
 					</div>
-					<div>
-						<textarea type="text" class="request-content" id="requestContents" placeholder="사연을 작성해주세요" name="content" required></textarea>
+					<div class="summernoteDiv">
+						<textarea type="text" class="request-content summernote" id="requestContents" name="content" required></textarea>
 					</div>
 					<div>
 						<p style="font-weight: bold;">어떤 도움이 필요하신지 입력해주세요!</p>
@@ -126,15 +125,25 @@
 
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
-
 		<%@include file="../layout/sidebar_back.jsp"%>
 
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
-
-	<!-- Core theme JS-->
 	<script src="/js/request.js"></script>
-	<script src="/js/modal.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			$('.summernote').summernote({
+				  height: 300,                 // 에디터 높이
+				  minHeight: null,             // 최소 높이
+				  maxHeight: null,             // 최대 높이
+				  focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
+				  lang: "ko-KR",					// 한글 설정
+				  placeholder: '사연을 작성해주세요'	//placeholder 설정
+		          
+			});
+		});
+	</script>
 	</div>
 </body>
 </html>

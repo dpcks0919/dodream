@@ -27,6 +27,7 @@ public class RequestApiController {
 	
 	@PostMapping("/requestItemSaveProc")
 	public ResponseDto<Integer> saveItem(@RequestBody RequestItem requestItem, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println(requestItem);
 		requestService.saveRequestItem(requestItem, principalDetails);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
