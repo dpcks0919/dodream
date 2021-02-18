@@ -38,6 +38,7 @@
       document.getElementById("page-top").style.overflow="hidden";
       document.getElementById("menu-back").style.filter = "blur(5px)";
       document.getElementById("Wrapper").style.filter = "blur(5px)";
+
 	  document.getElementById("rq_title").innerHTML = "<h5>" + rq.title + "</h5>";
       document.getElementById("rq_id").innerHTML = rq.id;
       document.getElementById("rq_date").innerHTML = rq.date;
@@ -45,6 +46,10 @@
 	  document.getElementById("rq_addr").innerHTML = rq.addr;
 	  document.getElementById("rq_level").innerHTML = rq.level;
 	  document.getElementById("rq_user").innerHTML = rq.user;
+
+	  document.getElementById("rq_title2").innerHTML = "<br>" + rq.title;
+
+
     }
 
     function closeModal() {

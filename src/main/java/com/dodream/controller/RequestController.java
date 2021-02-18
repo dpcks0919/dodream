@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.service.RequestService;
 
 @Controller
@@ -19,8 +21,10 @@ public class RequestController {
 	
 	//	요청 목록 페이지
 	@GetMapping("user/requestList")
-	public String requestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.ASC) Pageable pageable) {
+	public String requestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.ASC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("requests", requestService.readRequestList(pageable));
+		model.addAttribute("user", principalDetails.getUser());
+		System.out.println(principalDetails.getUser());
 		return "request/request_list";
 	}
 	
