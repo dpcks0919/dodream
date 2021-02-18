@@ -1,144 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
 
-
 <link href="/css/login.css" rel="stylesheet" />
-<style>
-.checkbox-container {
-	width: 100%;
-	font-size: 8pt;
-	font-weight: 500;
-	text-align: left;
-	margin-top: 1.5vh;
-}
 
-.checkbox-container input[type="checkbox"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0
-}
-
-.checkbox-container input[type="checkbox"]+label {
-	display: inline-block;
-	position: relative;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-.checkbox-container input[type="checkbox"]+label:before {
-	content: ' ';
-	display: inline-block;
-	width: 12px;
-	height: 12px;
-	line-height: 12px;
-	margin: -2px 8px 0 0;
-	text-align: center;
-	vertical-align: middle;
-	background: #fafafa;
-	border: 1px solid #e95378;;
-	border-radius: 3px;
-}
-
-.checkbox-container input[type="checkbox"]+label:active:before,
-	.checkbox-container input[type="checkbox"]:checked+label:active:before
-	{
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px
-		rgba(0, 0, 0, 0.1);
-}
-
-.checkbox-container input[type="checkbox"]:checked+label:before {
-	content: '\2713';
-	color: white;
-	background: #e95378;;
-	border-color: #e95378;;
-}
-
-.input-id::placeholder, .input-pw::placeholder {
-	color: #CACACA;
-}
-
-*:focus {
-	outline: none;
-}
-
-.input-id:focus, .input-pw:focus {
-	outline: none;
-	background-color: white;
-}
-
-.snslgbtn {
-	width: 100%;
-	height: 3rem;
-	margin-top: 1.2vh;
-}
-
-.divider-custom {
-	margin: 0;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.divider-custom .divider-custom-line {
-	width: 30%;
-	height: 0.1rem;
-	background-color: #CACACA;
-	border-radius: 1rem;
-	border-color: #CACACA !important;
-}
-
-.login-container {
-	width: 22.5rem;
-}
-
-.login-explain {
-	display: block;
-	width: 32.5%;
-}
-
-.login-all {
-	height: calc(40vh - 2rem);
-}
-
-/*@media (max-width: 992px) {
-            .login-container {
-              margin-top: 1rem;
-            }
-            .login-explain {
-              width: 50%;
-            }
-          }*/
-@media ( max-width : 992px) {
-	.login-explain {
-		display: none;
-	}
-	.login-all {
-		position: relative;
-	}
-	.login-wrapper {
-		position: absolute;
-		top: 100%;
-		left: 50%;
-		transform: translate(-50%, -45%);
-	}
-	.masthead {
-		height: 100vh;
-	}
-	body {
-		/*background: linear-gradient(to right, rgb(175, 218, 231), #ed7e95);*/
-		background-color: inherit;
-	}
-}
-</style>
 </head>
 
 <body id="page-top">
@@ -198,7 +62,6 @@
 		</header>
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
-
 	<script type="text/javascript" src="/js/join.js"></script>
 </body>
 </html>

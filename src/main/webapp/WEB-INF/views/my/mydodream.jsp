@@ -82,10 +82,7 @@
 		<%@include file="../layout/footer.jsp"%>
 		<%@include file="../layout/sidebar_back.jsp"%>
 
-
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
-
-	<script src="/js/modal.js"></script>
 </body>
 </html>
