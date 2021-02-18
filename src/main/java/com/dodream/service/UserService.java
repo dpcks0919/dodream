@@ -49,6 +49,7 @@ public class UserService {
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setUserName(principalDetails.getUser().getUserName());
+			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
 			System.out.println("(개인)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
@@ -69,6 +70,7 @@ public class UserService {
 			System.out.println("(그룹)소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
+			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
 			System.out.println("(그룹)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
@@ -96,6 +98,7 @@ public class UserService {
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setUserName(principalDetails.getUser().getUserName());
+			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
 			System.out.println("(사복)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
@@ -123,6 +126,7 @@ public class UserService {
 			System.out.println("(기관)소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
+			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
 			System.out.println("(기관)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
@@ -212,6 +216,19 @@ public class UserService {
 		persistance.setEmailFlag(user.getEmailFlag());
 		persistance.setOrgPhone(user.getOrgPhone());
 		
+		if( ! user.getAddress().trim().equals(persistance.getAddress().trim())) {
+			persistance.setAddress(user.getAddress());
+			persistance.setLatitude(user.getLatitude());
+			persistance.setLongitude(user.getLongitude());
+		}
+
+	}
+	
+	@Transactional
+	public void updatepw(String currentId, String password) {		
+		User persistance = userRepository.findByLoginId(currentId);
+		String encPassword =  encoder.encode(password);
+		persistance.setLoginPassword(encPassword);
 	}
 
 	public boolean passwordCheckService(String password, String dbPassword) {

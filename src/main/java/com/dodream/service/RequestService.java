@@ -30,10 +30,17 @@ public class RequestService {
 		requestRepository.save(request);
 		return request;
 	}
-
+	
+	//@Transactional(readOnly = true)
 	@Transactional
 	public void saveRequestItem(RequestItem requestItem, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		requestItemRepository.save(requestItem);
+		System.out.println("saveRequestItem");
+	}
+	
+	@Transactional
+	public Page<Request> readRequestList(Pageable pageable) {
+		return requestRepository.findAll(pageable);
 	}
 
 	@Transactional
