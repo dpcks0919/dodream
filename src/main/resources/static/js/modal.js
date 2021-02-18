@@ -39,6 +39,7 @@
       document.getElementById("menu-back").style.filter = "blur(5px)";
       document.getElementById("Wrapper").style.filter = "blur(5px)";
     }
+
     function closeModal() {
       document.getElementById("modal-bg").style.display="none";
       document.getElementById("view-detail").style.display="none";

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="layout/header.jsp"%>
 
-
 <link href="/css/main.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <%@include file="layout/kakaoMap.jsp"%>
@@ -233,8 +232,6 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 	</script>
 	<%@include file="layout/jsFile.jsp"%>
-
-	<script src="/js/modal.js"></script>
 	<script type="text/javascript" src="/js/map.js"></script>
 </body>
 </html>

@@ -108,10 +108,12 @@
 		</section>
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
+	<%@include file="../layout/jsFile.jsp"%>
+	<script src="/js/my.js"></script>
 
 	<script>
 		$(document).ready(function() {
-
+			
 		 	var birthday = '${user.userDob}'
 		 	var substring = "-";  
 		 	var dob, year, month, date;
@@ -199,10 +201,6 @@
 		}
 	</script>
 
-	<%@include file="../layout/jsFile.jsp"%>
-
-	<script src="/js/modal.js"></script>
-	<script src="/js/my.js"></script>
 
 </body>
 </html>

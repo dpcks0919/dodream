@@ -9,3 +9,4 @@
 <script src="assets/mail/contact_me.js"></script>
 <!-- Core theme JS-->
 <script src="/js/scripts.js"></script>
+<script src="/js/modal.js"></script>
