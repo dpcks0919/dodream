@@ -642,10 +642,14 @@ td, th {
   padding-left:2vh;
   padding-right:2vh;
 }
-.request-form div {
+.request-form div:not[.summernoteDiv] {
   width:100%;
   margin-bottom:2vh;
 }
+.summernoteDiv{
+	margin:20px 0px 20px 0px;
+}
+
 .request-title, .request-content {
   width:100%;
 }

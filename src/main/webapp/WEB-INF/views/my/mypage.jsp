@@ -139,8 +139,6 @@
 		<%@include file="../layout/sidebar_back.jsp"%>
 		<%@include file="../layout/jsFile.jsp"%>
 
-		<script src="/js/modal.js"></script>
-
 	</div>
 </body>
 </html>

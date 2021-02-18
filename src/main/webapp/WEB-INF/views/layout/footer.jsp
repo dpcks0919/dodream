@@ -22,19 +22,19 @@
 				<a class="text-white" href="/user/requestList">요청 보기</a>
 			</div>
 			<div class="footer-link">
-				<a class="text-white">소식 보기</a>
+				<a class="text-white" href="/">소식 보기</a>
 			</div>
 			<div class="footer-link">
 				<a class="text-white" href="/">두드림터치</a>
 				<!-- <a class="footer-link-list">두드림터치</a>
-              <a class="footer-link-list">인사말</a>
-              <a class="footer-link-list">오시는길</a> -->
+             	<a class="footer-link-list">인사말</a>
+            	<a class="footer-link-list">오시는길</a> -->
 			</div>
 		</div>
 	</div>
 </footer>
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center dodream-copyright">
-	<img class="footer-logo" src="image/Logo2.png"> <small>대표 이종민 | 전화: 054-262-1070 이메일 dodream.touch@gmail.com</small> <img class="footer-facebook" src="/image/footer-facebook.png"> <img
+	<img class="footer-logo" src="/image/Logo2.png"> <small>대표 이종민 | 전화: 054-262-1070 이메일 dodream.touch@gmail.com</small> <img class="footer-facebook" src="/image/footer-facebook.png"> <img
 		class="footer-instagram" src="/image/footer-instagram.png"> <img class="footer-youtube" src="/image/footer-youtube.png">
 </div>
