@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.model.ClientType;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.repository.RequestItemRepository;
@@ -15,13 +16,13 @@ import com.dodream.repository.RequestRepository;
 
 @Service
 public class RequestService {
-	
+
 	@Autowired
 	private RequestRepository requestRepository;
-	
+
 	@Autowired
 	private RequestItemRepository requestItemRepository;
-	
+
 	@Transactional
 	public Request saveRequest(Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		request.setUser(principalDetails.getUser());
@@ -40,6 +41,16 @@ public class RequestService {
 	@Transactional
 	public Page<Request> readRequestList(Pageable pageable) {
 		return requestRepository.findAll(pageable);
+	}
+
+	@Transactional
+	public Request[] markProcService(String clientType) {
+		
+		Request[] requestList = requestRepository.findAllByClientType(ClientType.valueOf(clientType));
+//		for (int i = 0; i < requestList.length; i++) {
+//			System.out.println(requestList[i].getRequestAddress());
+//		}
+		return requestList;
 	}
 	
 	@Transactional
