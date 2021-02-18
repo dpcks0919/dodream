@@ -115,6 +115,7 @@ body {
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
 	<%@include file="../layout/jsFile.jsp"%>
+	<%@include file="../layout/kakaoMap.jsp"%>
 	<script type="text/javascript" src="/js/join.js"></script>
 </body>
 </html>
