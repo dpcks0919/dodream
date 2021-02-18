@@ -83,6 +83,8 @@
 		</section>
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
+	<%@include file="../layout/jsFile.jsp"%>
+	<script src="/js/my.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -175,11 +177,6 @@
 			}
 		}
 	</script>
-
-	<%@include file="../layout/jsFile.jsp"%>
-
-	<script src="/js/modal.js"></script>
-	<script src="/js/my.js"></script>
 
 </body>
 </html>
