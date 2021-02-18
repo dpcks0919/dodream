@@ -1,11 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal" />
-</sec:authorize>
-
 
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top shadow" id="mainNav">
 	<div class="container">
@@ -27,15 +20,3 @@
 			onclick="document.location.href='main.html'"> <a class="profile" id="nav-profile" onclick="openProfile()"><i class="fa fa-user" aria-hidden="true"></i></a>
 	</div>
 </nav>
-
-<!-- Bootstrap core JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Third party plugin JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<!-- Contact form JS-->
-<script src="assets/mail/jqBootstrapValidation.js"></script>
-<script src="assets/mail/contact_me.js"></script>
-<!-- Core theme JS-->
-<script src="js/scripts.js"></script>
-

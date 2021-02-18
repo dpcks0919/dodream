@@ -1,25 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>두드림터치 메인 페이지</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="/css/styles.css" rel="stylesheet" />
+<%@include file="layout/header.jsp"%>
+
+
 <link href="/css/main.css" rel="stylesheet" />
-<link href="/css/nav_footer.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4407e6aa270afe5752d07352835fb75f&libraries=services"></script>
+<%@include file="layout/kakaoMap.jsp"%>
 
 </head>
 
@@ -73,8 +58,10 @@
 			</p>
 			<div class="container ">
 				<div style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요." id="input-addr"> 
-					<div id="btn-search"><i class="fas fa-search search-icon" id="btn-search"></i></div>
+					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요." id="input-addr">
+					<div id="btn-search">
+						<i class="fas fa-search search-icon" id="btn-search"></i>
+					</div>
 				</div>
 				<div class="sec3-middle ">
 					<div class="left sec3-middle-left">
@@ -245,16 +232,8 @@
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 	</script>
-	<!-- Bootstrap core JS-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Third party plugin JS-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-	<!-- Contact form JS-->
-	<script src="assets/mail/jqBootstrapValidation.js"></script>
-	<script src="assets/mail/contact_me.js"></script>
-	<!-- Core theme JS-->
-	<script src="/js/scripts.js"></script>
+	<%@include file="layout/jsFile.jsp"%>
+
 	<script src="/js/modal.js"></script>
 	<script type="text/javascript" src="/js/map.js"></script>
 </body>
