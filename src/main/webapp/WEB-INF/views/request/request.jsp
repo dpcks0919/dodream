@@ -1,155 +1,140 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"/>
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>도움 요청</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/css/styles.css" rel="stylesheet" />
-        <link href="/css/request.css" rel="stylesheet" />
-        <link href="/css/modal-info.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
+<%@include file="../layout/header.jsp"%>
 
-    <body id="page-top" >
-      <div class="modal-bg" id="modal-bg" onclick="closeModal_request()"></div>
-      <div class="modal-container" id="view-detail">
-          <div class="modal-content">
-              <h5 id="modal-title">독거어르신 주거환경개선 도움 요청</h5>
-              <div class="content-info">
-                  <table class="info-table">
-                      <tr>
-                          <td style="width:17.5%;"><b>등록번호</b></td>
-                          <td style="width:27.5%;">#10011</td>
-                          <td style="width:17.5%;"><b>등록날짜</b></td>
-                          <td style="width:37.5%;">2020.10.21.</td>
-                      </tr>
-                      <tr>
-                          <td><b>기간</b></td>
-                          <td id="modal-period"></td>
-                          <td></td>
-                          <td></td>
-                      </tr>
-                  </table>
-                  <div class="content-text" id="modal-contents">
+<link href="/css/request.css" rel="stylesheet" />
+<link href="/css/modal-info.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-                  </div>
-                  <div class="content-needs">
-                      <table class="info-table" id="modal-table">
-                        <thead>
-                          <tr style="border-bottom: 2px solid grey; cursor:none;">
-                              <th style="width:15%;">종류</th>
-                              <th style="width:50%;">내역</th>
-                              <th style="width:35%;">수량</th>
-                          </tr>
-                        </thead>
-                        <tbody id="modal-reset">
+<body id="page-top">
+	<div class="modal-bg" id="modal-bg" onclick="closeModal_request()"></div>
+	<div class="modal-container" id="view-detail">
+		<div class="modal-content">
+			<h5 id="modal-title">독거어르신 주거환경개선 도움 요청</h5>
+			<div class="content-info">
+				<table class="info-table">
+					<tr>
+						<td style="width: 17.5%;"><b>등록번호</b></td>
+						<td style="width: 27.5%;">#10011</td>
+						<td style="width: 17.5%;"><b>등록날짜</b></td>
+						<td style="width: 37.5%;">2020.10.21.</td>
+					</tr>
+					<tr>
+						<td><b>기간</b></td>
+						<td id="modal-period"></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<div class="content-text" id="modal-contents"></div>
+				<div class="content-needs">
+					<table class="info-table" id="modal-table">
+						<thead>
+							<tr style="border-bottom: 2px solid grey; cursor: none;">
+								<th style="width: 15%;">종류</th>
+								<th style="width: 50%;">내역</th>
+								<th style="width: 35%;">수량</th>
+							</tr>
+						</thead>
+						<tbody id="modal-reset">
 
-                        </tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 
-          <div class="modal-ftr" style="display:flex;flex-direction:row; justify-content:space-between;">
-              <div class="btn-res" onclick="closeModal_request();" style="color:gray;border:2px solid gray;">수정하기</div>
-              <div class="btn-res" onclick="upload(2);" style="color:gray;border:2px solid gray;">올리기</div>
-          </div>
-      </div>
+		<div class="modal-ftr" style="display: flex; flex-direction: row; justify-content: space-between;">
+			<div class="btn-res" onclick="closeModal_request();" style="color: gray; border: 2px solid gray;">수정하기</div>
+			<div class="btn-res" onclick="upload(2);" style="color: gray; border: 2px solid gray;">올리기</div>
+		</div>
+	</div>
 
-      <div id="menu-back" onclick="closeNav()"></div>
-      	<%@include file="../layout/sidebar_front.jsp"%>
+	<div id="menu-back" onclick="closeNav()"></div>
+	<%@include file="../layout/sidebar_front.jsp"%>
 
-      <div id="Wrapper">
-        <!-- Navigation-->
-   		<%@include file="../layout/navbar.jsp"%>
+	<div id="Wrapper">
+		<!-- Navigation-->
+		<%@include file="../layout/navbar.jsp"%>
 
-        <header class="text-white text-center request-bgcolor">
-            <div class="container d-flex flex-column title-info">
-                <div class="reg-info">
-                    <h4>요청하기</h4>
-                    <p>도움이 필요한 이웃을 위해<br>요청을 올릴 수 있습니다.</p>
-                </div>
-            </div>
-        </header>
+		<header class="text-white text-center request-bgcolor">
+			<div class="container d-flex flex-column title-info">
+				<div class="reg-info">
+					<h4>요청하기</h4>
+					<p>
+						도움이 필요한 이웃을 위해<br>요청을 올릴 수 있습니다.
+					</p>
+				</div>
+			</div>
+		</header>
 
-        <section class="request-section" id="request">
-          <div class="container">
-            <div class="request-form" id="requestForm">
-              <div class="">
-                <input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required/>
-              </div>
-              <div class="">
-                <span>기간 : </span>
-                  <select class="request-period" name="period" id="requestPeriod">
-                    <option name="p1">보통(한 달 이내)</option>
-                    <option name="p2">긴급(7~14일 이내)</option>
-                    <option name="p3">매우 긴급(3일 이내)</option>
-                  </select>
-              </div>
-              <div>
-                <textarea type="text" class="request-content" id="requestContents" placeholder="사연을 작성해주세요" name="content" required></textarea>
-              </div>
-              <div>
-                <p style="font-weight:bold;">어떤 도움이 필요하신지 입력해주세요!</p>
-              </div>
-              <div>
-                <p><b>**입력 가이드라인**</b></p>
-                <p>1. 물품: 이름-물품명 <span class="res-span">ex)선풍기, 세제 등</span></p>
-                <p>2. 재정: 이름-재정이 쓰이는 곳 <span class="res-span">ex) 밀린 공과금 납부</span></p>
-                <p>3. 봉사: 이름-봉사 이름 <span class="res-span">ex)연탄봉사</span></p>
-              </div>
-              <div>
-                <table id="myTable">
-                  <thead class="table-title" style="cursor:initial;">
-                    <th class="" width="20%">종류</th>
-                    <th class="" width="40%">이름</th>
-                    <th class="" width="5%">수량</th>
-                    <th class="" width="5%">삭제</th>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                  <tr class="add_item ">
-                    <th colspan="4"><button type="button" class="add_item-button" style="width:100%" onclick="rowAdd();">+</button></th>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <div class="request-ftr" style="justify-content: space-between;">
-              <div class="btn-upload" onclick="upload(1);">다음</div>
-              <div class="btn-save" onclick="save();">임시저장</div>
-            </div>
-          </div>
-        </section>
+		<section class="request-section" id="request">
+			<div class="container">
+				<div class="request-form" id="requestForm">
+					<div class="">
+						<input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required />
+					</div>
+					<div class="">
+						<span>기간 : </span> <select class="request-period" name="period" id="requestPeriod">
+							<option name="p1">보통(한 달 이내)</option>
+							<option name="p2">긴급(7~14일 이내)</option>
+							<option name="p3">매우 긴급(3일 이내)</option>
+						</select>
+					</div>
+					<div>
+						<textarea type="text" class="request-content" id="requestContents" placeholder="사연을 작성해주세요" name="content" required></textarea>
+					</div>
+					<div>
+						<p style="font-weight: bold;">어떤 도움이 필요하신지 입력해주세요!</p>
+					</div>
+					<div>
+						<p>
+							<b>**입력 가이드라인**</b>
+						</p>
+						<p>
+							1. 물품: 이름-물품명 <span class="res-span">ex)선풍기, 세제 등</span>
+						</p>
+						<p>
+							2. 재정: 이름-재정이 쓰이는 곳 <span class="res-span">ex) 밀린 공과금 납부</span>
+						</p>
+						<p>
+							3. 봉사: 이름-봉사 이름 <span class="res-span">ex)연탄봉사</span>
+						</p>
+					</div>
+					<div>
+						<table id="myTable">
+							<thead class="table-title" style="cursor: initial;">
+								<th class="" width="20%">종류</th>
+								<th class="" width="40%">이름</th>
+								<th class="" width="5%">수량</th>
+								<th class="" width="5%">삭제</th>
+							</thead>
+							<tbody>
+							</tbody>
+							<tr class="add_item ">
+								<th colspan="4"><button type="button" class="add_item-button" style="width: 100%" onclick="rowAdd();">+</button></th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="request-ftr" style="justify-content: space-between;">
+					<div class="btn-upload" onclick="upload(1);">다음</div>
+					<div class="btn-save" onclick="save();">임시저장</div>
+				</div>
+			</div>
+		</section>
 
-        <!-- Footer-->
-   		<%@include file="../layout/footer.jsp"%>
+		<!-- Footer-->
+		<%@include file="../layout/footer.jsp"%>
 
 		<%@include file="../layout/sidebar_back.jsp"%>
-		
-      </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>        
-        <script src="/js/scripts.js"></script>
-        <!-- Core theme JS-->
-       	<script src="/js/request.js"></script>
-       	<script src="/js/modal.js"></script>
-      </div>
-    </body>
+
+	</div>
+	<%@include file="../layout/jsFile.jsp"%>
+
+	<!-- Core theme JS-->
+	<script src="/js/request.js"></script>
+	<script src="/js/modal.js"></script>
+	</div>
+</body>
 </html>
