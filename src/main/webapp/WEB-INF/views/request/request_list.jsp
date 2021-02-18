@@ -5,7 +5,6 @@
 <link href="/css/view-reg.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<%@include file="../layout/kakaoMap.jsp"%>
 </head>
 <style>
 .paging-left, .paging-right {
@@ -390,6 +389,8 @@
 	</div>
 
 	<%@include file="../layout/jsFile.jsp"%>
+	<%@include file="../layout/kakaoMap.jsp"%>
+	
 	<script src="/js/request.js"></script>	
 	<script>
 	var lati, longi;

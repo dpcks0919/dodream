@@ -127,7 +127,6 @@
 
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
-
 		<%@include file="../layout/sidebar_back.jsp"%>
 
 
