@@ -58,6 +58,12 @@ html, body {
   justify-content: space-between;
 }
 
+.box-right-two {
+  line-height: initial;
+  text-align: right;
+  margin-top: 2.3rem;
+}
+
 .section2-text2 {
   margin-bottom:0;
   font-size:0.9rem;
