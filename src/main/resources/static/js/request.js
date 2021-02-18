@@ -213,7 +213,7 @@ let index = {
 		let data = {
 			title: document.getElementById('requestTitle').value,
 			// 노인 아동 장애인 기타 : 일단 임시로 1
-			clientType: "SENIOR",
+			clientType: "ELDERLY",
 			// request에서 새로 주소를 받아오기로 함. (form 한개 더 만들어져야 함)
 			requestAddress : "temp",
 			latitude : 125,

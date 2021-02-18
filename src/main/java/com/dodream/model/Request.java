@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -73,7 +74,8 @@ public class Request {
 	private String comment;
 	
 	@OneToMany(mappedBy = "request")
-	@JsonIgnoreProperties({"request"})
+	//@JsonIgnoreProperties({"request"})
+	@JsonManagedReference //본질적인 루프참조 해결방법 
 	private List<RequestItem> requestItem;
 	
 	@CreationTimestamp 

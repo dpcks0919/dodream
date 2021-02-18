@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.model.Request;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
