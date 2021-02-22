@@ -39,17 +39,57 @@
       document.getElementById("menu-back").style.filter = "blur(5px)";
       document.getElementById("Wrapper").style.filter = "blur(5px)";
 
-	  document.getElementById("rq_title").innerHTML = "<h5>" + rq.title + "</h5>";
-      document.getElementById("rq_id").innerHTML = rq.id;
-      document.getElementById("rq_date").innerHTML = rq.date;
-	  document.getElementById("rq_status").innerHTML = rq.status;
-	  document.getElementById("rq_addr").innerHTML = rq.addr;
-	  document.getElementById("rq_level").innerHTML = rq.level;
-	  document.getElementById("rq_user").innerHTML = rq.user;
+	  var date = rq.duedate;
+	  var d_date = new Date(date.valueOf());
+	  var d_time = d_date.getTime();
+      var cur = new Date(); // 현재시간
+	  var c_time = cur.getTime();
+      var status = "";
+	  if(c_time <= d_time) status = "응답 대기중";
+      else status = "응답 완료";
 
-	  document.getElementById("rq_title2").innerHTML = "<br>" + rq.title;
+      let regdate = rq.regdate.substring(0,10);
+	  let level = rq.level;
+	  if(level == 1) level = "매우 긴급(3일 이내)";
+	  else if(level == 2) level = "긴급(14일 이내)";
+      else if(level == 3) level = "보통(한 달 이내)";
 
 
+	  $("#rq_title").html("<h5>" + rq.title + "</h5>");
+      $("#rq_id").html(rq.id);
+      $("#rq_date").html(regdate);
+	  $("#rq_status").html(status);
+	  $("#rq_addr").html(rq.address);
+	  $("#rq_level").html(level);
+	  $("#rq_user").html(rq.writer);
+	  $("#rq_contents").html(rq.contents);
+
+	  let items = rq.item;
+	  items.sort(function(a, b) {
+	    return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
+	  });
+		
+	  for(var i = 0; i < items.length; i++) {
+		if(i == 0) {
+		  $("#rq_item0").html("<td>"+ items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td>");
+		}
+		else {
+		  let nid = "#rq_item" + (i-1);
+		  if(items[i].type === items[i-1].type) {
+			$(nid).after('<tr id="rq_item' + i + '"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
+		  } else {
+			$(nid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
+		  }
+		}
+	  }
+
+	  $("#modal-bg").click(function() {
+		for(var i = 0; i < items.length; i++) {
+		  let nid = "#rq_item" + i;
+		  if(i == 0) $(nid).empty();
+		  else $(nid).remove();
+		}
+	  })
     }
 
     function closeModal() {
