@@ -44,8 +44,8 @@ body {
 										<input class="text-input" type="text" name="username" placeholder="이름 입력" id="username">
 									</div>
 									<div class="input-content">
-										<span class="input-title">대표 이메일주소</span><span>&nbsp;<em>*</em></span> <br> <input class="text-input" type="email" name="useremail" placeholder="이메일주소 입력" id="useremail"> <span
-											class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. <br>메일 수신 동의&nbsp;&nbsp; <span> <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked>
+										<span class="input-title">대표 이메일주소</span><span>&nbsp;<em>*</em></span> <br> <input class="text-input" type="email" name="useremail" placeholder="이메일주소 입력" id="useremail"> 
+										<span class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. <br>메일 수신 동의&nbsp;&nbsp; <span> <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked>
 													예</label>&nbsp;&nbsp; <label><input type="radio" name="mail_rcv" value="0" id="mail_rcv"> 아니요</label>
 										</span>
 										</span>
@@ -80,7 +80,10 @@ body {
 										</div>
 										<div style="height: 5px;"></div>
 										<input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력"> <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span> <br>
-										<span class="extra-info"> 알림 반경 : <select class="select-radius" id="selectradius"></select> <input type="hidden" name="radius" id="notification_radius">&nbsp;km
+										<span class="extra-info"> 알림 반경 : <select class="select-radius" id="selectradius"></select> <input type="hidden" name="radius" id="notification_radius">&nbsp;km</span> <br>
+										<span class="extra-info">단체의 위치를 지도에 표시할 수 있습니다. <br>지도 표시 동의&nbsp;&nbsp; <span> <label><input type="radio" name="show_flag" value="1" id="show_flag" checked>
+													예</label>&nbsp;&nbsp; <label><input type="radio" name="show_flag" value="0" id="show_flag"> 아니요</label>
+										</span>
 										</span>
 									</div>
 								</form>
