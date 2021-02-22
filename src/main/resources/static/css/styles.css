@@ -67,7 +67,7 @@ input[type=password]::placeholder {
 *::after {
   box-sizing: border-box;
 }
-
+ 
 html {
   font-family: "NanumSquareR";
   line-height: 1.15;
@@ -186,7 +186,7 @@ a {
 }
 a:hover {
   /* color: #117964; */
-  /* text-decoration: underline; */
+  /* text-decoration: underline;  */
 }
 
 a:not([href]):not([class]) {

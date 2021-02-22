@@ -6,31 +6,14 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-/*
-// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
-function setMapType(maptype) { 
-    var roadmapControl = document.getElementById('btnRoadmap');
-    var skyviewControl = document.getElementById('btnSkyview'); 
-    if (maptype === 'roadmap') {
-        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
-        roadmapControl.className = 'selected_btn';
-        skyviewControl.className = 'unselected_btn';
-    } else {
-        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
-        skyviewControl.className = 'selected_btn';
-        roadmapControl.className = 'unselected_btn';
-    }
-}
-*/
-
 // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
 function zoomIn() {
-    map.setLevel(map.getLevel() - 1);
+	map.setLevel(map.getLevel() - 1);
 }
 
 // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
 function zoomOut() {
-    map.setLevel(map.getLevel() + 1);
+	map.setLevel(map.getLevel() + 1);
 }
 
 var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
@@ -48,6 +31,7 @@ var marker = new kakao.maps.Marker({
 });
 
 
+/*
 //마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -57,6 +41,7 @@ var infowindow = new kakao.maps.InfoWindow({
 	content: iwContent,
 	removable: iwRemoveable
 });
+*/
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
@@ -73,6 +58,9 @@ let index = {
 			infowindow.open(map, marker);
 			alert("hello");
 		});
+		
+		// defaultmark
+		this.defaultMark();
 
 		//지도부분 버튼 클릭시
 		$("#btn-search").on("click", () => {
@@ -86,7 +74,7 @@ let index = {
 		$("#btn-child").on("click", () => {
 			this.searchAndMark("CHILD");
 			alert("아이");
-		}); 
+		});
 		$("#btn-disabled").on("click", () => {
 			this.searchAndMark("DISABLED");
 			alert("장애인");
@@ -109,11 +97,49 @@ let index = {
 		});
 	},
 
-	searchAndMark: function(clientType) {
+	// 마크하기 
+	defaultMark: function() {
+		$.ajax({// DB에서 주소 받아오기.
+			type: "POST",
+			url: "/defaultMarkProc",
+		}).done(function(resp) {
+			if (resp.status == 500) {
+				alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+			} else {
+				alert("성공1");
+				map = new kakao.maps.Map(mapContainer, mapOption); // 지도 재설정
+
+				for (var i = 0; i < resp.data.length; i++) {
+					var addr = resp.data[i].requestAddress;
+
+					geocoder.addressSearch(addr, function(result, status) {	// 좌표얻기
+						if (status === kakao.maps.services.Status.OK) {// 정상적으로 검색이 완료됐으면 
+							var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							arker = new kakao.maps.Marker({// 결과값으로 받은 위치를 마커로 표시합니다
+								map: map,
+								position: coords
+							});
+							map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+
+						}
+						else {
+							alert("정확한 주소 입력 부탁드립니다.");
+						}
+					});
+				}
+			}
+
+		}).fail(function(error) {
+			alert("defaultMark error: " + JSON.stringify(error));
+		});
+	},
+
+	// 클릭시 
+	searchAndMark: function(clientType) {	//
 		$.ajax({// DB에서 주소 받아오기.
 			type: "POST",
 			url: "/markProc",
-			data: {clientType: clientType},
+			data: { clientType: clientType },
 			type: "POST",
 		}).done(function(resp) {
 			if (resp.status == 500) {
@@ -122,30 +148,41 @@ let index = {
 				alert("성공ㅇ");
 				map = new kakao.maps.Map(mapContainer, mapOption); // 지도 재설정
 
-				for(var i = 0; i < resp.data.length; i++){
+				for (var i = 0; i < resp.data.length; i++) {
 					var addr = resp.data[i].requestAddress;
-					geocoder.addressSearch(addr, function(result, status) {
-					if (status === kakao.maps.services.Status.OK) {// 정상적으로 검색이 완료됐으면 
-						var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-						marker = new kakao.maps.Marker({// 결과값으로 받은 위치를 마커로 표시합니다
-							map: map,
-							position: coords
-						});
-						
-						var infowindow = new kakao.maps.InfoWindow({// 인포윈도우로 장소에 대한 설명을 표시합니다
-							content: '<div style="width:150px;text-align:center;padding:6px 0;">요기</div>'
-						});
-						infowindow.open(map, marker);
-						map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-						
-					}
-					else {
-						alert("정확한 주소 입력 부탁드립니다.");
-					}
-				});
+					var clientType = resp.data[i].client_type;
+					var description = resp.data[i].description;
+					var title = resp.data[i].title;
+					var urgentLevel = resp.data[i].urgent_level;
+					alert("DES: " + description);
+
+					geocoder.addressSearch(addr, function(result, status) {	// 좌표얻기
+						if (status === kakao.maps.services.Status.OK) {// 정상적으로 검색이 완료됐으면 
+							var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							marker = new kakao.maps.Marker({// 결과값으로 받은 위치를 마커로 표시합니다
+								map: map,
+								position: coords
+							});
+
+							var infowindow = new kakao.maps.InfoWindow({// 인포윈도우로 장소에 대한 설명을 표시합니다
+								content: '<div style="width:250px;text-align:left;padding:6px 0;">'
+									+ '제목: ' + title + '<br>'
+									+ '종류: ' + clientType + '<br>'
+									+ '설명: ' + description + '<br>'
+									+ '긴급한 정도:' + urgentLevel + '<br>'
+									+ '주소: ' + addr + '</div>'
+							});
+							infowindow.open(map, marker);
+							map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+
+						}
+						else {
+							alert("정확한 주소 입력 부탁드립니다.");
+						}
+					});
 				}
 			}
-			
+
 		}).fail(function(error) {
 			alert("searchAndMark error: " + JSON.stringify(error));
 		});
