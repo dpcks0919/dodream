@@ -25,7 +25,7 @@
 </style>
 
 <body id="page-top">
-	<div class="modal-bg" id="modal-bg" onclick="closeModal()"></div>
+	<div class="modal-bg" id="modal-bg" onclick="closeModal_request()"></div>
 
 	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail">
@@ -35,29 +35,24 @@
 				<table class="info-table">
 					<tr>
 						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td id="rq_id" style="width: 27.5%;">#10011</td>
+						<td id="rq_id" style="width: 27.5%;"></td>
 						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="rq_date" style="width: 37.5%;">2020.10.21.</td>
+						<td id="rq_date" style="width: 37.5%;"></td>
 					</tr>
 					<tr>
 						<td><b>상태</b></td>
-						<td id="rq_status">응답 대기중</td>
+						<td id="rq_status"></td>
 						<td><b>주소</b></td>
-						<td id="rq_addr">경상북도 포항시 북구 흥해읍</td>
+						<td id="rq_addr"></td>
 					</tr>
 					<tr>
 						<td><b>기간</b></td>
-						<td id="rq_level" >보통(한 달 이내)</td>
+						<td id="rq_level" ></td>
 						<td><b>요청자</b></td>
-						<td id="rq_user">요청을 올린 사회복지사/기관</td>
+						<td id="rq_user"></td>
 					</tr>
 				</table>
-				<div id="rq_desc" class="content-text">여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는
-					어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이
-					노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는
-					사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한
-					글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다.
-					주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라 여기는 사회복지사가 직접 작성한 글이 나타나는 곳이다. 주거환경개선 도움을 요청합니다. 블라블라 글글글글 대상자는 혼자 사시는 어르신으로 주택이 노후되어 블라블라</div>
+				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">
 					<table class="info-table">
 						<tr>
@@ -65,26 +60,7 @@
 							<th style="width: 35%;">내역</th>
 							<th style="width: 50%;">필요 수량 / 목표 수량</th>
 						</tr>
-						<tr class="needs-category">
-							<td>물품</td>
-							<td>물품1</td>
-							<td>10 / 30</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>물품2</td>
-							<td>5 / 10</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>물품3</td>
-							<td>10 / 20</td>
-						</tr>
-						<tr class="needs-category">
-							<td>봉사</td>
-							<td>옮기기</td>
-							<td>7 / 10</td>
-						</tr>
+						<tr class="needs-category" id="rq_item0"></tr>
 					</table>
 				</div>
 			</div>
@@ -296,15 +272,29 @@
 					<tbody>
 						<c:forEach var="request" items="${requests.content}">
 							<script>
+								var arr = new Array();
+								<c:forEach items="${request.requestItem}" var="item">
+									if("${item.requestType}" == "STUFF") var type = "물품";
+									else if("${item.requestType}" == "SERVICE") var type = "봉사";
+									else if("${item.requestType}" == "FINANCE") var type = "재정";
+									else var type = "기타";
+									arr.push({
+										name: "${item.itemName}",
+										itemnum: "${item.itemNum}",
+										receivednum: "${item.receivedNum}",
+										type: type,
+									});
+								</c:forEach>
 								const rq${request.id} = {
 									id: ${request.id},
 									title: '${request.title}',
-									date: '${request.regDate}',
-									status: '${request.status}',
+									regdate: '${request.regDate}',
+									duedate: '${request.dueDate}',
 									address: '${request.requestAddress}',
 									level: '${request.urgentLevel}',
-									writer: '${request.user}',
+									writer: '${request.user.userName}',
 									contents: '${request.description}',
+									item: arr,
 								};
 							</script>
 							<tr>
