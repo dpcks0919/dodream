@@ -291,7 +291,7 @@ let index = {
 		}).fail(function(error){
 			consele.log(JSON.stringify(error));
 		});		
-	}
+	},
 	
 	saveReply:function() {
 
