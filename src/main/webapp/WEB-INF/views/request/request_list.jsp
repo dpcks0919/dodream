@@ -25,7 +25,7 @@
 </style>
 
 <body id="page-top">
-	<div class="modal-bg" id="modal-bg" onclick="closeModal_request()"></div>
+	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
 
 	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail">
