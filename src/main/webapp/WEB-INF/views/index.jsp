@@ -67,19 +67,28 @@
 						<button class="tbox-center tbox-small" id="btn-elderly'">노인</button>
 						<button class="tbox-center tbox-small" id="btn-child">아이</button>
 						<button class="tbox-center tbox-small" id="btn-disabled">장애인</button>
-						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
+						<button class="tbox-center tbox-small" id="btn-others">기타</button>
 					</div>
 					<div class="left sec3-middle-right">
 						<span class="sec3-text1">돕고 싶은 재화</span>
 						<button class="tbox-center tbox-small" id="btn-goods">물품</button>
 						<button class="tbox-center tbox-small" id="btn-finance">재정</button>
 						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
-						<button class="tbox-center tbox-small" id="btn-others">기타</button>
+						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
 					<br>
+					<div class="map_wrap">
+						<div class="text-center main-map" id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+						<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+						<div class="custom_zoomcontrol radius_border">
+							<span class="map_zoom" onclick="zoomIn()">확대</span> <span class="map_zoom" onclick="zoomOut()">축소</span>
+						</div>
+					</div>
 				</div>
 				<!-- <div style="position:absolute;bottom:0;width:70%;left:24%;transform:translate(45%,-150%);background-color: rgba(255, 255, 255, 0.2);border:1px solid white;border-radius:16px;padding:2px 20px 2px 20px;font-size:14pt;font-weight:bold;cursor:pointer;">회원가입</div> -->
-				<div class="text-center main-map" id="map"></div>
+				<!-- 				<div class="text-center main-map" id="map"></div>
+ -->
+
 				<div class="container-sec3">
 					<div class="sec3-bottom-right-tmp left">
 						<p style="color: white;" class="sec3-bottom-right-title">
@@ -205,7 +214,7 @@
 		<%@include file="layout/footer.jsp"%>
 	</div>
 	<%@include file="layout/sidebar_back.jsp"%>
-	
+
 	<%@include file="layout/jsFile.jsp"%>
 	<%@include file="layout/kakaoMap.jsp"%>
 	<script type="text/javascript" src="/js/map.js"></script>
