@@ -26,9 +26,15 @@ public class MapApiController {
 	@Value("${social.password}")
 	private String socialPassword;
 	
+	@PostMapping("/defaultMarkProc")	// 모든 마커 찍기
+	public ResponseDto<Request[]> dafaultMarkProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
+		return new ResponseDto<Request[]>(HttpStatus.OK.value(), requestService.defaultMarkProcService());
+	}
+
+	
 	@PostMapping("/markProc")	// searchAndMark 요청 종류별로 마커 찍기
-	public ResponseDto<Request[]> sendText(@RequestParam(value = "clientType") String clientType) {	// verifyCode(스트링) 리턴 
-		//System.out.println("MARKPROC HERE: " + clientType);
+	public ResponseDto<Request[]> markProc(@RequestParam(value = "clientType") String clientType) {	
+		System.out.println("MARKPROC HERE: " + requestService.markProcService(clientType)[0].getClientType());
 		return new ResponseDto<Request[]>(HttpStatus.OK.value(), requestService.markProcService(clientType));
 	}
 
