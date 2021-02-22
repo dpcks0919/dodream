@@ -217,6 +217,9 @@ function bringInfo(type, userName, userPhone, orgName) {
 
 let index = {
 	init: function() {
+		$("#btn-com").on("click", () => { 
+				this.saveReply();
+		});
 	},
 	
 	saveRequest:function(totalCnt, itemList) {
@@ -289,4 +292,31 @@ let index = {
 			consele.log(JSON.stringify(error));
 		});		
 	}
+	
+	saveReply:function() {
+
+		let data = {
+			title: document.getElementById('requestTitle').value,
+		};
+		
+		console.log(data);
+		$.ajax({
+			type: "POST",
+			url: "/replySaveProc",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset = utf-8 ",
+			dataType: "json"
+		}).done(function(resp){
+			console.log(data);
+			if(resp.status == 500) {
+				alert("업로드 실패하였습니다. ");
+			}else {
+				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+			} 
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
+	},
 }
+
+index.init();

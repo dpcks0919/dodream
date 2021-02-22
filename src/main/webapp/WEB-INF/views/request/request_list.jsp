@@ -189,7 +189,7 @@
 		</div>
 
 		<div class="modal-ftr" style="justify-content: space-between;">
-			<div class="btn-com">완료하기</div>
+			<div class="btn-com" id="btn-com">완료하기</div>
 			<div class="btn-back" onclick="goBack()">
 				<span style="color: #e5e5e5; visibility: hidden;">뒤</span>뒤로<span style="color: #e5e5e5; visibility: hidden;">뒤</span>
 			</div>

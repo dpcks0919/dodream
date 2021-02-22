@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +28,7 @@ public class ReplyItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "replyId")
+	@JsonBackReference
 	private Reply reply;
 	
 	@Column(nullable = false)
