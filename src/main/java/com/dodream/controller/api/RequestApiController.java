@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.dto.ReplyDto;
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
@@ -19,7 +20,7 @@ public class RequestApiController {
 	private RequestService requestService;
 
 	@PostMapping("/requestSaveProc")
-	public ResponseDto<Request> save(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		Request newRequest = requestService.saveRequest(request, principalDetails);
 		System.out.println(newRequest);
 		return new ResponseDto<Request> (HttpStatus.OK.value(), newRequest);
@@ -29,6 +30,12 @@ public class RequestApiController {
 	public ResponseDto<Integer> saveItem(@RequestBody RequestItem requestItem, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		System.out.println(requestItem);
 		requestService.saveRequestItem(requestItem, principalDetails);
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/replySaveProc")
+	public ResponseDto<Integer> responseSave(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println(replyDto);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
 }
