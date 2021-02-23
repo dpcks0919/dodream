@@ -69,7 +69,7 @@
 		<section class="request-section" id="request">
 			<div class="container">
 				<div class="request-form" id="requestForm">
-					<div class="">
+					<div class="" style="margin-bottom:10px;">
 						<input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required />
 					</div>
 					<div class="">

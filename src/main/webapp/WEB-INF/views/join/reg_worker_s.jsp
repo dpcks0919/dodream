@@ -86,6 +86,10 @@ body {
 										</span></span>
 									</div>
 									<div class="input-content">
+										<span class="input-title">사회복지사 자격증 번호</span><span>&nbsp;<em>*</em></span><br>
+										<input class="text-input" type="text" name="userpos" id="userpos" placeholder="자격증 번호 입력">
+									</div>
+									<div class="input-content">
 										<span class="input-title">기관명</span><span>&nbsp;<em>*</em></span><br>
 										<input class="text-input" type="text" name="orgname" id="orgname" placeholder="기관명 입력">
 									</div>
@@ -102,7 +106,7 @@ body {
 											<div class="input-check" onclick="goPopup();" id="btn-addr-search" style="width: 50px;">검색</div>
 										</div>
 										<div style="height: 5px;"></div>
-										<input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력"> <span class="extra-info">반경 내의 소식들을 확인할 수 있습니다.</span>
+										<input class="text-input" type="text" name="addrDetail" id="addrDetail" placeholder="상세주소 입력">
 									</div>
 								</form>
 								<button id="btn-save" class="sign-submit">가입하기</button>

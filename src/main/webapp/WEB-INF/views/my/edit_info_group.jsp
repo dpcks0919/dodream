@@ -90,7 +90,6 @@
 	<script>
 		$(document).ready(function() {
 
-			
 			$('#loginId').val('${user.loginId}');
 			$('#username').val('${user.userName}');
 		

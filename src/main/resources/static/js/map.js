@@ -60,7 +60,7 @@ let index = {
 		});
 
 		// defaultmark
-		//this.defaultMark();
+		this.defaultMark();
 
 		//지도부분 버튼 클릭시
 		$("#btn-search").on("click", () => {

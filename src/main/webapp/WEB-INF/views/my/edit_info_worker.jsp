@@ -79,6 +79,10 @@
 								</span></span>
 							</div>
 							<div class="input-content">
+								<span class="input-title">사회복지사 자격증 번호</span><span>&nbsp;<em>*</em></span><br>
+								<input class="text-input" type="text" name="userpos" id="userpos" placeholder="자격증 번호 입력">
+							</div>
+							<div class="input-content">
 								<span class="input-title">기관명</span><span>&nbsp;<em>*</em></span><br> <input class="text-input" type="text" name="orgname" id="orgname" placeholder="기관명 입력" id="o">
 							</div>
 							<div class="input-content">
