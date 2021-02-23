@@ -261,7 +261,8 @@ let index = {
 					index.saveRequestItem(itemList[i], resp.data);
 				}
 				closeModal_request();
-			    location.reload();
+			    //location.reload();
+			    location.href = "/user/requestList";
 				window.scrollTo(0,0); 
 			} 
 		}).fail(function(error){
@@ -287,7 +288,6 @@ let index = {
 			if(resp.status == 500) {
 				alert("아이템 업로드 실패하였습니다. ");
 			}
-			location.href = "/user/requestList";
 		}).fail(function(error){
 			consele.log(JSON.stringify(error));
 		});		
@@ -295,9 +295,14 @@ let index = {
 	
 	saveReply:function() {
 
-		let data = {
+		let reply = {
 			title: document.getElementById('requestTitle').value,
 		};
+		
+		let data = {
+			reply: reply,
+			replyItem: 
+		}
 		
 		console.log(data);
 		$.ajax({
