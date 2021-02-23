@@ -26,7 +26,10 @@ var geocoder = new kakao.maps.services.Geocoder();
 
 let index = {
 	init: function() {
-
+		
+		//map info 란 hidden 처리
+		$("#map-info-container").css('visibility', 'hidden');
+	
 		// defaultmark
 		this.defaultMark();
 
@@ -134,7 +137,8 @@ let index = {
 								removable : true
 							 }); // 마커에 클릭이벤트를 등록합니다 
 							 	 infowindowList.push(infowindow);	// infowindow list에 push 
-							 	 kakao.maps.event.addListener(marker, 'click', function() { 
+							 	 kakao.maps.event.addListener(marker, 'click', function() {
+								 $("#map-info-container").css('visibility', 'visible');
 								 // 마커 위에 인포윈도우를 표시합니다 
 								 infowindow.open(map, marker); 
 							}); 
@@ -174,12 +178,12 @@ let index = {
 								content: '<div style="width:150px;text-align:center;padding:6px 0;">' + '#' + groupList[index].userName + '</div>', 
 								removable : true
 							 }); // 마커에 클릭이벤트를 등록합니다 
-							
-							 infowindowList.push(infowindow);	// infowindow list에 push 
-							 infowindowList.push(infowindow);
+							infowindowList.push(infowindow);	// infowindow list에 push 
 							 kakao.maps.event.addListener(marker, 'click', function() { 
-								 // 마커 위에 인포윈도우를 표시합니다 
-								 infowindow.open(map, marker); 
+							$("#map-info-container").css('visibility', 'visible');
+							// 마커 위에 인포윈도우를 표시합니다 
+							infowindow.open(map, marker); 
+								
 							}); 
 						}
 						//좌표이동
@@ -231,6 +235,7 @@ let index = {
 							 // list에 infowindow push 
 							 infowindowList.push(infowindow);
 							 kakao.maps.event.addListener(marker, 'click', function() { 
+								 $("#map-info-container").css('visibility', 'visible');
 								 // 마커 위에 인포윈도우를 표시합니다 
 								 infowindow.open(map, marker); 
 							}); 
