@@ -238,8 +238,9 @@ public class UserService {
 		return encoder.matches(password, dbPassword);
 	}
 
-	public User[] getByUserTypeService(RoleType userType) {
-		return userRepository.findAllByUserType(userType);
+
+	public User[] getGroupUserSerive() {
+		return userRepository.findByUserTypeAndShowFlag(RoleType.GROUP, 1);
 	}
 
 

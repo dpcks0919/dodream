@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
 	public User findByLoginIdAndLoginPassword(String loginId, String loginPassword);
 
-	public User[] findAllByUserType(RoleType userType);
+	public User[] findByUserTypeAndShowFlag(RoleType userType, int showFlag);
 	
 }
