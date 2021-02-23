@@ -36,7 +36,7 @@ public class MapApiController {
 	
 	@PostMapping("/groupListProc")
 	public ResponseDto<User[]> groupListProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
-		return new ResponseDto<User[]>(HttpStatus.OK.value(), userService.getByUserTypeService(RoleType.GROUP));
+		return new ResponseDto<User[]>(HttpStatus.OK.value(), userService.getGroupUserSerive());
 	}
 
 	
