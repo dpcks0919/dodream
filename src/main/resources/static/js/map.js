@@ -1,7 +1,11 @@
+// 마커들을 모아놓는 리스트(삭제 용이)
+var markerList = [];
+var infowindowList = [];
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center: new kakao.maps.LatLng(37.54699, 127.09598), // 지도의 중심좌표
-		level: 4 // 지도의 확대 레벨
+		level: 2 // 지도의 확대 레벨
 	};
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -24,11 +28,13 @@ var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
 	markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
 
+/*
 // 마커를 생성합니다
 var marker = new kakao.maps.Marker({
 	position: markerPosition,
 	image: markerImage // 마커이미지 설정 
 });
+*/
 
 
 /*
@@ -50,17 +56,19 @@ let index = {
 	init: function() {
 
 		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
+		//marker.setMap(map);
 
+		/*
 		// 마커에 클릭이벤트를 등록합니다
 		kakao.maps.event.addListener(marker, 'click', function() {
 			// 마커 위에 인포윈도우를 표시합니다
 			infowindow.open(map, marker);
 			alert("hello");
 		});
+		*/
 
 		// defaultmark
-		//this.defaultMark();
+		this.defaultMark();
 
 		//지도부분 버튼 클릭시
 		$("#btn-search").on("click", () => {
@@ -97,25 +105,43 @@ let index = {
 		});
 	},
 
+	
+	mapClean: function(){
+		for(var i = 0; i < markerList.length; i++){
+			markerList[i].setMap(null);
+		}
+		
+		for(var i = 0; i < infowindowList.lenth; i++){
+			infowindowList[i].setMap(null);
+		}
+	},
+
 	// 마크하기 
 	defaultMark: function() {
+		var requestList;
+		var groupList;
+		this.mapClean();		// map 객체 초기화
+		
+		//1. request 마커 찍기
 		$.ajax({// DB에서 주소 받아오기.
 			type: "POST",
-			url: "/defaultMarkProc",
+			url: "/requestListProc",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
 			} else {
+				requestList = resp.data;
+				
 				map = new kakao.maps.Map(mapContainer, mapOption); // 지도 재설정
 
-				var addresslist = [];
+				var requestaddresslist = [];
 				
-				for(var i = 0; i < resp.data.length; i ++){
-					addresslist.push(resp.data[i].requestAddress);
+				for(var i = 0; i < requestList.length; i ++){
+					requestaddresslist.push(requestList[i].requestAddress);
 				}
 				
-				
-				addresslist.forEach(function(addr, index) { 
+				//마커 뿌리기
+				requestaddresslist.forEach(function(addr, index) { 
 					geocoder.addressSearch(addr, function(result, status) { 
 						if (status === daum.maps.services.Status.OK) {
 							 var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
@@ -124,6 +150,7 @@ let index = {
 								 clickable: true 
 								}); 
 							// 마커를 지도에 표시합니다. 
+							markerList.push(marker);	// list에 마커 push
 							marker.setMap(map); 
 							// 인포윈도우를 생성합니다 
 							var infowindow = new kakao.maps.InfoWindow({ 
@@ -140,12 +167,63 @@ let index = {
 				});
 			}
 		}).fail(function(error) {
-			alert("defaultMark error: " + JSON.stringify(error));
+			alert("requestListProc error: " + JSON.stringify(error));
+		});
+		
+		//2. group(단체) 마커 찍기
+		$.ajax({// DB에서 주소 받아오기.
+			type: "POST",
+			url: "/groupListProc",
+		}).done(function(resp) {
+			if (resp.status == 500) {
+				alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+			} else {
+				groupList = resp.data;
+				
+				var groupaddresslist = [];
+				
+				for(var i = 0; i < groupList.length; i ++){
+					groupaddresslist.push(groupList[i].address);
+				}
+				
+				// Group 주소 마커 뿌리기
+				groupaddresslist.forEach(function(addr, index) { 
+					geocoder.addressSearch(addr, function(result, status) { 
+						if (status === daum.maps.services.Status.OK) {
+							 var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
+							 var marker = new daum.maps.Marker({ 
+								 position: coords, 
+								 clickable: true 
+								}); 
+							// 마커를 지도에 표시합니다. 
+							markerList.push(marker);	// list에 마커 push
+							marker.setMap(map); 
+							// 인포윈도우를 생성합니다 
+							var infowindow = new kakao.maps.InfoWindow({ 
+								content: '<div style="width:150px;text-align:center;padding:6px 0;">' + addr + '</div>', 
+								removable : true
+							 }); // 마커에 클릭이벤트를 등록합니다 
+							
+							 // list에 infowindow push 
+							 infowindowList.push(infowindow);
+							 kakao.maps.event.addListener(marker, 'click', function() { 
+								 // 마커 위에 인포윈도우를 표시합니다 
+								 infowindow.open(map, marker); 
+							}); 
+						}
+						//좌표이동
+						map.setCenter(coords);
+					}); 
+				});
+			}
+		}).fail(function(error) {
+			alert("groupListProc error: " + JSON.stringify(error));
 		});
 	},
 
 	// 클릭시 
 	searchAndMark: function(clientType) {	//
+		this.mapClean();		// map 객체 초기화
 		$.ajax({// DB에서 주소 받아오기.
 			type: "POST",
 			url: "/markProc",
@@ -169,10 +247,11 @@ let index = {
 					geocoder.addressSearch(addr, function(result, status) {	// 좌표얻기
 						if (status === kakao.maps.services.Status.OK) {// 정상적으로 검색이 완료됐으면 
 							var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-							marker = new kakao.maps.Marker({// 결과값으로 받은 위치를 마커로 표시합니다
+							var marker = new kakao.maps.Marker({// 결과값으로 받은 위치를 마커로 표시합니다
 								map: map,
 								position: coords
 							});
+							markerList.push(marker);	// list에 마커 push
 
 							var infowindow = new kakao.maps.InfoWindow({// 인포윈도우로 장소에 대한 설명을 표시합니다
 								content: '<div style="width:250px;text-align:left;padding:6px 0;">'
@@ -182,6 +261,8 @@ let index = {
 									+ '긴급한 정도:' + urgentLevel + '<br>'
 									+ '주소: ' + addr + '</div>'
 							});
+							
+							infowindowList.push(infowindow);	//list에 push
 							infowindow.open(map, marker);
 							map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.model.Request;
+import com.dodream.model.RoleType;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
@@ -234,6 +236,10 @@ public class UserService {
 	public boolean passwordCheckService(String password, String dbPassword) {
 		
 		return encoder.matches(password, dbPassword);
+	}
+
+	public User[] getByUserTypeService(RoleType userType) {
+		return userRepository.findAllByUserType(userType);
 	}
 
 
