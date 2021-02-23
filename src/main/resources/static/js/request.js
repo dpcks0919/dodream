@@ -301,7 +301,6 @@ let index = {
 		
 		let data = {
 			reply: reply,
-			replyItem: 
 		}
 		
 		console.log(data);
