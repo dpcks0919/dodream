@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -31,8 +32,9 @@ public class ReplyItem {
 	@JsonBackReference
 	private Reply reply;
 	
-	@Column(nullable = false)
-	private String replyItemName;
+	@OneToOne
+	@JoinColumn(name = "requestItemId")
+	private RequestItem requestItem;
 	
 	@Column(nullable = false)
 	private int replyNum;
