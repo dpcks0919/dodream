@@ -341,6 +341,7 @@
 	<%@include file="../layout/kakaoMap.jsp"%>
 	
 	<script src="/js/request.js"></script>	
+	<script src="/js/map.js"></script>	
 	<script>
 	var lati, longi;
 	

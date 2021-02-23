@@ -24,13 +24,19 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="image/Main1.png" class="d-block w-100" alt="...">
-						<div class="carousel-caption d-md-block">
+						<img src="image/Main1.png" class="d-block w-100 mainImage-web" alt="...">
+						<img src="image/Main1_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
+						<div class="carousel-caption1 d-md-block mainImage-web">
 							<a class=" rounded main1-register" href="#about">소식보기</a>
+						</div>
+						<div class="carousel-caption1_mobile test d-md-block mainImage-mobile">
+							<p class="main1-register-text_mobile">이번 달에는 어떤 도움의 손길들이 있었을까요?</p>
+							<a class=" rounded main1-register main1-register_mobile" href="#about">소식보기</a>
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="image/Main2.png" class="d-block w-100" alt="...">
+						<img src="image/Main2.png" class="d-block w-100 mainImage-web" alt="...">
+						<img src="image/Main2.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption2 d-md-block">
 							<a class="py-2 rounded js-scroll-trigger main3-register " href="#about">자세히보기</a>
 						</div>
@@ -63,7 +69,7 @@
 				</div>
 				<div class="sec3-middle ">
 					<div class="left sec3-middle-left">
-						<span class="sec3-text1">돕고 싶은 이웃</span> 
+						<span class="sec3-text1">돕고 싶은 이웃</span>
 						<button class="tbox-center tbox-small" id="btn-elderly">노인</button>
 						<button class="tbox-center tbox-small" id="btn-child">아이</button>
 						<button class="tbox-center tbox-small" id="btn-disabled">장애인</button>
@@ -77,18 +83,17 @@
 						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
 					<br>
-					<div class="map_wrap">
-						<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-						<!-- 지도타입 컨트롤 div 입니다 -->
-						<div class="custom_typecontrol radius_border">
-							<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> 
-							<span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-						</div>
-						<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-						<div class="custom_zoomcontrol radius_border">
-							<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
-								src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
-						</div>
+				</div>
+				<div class="map_wrap">
+					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+					<!-- 지도타입 컨트롤 div 입니다 -->
+					<div class="custom_typecontrol radius_border">
+						<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+					</div>
+					<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+					<div class="custom_zoomcontrol radius_border">
+						<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
+							src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
 					</div>
 				</div>
 				<!-- <div style="position:absolute;bottom:0;width:70%;left:24%;transform:translate(45%,-150%);background-color: rgba(255, 255, 255, 0.2);border:1px solid white;border-radius:16px;padding:2px 20px 2px 20px;font-size:14pt;font-weight:bold;cursor:pointer;">회원가입</div> -->
