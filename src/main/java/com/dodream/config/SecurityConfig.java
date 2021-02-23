@@ -48,8 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable();
 		http.authorizeRequests()
-			.antMatchers("/user/**").access("hasRole('ROLE_INDIVIDUAL') or hasRole('ROLE_GROUP') or hasRole('ROLE_SOCIAL_WORKER') or hasRole('ROLE_INSTITUTION')")
-			.antMatchers("/social/**").access("hasRole('ROLE_SOCIAL_WORKER') or hasRole('ROLE_INSTITUTION')")
+			.antMatchers("/user/**").access("hasRole('ROLE_INDIVIDUAL_APPROVED') or hasRole('ROLE_GROUP_APPROVED') or hasRole('ROLE_SOCIAL_WORKER_APPROVED') or hasRole('ROLE_INSTITUTION_APPROVED')")
+			.antMatchers("/social/**").access("hasRole('ROLE_SOCIAL_WORKER_APPROVED') or hasRole('ROLE_INSTITUTION_APPROVED')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll()
 			.and()
