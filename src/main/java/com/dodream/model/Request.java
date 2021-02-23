@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -72,9 +71,9 @@ public class Request {
 	private StatusType status;
 	
 	private String comment;
-	
-	@OneToMany(mappedBy = "request")
+
 	//@JsonIgnoreProperties({"request"})
+	@OneToMany(mappedBy = "request")
 	@JsonManagedReference //본질적인 루프참조 해결방법 
 	private List<RequestItem> requestItem;
 	
