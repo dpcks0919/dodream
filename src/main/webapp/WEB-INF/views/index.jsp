@@ -25,13 +25,19 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="image/Main1.png" class="d-block w-100" alt="...">
-						<div class="carousel-caption d-md-block">
+						<img src="image/Main1.png" class="d-block w-100 mainImage-web" alt="...">
+						<img src="image/Main1_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
+						<div class="carousel-caption1 d-md-block mainImage-web">
 							<a class=" rounded main1-register" href="#about">소식보기</a>
+						</div>
+						<div class="carousel-caption1_mobile test d-md-block mainImage-mobile">
+							<p class="main1-register-text_mobile">이번 달에는 어떤 도움의 손길들이 있었을까요?</p>
+							<a class=" rounded main1-register main1-register_mobile" href="#about">소식보기</a>
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="image/Main2.png" class="d-block w-100" alt="...">
+						<img src="image/Main2.png" class="d-block w-100 mainImage-web" alt="...">
+						<img src="image/Main2.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption2 d-md-block">
 							<a class="py-2 rounded js-scroll-trigger main3-register " href="#about">자세히보기</a>
 						</div>
@@ -39,14 +45,27 @@
 							allowfullscreen></iframe>
 					</div>
 					<div class="carousel-item">
-						<img src="image/Main3.png" class="d-block w-100" alt="...">
-						<div class="carousel-caption3 d-md-block">
+						<img src="image/Main3.png" class="d-block w-100 mainImage-web" alt="...">					
+						<img src="image/Main3_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
+						<div class="carousel-caption3 d-md-block mainImage-web">
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
+						</div>
+						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
+							<h3 style="font-size:1rem; font-weight:bold; color:#ed7e95;">두드림이 있는 곳에 손길을</h3>
+							<p style="font-size:0.75rem;">돕는다는 것은,<br>함께 하는 것입니다.</p>
+							<p style="font-size:0.75rem;">아름다운 세상을 위한 변화,<br>당신의 손길로 시작됩니다.</p>
+							<p style="font-size:0.75rem;">"네 이웃을 네 몸과 같이 사랑하라"</p>
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
 						</div>
 					</div>
 				</div>
-				<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-				</a> <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+				<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev"> 
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+				<span class="sr-only">Previous</span>
+				</a> 
+				<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next"> 
+				<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+				<span class="sr-only">Next</span>
 				</a>
 			</div>
 		</header>
