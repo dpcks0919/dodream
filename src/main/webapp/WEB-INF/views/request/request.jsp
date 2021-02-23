@@ -73,6 +73,7 @@
 					<div class="">
 						<input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required />
 					</div>
+					<br>
 					<div class="">
 						<span>기간 : </span> <select class="request-period" name="period" id="requestPeriod">
 							<option name="p1">보통(한 달 이내)</option>
