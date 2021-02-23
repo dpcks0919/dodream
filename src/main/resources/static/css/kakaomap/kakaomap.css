@@ -1,31 +1,40 @@
-/* *,
-*::before,
-*::after {
-  box-sizing: content-box;
-} */
-
 .map_wrap {
 	position: relative;
 	overflow: hidden;
 	width: 100%;
 	height: 350px;
-	
+	margin-top: 15px;
+	box-sizing: content-box;
+}
+
+.map_wrap::before, .map_wrap::after{
+	box-sizing: content-box;
 }
 
 .radius_border {
 	border: 1px solid #919191;
 	border-radius: 5px;
+	box-sizing: content-box;
+}
+
+.radius_border::before, .radius_border::after{
+	box-sizing: content-box;
 }
 
 .custom_zoomcontrol {
 	position: absolute;
-	top: 50px;
+	top: 10px;
 	right: 10px;
 	width: 36px;
 	height: 80px;
 	overflow: hidden;
 	z-index: 1;
 	background-color: #f5f5f5;
+	box-sizing: content-box;
+}
+
+.custom_zoomcontrol::before, .custom_zoomcontrol::after{
+	box-sizing: content-box;
 }
 
 .custom_zoomcontrol span {
@@ -34,6 +43,11 @@
 	height: 40px;
 	text-align: center;
 	cursor: pointer;
+	box-sizing: content-box;
+}
+
+.custom_zoomcontrol span::before, .custom_zoomcontrol span::after{
+	box-sizing: content-box;
 }
 
 .custom_zoomcontrol span img {
@@ -41,8 +55,20 @@
 	height: 15px;
 	padding: 12px 0;
 	border: none;
+	box-sizing: content-box;
+}
+
+.custom_zoomcontrol span img::before, .custom_zoomcontrol span img::after{
+	box-sizing: content-box;
 }
 
 .custom_zoomcontrol span:first-child {
 	border-bottom: 1px solid #bfbfbf;
+	box-sizing: content-box;
 }
+
+.custom_zoomcontrol span:first-child::before, .custom_zoomcontrol span:first-child::after{
+	box-sizing: content-box;
+}
+
+

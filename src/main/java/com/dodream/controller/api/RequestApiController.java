@@ -35,6 +35,8 @@ public class RequestApiController {
 	
 	@PostMapping("/replySaveProc")
 	public ResponseDto<Integer> responseSave(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		// 해당 request의 requestItem들의 필요 수량을 다시 확인해야 됨!
 		System.out.println(replyDto);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
