@@ -2,14 +2,6 @@
 var markerList = [];
 var infowindowList = [];
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center: new kakao.maps.LatLng(37.54699, 127.09598), // 지도의 중심좌표
-		level: 2 // 지도의 확대 레벨
-	};
-
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
 // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
 function zoomIn() {
 	map.setLevel(map.getLevel() - 1);
@@ -44,32 +36,56 @@ let index = {
 			this.searchAndLocate(addr);
 		});
 		$("#btn-elderly").on("click", () => {
-			this.searchAndMark("ELDERLY")
-			alert("노인");
+			this.searchAndMark("ELDERLY");
+			$('#btn-elderly').addClass('tbox-small-selected-blue');
+			$('#btn-child').removeClass('tbox-small-selected-blue');
+			$('#btn-disabled').removeClass('tbox-small-selected-blue');
+			$('#btn-others').removeClass('tbox-small-selected-blue');
 		});
 		$("#btn-child").on("click", () => {
 			this.searchAndMark("CHILD");
-			alert("아이");
+			$('#btn-elderly').removeClass('tbox-small-selected-blue');
+			$('#btn-child').addClass('tbox-small-selected-blue');
+			$('#btn-disabled').removeClass('tbox-small-selected-blue');
+			$('#btn-others').removeClass('tbox-small-selected-blue');
 		});
 		$("#btn-disabled").on("click", () => {
 			this.searchAndMark("DISABLED");
-			alert("장애인");
+			$('#btn-elderly').removeClass('tbox-small-selected-blue');
+			$('#btn-child').removeClass('tbox-small-selected-blue');
+			$('#btn-disabled').addClass('tbox-small-selected-blue');
+			$('#btn-others').removeClass('tbox-small-selected-blue');		
 		});
 		$("#btn-others").on("click", () => {
 			this.searchAndMark("OTHERS");
-			alert("기타");
+			$('#btn-elderly').removeClass('tbox-small-selected-blue');
+			$('#btn-child').removeClass('tbox-small-selected-blue');
+			$('#btn-disabled').removeClass('tbox-small-selected-blue');
+			$('#btn-others').addClass('tbox-small-selected-blue');
 		});
 		$("#btn-goods").on("click", () => {
-			alert("물품");
+			$('#btn-goods').addClass('tbox-small-selected-red');
+			$('#btn-finance').removeClass('tbox-small-selected-red');
+			$('#btn-service').removeClass('tbox-small-selected-red');
+			$('#btn-etc').removeClass('tbox-small-selected-red');
 		});
 		$("#btn-finance").on("click", () => {
-			alert("재정");
+			$('#btn-goods').removeClass('tbox-small-selected-red');
+			$('#btn-finance').addClass('tbox-small-selected-red');
+			$('#btn-service').removeClass('tbox-small-selected-red');
+			$('#btn-etc').removeClass('tbox-small-selected-red');
 		});
 		$("#btn-service").on("click", () => {
-			alert("서비스");
+			$('#btn-goods').removeClass('tbox-small-selected-red');
+			$('#btn-finance').removeClass('tbox-small-selected-red');
+			$('#btn-service').addClass('tbox-small-selected-red');
+			$('#btn-etc').removeClass('tbox-small-selected-red');
 		});
 		$("#btn-etc").on("click", () => {
-			alert("기타");
+			$('#btn-goods').removeClass('tbox-small-selected-red');
+			$('#btn-finance').removeClass('tbox-small-selected-red');
+			$('#btn-service').removeClass('tbox-small-selected-red');
+			$('#btn-etc').addClass('tbox-small-selected-red');
 		});
 	},
 
@@ -227,7 +243,7 @@ let index = {
 			}
 
 		}).fail(function(error) {
-			alert("searchAndMark error: " + JSON.stringify(error));
+			alert("결과가 없습니다.");
 		});
 	},
 
@@ -241,7 +257,6 @@ let index = {
 			if (status === kakao.maps.services.Status.OK) {
 
 				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
 
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
