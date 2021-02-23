@@ -111,7 +111,7 @@ let index = {
 			markerList[i].setMap(null);
 		}
 		
-		for(var i = 0; i < infowindowList.lenth; i++){
+		for(var i = 0; i < infowindowList.length; i++){
 			infowindowList[i].setMap(null);
 		}
 	},
