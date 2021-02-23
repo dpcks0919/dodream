@@ -56,9 +56,9 @@
 				<div class="content-needs">
 					<table class="info-table">
 						<tr>
-							<th style="width: 15%;">종류</th>
-							<th style="width: 35%;">내역</th>
-							<th style="width: 50%;">필요 수량 / 목표 수량</th>
+							<th style="width: 17.5%;">종류</th>
+							<th style="width: 27.5%;">내역</th>
+							<th style="width: 55%;">필요 수량 / 목표 수량</th>
 						</tr>
 						<tr class="needs-category" id="rq_item0"></tr>
 					</table>
@@ -112,53 +112,12 @@
 				<div class="content-needs">
 					<table class="info-table">
 						<tr>
-							<th style="width: 5%;">종류</th>
-							<th style="width: 20%;">내역</th>
-							<th style="width: 13%;">수량 설정</th>
-							<th style="width: 20%;">필요 수량 / 목표 수량</th>
+							<th style="width: 10%;">종류</th>
+							<th style="width: 30%;">내역</th>
+							<th style="width: 30%;">수량 설정</th>
+							<th style="width: 30%;">필요 수량</th>
 						</tr>
-						<tr class="needs-category">
-							<td>물품</td>
-							<td style="width: 20%;" class="reponse-item">물품1</td>
-							<td>
-								<div>
-									<i class="fas fa-minus minus-icon" onclick="alert('minus');"></i><input type="text" class="response-item-count" name="response-item" placeholder="0" readonly> <i
-										class="fas fa-plus plus-icon" onclick="alert('plus');"></i>
-								</div>
-							</td>
-							<td>10 / 30</td>
-
-						</tr>
-						<tr>
-							<td></td>
-							<td>물품2</td>
-							<td>
-								<div>
-									<i class="fas fa-minus minus-icon"></i><input type="text" class="response-item-count" name="response-item" placeholder="0" readonly> <i class="fas fa-plus plus-icon"></i>
-								</div>
-							</td>
-							<td>5 / 10</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>물품3</td>
-							<td>
-								<div>
-									<i class="fas fa-minus minus-icon"></i><input type="text" class="response-item-count" name="response-item" placeholder="0" readonly> <i class="fas fa-plus plus-icon"></i>
-								</div>
-							</td>
-							<td>10 / 20</td>
-						</tr>
-						<tr class="needs-category">
-							<td>봉사</td>
-							<td>옮기기</td>
-							<td>
-								<div>
-									<i class="fas fa-minus minus-icon"></i><input type="text" class="response-item-count" name="response-item" placeholder="0" readonly> <i class="fas fa-plus plus-icon"></i>
-								</div>
-							</td>
-							<td>7 / 10</td>
-						</tr>
+						<tr class="needs-category" id="rp_item0"></tr>
 					</table>
 				</div>
 			</div>

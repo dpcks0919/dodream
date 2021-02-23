@@ -70,27 +70,53 @@
 	  });
 		
 	  for(var i = 0; i < items.length; i++) {
+		let needs = items[i].itemnum - items[i].receivednum;
 		if(i == 0) {
-		  $("#rq_item0").html("<td>"+ items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td>");
+		  $("#rq_item0").html("<td>" + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td>");
+		  $("#rp_item0").html("<td>" + items[i].type + "</td><td>" + items[i].name + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td>');
 		}
 		else {
-		  let nid = "#rq_item" + (i-1);
+		  let qid = "#rq_item" + (i-1);
+		  let pid = "#rp_item" + (i-1);
+
 		  if(items[i].type === items[i-1].type) {
-			$(nid).after('<tr id="rq_item' + i + '"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
+			$(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
+		  	$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].name + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
 		  } else {
-			$(nid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
+			$(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
+		  	$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
 		  }
 		}
 	  }
 
 	  $("#modal-bg").click(function() {
 		for(var i = 0; i < items.length; i++) {
-		  let nid = "#rq_item" + i;
-		  if(i == 0) $(nid).empty();
-		  else $(nid).remove();
+		  let qid = "#rq_item" + i;
+		  let pid = "#rp_item" + i;
+		  if(i == 0) {
+			$(qid).empty();
+			$(pid).empty();
+		  } else {
+			$(qid).remove();
+			$(pid).remove();
+		  }
 		}
-	  })
+	  });
     }
+
+	function rp_minus(i) {
+	  let pid = "#response_num" + i;
+      let num = Number($(pid).val());
+	  if($(pid).val() > 0) $(pid).val(num -= 1);
+      else alert($(pid).val());
+	}
+	
+	function rp_plus(i, max) {
+	  let pid = "#response_num" + i;
+	  let num = Number($(pid).val());
+      if($(pid).val() < max) $(pid).val(num += 1);
+      else alert($(pid).val());
+	}
 
     function closeModal() {
       document.getElementById("modal-bg").style.display="none";
