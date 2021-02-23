@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.dodream.model.RoleType;
 import com.dodream.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
@@ -18,5 +19,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public void increaseLoginCount(int id);
 
 	public User findByLoginIdAndLoginPassword(String loginId, String loginPassword);
+
+	public User[] findAllByUserType(RoleType userType);
 	
 }
