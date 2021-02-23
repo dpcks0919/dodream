@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
+import com.dodream.model.RoleType;
+import com.dodream.model.User;
 import com.dodream.service.RequestService;
 import com.dodream.service.UserService;
 
@@ -25,10 +27,16 @@ public class MapApiController {
 	
 	@Value("${social.password}")
 	private String socialPassword;
+
 	
-	@PostMapping("/defaultMarkProc")	// 모든 마커 찍기
-	public ResponseDto<Request[]> dafaultMarkProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
-		return new ResponseDto<Request[]>(HttpStatus.OK.value(), requestService.defaultMarkProcService());
+	@PostMapping("/requestListProc")
+	public ResponseDto<Request[]> requestListProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
+		return new ResponseDto<Request[]>(HttpStatus.OK.value(), requestService.requestListProcService());
+	}
+	
+	@PostMapping("/groupListProc")
+	public ResponseDto<User[]> groupListProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
+		return new ResponseDto<User[]>(HttpStatus.OK.value(), userService.getByUserTypeService(RoleType.GROUP));
 	}
 
 	
