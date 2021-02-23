@@ -43,9 +43,9 @@ public class RequestService {
 		return requestRepository.findAll(pageable);
 	}
 	
+	
 	@Transactional
-	public Request[] defaultMarkProcService() {
-		
+	public Request[] requestListProcService() {
 		Request[] requestList = requestRepository.findAllByDeleteFlag(0);
 		return requestList;
 	}
