@@ -94,12 +94,12 @@
 					</div>
 					<div class="response-info">
 						<div class="info-title">소속단체</div>
-						<input class="info-group info-text" name="response-org" type="text" value="${user.userPhone}" placeholder="소속단체 입력"></input>
+						<input class="info-group info-text" name="response-org" type="text" value="${user.orgName}" placeholder="소속단체 입력"></input>
 					</div>
 				</div>
 				<div class="response-info">
 					<div class="info-title">전화번호</div>
-					<input class="info-phone info-text" name="response-phone" type="text" value="${user.orgName}" placeholder="전화번호 입력"></input>
+					<input class="info-phone info-text" name="response-phone" type="text" value="${user.userPhone}" placeholder="전화번호 입력"></input>
 				</div>
 				<!-- 공간 맞추기 여백 -->
 				<div class="response-info" style="visibility: hidden !important;">
