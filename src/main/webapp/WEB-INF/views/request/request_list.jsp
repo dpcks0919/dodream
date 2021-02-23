@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../layout/header.jsp"%>
-
 <link href="/css/view-reg.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -169,24 +168,7 @@
 				</div>
 			</div>
 
-			<div class="container ">
-				<!-- <div class="text-center main-map" id="map"></div> -->
-				<div class="map_wrap">
-					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-					<!-- 지도타입 컨트롤 div 입니다 -->
-					<div class="custom_typecontrol radius_border">
-						<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-					</div>
-					<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-					<div class="custom_zoomcontrol radius_border">
-						<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
-							src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="container" style="margin-top: 30px" id="map-info-container">
+			<div class="container" style="margin-top: 30px;">
 				<div class="map-content ">
 					<div class="map-left">
 						<p class="help-content">주거환경개선 도움</p>
@@ -362,15 +344,14 @@
 	<script src="/js/request.js"></script>
 	<script>
 	var lati, longi;
-	
 	<c:choose>
-		<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+		<c:when test="${user.loginCount == 0 || empty user.loginCount}">
 			lati = 36.1023014256562;
 			longi = 129.389266058166;
 		</c:when>
 		<c:otherwise>
-			lati = ${principal.user.latitude};
-		  	longi = ${principal.user.longitude};
+			lati = ${user.latitude};
+		  	longi = ${user.longitude};
 		</c:otherwise>
 	</c:choose>
 	

@@ -73,7 +73,7 @@
 			<p class="text-center text-uppercase text-secondary mb-0 page-section3-title">
 				내 주변에는 어떤 이웃이 도움을 필요로 할까요?<br>지금 바로 지도를 통해 확인해 보세요!
 			</p>
-			<div class="container ">
+			<div class="container">
 				<div style="text-align: right;">
 					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요." id="input-addr">
 					<div id="btn-search">
@@ -244,7 +244,6 @@
 	<script type="text/javascript" src="/js/map.js"></script>
 	<script>
 	var lati, longi;
-	
 	<c:choose>
 		<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
 			lati = 36.1023014256562;
@@ -256,15 +255,14 @@
 		</c:otherwise>
 	</c:choose>
 	
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
+		level : 3
+	// 지도의 확대 레벨
+	};
 
-		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption);
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 	</script>
 
 </body>

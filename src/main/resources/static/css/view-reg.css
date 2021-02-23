@@ -578,6 +578,18 @@ td, th {
   background-color : white;
   margin-right:0.5%;
 }
+
+.tbox-small-selected-red{
+	color : white;
+	background-color: #ed7e95;
+	border: 1px solid #ed7e95;
+}
+
+.tbox-small-selected-blue{
+	color : white;
+	background-color: #AFDAE7;
+	border: 1px solid #AFDAE7;
+}
 .sec3-text1 {
   font-size:0.9rem;
   margin-right:1%;
