@@ -165,10 +165,8 @@
 						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
 						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
-				</div>
-			</div>
-
-			<div class="map_wrap">
+				</div>	
+				<div class="map_wrap">
 					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 					<!-- 지도타입 컨트롤 div 입니다 -->
 					<div class="custom_typecontrol radius_border">
@@ -179,7 +177,10 @@
 						<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
 							src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
 					</div>
+				</div>
 			</div>
+
+			
 
 			<div class="container" style="margin-top: 30px;" id="marker-info-container">
 				<div class="map-content ">

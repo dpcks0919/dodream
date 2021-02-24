@@ -1,3 +1,35 @@
+var Lat, Lng;
+// 도로명주소 검색
+function goPopup(){
+
+	var pop = window.open("/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+
+		$("#roadAddrPart1").val(roadAddrPart1);
+		
+		var geocoder = new daum.maps.services.Geocoder();
+		 var x,y          = "";
+	     var gap = roadAddrPart1;
+	     
+		 // 주소로 좌표를 검색
+		 geocoder.addressSearch(gap, function(result, status) {
+		  
+		  // 정상적으로 검색이 완료됐으면,
+		  if (status == daum.maps.services.Status.OK) {
+		   
+		   var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+		   Lng = result[0].x;
+		   Lat = result[0].y;
+		  }
+		 }); 
+		 
+} 
+
 // 모달
 function goRequestDetail(title, period_text, contents, totalCnt, itemList) {
   document.getElementById("modal-bg").style.display="block";
@@ -229,19 +261,25 @@ let requestInit = {
 		  else if(period_text == '긴급(7~14일 이내)') period = 2;
 		  else if(period_text == '매우 긴급(3일 이내)') period = 1;
 		  var contents = document.getElementById('requestContents').value;
+		 
+		  var type = document.getElementById('requestType').value; 
+		  var type_text = type;
+		  if(type_text == '노인') type = "ELDERLY";
+		  else if(type_text == '아이') type = "CHILD";
+		  else if(type_text == '장애인') type = "DISABLED";
+		  else if(type_text == '기타') type = "OTHERS";
 
 		let data = {
 			title: document.getElementById('requestTitle').value,
-			// 노인 아동 장애인 기타 : 일단 임시로 1
-			clientType: "ELDERLY",
+			clientType: type,
 			// request에서 새로 주소를 받아오기로 함. (form 한개 더 만들어져야 함)
-			requestAddress : "temp",
-			latitude : 125,
-			longitude : 125,
+			requestAddress : document.getElementById('roadAddrPart1').value,
+			latitude : Lat,
+			longitude : Lng,
 			urgentLevel : period,
 			description : document.getElementById('requestContents').value,
 			status : "NON_APPROVED",			
-			showFlag : 0
+			showFlag : 1
 		};
 		console.log(data);
 		$.ajax({

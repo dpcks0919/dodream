@@ -66,6 +66,7 @@
 
  	let items = rq.requestItem;
 
+
 			//종류 한글로 바꿔주기 
 	   for(var i = 0; i < items.length; i++){
 		if(items[i].requestType == "STUFF") items[i].requestType = "물품";		
