@@ -69,7 +69,7 @@
 		<section class="request-section" id="request">
 			<div class="container">
 				<div class="request-form" id="requestForm">
-					<div class="" style="margin-bottom:10px;">
+					<div class="" style="margin-bottom: 10px;">
 						<input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required />
 					</div>
 					<br>
@@ -79,6 +79,30 @@
 							<option name="p2">긴급(7~14일 이내)</option>
 							<option name="p3">매우 긴급(3일 이내)</option>
 						</select>
+					</div>
+					<div class="">
+						<span>도움이 필요하신 분 : </span> <select class="request-period" name="type" id="requestType">
+							<option name="t1">노인</option>
+							<option name="t2">아이</option>
+							<option name="t3">장애인</option>
+							<option name="t4">기타</option>
+						</select>
+					</div>
+					<div>
+						<input class="text-input" type="text" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명 주소 입력" disabled>
+						<div class="" onclick="goPopup();" id="btn-addr-search">도로명주소 검색 버튼</div>
+					</div>
+					<div class="map_wrap">
+						<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+						<!-- 지도타입 컨트롤 div 입니다 -->
+						<div class="custom_typecontrol radius_border">
+							<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+						</div>
+						<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+						<div class="custom_zoomcontrol radius_border">
+							<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
+								src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+						</div>
 					</div>
 					<div class="summernoteDiv">
 						<textarea type="text" class="request-content summernote" id="requestContents" name="content" required></textarea>
@@ -130,6 +154,7 @@
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
 	<%@include file="../layout/summernote.jsp"%>
+	<%@include file="../layout/kakaoMap.jsp"%>
 	<script src="/js/request.js"></script>
 
 	<script>
@@ -144,6 +169,7 @@
 
 			});
 		});
+		
 	</script>
 </body>
 </html>
