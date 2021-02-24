@@ -24,11 +24,11 @@ var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-let index = {
+let mapInit = {
 	init: function() {
 		
-		//map info 란 hidden 처리
-		$("#map-info-container").css('visibility', 'hidden');
+		//marker info 란 hidden 처리
+		$("#marker-info-container").css('visibility', 'hidden');
 	
 		// defaultmark
 		this.defaultMark();
@@ -138,7 +138,36 @@ let index = {
 							 }); // 마커에 클릭이벤트를 등록합니다 
 							 	 infowindowList.push(infowindow);	// infowindow list에 push 
 							 	 kakao.maps.event.addListener(marker, 'click', function() {
-								 $("#map-info-container").css('visibility', 'visible');
+								 $("#marker-info-container").css('visibility', 'visible');
+								 $("#marker-info-title").text(requestList[index].title); 
+								 $("#marker-info-date").text(requestList[index].regDate.substring(0,10)); 
+							
+								  // 날짜로 상태 계산 
+								  var date = requestList[index].dueDate;
+								  var d_date = new Date(date.valueOf());
+								  var d_time = d_date.getTime();
+							      var cur = new Date(); // 현재시간
+								  var c_time = cur.getTime();
+							      var status = "";
+								  if(c_time <= d_time) status = "응답 대기중";
+							      else status = "응답 완료";
+								 $("#marker-info-status").text(status);
+							
+								 // 긴급정도 나타내기
+								 if(requestList[index].urgentLevel == 1) var urgentLevel = "매우 긴급(24시간 이내)";
+								 else if(requestList[index].urgentLevel == 2) var urgentLevel = "긴급(일주일 이내)";
+								 else if(requestList[index].urgentLevel == 3) var urgentLevel = "보통(한달 이내)";
+								 else var urgentLevel = "기타";
+								 $("#marker-info-urgentlevel").text(urgentLevel); 
+							
+								 $("#marker-info-address").text(requestList[index].requestAddress); 
+								 $("#marker-info-phone").text(requestList[index].user.userPhone); 
+							
+								//자세히 보기 클릭시
+								$("#marker-info-btn").on("click", () => {
+								     goDetail_request(requestList[index]);
+								});
+
 								 // 마커 위에 인포윈도우를 표시합니다 
 								 infowindow.open(map, marker); 
 							}); 
@@ -275,4 +304,4 @@ let index = {
 
 }
 
-index.init();
+mapInit.init();
