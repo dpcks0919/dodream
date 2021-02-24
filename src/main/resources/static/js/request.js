@@ -1,8 +1,7 @@
 var Lat, Lng;
 // 도로명주소 검색
 function goPopup(){
-
-	var pop = window.open("/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
@@ -25,8 +24,9 @@ function goPopup(){
 		   var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 		   Lng = result[0].x;
 		   Lat = result[0].y;
-		  }
-		 }); 
+	  	}
+	$(".map_wrap").show();
+ }); 
 		 
 } 
 
@@ -157,9 +157,6 @@ function upload(step) {
   var title = document.getElementById('requestTitle').value;
   var period = document.getElementById('requestPeriod').value;
   var period_text = period;
-  if(period_text == '보통(한 달 이내)') period = 3;
-  else if(period_text == '긴급(7~14일 이내)') period = 2;
-  else if(period_text == '매우 긴급(3일 이내)') period = 1;
   var contents = document.getElementById('requestContents').value;
 
   if(title =='') {
