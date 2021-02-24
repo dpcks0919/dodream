@@ -30,7 +30,7 @@ function goPopup(){
 		 }); 
 }
 
-let index = {
+let myInit = {
 	
 	init: function(){
 	
@@ -211,4 +211,4 @@ let index = {
 	
 }
 
-index.init();
+myInit.init();

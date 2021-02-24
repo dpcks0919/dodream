@@ -32,7 +32,7 @@ function goPopup(){
 		 }); 
 }   
 
-let index = {
+let joinInit = {
 	init: function(){
 		$("#btn-code-verify").css('display', 'none');
 		$("#sms_check").css('width', '100%');
@@ -380,5 +380,5 @@ let index = {
 	},
 }
 
-index.init();
+joinInit.init();
 
