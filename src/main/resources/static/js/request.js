@@ -1,4 +1,15 @@
 var Lat, Lng;
+var prevMarker;
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center: new kakao.maps.LatLng(33.452613, 126.570888), // 지도의 중심좌표
+		level: 3
+		// 지도의 확대 레벨
+	};
+
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -7,28 +18,45 @@ function goPopup(){
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 }
 
- function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 
-		$("#roadAddrPart1").val(roadAddrPart1);
-		
-		var geocoder = new daum.maps.services.Geocoder();
-		 var x,y          = "";
-	     var gap = roadAddrPart1;
-	     
-		 // 주소로 좌표를 검색
-		 geocoder.addressSearch(gap, function(result, status) {
-		  
-		  // 정상적으로 검색이 완료됐으면,
-		  if (status == daum.maps.services.Status.OK) {
-		   
-		   var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-		   Lng = result[0].x;
-		   Lat = result[0].y;
-	  	}
-	$(".map_wrap").show();
- }); 
-		 
-} 
+	$("#roadAddrPart1").val(roadAddrPart1);
+
+	var geocoder = new daum.maps.services.Geocoder();
+	var x, y = "";
+	var gap = roadAddrPart1;
+
+	// 주소로 좌표를 검색
+	geocoder.addressSearch(gap, function (result, status) {
+
+		// 정상적으로 검색이 완료됐으면,
+		if (status == daum.maps.services.Status.OK) {
+
+			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+			Lng = result[0].x;
+			Lat = result[0].y;
+			var moveLatLon = new kakao.maps.LatLng(Lat, Lng);
+			// 지도 중심을 이동 시킵니다
+			map.setCenter(moveLatLon);
+			
+			var marker = new kakao.maps.Marker({
+				position: moveLatLon
+			});
+			
+			// 처음인 경우
+			if( prevMarker == null){
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				prevMarker = marker;
+			}else{
+				prevMarker.setMap(null);
+				marker.setMap(map);
+				prevMarker = marker;
+			}
+		}
+		$(".map_wrap").show();
+	});
+}
 
 // 모달
 function goRequestDetail(title, period_text, contents, totalCnt, itemList) {
