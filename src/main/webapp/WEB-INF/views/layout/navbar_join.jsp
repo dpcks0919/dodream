@@ -16,7 +16,8 @@
 		</div>
 	</div>
 	<div class="responsive-container">
-		<a class="menu-bar" onclick="openMenu()" id="nav-burger"><i class="fa fa-bars" aria-hidden="true"></i></a> <img src="/image/Logo.png" class="logo" id="nav-logo"
-			onclick="document.location.href='/'"> <a class="profile" id="nav-profile" onclick="openProfile()"><i class="fa fa-user" aria-hidden="true"></i></a>
+		<a class="menu-bar" onclick="openMenu()" id="nav-burger"><i class="fa fa-bars" aria-hidden="true"></i></a> 
+		<img src="/image/Logo.png" class="logo" id="nav-logo" onclick="document.location.href='/'"> 
+		<a class="profile" id="nav-profile" onclick="openProfile()"><i class="fa fa-user" aria-hidden="true"></i></a>
 	</div>
 </nav>
