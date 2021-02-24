@@ -39,7 +39,7 @@
       document.getElementById("menu-back").style.filter = "blur(5px)";
       document.getElementById("Wrapper").style.filter = "blur(5px)";
 
-	  var date = rq.duedate;
+	  var date = rq.dueDate;
 	  var d_date = new Date(date.valueOf());
 	  var d_time = d_date.getTime();
       var cur = new Date(); // 현재시간
@@ -48,8 +48,8 @@
 	  if(c_time <= d_time) status = "응답 대기중";
       else status = "응답 완료";
 
-      let regdate = rq.regdate.substring(0,10);
-	  let level = rq.level;
+      let regDate = rq.regDate.substring(0,10);
+	  let level = rq.urgentLevel;
 	  if(level == 1) level = "매우 긴급(3일 이내)";
 	  else if(level == 2) level = "긴급(14일 이내)";
       else if(level == 3) level = "보통(한 달 이내)";
@@ -57,34 +57,58 @@
 
 	  $("#rq_title").html("<h5>" + rq.title + "</h5>");
       $("#rq_id").html(rq.id);
-      $("#rq_date").html(regdate);
+      $("#rq_date").html(regDate);
 	  $("#rq_status").html(status);
-	  $("#rq_addr").html(rq.address);
+	  $("#rq_addr").html(rq.requestAddress);
 	  $("#rq_level").html(level);
-	  $("#rq_user").html(rq.writer);
-	  $("#rq_contents").html(rq.contents);
+	  $("#rq_user").html(rq.userName);
+	  $("#rq_contents").html(rq.description);
 
-	  let items = rq.item;
+ 	let items = rq.requestItem;
+
+			//종류 한글로 바꿔주기 
+	   for(var i = 0; i < items.length; i++){
+		if(items[i].requestType == "STUFF") items[i].requestType = "물품";		
+		else if(items[i].requestType == "FINANCE") items[i].requestType = "재정";
+		else if(items[i].requestType == "SERVICE") items[i].requestType = "봉사";
+		else if(items[i].requestType == "ETC") items[i].requestType = "기타";
+	}
+	
+	/*
+	var arr = new Array();
+	
+	rq.requestItem.forEach(function(item, index){
+				arr.push({
+										itemName: item.itemName,
+										itemNum: item.itemNum,
+										receivedNum: item.receivedNum,
+										requestType: item.requestType,
+									});
+	});
+	*/
+	
+
+
 	  items.sort(function(a, b) {
-	    return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
+	    return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
 	  });
 		
 	  for(var i = 0; i < items.length; i++) {
-		let needs = items[i].itemnum - items[i].receivednum;
+		let needs = items[i].itemNum - items[i].receivedNum;
 		if(i == 0) {
-		  $("#rq_item0").html("<td>" + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td>");
-		  $("#rp_item0").html("<td>" + items[i].type + "</td><td>" + items[i].name + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td>');
+		  $("#rq_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td>");
+		  $("#rp_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td>');
 		}
 		else {
 		  let qid = "#rq_item" + (i-1);
 		  let pid = "#rp_item" + (i-1);
 
-		  if(items[i].type === items[i-1].type) {
-			$(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
-		  	$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].name + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
+		  if(items[i].requestType === items[i-1].requestType) {
+			$(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
+		  	$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
 		  } else {
-			$(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + items[i].receivednum + " / " + items[i].itemnum + "</td></tr>");
-		  	$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].type + "</td><td>" + items[i].name + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
+			$(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
+		  	$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
 		  }
 		}
 	  }

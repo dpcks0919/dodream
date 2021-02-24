@@ -161,7 +161,7 @@ function upload(step) {
 	}
 	// 바로 upload
 	else if(step == 2) {
-    	index.saveRequest(totalCnt, itemList);
+    	requestInit.saveRequest(totalCnt, itemList);
 	}
   }
   else {
@@ -215,7 +215,7 @@ function bringInfo(type, userName, userPhone, orgName) {
 	}
 }
 
-let index = {
+let requestInit = {
 	init: function() {
 		$("#btn-com").on("click", () => { 
 				this.saveReply();
@@ -258,7 +258,7 @@ let index = {
 				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
 				
 				for(var i=0; i<itemList.length; i++) {
-					index.saveRequestItem(itemList[i], resp.data);
+					requestInit.saveRequestItem(itemList[i], resp.data);
 				}
 				closeModal_request();
 			    //location.reload();
@@ -324,4 +324,4 @@ let index = {
 	},
 }
 
-index.init();
+requestInit.init();
