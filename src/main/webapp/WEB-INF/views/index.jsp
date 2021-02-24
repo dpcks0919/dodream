@@ -29,16 +29,21 @@
 						<div class="carousel-caption1 d-md-block mainImage-web">
 							<a class=" rounded main1-register" href="#about">소식보기</a>
 						</div>
-						<div class="carousel-caption1_mobile test d-md-block mainImage-mobile">
-							<p class="main1-register-text_mobile">이번 달에는 어떤 도움의 손길들이 있었을까요?</p>
+						<div class="carousel-caption1_mobile d-md-block mainImage-mobile">
+							<!-- 
+								<p class="main1-register-text_mobile">이번 달에는 어떤 도움의 손길들이 있었을까요?</p>
+							 -->
 							<a class=" rounded main1-register main1-register_mobile" href="#about">소식보기</a>
 						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="image/Main2.png" class="d-block w-100 mainImage-web" alt="...">
-						<img src="image/Main2.png" class="d-block w-100 mainImage-mobile" alt="...">
-						<div class="carousel-caption2 d-md-block">
+						<img src="image/Main2_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
+						<div class="carousel-caption2 d-md-block mainImage-web">
 							<a class="py-2 rounded js-scroll-trigger main3-register " href="#about">자세히보기</a>
+						</div>
+						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="#about">자세히 보기</a>
 						</div>
 						<iframe class="carousel-youtube" src="https://www.youtube.com/embed/9Yfaj0oTw18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowfullscreen></iframe>
@@ -50,10 +55,13 @@
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
 						</div>
 						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
+						<!-- 
 							<h3 style="font-size:1rem; font-weight:bold; color:#ed7e95;">두드림이 있는 곳에 손길을</h3>
 							<p style="font-size:0.75rem;">돕는다는 것은,<br>함께 하는 것입니다.</p>
 							<p style="font-size:0.75rem;">아름다운 세상을 위한 변화,<br>당신의 손길로 시작됩니다.</p>
 							<p style="font-size:0.75rem;">"네 이웃을 네 몸과 같이 사랑하라"</p>
+						
+						 -->
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
 						</div>
 					</div>
@@ -77,7 +85,7 @@
 				<div style="text-align: right;">
 					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요." id="input-addr">
 					<div id="btn-search">
-						<i class="fas fa-search search-icon" id="btn-search"></i>
+						<img class="search-icon" src="image/search-icon.png" />
 					</div>
 				</div>
 				<div class="sec3-middle ">
@@ -118,8 +126,8 @@
 						<p style="color: white;" class="sec3-bottom-right-title">
 							어떤 도움이든, <br>당신의 도움은 시작이 됩니다.
 						</p>
-						<span style="color: white; margin-bottom: 7vw; font-weight: bold;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</span> <a class="py-2 rounded js-scroll-trigger main4-register"
-							href="/loginForm">시작하기</a>
+						<span style="color: white; margin-bottom: 7vw; font-weight: bold;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</span> 
+						<a class="py-2 rounded js-scroll-trigger main4-register" href="/loginForm">시작하기</a>
 					</div>
 					<div class="sec3-bottom-left left ">
 						<div class="four_box">
@@ -209,28 +217,20 @@
 
 		<!-- Contact Section-->
 		<section class="page-section-join" id="join">
-			<div class="container text-center">
-				<div class="container-join">
-					<!-- Contact Section Heading-->
-					<div class="join-title text-white">두드림터치와 함께 하기</div>
-					<div class="join-body">
-						<div class="join-body-left">
-							<p class="join-text1">개인 / 단체</p>
-							<p class="join-text2">개인, 교회, 동호회 등</p>
-							<p class="join-text3">
-								우리 지역은 내가/우리가<br>돌보고 싶을 때
-							</p>
-							<a class="py-2 rounded js-scroll-trigger join-button" href="/joinForm">가입하기</a>
-						</div>
-						<div class="join-body-right">
-							<p class="join-text1">사회복지사 / 기관</p>
-							<p class="join-text2">민간, 공공 등</p>
-							<p class="join-text3">
-								자원이 없어<br>이웃을 돌보지 못할 때
-							</p>
-							<a class="py-2 rounded js-scroll-trigger join-button" href="/joinForm">가입하기</a>
-						</div>
-					</div>
+			<div class="container">
+				<div class="container-join text-white">
+					<h4 style="margin-bottom:2rem;">두드림터치와 함께하기</h4>
+					<p style="margin-bottom:2rem;">기관/사회복지사가 도움이 필요한 이웃의 필요를 발견하고<br>두드림터치 플랫폼에 등록하면 요청사항들이 두드림터치를 통해<br>지역교회/커뮤니티로 전달됩니다.</p>
+					<p style="margin-bottom:2rem;">두드림터치와 함께 이웃을 돕고 싶으신 분들을 찾습니다.</p>
+					<c:choose>
+						<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+							<a class=" rounded join-btn" href="/loginForm">가입하기</a>
+					</c:when>
+					<c:otherwise>
+							<a class=" rounded join-btn" href="/user/requestList">요청보기</a>
+					</c:otherwise>
+					</c:choose>
+					
 				</div>
 			</div>
 		</section>
