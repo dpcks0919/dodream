@@ -58,10 +58,6 @@ input[type=password]::placeholder {
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.dodream-color {
-
-}
-
 *,
 *::before,
 *::after {
@@ -4061,7 +4057,7 @@ input[type=button].btn-block {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
-  margin-right: 1vw;
+  margin-right: 1.3vw;
   font-size: 1.25vw;
   line-height: inherit;
   white-space: nowrap;
@@ -10339,6 +10335,7 @@ form .row:first-child .floating-label-form-group {
   display:none;
 }
 @media (max-width:556px) {
+
   .logo {
     position:relative;
     left:50%;
@@ -10387,11 +10384,9 @@ form .row:first-child .floating-label-form-group {
     left:50%;
     transform: translateX(-60%);
     width:8rem!important;
-    margin-right:0em;
+    margin-right:0em; 
   }
-  
-  
-}
+ 
 
 /* open left menu */
 .sidebar {
@@ -10650,4 +10645,6 @@ form .row:first-child .floating-label-form-group {
   border: 1px solid #4CAF50;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
