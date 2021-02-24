@@ -42,9 +42,9 @@
 							<div class="input-content">
 								<span class="input-title">성별</span><span>&nbsp;<em>*</em></span><br>
 								<div class="flex-center" style="margin-top: 0.5rem;">
-									<div class="select-sex" id="maleuser" onclick="index.selectSex(this)">남자</div>
+									<div class="select-sex" id="maleuser" onclick="myInit.selectSex(this)">남자</div>
 									<div style="width: 2%;"></div>
-									<div class="select-sex" id="femaleuser" onclick="index.selectSex(this)">여자</div>
+									<div class="select-sex" id="femaleuser" onclick="myInit.selectSex(this)">여자</div>
 								</div>
 								<input id="input_sex" type="text" name="input_sex" value="1" style="display: none;">
 							</div>
