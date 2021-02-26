@@ -136,7 +136,7 @@ function minusCount(_current) {
     alert("0이상의 수를 입력하세요.");
   }
 }
-
+ 
 function plusCount(_current) {
   var target = _current.id + "count";
   var cnt = document.getElementById(target).value;
@@ -277,6 +277,7 @@ let requestInit = {
 		$("#btn-com").on("click", () => { 
 				this.saveReply();
 		});
+		
 	},
 	
 	saveRequest:function(totalCnt, itemList) {
