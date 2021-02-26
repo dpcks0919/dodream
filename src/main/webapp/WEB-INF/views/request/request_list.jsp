@@ -165,7 +165,7 @@
 						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
 						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
-				</div>	
+				</div>
 				<div class="map_wrap">
 					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 					<!-- 지도타입 컨트롤 div 입니다 -->
@@ -179,34 +179,34 @@
 					</div>
 				</div>
 			</div>
-
-			
-
+      
+      
 			<div class="container" style="margin-top: 30px;" id="marker-info-container">
+
 				<div class="map-content ">
 					<div class="map-left">
 						<p class="help-content" id="marker-info-title">주거환경개선 도움</p>
-						<p class="help-date"  id="marker-info-date">등록일 2020/12/25</p>
+						<p class="help-date" id="marker-info-date">등록일 2020/12/25</p>
 					</div>
 					<div class="map-mid ">
 						<p class="wrapper-status">
-							상태 <span class="help-status"  id="marker-info-status">응답 대기중</span>
-						</p> 
+							상태 <span class="help-status" id="marker-info-status">응답 대기중</span>
+						</p>
 						<p>
-							기간 <span class="help-term"  id="marker-info-urgentlevel">보통(한 달 이내)</span>
+							기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span>
 						</p>
 					</div>
 					<div class="map-mid ">
 						<p class="wrapper-status">
-							주소 <span class="help-status"  id="marker-info-address">포항시 북구 흥해읍</span>
+							주소 <span class="help-status" id="marker-info-address">포항시 북구 흥해읍</span>
 						</p>
 						<p>
-							문의 <span class="help-term"  id="marker-info-phone">010-1234-5678</span>
+							문의 <span class="help-term" id="marker-info-phone">010-1234-5678</span>
 						</p>
 					</div>
 					<div class="map-right ">
-						<span class="help-code"  id="marker-info-search-input">검색코드<input type="text" class="help-code-box"></input><i class="fa fa-clone copy-btn" aria-hidden="true"></i></span> <input type="button" class="help-detail"
-							value="자세히 보기"  id="marker-info-btn"></input>
+						<span class="help-code">검색코드<input type="text" class="help-code-box"  id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i class="fa fa-clone copy-btn" aria-hidden="true" ></i></span></span> <input type="button"
+							class="help-detail" value="자세히 보기" id="marker-info-btn"></input>
 					</div>
 				</div>
 			</div>

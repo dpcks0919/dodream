@@ -64,36 +64,35 @@
 	  $("#rq_user").html(rq.userName);
 	  $("#rq_contents").html(rq.description);
 
- 	let items = rq.requestItem;
+ 	 let items = rq.requestItem;
 
 
 			//종류 한글로 바꿔주기 
-	   for(var i = 0; i < items.length; i++){
+	for(var i = 0; i < items.length; i++){
 		if(items[i].requestType == "STUFF") items[i].requestType = "물품";		
 		else if(items[i].requestType == "FINANCE") items[i].requestType = "재정";
 		else if(items[i].requestType == "SERVICE") items[i].requestType = "봉사";
 		else if(items[i].requestType == "ETC") items[i].requestType = "기타";
 	}
-	
-	/*
-	var arr = new Array();
-	
-	rq.requestItem.forEach(function(item, index){
-				arr.push({
-										itemName: item.itemName,
-										itemNum: item.itemNum,
-										receivedNum: item.receivedNum,
-										requestType: item.requestType,
-									});
-	});
-	*/
-	
-
 
 	  items.sort(function(a, b) {
 	    return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
 	  });
-		
+
+		// 마커 여러번 클릭했을때, 중복 출력되지 않도록 이전 것 삭제조치
+		for(var i = 0; i < items.length; i++) {
+		  let qid = "#rq_item" + i;
+		  let pid = "#rp_item" + i;
+		  if(i == 0) {
+			$(qid).empty();
+			$(pid).empty();
+		  } else {
+			$(qid).remove();
+			$(pid).remove();
+		  }
+		}
+
+	
 	  for(var i = 0; i < items.length; i++) {
 		let needs = items[i].itemNum - items[i].receivedNum;
 		if(i == 0) {
