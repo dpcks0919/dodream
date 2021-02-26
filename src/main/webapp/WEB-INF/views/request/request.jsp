@@ -69,16 +69,40 @@
 		<section class="request-section" id="request">
 			<div class="container">
 				<div class="request-form" id="requestForm">
-					<div class="" style="margin-bottom:10px;">
+					<div class="" style="margin-bottom: 10px;">
 						<input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required />
 					</div>
-					<br>
-					<div class="">
-						<span>기간 : </span> <select class="request-period" name="period" id="requestPeriod">
+					<div class="" style="margin-bottom:0.5rem;">
+						<span>기간 설정 : </span> <select class="request-period" name="period" id="requestPeriod" style="outline:none;">
 							<option name="p1">보통(한 달 이내)</option>
 							<option name="p2">긴급(7~14일 이내)</option>
 							<option name="p3">매우 긴급(3일 이내)</option>
 						</select>
+					</div>
+					<div class="" style="margin-bottom:0.5rem;">
+						<span>요청 대상 : </span> <select class="request-period" name="type" id="requestType" style="outline:none;">
+							<option name="t1">노인</option>
+							<option name="t2">아이</option>
+							<option name="t3">장애인</option>
+							<option name="t4">기타</option>
+						</select>
+					</div>
+					<span style="font-size:0.76rem; color:blue;">* 대략적인 위치 파악을 위한 주소이므로, 상세 정보는 적으시지 않아도 됩니다. / <b>예시 : 포항시 북구 흥해읍 한동로 558 </b></span>
+					<div class="" style="margin-bottom:0.5rem;">
+						<span>요청 장소 : </span> <input class="text-input" type="text" name="roadAddrPart1" style="width:50%; margin-right:0.5rem;" id="roadAddrPart1" placeholder="주소를 검색하세요." disabled>
+						<button style="background-color:white; border:1px solid black; outline:none;" onclick="goPopup();">검색</button>
+					</div>
+					<div class="map_wrap">
+						<div id="map" style="width: 100%; height: 70%; position: relative; overflow: hidden;"></div>
+						<!-- 지도타입 컨트롤 div 입니다 -->
+						<div class="custom_typecontrol radius_border">
+							<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+						</div>
+						<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+						<div class="custom_zoomcontrol radius_border">
+							<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
+								src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+						</div>
 					</div>
 					<div class="summernoteDiv">
 						<textarea type="text" class="request-content summernote" id="requestContents" name="content" required></textarea>
@@ -130,6 +154,7 @@
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
 	<%@include file="../layout/summernote.jsp"%>
+	<%@include file="../layout/kakaoMap.jsp"%>
 	<script src="/js/request.js"></script>
 
 	<script>
@@ -141,9 +166,9 @@
 				focus : false, // 에디터 로딩후 포커스를 맞출지 여부
 				lang : "ko-KR", // 한글 설정
 				placeholder : '사연을 작성해주세요' //placeholder 설정
-
 			});
 		});
+		
 	</script>
 </body>
 </html>

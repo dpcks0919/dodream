@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.service.RequestService;
@@ -40,5 +41,10 @@ public class RequestController {
 	@GetMapping("user/request")
 	public String requestForm() {
 		return "request/request";
+	}
+	
+	@RequestMapping(value="/jusoPopup_request")
+	public String jusoPopup() {
+		return "join/jusoPopup";
 	}
 }

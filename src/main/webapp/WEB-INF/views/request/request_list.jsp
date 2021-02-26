@@ -179,8 +179,8 @@
 					</div>
 				</div>
 			</div>
-
-
+      
+      
 			<div class="container" style="margin-top: 30px;" id="marker-info-container">
 
 				<div class="map-content ">
