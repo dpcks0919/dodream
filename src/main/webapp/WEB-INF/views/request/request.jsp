@@ -92,8 +92,8 @@
 						<span>요청 장소 : </span> <input class="text-input" type="text" name="roadAddrPart1" style="width:50%; margin-right:0.5rem;" id="roadAddrPart1" placeholder="주소를 검색하세요." disabled>
 						<button style="background-color:white; border:1px solid black; outline:none;" onclick="goPopup();">검색</button>
 					</div>
-					<div class="map_wrap">
-						<div id="map" style="width: 100%; height: 70%; position: relative; overflow: hidden;"></div>
+					<div class="map_wrap" style="height:300px;">
+						<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 						<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
 						<div class="custom_zoomcontrol radius_border" >
 							<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
@@ -165,6 +165,7 @@
 			});
 		});
 		
+		$(".map_wrap").hide();
 	</script>
 </body>
 </html>

@@ -286,8 +286,7 @@ let requestInit = {
 	init: function() {
 		$("#btn-com").on("click", () => { 
 				this.saveReply();
-		});
-		
+		});		
 	},
 	
 	saveRequest:function(totalCnt, itemList) {
