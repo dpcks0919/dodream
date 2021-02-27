@@ -15,7 +15,7 @@
 	<div id="menu-back" onclick="closeNav()"></div>
 	<%@include file="../layout/sidebar_front.jsp"%>
 
-	<div id="Wrapper">
+	<div id="Wrapper" style="width: 100%;">
 		<!-- Navigation-->
 		<%@include file="../layout/navbar.jsp"%>
 
@@ -77,12 +77,10 @@
 				</table>
 			</div>
 		</section>
-
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
-		<%@include file="../layout/sidebar_back.jsp"%>
-
 	</div>
+		<%@include file="../layout/sidebar_back.jsp"%>
 	<%@include file="../layout/jsFile.jsp"%>
 </body>
 </html>
