@@ -18,3 +18,5 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/nav_footer.css" rel="stylesheet" />
+</head>
+</html>

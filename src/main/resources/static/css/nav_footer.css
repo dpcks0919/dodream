@@ -30,7 +30,8 @@
     margin-right:0em;
   }
   }
-  @media (max-width: 992px) {
+  
+@media (max-width: 992px) {
   nav .container {
     display:none!important;
   }
@@ -60,7 +61,10 @@
     width:20vw;
     margin-right:0em;
   }
+   .footer-youtube, .footer-instagram, .footer-facebook {
+  	width:3rem!important;
   }
+}
 
   /* open left menu */
   .sidebar {
@@ -173,6 +177,46 @@
 
 
   /* Footer */
+  .container-footer {
+   width:auto;
+   height:auto;
+}
+
+.footer-text {
+  font-size:1vw;
+  text-align:justify;
+}
+.footer-text p {
+  margin-bottom:1vw;
+}
+.footer-left {
+  float:left;
+  width:50%;
+  height:15vw;
+}
+
+.footer-right {
+  float:left;
+  width:auto;
+  height:10vw;
+  text-align:justify;
+  padding-left:1vw;
+}
+.footer-link {
+  font-size:1.1vw;
+  margin-right:5vw;
+  cursor:pointer;
+  text-decoration:none;
+  float:left;
+  display:block;
+}
+.footer-link-list {
+  display:block;
+  color:rgb(166,176,186);
+  font-size:1vw;
+  margin-top:1.5vw;
+}
+  
   /* dodream Footer and Responsive copyright*/
 .dodream-footer {
   background-color:rgb(0,28,56);
@@ -182,7 +226,7 @@
   padding-left:15%;
   padding-right:15%;
   text-align:justify;
-  height:25vw;
+  height:23vw;
 }
 .dodream-copyright {
   background-color:rgb(0,28,56);
@@ -201,20 +245,20 @@
   vertical-align: middle!important;
 }
 .footer-facebook {
-  width: 2.5vh!important;
+  width: 1.5rem!important;
   margin-left:5vh;
   cursor:pointer;
 }
 .footer-instagram {
-  width: 2.5vh!important;
+  width: 1.5rem!important;
   margin-left:1vh;
   cursor:pointer;
 }
 .footer-youtube {
-  padding-top:0.7vh!important;
-  width: 2.5vh!important;
-  margin-left:1vh;
-  cursor:pointer;
+ padding-top:0!important;
+ width: 1.5rem!important;
+ margin-left:1vh;
+ cursor:pointer;
 }
 @media (max-width: 768px) {
   .dodream-footer {
