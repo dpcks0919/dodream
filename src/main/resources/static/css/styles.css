@@ -71,7 +71,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, header, hgroup, main, nav, section {
   display: block;
 }
 
@@ -1939,53 +1939,6 @@ pre code {
 
 .shadow {
   box-shadow : 0, -20, 10, 1;
-}
-.dodream-footer {
-  background-color:rgb(0,28,56);
-  color:rgb(166,176,186);
-  padding-top:5vw;
-  padding-bottom:5vw;
-  padding-left:5vw;
-  padding-right:5vw;
-  height:27vw;
-}
-.footer-logo {
-  margin-bottom: 1.5vw;
-  width:8vw;
-}
-.footer-text {
-  font-size:1vw;
-  text-align:justify;
-}
-.footer-text p {
-  margin-bottom:1vw;
-}
-.footer-left {
-  float:left;
-  width:30vw;
-  height:20vw;
-}
-
-.footer-right {
-  float:left;
-  width:40vw;
-  height:20vw;
-  text-align:justify;
-  padding-left:1vw;
-}
-.footer-link {
-  font-size:1.1vw;
-  margin-right:5vw;
-  cursor:pointer;
-  text-decoration:none;
-  float:left;
-  display:block;
-}
-.footer-link-list {
-  display:block;
-  color:rgb(166,176,186);
-  font-size:1vw;
-  margin-top:1.5vw;
 }
 a {
   text-decoration:none!important;
@@ -10386,7 +10339,7 @@ form .row:first-child .floating-label-form-group {
     width:8rem!important;
     margin-right:0em; 
   }
- 
+} 
 
 /* open left menu */
 .sidebar {
@@ -10499,26 +10452,11 @@ form .row:first-child .floating-label-form-group {
 
 
 /* footer */
-
-/* dodream Footer */
-.dodream-footer {
-  background-color:rgb(0,28,56);
-  color:#808080;
-  padding-top:3%;
-  padding-bottom:3%;
-  padding-left:15%;
-  padding-right:15%;
-  height:25vw;
-  text-align:justify;
-}
 .container-footer {
    width:auto;
    height:auto;
 }
-.footer-logo {
-  margin-bottom: 1.5vw;
-  width:8vw;
-}
+
 .footer-text {
   font-size:1vw;
   text-align:justify;
@@ -10529,7 +10467,7 @@ form .row:first-child .floating-label-form-group {
 .footer-left {
   float:left;
   width:50%;
-  height:20vw;
+  height:10vw;
 }
 
 .footer-right {
@@ -10582,20 +10520,22 @@ form .row:first-child .floating-label-form-group {
   vertical-align: middle!important;
 }
 .footer-facebook {
-  width: 2rem!important;
+  width: 1.5rem!important;
   margin-left:5vh;
   cursor:pointer;
 }
 .footer-instagram {
-  width: 2rem!important;
+  width: 1.5rem!important;
   margin-left:1vh;
   cursor:pointer;
 }
 .footer-youtube {
-  width: 2rem!important;
-  margin-left:1vh;
-  cursor:pointer;
+ padding-top:0!important;
+ width: 1.5rem!important;
+ margin-left:1vh;
+ cursor:pointer;
 }
+
 @media (max-width: 768px) {
   .dodream-footer {
     display:none!important;
@@ -10611,9 +10551,8 @@ form .row:first-child .floating-label-form-group {
     font-size:0.1rem!important;
     display:block!important;
   }
-  
-}
 
+}
 @media (max-width:570px) {
   .footer-facebook {
     display:none;
