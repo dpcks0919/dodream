@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
 
-<link href="/css/mypage.css" rel="stylesheet" />
+<link href="/css/news.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -29,45 +29,101 @@
 				</div>
 			</div>
 		</header>
+		
+		<section class="news-section1">
+			<div class="news-section1-wrapper">
+				<div class="news-header">
+				<!-- 제일 최근 3개   -->
+					<div class="news-header-wrapper" style="display:inline;">
+						<img class="news-header-wrapper-image" src="/image/news-test.jpeg" style="width:100%;"/>
+						<div class="news-header-wrapper-text">
+							<p class="news-header-wrapper-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+							<p class="news-header-wrapper-date">2020.09.30</p>
+							<p class="news-header-wrapper-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>						
+						</div>
+					</div>
+					<div class="news-header-wrapper" style="display:inline;">
+						<img class="news-header-wrapper-image" src="/image/news-test.jpeg" style="width:100%;"/>
+						<div class="news-header-wrapper-text">
+							<p class="news-header-wrapper-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+							<p class="news-header-wrapper-date">2020.09.30</p>
+							<p class="news-header-wrapper-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>						
+						</div>
+					</div>
+					<div class="news-header-wrapper" style="display:inline;">
+						<img class="news-header-wrapper-image" src="/image/news-test.jpeg" style="width:100%;"/>
+						<div class="news-header-wrapper-text">
+							<p class="news-header-wrapper-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+							<p class="news-header-wrapper-date">2020.09.30</p>
+							<p class="news-header-wrapper-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다. 지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>						
+						</div>
+					</div>		
+				</div>
+			
+			</div>
+		</section>
+		
+		<div class="news-section2-menu-wrapper">
+			<div class="news-section2-menu">
+				<a class="news-menu-title"><b>최신 콘텐츠</b></a>
+				<a class="news-menu-button news-section2-menu-selected">모든 소식</a>
+				<a class="news-menu-button">이웃 소식</a>
+				<a class="news-menu-button">두드림 소식</a>
+			</div>
+		</div>
+		
 		<!-- news Section-->
-		<section class="mypage-section2" id="about" style="text-align: center;">
-			<div class="container ">
-				<table style="table-layout: fixed">
-					<thead>
-						<tr style="border-bottom: 3px solid #d3d3d3;">
-							<th class="table-num">등록번호</th>
-							<th class="table-title">응답 명</th>
-							<th class="table-date">등록일</th>
-							<th class="table-status">상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr>
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">미승인</td>
-						</tr>
-						<tr class="complete_event">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">승인</td>
-						</tr>
-					</tbody>
-				</table>
+		
+		<section class="news-section2">
+			<div class="news-section2-wrapper test">
+				<div class="news-section2-div test">
+					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
+					<div class="news-section2-div-right">
+						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+						<p class="news-section2-div-date">2020.09.30</p>
+						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
+					</div>
+				</div>
+				<div class="news-section2-div test">
+					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
+					<div class="news-section2-div-right ">
+						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+						<p class="news-section2-div-date">2020.09.30</p>
+						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
+					</div>
+				</div>
+				<div class="news-section2-div test">
+					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
+					<div class="news-section2-div-right ">
+						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+						<p class="news-section2-div-date">2020.09.30</p>
+						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
+					</div>
+				</div>
+				<div class="news-section2-div test">
+					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
+					<div class="news-section2-div-right ">
+						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
+						<p class="news-section2-div-date">2020.09.30</p>
+						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
+					</div>
+				</div>								
 			</div>
 		</section>
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 	</div>
 		<%@include file="../layout/sidebar_back.jsp"%>
-	<%@include file="../layout/jsFile.jsp"%>
+		<%@include file="../layout/jsFile.jsp"%>
+	<script>
+	$(document).ready(function() {
+		$(".news-menu-button").on("click", function() {
+			$(".news-menu-button").removeClass('news-section2-menu-selected');
+			$(this).addClass('news-section2-menu-selected');		
+		});
+	});
+
+	
+	</script>
 </body>
 </html>
