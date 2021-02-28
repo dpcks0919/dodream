@@ -75,8 +75,8 @@
 		<!-- news Section-->
 		
 		<section class="news-section2">
-			<div class="news-section2-wrapper test">
-				<div class="news-section2-div test">
+			<div class="news-section2-wrapper ">
+				<div class="news-section2-div ">
 					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
 					<div class="news-section2-div-right">
 						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
@@ -84,7 +84,7 @@
 						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
 					</div>
 				</div>
-				<div class="news-section2-div test">
+				<div class="news-section2-div ">
 					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
 					<div class="news-section2-div-right ">
 						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
@@ -92,7 +92,7 @@
 						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
 					</div>
 				</div>
-				<div class="news-section2-div test">
+				<div class="news-section2-div ">
 					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
 					<div class="news-section2-div-right ">
 						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
@@ -100,7 +100,7 @@
 						<p class="news-section2-div-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>					
 					</div>
 				</div>
-				<div class="news-section2-div test">
+				<div class="news-section2-div ">
 					<img src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/>
 					<div class="news-section2-div-right ">
 						<p class="news-section2-div-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
