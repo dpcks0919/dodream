@@ -148,7 +148,7 @@
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container ">
 				<div style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요."> <i class="fas fa-search search-icon"></i>
+					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> <span id="btn-search"><i class="fas fa-search search-icon"></i></span>
 				</div>
 				<div class="sec3-middle">
 					<div class="left sec3-middle-left">
@@ -357,6 +357,7 @@
 	<script type="text/javascript" src="/js/map.js"></script>
 	<script src="/js/request.js"></script>
 	<script>
+	var isIndexPage = false;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
 	var lati, longi;
 	<c:choose>
 		<c:when test="${user.loginCount == 0 || empty user.loginCount}">
