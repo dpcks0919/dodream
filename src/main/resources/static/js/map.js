@@ -195,32 +195,34 @@ let mapInit = {
 							// request 마커를 지도에 표시합니다. 
 							markerList.push(marker);	// list에 마커 push
 							marker.setMap(map); 
-							/*
-							// 인포윈도우를 생성합니다 
-							var infowindow = new kakao.maps.InfoWindow({ 
-								content: '<div style="width:150px;text-align:center;padding:6px 0;"> #' + requestList[index].id + '</div>', 
-								removable : true
-							 }); 
-							 	 infowindowList.push(infowindow);	// infowindow list에 push 
-						*/
+							
+							// IndexPage 일 경우, 인포윈도우를 추가한다
+							if(isIndexPage == true){
+								// 인포윈도우를 생성합니다 
+								var infowindow = new kakao.maps.InfoWindow({ 
+									content: '<div style="width:150px;text-align:center;padding:6px 0;">' + requestList[index].title + '</div>', 
+									removable : true
+								 }); 
+								 	 infowindowList.push(infowindow);	// infowindow list에 push 
+							}
 						
-								 kakao.maps.event.addListener(marker, 'click',  function() { 
-									map.setCenter(coords);	// 클릭 위치로 이동
-									mapInit.fillMarkerInfo(index);	// marker info 채우는 함수
-									$("#marker-info-container").css('visibility', 'visible');	// 상세보기 배너 띄우기
+							 kakao.maps.event.addListener(marker, 'click',  function() { 
+								map.setCenter(coords);	// 클릭 위치로 이동
+								mapInit.fillMarkerInfo(index);	// marker info 채우는 함수
+								$("#marker-info-container").css('visibility', 'visible');	// 상세보기 배너 띄우기
 
-									// 검색코드에 나타내기
-									 $("#marker-info-search-input").val(requestList[index].id);
-					
-									//자세히 보기 클릭시
-									$("#marker-info-btn").off("click"); // 기존 listener 제거(중요)
-									$("#marker-info-btn").on("click", () => {
-									    goDetail_request(requestList[index]);
-										$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
-									});
-									
-									 // 마커 위에 인포윈도우를 표시합니다 
-									// infowindow.open(map, marker); 
+								// 검색코드에 나타내기
+								 $("#marker-info-search-input").val(requestList[index].id);
+				
+								//자세히 보기 클릭시
+								$("#marker-info-btn").off("click"); // 기존 listener 제거(중요)
+								$("#marker-info-btn").on("click", () => {
+								    goDetail_request(requestList[index]);
+									$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+								});
+								
+								//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
+								if(isIndexPage == true) infowindow.open(map, marker); 
 							});			
 						} 
 					}); 
@@ -246,7 +248,7 @@ let mapInit = {
 						if (status === daum.maps.services.Status.OK) {
 							 var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
 							 var marker = new daum.maps.Marker({ 
-								 image: markerImage,	 // custome marker image(상단 전역변수 참고) 이용
+								 //image: markerImage,	 // custome marker image(상단 전역변수 참고) 이용
 								 position: coords, 
 								 clickable: true 
 								}); 
@@ -255,15 +257,15 @@ let mapInit = {
 							marker.setMap(map); 
 							// 인포윈도우를 생성합니다 
 							var infowindow = new kakao.maps.InfoWindow({ 
-								content: '<div style="width:150px;text-align:center;padding:6px 0;">' + '#' + groupList[index].userName + '</div>', 
+								content: '<div style="width:150px;text-align:center;padding:6px;">' + groupList[index].userName + '</div>', 
 								removable : true
 							 }); // 마커에 클릭이벤트를 등록합니다 
 							infowindowList.push(infowindow);	// infowindow list에 push 
 							 kakao.maps.event.addListener(marker, 'click', function() { 
-							$("#map-info-container").css('visibility', 'visible');
-							// 마커 위에 인포윈도우를 표시합니다 
-							infowindow.open(map, marker); 
-								
+								$("#map-info-container").css('visibility', 'visible');
+								// 마커 위에 인포윈도우를 표시합니다 
+								infowindow.open(map, marker); 
+									
 							}); 
 						}
 						//좌표이동
@@ -328,7 +330,7 @@ let mapInit = {
 							}); 
 						}
 						//좌표이동
-						map.setCenter(coords);
+						//map.setCenter(coords);
 					}); 
 				});
 				
@@ -340,7 +342,6 @@ let mapInit = {
 	},
 
 	searchAndLocate: function(addr) {
-		alert(addr);
 
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(addr, function(result, status) {
