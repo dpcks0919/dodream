@@ -70,7 +70,6 @@ public class RequestService {
 
 	@Transactional
 	public Request[] markProcService(String clientType) {
-
 		Request[] requestList = requestRepository.findAllByClientType(ClientType.valueOf(clientType));
 //		for (int i = 0; i < requestList.length; i++) {
 //			System.out.println(requestList[i].getRequestAddress());
