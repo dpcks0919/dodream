@@ -365,16 +365,34 @@ let requestInit = {
 			consele.log(JSON.stringify(error));
 		});		
 	},
-	
+	/*
 	saveReply:function() {
 
 		let reply = {
-			title: document.getElementById('requestTitle').value,
+			// request 처리 방법
+			title: "제목",
+			replyContent: "내용",
+			replyUser: "글쓴이",
+			replyOrg: "소속 단체",
+			replyPhone: "전화번호",
+			// status는 service에서 처리
 		};
+
+		let item1 = {
+			//reply
+			requestItem:
+			replyNum:
+		};
+		
+		let item2 = {
+		
+		};
+		
+		let replyItem = [ item1, item2 ];
 		
 		let data = {
 			reply: reply,
-			//replyItem: 
+			replyItem: replyItem
 		}
 		
 		console.log(data);
@@ -394,7 +412,7 @@ let requestInit = {
 		}).fail(function(error){
 			alert(JSON.stringify(error));
 		});
-	},
+	}, */
 }
 
 requestInit.init();
