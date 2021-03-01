@@ -58,32 +58,52 @@ let mapInit = {
 			this.searchAndLocate(addr);
 		});
 		$("#btn-elderly").on("click", () => {
-			this.searchAndMark("ELDERLY");
-			$('#btn-elderly').addClass('tbox-small-selected-blue');
-			$('#btn-child').removeClass('tbox-small-selected-blue');
-			$('#btn-disabled').removeClass('tbox-small-selected-blue');
-			$('#btn-others').removeClass('tbox-small-selected-blue');
+			if($("#btn-elderly").hasClass("tbox-small-selected-blue") === true) {
+				$('#btn-elderly').removeClass('tbox-small-selected-blue');
+				this.defaultMark();
+			}else{
+				this.searchAndMark("ELDERLY");
+				$('#btn-elderly').addClass('tbox-small-selected-blue');
+				$('#btn-child').removeClass('tbox-small-selected-blue');
+				$('#btn-disabled').removeClass('tbox-small-selected-blue');
+				$('#btn-others').removeClass('tbox-small-selected-blue');
+			}
 		});
 		$("#btn-child").on("click", () => {
-			this.searchAndMark("CHILD");
-			$('#btn-elderly').removeClass('tbox-small-selected-blue');
-			$('#btn-child').addClass('tbox-small-selected-blue');
-			$('#btn-disabled').removeClass('tbox-small-selected-blue');
-			$('#btn-others').removeClass('tbox-small-selected-blue');
+			if($("#btn-child").hasClass("tbox-small-selected-blue") === true) {
+				$('#btn-child').removeClass('tbox-small-selected-blue');
+				this.defaultMark();
+			}else{
+				this.searchAndMark("CHILD");
+				$('#btn-elderly').removeClass('tbox-small-selected-blue');
+				$('#btn-child').addClass('tbox-small-selected-blue');
+				$('#btn-disabled').removeClass('tbox-small-selected-blue');
+				$('#btn-others').removeClass('tbox-small-selected-blue');
+			}
 		});
 		$("#btn-disabled").on("click", () => {
-			this.searchAndMark("DISABLED");
-			$('#btn-elderly').removeClass('tbox-small-selected-blue');
-			$('#btn-child').removeClass('tbox-small-selected-blue');
-			$('#btn-disabled').addClass('tbox-small-selected-blue');
-			$('#btn-others').removeClass('tbox-small-selected-blue');		
+			if($("#btn-disabled").hasClass("tbox-small-selected-blue") === true) {
+				$('#btn-disabled').removeClass('tbox-small-selected-blue');
+				this.defaultMark();
+			}else{
+				this.searchAndMark("DISABLED");
+				$('#btn-elderly').removeClass('tbox-small-selected-blue');
+				$('#btn-child').removeClass('tbox-small-selected-blue');
+				$('#btn-disabled').addClass('tbox-small-selected-blue');
+				$('#btn-others').removeClass('tbox-small-selected-blue');	
+			}			
 		});
 		$("#btn-others").on("click", () => {
-			this.searchAndMark("OTHERS");
-			$('#btn-elderly').removeClass('tbox-small-selected-blue');
-			$('#btn-child').removeClass('tbox-small-selected-blue');
-			$('#btn-disabled').removeClass('tbox-small-selected-blue');
-			$('#btn-others').addClass('tbox-small-selected-blue');
+			if($("#btn-others").hasClass("tbox-small-selected-blue") === true) {
+				$('#btn-others').removeClass('tbox-small-selected-blue');
+				this.defaultMark();
+			}else{
+				this.searchAndMark("OTHERS");
+				$('#btn-elderly').removeClass('tbox-small-selected-blue');
+				$('#btn-child').removeClass('tbox-small-selected-blue');
+				$('#btn-disabled').removeClass('tbox-small-selected-blue');
+				$('#btn-others').addClass('tbox-small-selected-blue');
+			}	
 		});
 		$("#btn-goods").on("click", () => {
 			$('#btn-goods').addClass('tbox-small-selected-red');
@@ -264,12 +284,9 @@ let mapInit = {
 							 kakao.maps.event.addListener(marker, 'click', function() { 
 								$("#map-info-container").css('visibility', 'visible');
 								// 마커 위에 인포윈도우를 표시합니다 
-								infowindow.open(map, marker); 
-									
+								infowindow.open(map, marker); 					
 							}); 
 						}
-						//좌표이동
-						map.setCenter(coords);
 					}); 
 				});
 			}
