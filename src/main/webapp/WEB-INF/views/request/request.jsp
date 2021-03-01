@@ -43,7 +43,7 @@
 		</div>
 
 		<div class="modal-ftr" style="display: flex; flex-direction: row; justify-content: space-between;">
-			<div class="btn-res" onclick="closeModal_request();" style="color: gray; border: 2px solid gray;">수정하기</div>
+			<div class="btn-res" onclick="closeModal_request();" style="color: gray; border: 2px solid gray;">취소</div>
 			<div class="btn-res" onclick="upload(2);" style="color: gray; border: 2px solid gray;">올리기</div>
 		</div>
 	</div>
@@ -137,8 +137,8 @@
 					</div>
 				</div>
 				<div class="request-ftr" style="justify-content: space-between;">
-					<div class="btn-upload" onclick="upload(1);">다음</div>
-					<div class="btn-save" onclick="save();">임시저장</div>
+					<div class="btn-upload" onclick="upload(1);">미리보기</div>
+					<!-- <div class="btn-save" onclick="save();">임시저장</div> -->
 				</div>
 			</div>
 		</section>
