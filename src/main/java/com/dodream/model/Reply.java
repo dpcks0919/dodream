@@ -43,9 +43,8 @@ public class Reply {
 	@JoinColumn(name="requestId")
 	private Request request;
 
-	@ManyToOne
-	@JoinColumn(name =" replyUserId")
-	private User replyUser;
+	@Column(nullable = false)
+	private String replyUser;
 	
 	@Column(nullable = false)
 	private String replyOrg;
