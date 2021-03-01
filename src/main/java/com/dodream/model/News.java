@@ -40,6 +40,7 @@ public class News{
 	@Lob // 대용량 데이터.
 	private String content;
 	
+	@Column(columnDefinition = "int default 0")
 	private int count;
 	
 	@CreationTimestamp

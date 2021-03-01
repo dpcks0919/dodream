@@ -7,21 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
-.paging-left, .paging-right {
-	border-style: none !important;
-	outline: none !important;
-}
 
-.paging-left:hover, .paging-right:hover {
-	background-color: white !important;
-	outline: none !important;
-}
-
-.selected_page {
-	background-color: #ed7e95;
-	color: white;
-	border: 1px solid #ed7e95;
-}
 </style>
 
 <body id="page-top">
