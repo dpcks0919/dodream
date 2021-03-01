@@ -339,6 +339,18 @@ let mapInit = {
 									
 								//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
 								if(isIndexPage == true) infowindow.open(map, marker); 
+									 // 검색코드에 나타내기
+									 $("#marker-info-search-input").val(requestList[index].id);
+							
+									//자세히 보기 클릭시
+									$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
+									$("#marker-info-btn").on("click", () => {
+										goDetail_request(requestList[index]);
+										$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+									});
+								 
+								 	//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
+									if(isIndexPage == true) infowindow.open(map, marker); 
 							
 							}); 
 						}
