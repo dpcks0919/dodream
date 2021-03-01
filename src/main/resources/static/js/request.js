@@ -325,6 +325,7 @@ let requestInit = {
 			dataType: "json"
 		}).done(function(resp){
 			console.log(data);
+			console.log(resp);
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
