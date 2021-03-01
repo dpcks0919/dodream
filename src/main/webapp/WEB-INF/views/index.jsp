@@ -243,6 +243,7 @@
 	<%@include file="layout/kakaoMap.jsp"%>
 	<script type="text/javascript" src="/js/map.js"></script>
 	<script>
+	var isIndexPage = true;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
 	var lati, longi;
 	<c:choose>
 		<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
