@@ -311,21 +311,34 @@ let mapInit = {
 							// 마커를 지도에 표시합니다. 
 							markerList.push(marker);	// list에 마커 push
 							marker.setMap(map); 
+							
+							// IndexPage 일 경우, 인포윈도우를 추가한다
+							if(isIndexPage == true){
+								// 인포윈도우를 생성합니다 
+								var infowindow = new kakao.maps.InfoWindow({ 
+									content: '<div style="width:150px;text-align:center;padding:6px 0;">' + requestList[index].title + '</div>', 
+									removable : true
+								 }); 
+								 	 infowindowList.push(infowindow);	// infowindow list에 push 
+							}
 													
 							 kakao.maps.event.addListener(marker, 'click', function() {
-									map.setCenter(coords);	// 클릭 위치로 이동
-									mapInit.fillMarkerInfo(index);	// marker info 채우는 함수
-									$("#marker-info-container").css('visibility', 'visible');	// 상세보기 배너 띄우기
+								map.setCenter(coords);	// 클릭 위치로 이동
+								mapInit.fillMarkerInfo(index);	// marker info 채우는 함수
+								$("#marker-info-container").css('visibility', 'visible');	// 상세보기 배너 띄우기
+								
+								 // 검색코드에 나타내기
+								 $("#marker-info-search-input").val(requestList[index].id);
+						
+								//자세히 보기 클릭시
+								$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
+								$("#marker-info-btn").on("click", () => {
+									goDetail_request(requestList[index]);
+									$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+								});
 									
-									 // 검색코드에 나타내기
-									 $("#marker-info-search-input").val(requestList[index].id);
-							
-									//자세히 보기 클릭시
-									$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
-									$("#marker-info-btn").on("click", () => {
-										goDetail_request(requestList[index]);
-										$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
-									});
+								//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
+								if(isIndexPage == true) infowindow.open(map, marker); 
 							
 							}); 
 						}
