@@ -1,0 +1,10 @@
+.customoverlay {
+    display: block;
+    background: #50627F;
+    color: #fff;
+    text-align: center;
+    width:120px;
+    height: 25px;
+    line-height:22px;
+    padding:0px 10px;
+}
