@@ -1,25 +1,6 @@
 var Lat, Lng;
 var prevMarker;
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center: new kakao.maps.LatLng(33.452613, 126.570888), // 지도의 중심좌표
-		level: 3
-		// 지도의 확대 레벨
-	};
-
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-function zoomIn() {
-	map.setLevel(map.getLevel() - 1);
-}
-
-// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-function zoomOut() {
-	map.setLevel(map.getLevel() + 1);
-}
-
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -370,7 +351,7 @@ let requestInit = {
 
 		// request객체에서 id만 보내는 방법
 		let requestId = {
-			id: 33
+			id: 1
 		}
 		
 		let reply = {
@@ -387,7 +368,7 @@ let requestInit = {
 		$.ajax({
 			type: "POST",
 			url: "/replySaveProc",
-			data: JSON.stringify(reply),여기서 
+			data: JSON.stringify(reply),
 			contentType: "application/json; charset = utf-8 ",
 			dataType: "json"
 		}).done(function(resp){
@@ -397,8 +378,9 @@ let requestInit = {
 				//for 문으로 변경해야됨, item 갯수대로
 				//requestInit.saveReplyItem(itemList[i], resp.data);
 				//
-				alert(resp.data.id);
+				console.log(resp.data.request);
 				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+				location.href = "/user/requestList";
 			} 
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
