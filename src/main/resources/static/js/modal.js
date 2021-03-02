@@ -54,7 +54,6 @@
 	  else if(level == 2) level = "긴급(14일 이내)";
       else if(level == 3) level = "보통(한 달 이내)";
 
-
 	  $("#rq_title").html("<h5>" + rq.title + "</h5>");
       $("#rq_id").html(rq.id);
       $("#rq_date").html(regDate);
@@ -66,7 +65,6 @@
 
  	 let items = rq.requestItem;
 
-
 			//종류 한글로 바꿔주기 
 	for(var i = 0; i < items.length; i++){
 		if(items[i].requestType == "STUFF") items[i].requestType = "물품";		
@@ -77,6 +75,10 @@
 
 	  items.sort(function(a, b) {
 	    return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
+	  });
+
+	  $("#btn-com").click(function() {
+		requestInit.saveReply(rq.requestItem);
 	  });
 
 		// 마커 여러번 클릭했을때, 중복 출력되지 않도록 이전 것 삭제조치
@@ -112,6 +114,7 @@
 		  }
 		}
 	  }
+	
 
 	  $("#modal-bg").click(function() {
 		for(var i = 0; i < items.length; i++) {

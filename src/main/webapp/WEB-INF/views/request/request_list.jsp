@@ -76,16 +76,16 @@
 						<div class="info-title">
 							이름<span style="color: white;">이름</span>
 						</div>
-						<input class="info-name info-text" name="response-name" type="text" value="${user.userName}" placeholder="이름 입력"></input>
+						<input class="info-name info-text" name="response-name" id="reply_user" type="text" value="${user.userName}" placeholder="이름 입력"></input>
 					</div>
 					<div class="response-info">
 						<div class="info-title">소속단체</div>
-						<input class="info-group info-text" name="response-org" type="text" value="${user.orgName}" placeholder="소속단체 입력"></input>
+						<input class="info-group info-text" name="response-org" id="reply_org" type="text" value="${user.orgName}" placeholder="소속단체 입력"></input>
 					</div>
 				</div>
 				<div class="response-info">
 					<div class="info-title">전화번호</div>
-					<input class="info-phone info-text" name="response-phone" type="text" value="${user.userPhone}" placeholder="전화번호 입력"></input>
+					<input class="info-phone info-text" name="response-phone" id="reply_phone" type="text" value="${user.userPhone}" placeholder="전화번호 입력"></input>
 				</div>
 				<!-- 공간 맞추기 여백 -->
 				<div class="response-info" style="visibility: hidden !important;">
@@ -93,7 +93,7 @@
 					<input class="info-text" type="text" placeholder="전화번호 입력"></input>
 				</div>
 				<br>
-				<textarea class="response-info-content" name="response-content"></textarea>
+				<textarea class="response-info-content" name="response-content" id="reply_content"></textarea>
 				<p style="float: left; margin-bottom: 0.5vh; font-weight: bold;">도움을 드리고 싶은 품목의 수량을 입력해주세요!</p>
 				<div class="content-needs">
 					<table class="info-table">
@@ -238,6 +238,7 @@
 									else if("${item.requestType}" == "FINANCE") var type = "재정";
 									else var type = "기타"; 
 									arr.push({
+										itemId: ${item.id},
 										itemName: "${item.itemName}",
 										itemNum: "${item.itemNum}",
 										receivedNum: "${item.receivedNum}",
