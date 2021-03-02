@@ -267,6 +267,9 @@ td, th {
     padding-top:0.5vw;
     float:left!important;
 
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .map-mid {
     width:29%;
@@ -278,6 +281,10 @@ td, th {
     line-height:1.5vw;
     font-weight:bold;
     float:left!important;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     /* border-right :2px solid #d5d5d5; */
     /* display:none!important; */
 
@@ -439,6 +446,9 @@ td, th {
     border-right :2px solid #d5d5d5;
     padding-top:0.5vw;
 
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .map-right {
     width:30%;
@@ -454,6 +464,10 @@ td, th {
     padding-top:0.5vw;
     line-height:1.5vw;
     font-weight:bold;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .search-div {
     display: inline;
@@ -479,7 +493,11 @@ td, th {
   .help-status {
     font-size:0.75rem;
     margin-left:1vh;
-
+    
+    width:10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .help-term {
     font-size:0.75rem;

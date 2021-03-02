@@ -147,7 +147,7 @@
 					</div>
 					<div class="left sec3-middle-right">
 						<span class="sec3-text1">돕고 싶은 재화</span>
-						<button class="tbox-center tbox-small" id="btn-goods">물품</button>
+						<button class="tbox-center tbox-small" id="btn-stuff">물품</button>
 						<button class="tbox-center tbox-small" id="btn-finance">재정</button>
 						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
 						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
@@ -356,7 +356,7 @@
 		  	longi = ${user.longitude};
 		</c:otherwise>
 	</c:choose>
-	
+
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
@@ -365,7 +365,7 @@
 		};
 
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption);
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
 	</script>
 
 </body>
