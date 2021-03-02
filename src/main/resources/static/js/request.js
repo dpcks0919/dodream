@@ -307,7 +307,6 @@ let requestInit = {
 		let data = {
 			title: document.getElementById('requestTitle').value,
 			clientType: type,
-			// request에서 새로 주소를 받아오기로 함. (form 한개 더 만들어져야 함)
 			requestAddress : document.getElementById('roadAddrPart1').value,
 			latitude : Lat,
 			longitude : Lng,
@@ -366,9 +365,14 @@ let requestInit = {
 			consele.log(JSON.stringify(error));
 		});		
 	},
-	/*
+	
 	saveReply:function() {
 
+		// request객체에서 id만 보내는 방법
+		let requestId = {
+			id: 33
+		}
+		
 		let reply = {
 			// request 처리 방법
 			title: "제목",
@@ -377,43 +381,53 @@ let requestInit = {
 			replyOrg: "소속 단체",
 			replyPhone: "전화번호",
 			// status는 service에서 처리
-		};
-
-		let item1 = {
-			//reply
-			requestItem:
-			replyNum:
+			request: requestId
 		};
 		
-		let item2 = {
-		
-		};
-		
-		let replyItem = [ item1, item2 ];
-		
-		let data = {
-			reply: reply,
-			replyItem: replyItem
-		}
-		
-		console.log(data);
 		$.ajax({
 			type: "POST",
 			url: "/replySaveProc",
-			data: JSON.stringify(data),
+			data: JSON.stringify(reply),여기서 
 			contentType: "application/json; charset = utf-8 ",
 			dataType: "json"
 		}).done(function(resp){
-			console.log(data);
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
+				//for 문으로 변경해야됨, item 갯수대로
+				//requestInit.saveReplyItem(itemList[i], resp.data);
+				//
+				alert(resp.data.id);
 				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
 			} 
 		}).fail(function(error){
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
-	}, */
+	}, 
+	
+	saveReplyItem:function(item, newReply) {
+		// 변수 이름바꿔도 되고 parsing도 맘대로 해도 되고
+		// 해당하는 requestItem의 id랑 replyNum만 보내주면됨
+		var temp_itemNum = item.itemNum;
+		item.itemNum.replace(',','');
+		item.itemNum = parseInt(temp_itemNum.replace(',',''));
+		
+		// 어떠한 request인지 object type으로 assign
+		item.request = newReply;
+		$.ajax({
+			type: "POST",
+			url: "/replyItemSaveProc",
+			data: JSON.stringify(item),
+			contentType: "application/json; charset = utf-8 ",
+			dataType: "json"
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("아이템 업로드 실패하였습니다. ");
+			}
+		}).fail(function(error){
+			consele.log(JSON.stringify(error));
+		});		
+	},
 }
 
 requestInit.init();
