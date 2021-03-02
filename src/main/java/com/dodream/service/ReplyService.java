@@ -24,7 +24,7 @@ public class ReplyService {
 	public Reply saveReply(Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		//reply.setRequest
-		//reply.setRequest(requestService.getRequest(reply.getRequest().getId()));
+		reply.setRequest(requestService.getRequest(reply.getRequest().getId()));
 		reply.setUser(principalDetails.getUser());
 		reply.setStatus(StatusType.WAITING);
 
