@@ -57,6 +57,8 @@ let mapInit = {
 			var addr = $("#input-addr").val()
 			this.searchAndLocate(addr);
 		});
+		
+		//돕고 싶은 이웃 클릭시(노인, 아이, 장애인, 기타 중 택1)
 		$("#btn-elderly").on("click", () => {
 			if($("#btn-elderly").hasClass("tbox-small-selected-blue") === true) {
 				$('#btn-elderly').removeClass('tbox-small-selected-blue');
@@ -105,26 +107,39 @@ let mapInit = {
 				$('#btn-others').addClass('tbox-small-selected-blue');
 			}	
 		});
-		$("#btn-goods").on("click", () => {
-			$('#btn-goods').addClass('tbox-small-selected-red');
+		
+		// 돕고 싶은 재화 클릭시(이웃과 중복 선택 가능하다)
+		$("#btn-stuff").on("click", () => {
+			this.searchAndMark2("STUFF"); // 기존 requestList에서 request_type 확인 후 걸러내는 함수 
+			$('#btn-stuff').addClass('tbox-small-selected-red');
 			$('#btn-finance').removeClass('tbox-small-selected-red');
 			$('#btn-service').removeClass('tbox-small-selected-red');
 			$('#btn-etc').removeClass('tbox-small-selected-red');
 		});
 		$("#btn-finance").on("click", () => {
-			$('#btn-goods').removeClass('tbox-small-selected-red');
+			this.searchAndMark2("FINANCE"); // 기존 requestList에서 request_type 확인 후 걸러내는 함수 
+			$('#btn-stuff').removeClass('tbox-small-selected-red');
 			$('#btn-finance').addClass('tbox-small-selected-red');
 			$('#btn-service').removeClass('tbox-small-selected-red');
 			$('#btn-etc').removeClass('tbox-small-selected-red');
 		});
 		$("#btn-service").on("click", () => {
-			$('#btn-goods').removeClass('tbox-small-selected-red');
+			this.searchAndMark2("SERVICE"); // 기존 requestList에서 request_type 확인 후 걸러내는 함수 
+			$('#btn-stuff').removeClass('tbox-small-selected-red');
 			$('#btn-finance').removeClass('tbox-small-selected-red');
 			$('#btn-service').addClass('tbox-small-selected-red');
 			$('#btn-etc').removeClass('tbox-small-selected-red');
 		});
 		$("#btn-etc").on("click", () => {
-			$('#btn-goods').removeClass('tbox-small-selected-red');
+			this.searchAndMark2("ETC"); // 기존 requestList에서 request_type 확인 후 걸러내는 함수 
+			$('#btn-stuff').removeClass('tbox-small-selected-red');
+			$('#btn-finance').removeClass('tbox-small-selected-red');
+			$('#btn-service').removeClass('tbox-small-selected-red');
+			$('#btn-etc').addClass('tbox-small-selected-red');
+		});
+		
+		$("#btn-etc").on("click", () => {
+			$('#btn-stuff').removeClass('tbox-small-selected-red');
 			$('#btn-finance').removeClass('tbox-small-selected-red');
 			$('#btn-service').removeClass('tbox-small-selected-red');
 			$('#btn-etc').addClass('tbox-small-selected-red');
@@ -196,6 +211,9 @@ let mapInit = {
 			} else {
 				requestList = resp.data;
 
+				//맵에 마커 뿌리기
+				//mapInit.setMarker(requestList);
+				
 				// request 마커 뿌리기
 				requestList.forEach(function(list, index) { 
 					geocoder.addressSearch(list.requestAddress, function(result, status) { 
@@ -247,6 +265,7 @@ let mapInit = {
 						} 
 					}); 
 				});
+				
 			}
 		}).fail(function(error) {
 			alert("requestListProc error: " + JSON.stringify(error));
@@ -381,6 +400,94 @@ let mapInit = {
 		}).fail(function(error) {
 			alert("결과가 없습니다.");
 		});
+	},
+	
+	// 돕고 싶은 재화(물품, 재정, 서비스,기타) 선택시 마커 걸러내는 함수 
+	searchAndMark2: function(requestType){
+		var validRequestList = [];	// 해당 requestType이 존재하는 valid한 request ID list
+		requestList.forEach(function(list, index){	// requestList
+			list.requestItem.forEach(function(list2,index2){	//request에 종속된 requestItem 리스트
+				if(requestType == list2.requestType) {
+					console.log(list2.requestId);
+					if(validRequestList[validRequestList.length-1] != requestList[index]) {
+						validRequestList.push(requestList[index]);
+						return false;	// break;
+					}
+				}
+			});
+		})
+		// 해당하는 마커들을 List에 넣은 후, setMarker()를 이용해 맵에 뿌리기
+		mapInit.setMarker(validRequestList);
+		console.log(validRequestList);
+	},
+	
+	// requestList를 받아서 해당하는 marker를 Map에 뿌려주는 함수
+	setMarker: function(InputRequestList) {	
+		this.mapClean();		// map 객체 초기화
+			// requestList 요청들 마커 뿌리기
+			InputRequestList.forEach(function(list, index) { 
+				geocoder.addressSearch(list.requestAddress, function(result, status) { 
+					var tempMarkerImage; // ClientType에 따라서 imageSrc 정하기
+					if (status === daum.maps.services.Status.OK) {
+						 var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
+						if(InputRequestList[index].clientType == 'ELDERLY')tempMarkerImage = markerImage2;	// 노인
+						else if(InputRequestList[index].clientType == 'CHILD') tempMarkerImage = markerImage3;
+						else if(InputRequestList[index].clientType == 'DISABLED') tempMarkerImage = markerImage4;
+					    else tempMarkerImage = markerImage5	// 기타
+						 var marker = new daum.maps.Marker({ 
+							title: InputRequestList[index].id,
+							 image: tempMarkerImage,	 // custome marker image(상단 전역변수 참고) 이용
+							 position: coords, 
+							 clickable: true 
+							}); 
+						// 마커를 지도에 표시합니다. 
+						markerList.push(marker);	// list에 마커 push
+						marker.setMap(map); 
+						
+						// IndexPage 일 경우, 인포윈도우를 추가한다
+						if(isIndexPage == true){
+							// 인포윈도우를 생성합니다 
+							var infowindow = new kakao.maps.InfoWindow({ 
+								content: '<div style="width:150px;text-align:center;padding:6px 0;">' + InputRequestList[index].title + '</div>', 
+								removable : true
+							 }); 
+							 	 infowindowList.push(infowindow);	// infowindow list에 push 
+						}
+												
+						 kakao.maps.event.addListener(marker, 'click', function() {
+							map.setCenter(coords);	// 클릭 위치로 이동
+							mapInit.fillMarkerInfo(index);	// marker info 채우는 함수
+							$("#marker-info-container").css('visibility', 'visible');	// 상세보기 배너 띄우기
+							
+							 // 검색코드에 나타내기
+							 $("#marker-info-search-input").val(InputRequestList[index].id);
+					
+							//자세히 보기 클릭시
+							$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
+							$("#marker-info-btn").on("click", () => {
+								goDetail_request(InputRequestList[index]);
+								$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+							});
+								
+							//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
+							if(isIndexPage == true) infowindow.open(map, marker); 
+								 // 검색코드에 나타내기
+								 $("#marker-info-search-input").val(InputRequestList[index].id);
+						
+								//자세히 보기 클릭시
+								$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
+								$("#marker-info-btn").on("click", () => {
+									goDetail_request(requestList[index]);
+									$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+								});
+							 
+							 	//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
+								if(isIndexPage == true) infowindow.open(map, marker); 
+						
+						}); 
+					}
+				}); 
+			});
 	},
 
 	searchAndLocate: function(addr) {

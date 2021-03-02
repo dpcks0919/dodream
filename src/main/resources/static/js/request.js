@@ -1,25 +1,6 @@
 var Lat, Lng;
 var prevMarker;
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center: new kakao.maps.LatLng(33.452613, 126.570888), // 지도의 중심좌표
-		level: 3
-		// 지도의 확대 레벨
-	};
-
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-function zoomIn() {
-	map.setLevel(map.getLevel() - 1);
-}
-
-// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-function zoomOut() {
-	map.setLevel(map.getLevel() + 1);
-}
-
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 

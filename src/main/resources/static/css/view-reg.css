@@ -464,6 +464,10 @@ td, th {
     padding-top:0.5vw;
     line-height:1.5vw;
     font-weight:bold;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .search-div {
     display: inline;
