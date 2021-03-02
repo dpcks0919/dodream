@@ -21,9 +21,8 @@ public class ReplyApiController {
 	
 	@PostMapping("/replySaveProc")
 	public ResponseDto<Reply> replySave(@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
+				
 		// 해당 request의 requestItem들의 필요 수량을 다시 확인해야 됨!
-		System.out.println(reply.getRequest().getId());
 		Reply newReply = replyService.saveReply(reply, principalDetails);
 		return new ResponseDto<Reply> (HttpStatus.OK.value(), newReply);
 	}
