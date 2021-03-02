@@ -24,7 +24,7 @@ public class RequestController {
 	public String requestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("requests", requestService.readRequestList(pageable));
 		model.addAttribute("user", principalDetails.getUser());
-		System.out.println(principalDetails.getUser());
+		//System.out.println(principalDetails.getUser());
 		return "request/request_list";
 	}
 	
