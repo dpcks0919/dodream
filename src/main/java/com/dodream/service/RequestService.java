@@ -77,11 +77,18 @@ public class RequestService {
 		return requestList;
 	}
 
+//	@Transactional
+//	public Request viewDetail(int id) {
+//		return requestRepository.findById(id).orElseThrow(() -> {
+//			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
+//		});
+//	}
 	@Transactional
-	public Request viewDetail(int id) {
+	public Request getRequest(int id) {
 		return requestRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 	}
+
 
 }
