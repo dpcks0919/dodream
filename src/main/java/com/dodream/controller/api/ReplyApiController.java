@@ -28,10 +28,10 @@ public class ReplyApiController {
 	}
 	
 	@PostMapping("/replyItemSaveProc")
-	public ResponseDto<Integer> saveReplyItem(@RequestBody ReplyItem replyItem) {
-		
-		System.out.println(replyItem);
-		replyService.saveReplyItem(replyItem);
+
+	public ResponseDto<Integer> saveReplyItem(@RequestBody ReplyItem replyItem, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		//System.out.println(replyItem);
+		replyService.saveReplyItem(replyItem, principalDetails);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
 }
