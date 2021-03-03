@@ -329,6 +329,8 @@ td, th {
     font-size:1.0rem;
     display:inline!important;
     margin-right:3vh!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .help-date {
     font-size:0.5rem;
@@ -337,9 +339,13 @@ td, th {
   .help-status {
     font-size:0.5rem;
     margin-left:1vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .wrapper-status {
     margin-bottom:2vh!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .help-term {
     font-size:0.5rem;
@@ -487,6 +493,8 @@ td, th {
   .help-content {
     font-weight:bold;
     font-size:1.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .help-date {
     font-size:0.5rem;
@@ -494,10 +502,13 @@ td, th {
   .help-status {
     font-size:0.75rem;
     margin-left:1vh;
-    
     width:10px;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .wrapper-status {
+    overflow: hidden;
     text-overflow: ellipsis;
   }
   .help-term {

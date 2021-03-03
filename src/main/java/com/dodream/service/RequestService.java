@@ -80,7 +80,14 @@ public class RequestService {
 	@Transactional
 	public Request getRequest(int id) {
 		return requestRepository.findById(id).orElseThrow(() -> {
-			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
+			return new IllegalArgumentException("요청글 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+	}
+	
+	@Transactional
+	public RequestItem getRequestItem(int id) {
+		return requestItemRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("요청 아이템 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 	}
 
