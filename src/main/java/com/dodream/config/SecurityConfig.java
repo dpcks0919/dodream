@@ -1,5 +1,7 @@
 package com.dodream.config;
 
+import javax.servlet.http.HttpSessionListener;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Bean
+	  public HttpSessionListener httpSessionListener(){
+	    return new SessionListener();
+	 }
 	
 	@Bean
 	@Override

@@ -270,6 +270,7 @@ td, th {
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    background-color:pink;
   }
   .map-mid {
     width:29%;

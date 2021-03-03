@@ -5,7 +5,7 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-            
+        
 spring:
   mvc:
     view:
@@ -18,7 +18,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
     username: root
-    password: rootroot
+    password: root
+    
     
   jpa:
     open-in-view: true
@@ -89,4 +90,6 @@ api:
     api-key: NCSOSP7IP6LI47WT
     api-secret: EVJACJDVXCTXW2ODT28UXRDIZHPZ9TUL
     send-phone: '01068363758'
-  
+    
+summernote:
+  upload: /Users/yechankim/Documents/sts-workspace/dodream/src/main/resources/static/image/summernote/

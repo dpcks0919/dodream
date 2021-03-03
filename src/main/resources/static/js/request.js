@@ -320,7 +320,7 @@ let requestInit = {
 				window.scrollTo(0,0); 
 			} 
 		}).fail(function(error){
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
 		// input값 초기화하기.
 	},
@@ -362,8 +362,7 @@ let requestInit = {
 			// status는 service에서 처리
 			request: requestId
 		};
-		
-		
+
 		$.ajax({
 			type: "POST",
 			url: "/replySaveProc",
@@ -374,6 +373,7 @@ let requestInit = {
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
+
 				for(var i=0; i<items.length; i++) {
 					requestInit.saveReplyItem(i, items[i], resp.data);
 				}
@@ -403,6 +403,7 @@ let requestInit = {
 		}
 		console.log(reply_item);
 		// 어떠한 request인지 object type으로 assign
+
 		$.ajax({
 			type: "POST",
 			url: "/replyItemSaveProc",
