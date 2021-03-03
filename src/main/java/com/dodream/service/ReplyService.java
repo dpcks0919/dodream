@@ -36,9 +36,13 @@ public class ReplyService {
 	}
 
 	@Transactional
-	public void saveReplyItem(ReplyItem replyItem ) {
+	public ReplyItem saveReplyItem(ReplyItem replyItem ) {
+		
+		replyItem.setRequestItem( requestService.getRequestItem(replyItem.getRequestItem().getId()) );
+		
 		replyItemRepository.save(replyItem);
-		System.out.println("saveReplyItem");
+		
+		return replyItem;
 	}
 	
 	

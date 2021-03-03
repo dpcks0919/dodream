@@ -373,11 +373,9 @@ let requestInit = {
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
-
 				for(var i=0; i<items.length; i++) {
 					requestInit.saveReplyItem(i, items[i], resp.data);
 				}
-				console.log(resp.data.request);
 				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
 				location.href = "/user/requestList";
 			} 
@@ -401,8 +399,6 @@ let requestInit = {
 			replyNum: reply_num,
 			reply: newReply,
 		}
-		console.log(reply_item);
-		// 어떠한 request인지 object type으로 assign
 
 		$.ajax({
 			type: "POST",
