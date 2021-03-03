@@ -148,7 +148,7 @@ let joinInit = {
 				location.href = "/";
 			}
 		}).fail(function(error){
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
 		
 	},
@@ -199,7 +199,7 @@ let joinInit = {
 				location.href = "/";
 			}
 		}).fail(function(error){
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		}); // ajax통신을 이용해서 3개의 데이터를 json으로 변겨해서 insert 요청  
 	},
 	

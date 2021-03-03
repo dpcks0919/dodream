@@ -33,7 +33,7 @@ let newsInit = {
 				
 			}
 		}).fail(function(error) {
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
 	}
 }
