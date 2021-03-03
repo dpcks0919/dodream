@@ -154,16 +154,25 @@
 	<script src="/js/request.js"></script>
 
 	<script>
-		$(document).ready(function() {
-			$('.summernote').summernote({
-				height : 300, // 에디터 높이
-				minHeight : null, // 최소 높이
-				maxHeight : null, // 최대 높이
-				focus : false, // 에디터 로딩후 포커스를 맞출지 여부
-				lang : "ko-KR", // 한글 설정
-				placeholder : '사연을 작성해주세요' //placeholder 설정
-			});
-		});
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
+
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+		function zoomIn() {
+			map.setLevel(map.getLevel() - 1);
+		}
+
+		// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+		function zoomOut() {
+			map.setLevel(map.getLevel() + 1);
+		}
 		
 		$(".map_wrap").hide();
 	</script>
