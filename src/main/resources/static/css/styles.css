@@ -7,7 +7,9 @@
 em {
   color: red;	
 }
-
+.text-dodream {
+	color:#e95378;
+}
 input[type=password] {
   font-family: "Noto Sans";
 }
