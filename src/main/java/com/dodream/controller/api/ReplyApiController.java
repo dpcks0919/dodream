@@ -21,17 +21,14 @@ public class ReplyApiController {
 	
 	@PostMapping("/replySaveProc")
 	public ResponseDto<Reply> replySave(@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-				
 		// 해당 request의 requestItem들의 필요 수량을 다시 확인해야 됨!
 		Reply newReply = replyService.saveReply(reply, principalDetails);
 		return new ResponseDto<Reply> (HttpStatus.OK.value(), newReply);
 	}
 	
 	@PostMapping("/replyItemSaveProc")
-
-	public ResponseDto<Integer> saveReplyItem(@RequestBody ReplyItem replyItem) {
-		//System.out.println(replyItem);
-		replyService.saveReplyItem(replyItem);
-		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	public ResponseDto<ReplyItem> saveReplyItem(@RequestBody ReplyItem replyItem) {
+		ReplyItem newReplyItem = replyService.saveReplyItem(replyItem);
+		return new ResponseDto<ReplyItem> (HttpStatus.OK.value(), newReplyItem);
 	}
 }
