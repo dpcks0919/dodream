@@ -29,9 +29,9 @@ public class ReplyApiController {
 	
 	@PostMapping("/replyItemSaveProc")
 
-	public ResponseDto<Integer> saveReplyItem(@RequestBody ReplyItem replyItem, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+	public ResponseDto<Integer> saveReplyItem(@RequestBody ReplyItem replyItem) {
 		//System.out.println(replyItem);
-		replyService.saveReplyItem(replyItem, principalDetails);
+		replyService.saveReplyItem(replyItem);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
 }
