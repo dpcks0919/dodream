@@ -56,6 +56,14 @@ public class RequestService {
 		requestItemRepository.save(requestItem);
 		System.out.println("saveRequestItem");
 	}
+	
+	//new
+	@Transactional
+	public void addRequestItem(RequestItem requestItem, int addNum) {
+		int receivedNum = requestItem.getReceivedNum();
+		requestItem.setReceivedNum(receivedNum + addNum);
+		//System.out.println("saveRequestItem");
+	}
 
 	@Transactional(readOnly = true)
 	public Page<Request> readRequestList(Pageable pageable) {
