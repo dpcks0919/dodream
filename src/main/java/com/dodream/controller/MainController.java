@@ -12,4 +12,9 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping("/dodreamtouch")
+	public  String dodreamtouch() {
+		return "introduction/dodreamtouch";
+	}
+	
 }
