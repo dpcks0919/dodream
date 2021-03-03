@@ -59,10 +59,16 @@ public class RequestService {
 	
 	//new
 	@Transactional
-	public void addRequestItem(RequestItem requestItem, int addNum) {
+	public int addRequestItem(RequestItem requestItem, int addNum) {
 		int receivedNum = requestItem.getReceivedNum();
-		requestItem.setReceivedNum(receivedNum + addNum);
-		//System.out.println("saveRequestItem");
+		int itemNum = requestItem.getItemNum();
+		
+		if(itemNum >= receivedNum + addNum) {
+			requestItem.setReceivedNum(receivedNum + addNum);
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	@Transactional(readOnly = true)
