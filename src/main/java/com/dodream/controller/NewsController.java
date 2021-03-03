@@ -23,6 +23,7 @@ public class NewsController {
 	@GetMapping("user/news/newsList")
 	public String news(Model model, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("newsList", newsService.readNewsList(pageable));
+		model.addAttribute("recentNews", newsService.recentNewsList());
 		model.addAttribute("user", principalDetails.getUser());
 		return "news/news_list";
 	}
