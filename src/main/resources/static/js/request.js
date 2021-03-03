@@ -320,7 +320,7 @@ let requestInit = {
 				window.scrollTo(0,0); 
 			} 
 		}).fail(function(error){
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
 		// input값 초기화하기.
 	},
@@ -364,7 +364,11 @@ let requestInit = {
 			// status는 service에서 처리
 			request: requestId
 		};
+		/*
+		let replyItem = {
 		
+		};
+		*/
 		$.ajax({
 			type: "POST",
 			url: "/replySaveProc",
@@ -376,10 +380,9 @@ let requestInit = {
 				alert("업로드 실패하였습니다. ");
 			}else {
 				//for 문으로 변경해야됨, item 갯수대로
-				//requestInit.saveReplyItem(itemList[i], resp.data);
-				//
-				console.log(resp.data.request);
-				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+				//requestInit.saveReplyItem(replyItem, resp.data);
+				
+				alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
 				location.href = "/user/requestList";
 			} 
 		}).fail(function(error){
@@ -395,7 +398,10 @@ let requestInit = {
 		item.itemNum = parseInt(temp_itemNum.replace(',',''));
 		
 		// 어떠한 request인지 object type으로 assign
-		item.request = newReply;
+		item.reply = newReply;
+		// 해당 아이템의 requestItemId를 넣어줌
+		// item.requestItem = requestItem;
+		
 		$.ajax({
 			type: "POST",
 			url: "/replyItemSaveProc",

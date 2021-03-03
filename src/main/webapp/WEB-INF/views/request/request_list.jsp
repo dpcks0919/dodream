@@ -170,8 +170,8 @@
       
 			<div class="container" style="margin-top: 30px;" id="marker-info-container">
 
-				<div class="map-content ">
-					<div class="map-left">
+				<div class="map-content">
+					<div class="map-left" style="display:block">
 						<p class="help-content" id="marker-info-title">주거환경개선 도움</p>
 						<p class="help-date" id="marker-info-date">등록일 2020/12/25</p>
 					</div>
