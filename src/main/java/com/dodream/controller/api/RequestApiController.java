@@ -52,8 +52,12 @@ public class RequestApiController {
 	@PostMapping("/requestItemAddProc")
 	public ResponseDto<Integer> addRequestItem(@RequestParam(value = "id") int id, @RequestParam(value = "addNum") int addNum) {
 		RequestItem requestItem = requestService.getRequestItem(id);
-		requestService.addRequestItem(requestItem, addNum);
-		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+		int returnValue = requestService.addRequestItem(requestItem, addNum);
+		if(returnValue == 1) {
+			return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+		} else {
+			return null;
+		}
 	}
 	
 	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
