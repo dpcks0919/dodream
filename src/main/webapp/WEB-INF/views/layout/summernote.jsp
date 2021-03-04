@@ -3,4 +3,5 @@
 <!-- summernote  -->
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+<script src="/js/summernote/summernoteInit.js"></script>
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">

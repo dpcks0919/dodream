@@ -264,11 +264,11 @@ function bringInfo(type, userName, userPhone, orgName) {
 }
 
 let requestInit = {
-	init: function() {
+	/*init: function() {
 		$("#btn-com").on("click", () => { 
 				this.saveReply();
 		});		
-	},
+	},*/
 	
 	saveRequest:function(totalCnt, itemList) {
 		  var period = document.getElementById('requestPeriod').value;
@@ -320,7 +320,7 @@ let requestInit = {
 				window.scrollTo(0,0); 
 			} 
 		}).fail(function(error){
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
 		// input값 초기화하기.
 	},
@@ -343,28 +343,26 @@ let requestInit = {
 				alert("아이템 업로드 실패하였습니다. ");
 			}
 		}).fail(function(error){
-			consele.log(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});		
 	},
 	
-	saveReply:function() {
-
+	saveReply:function(items) {
 		// request객체에서 id만 보내는 방법
 		let requestId = {
-			id: 1
+			id: $("#rq_id").text(),
 		}
-		
+
 		let reply = {
 			// request 처리 방법
-			title: "제목",
-			replyContent: "내용",
-			replyUser: "글쓴이",
-			replyOrg: "소속 단체",
-			replyPhone: "전화번호",
+			replyContent: $("#reply_content").val(),
+			replyUser: $("#reply_user").val(),
+			replyOrg: $("#reply_org").val(),
+			replyPhone: $("#reply_phone").val(),
 			// status는 service에서 처리
 			request: requestId
 		};
-		
+
 		$.ajax({
 			type: "POST",
 			url: "/replySaveProc",
@@ -375,9 +373,10 @@ let requestInit = {
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
-				//for 문으로 변경해야됨, item 갯수대로
-				//requestInit.saveReplyItem(itemList[i], resp.data);
-				//
+
+				for(var i=0; i<items.length; i++) {
+					requestInit.saveReplyItem(i, items[i], resp.data);
+				}
 				console.log(resp.data.request);
 				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
 				location.href = "/user/requestList";
@@ -387,19 +386,28 @@ let requestInit = {
 		});
 	}, 
 	
-	saveReplyItem:function(item, newReply) {
+	saveReplyItem:function(i, item, newReply) {
 		// 변수 이름바꿔도 되고 parsing도 맘대로 해도 되고
 		// 해당하는 requestItem의 id랑 replyNum만 보내주면됨
-		var temp_itemNum = item.itemNum;
-		item.itemNum.replace(',','');
-		item.itemNum = parseInt(temp_itemNum.replace(',',''));
+		var rid = "#response_num" + i;
+		var reply_num = parseInt($(rid).val());
+
+		let itemId = {
+			id: item.itemId,
+		}
 		
+		let reply_item = {
+			requestItem: itemId,
+			replyNum: reply_num,
+			reply: newReply,
+		}
+		console.log(reply_item);
 		// 어떠한 request인지 object type으로 assign
-		item.request = newReply;
+
 		$.ajax({
 			type: "POST",
 			url: "/replyItemSaveProc",
-			data: JSON.stringify(item),
+			data: JSON.stringify(reply_item),
 			contentType: "application/json; charset = utf-8 ",
 			dataType: "json"
 		}).done(function(resp){
@@ -407,9 +415,9 @@ let requestInit = {
 				alert("아이템 업로드 실패하였습니다. ");
 			}
 		}).fail(function(error){
-			consele.log(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});		
 	},
 }
 
-requestInit.init();
+//requestInit.init();
