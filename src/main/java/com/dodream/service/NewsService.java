@@ -1,5 +1,7 @@
 package com.dodream.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +29,10 @@ public class NewsService {
 	@Transactional(readOnly = true)
 	public Page<News> readNewsList(Pageable pageable) {
 		return newsRepository.findAll(pageable);
+	}
+	
+	
+	public List<News> recentNewsList() {
+		return newsRepository.findAllByOrderByRegDateDesc();
 	}
 }

@@ -30,10 +30,10 @@
 			</div>
 		</header>
 		
-		<section class="news-section1 test" style="height:7rem;">
+		<section class="news-section1" style="height:7rem;">
 			<div class="news-section1-wrapper">
 					<div><b>테스트</b></div>
-				<div class=" test" style="display:flex; justify-content:flex-start; ">
+				<div class=" " style="display:flex; justify-content:flex-start; ">
 					<div style="margin-right:4rem;">소식 제목 : <input type="text" placeholder="제목을 입력하세요" id="news-title"/></div>
 					<div style="margin-right:4rem;">소식 내용 : <input type="text" placeholder="내용을 입력하세요" id="news-content"/></div>
 					<button style="outline:none; border-style:none; border:1px solid black;" onclick="news_upload();">등록</button>

@@ -642,7 +642,7 @@ td, th {
   padding-left:2vh;
   padding-right:2vh;
 }
-.request-form div:not[.summernoteDiv] {
+.request-form div:not[summernoteDiv] {
   width:100%;
   margin-bottom:2vh;
 }

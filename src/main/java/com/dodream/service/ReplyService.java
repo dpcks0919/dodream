@@ -9,6 +9,7 @@ import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.model.Reply;
 import com.dodream.model.ReplyItem;
 import com.dodream.model.StatusType;
+import com.dodream.repository.ReplyItemRepository;
 import com.dodream.repository.ReplyRepository;
 
 @Service
@@ -19,11 +20,13 @@ public class ReplyService {
 	
 	@Autowired
 	private ReplyRepository replyRepository;
+	
+	@Autowired
+	private ReplyItemRepository replyItemRepository;
 
 	@Transactional
 	public Reply saveReply(Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		//reply.setRequest
 		reply.setRequest(requestService.getRequest(reply.getRequest().getId()));
 		reply.setUser(principalDetails.getUser());
 		reply.setStatus(StatusType.WAITING);
@@ -33,8 +36,9 @@ public class ReplyService {
 	}
 
 	@Transactional
-	public void saveReplyItem(ReplyItem replyItem, PrincipalDetails principalDetails) {
-		
+	public void saveReplyItem(ReplyItem replyItem ) {
+		replyItemRepository.save(replyItem);
+		System.out.println("saveReplyItem");
 	}
 	
 	
