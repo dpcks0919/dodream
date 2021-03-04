@@ -141,8 +141,8 @@ let mapInit = {
 			else{	// 눌려있던 것과, 새로 누른 버튼의 카테고리가 다른 경우(순서:이웃이 먼저 눌리고, 재화가 눌려야 한다)
 				selectedCnt++;
 				if(selectedBtnNum1 == 0){	// 재화 버튼을 먼저 눌러놓은 상태일때
-					mapInit.selectBtn(newBtnNum);
-					mapInit.selectBtn(selectedBtnNum2);
+					mapInit.selectBtn(newBtnNum);	//이웃 먼저 실행
+					mapInit.selectBtn(selectedBtnNum2);	//그다음 재화 실행
 				}
 				else if(selectedBtnNum2 == 0){	// 이웃 버튼을 먼저 눌러놓은 상태일때	
 					mapInit.selectBtn(selectedBtnNum1);
@@ -151,7 +151,36 @@ let mapInit = {
 			}
 		}
 		else if(selectedCnt == 2){	// 이미 두개가 눌려있을 때
-			//if(newBtnNum)
+			if(newBtnNum == selectedBtnNum1 || newBtnNum == selectedBtnNum2){	// 같은 버튼 눌렀을때
+				//btn Count 감소 
+				selectedCnt--;
+				mapInit.btnClassRemove();
+				
+				if(newBtnNum <= 4){	// 눌린 버튼이 이웃 일때
+					selectedBtnNum1 = 0;
+					mapInit.defaultMark();
+					mapInit.selectBtn(selectedBtnNum2); 
+				}
+				else if(newBtnNum >=5){	// 눌린 버튼이 재화 일때
+					selectedBtnNum2 = 0;
+					mapInit.defaultMark();
+					mapInit.selectBtn(selectedBtnNum1); 
+				}
+			}
+			else{	// 다른 버튼 일때
+				if(newBtnNum <= 4){	// 눌린 버튼이 이웃 일때
+					mapInit.btnClassRemove();
+					mapInit.selectBtn(newBtnNum); 
+					mapInit.selectBtn(selectedBtnNum2); 
+				}
+				else if(newBtnNum >=5){	// 눌린 버튼이 재화 일때
+					$('#btn-stuff').removeClass('tbox-small-selected-red');
+					$('#btn-finance').removeClass('tbox-small-selected-red');
+					$('#btn-service').removeClass('tbox-small-selected-red');
+					$('#btn-etc').removeClass('tbox-small-selected-red');
+					mapInit.selectBtn(newBtnNum); 
+				}
+			}
 		}
 	},
 	
@@ -267,54 +296,56 @@ let mapInit = {
 				defaultRequestList = resp.data;	// defaultRequestList 는 전역변수화 해서 어디서든 접근 가능하도록 한다
 				currRequestList = defaultRequestList;
 				
-				//맵에 마커 뿌리기
-				mapInit.setMarker(defaultRequestList);
+				//(버튼이 안눌렸을 경우) 맵에 마커 뿌리기
+				if(selectedCnt == 0) mapInit.setMarker(defaultRequestList);
 			}
 		}).fail(function(error) {
 			alert("requestListProc error: " + JSON.stringify(error));
 		});
 		
-		//2. group(단체) 마커 찍기
-		$.ajax({// DB에서 주소 받아오기.
-			type: "POST",
-			url: "/groupListProc",
-		}).done(function(resp) {
-			if (resp.status == 500) {
-				alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
-			} else {
-				groupList = resp.data;
-				
-				// Group 주소 마커 뿌리기
-				groupList.forEach(function(list, index) { 
-					geocoder.addressSearch(list.address, function(result, status) { 
-						if (status === daum.maps.services.Status.OK) {
-							 var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
-							 var marker = new daum.maps.Marker({ 
-								 image: markerImage6,	 // custome marker image(상단 전역변수 참고) 이용
-								 position: coords, 
-								 clickable: true 
+		if(selectedCnt == 0){// 카운트가 0일때(버튼이 하나도 안눌렸을 때)만 그룹마커 찍기
+			//2. group(단체) 마커 찍기
+			$.ajax({// DB에서 주소 받아오기.
+				type: "POST",
+				url: "/groupListProc",
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+				} else {
+					groupList = resp.data;
+					
+					// Group 주소 마커 뿌리기
+					groupList.forEach(function(list, index) { 
+						geocoder.addressSearch(list.address, function(result, status) { 
+							if (status === daum.maps.services.Status.OK) {
+								 var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
+								 var marker = new daum.maps.Marker({ 
+									 image: markerImage6,	 // custome marker image(상단 전역변수 참고) 이용
+									 position: coords, 
+									 clickable: true 
+									}); 
+								// group 마커를 지도에 표시합니다. 
+								markerList.push(marker);	// list에 마커 push
+								marker.setMap(map); 
+								// 인포윈도우를 생성합니다 
+								var infowindow = new kakao.maps.InfoWindow({ 
+									content: '<div style="width:150px;text-align:center;padding:6px;">' + list.userName + '</div>', 
+									removable : true
+								 }); // 마커에 클릭이벤트를 등록합니다 
+								infowindowList.push(infowindow);	// infowindow list에 push 
+								 kakao.maps.event.addListener(marker, 'click', function() { 
+									$("#map-info-container").css('visibility', 'visible');
+									// 마커 위에 인포윈도우를 표시합니다 
+									infowindow.open(map, marker); 					
 								}); 
-							// group 마커를 지도에 표시합니다. 
-							markerList.push(marker);	// list에 마커 push
-							marker.setMap(map); 
-							// 인포윈도우를 생성합니다 
-							var infowindow = new kakao.maps.InfoWindow({ 
-								content: '<div style="width:150px;text-align:center;padding:6px;">' + list.userName + '</div>', 
-								removable : true
-							 }); // 마커에 클릭이벤트를 등록합니다 
-							infowindowList.push(infowindow);	// infowindow list에 push 
-							 kakao.maps.event.addListener(marker, 'click', function() { 
-								$("#map-info-container").css('visibility', 'visible');
-								// 마커 위에 인포윈도우를 표시합니다 
-								infowindow.open(map, marker); 					
-							}); 
-						}
-					}); 
-				});
-			}
-		}).fail(function(error) {
-			alert("groupListProc error: " + JSON.stringify(error));
-		});
+							}
+						}); 
+					});
+				}
+			}).fail(function(error) {
+				alert("groupListProc error: " + JSON.stringify(error));
+			});
+		}
 	},
 
 	// 노인,아이,장애인, 기타 클릭시 
@@ -325,8 +356,8 @@ let mapInit = {
 			if(list.clientType == clientType) currRequestList.push(list);
 		});
 		
-		mapInit.setMarker(currRequestList);
-		
+		// 눌린버튼이 '이웃' 1개일때, 마커 찍기 
+		if(selectedCnt == 1 && selectedBtnNum1 != 0) mapInit.setMarker(currRequestList);
 		
 	},
 	
@@ -344,7 +375,8 @@ let mapInit = {
 			});
 		})
 		// 해당하는 마커들을 List에 넣은 후, setMarker()를 이용해 맵에 뿌리기
-		mapInit.setMarker(validRequestList);
+		// 이웃, 재화가 함께 눌리거나, 재화만 눌려있을 경우
+		if(selectedBtnNum2 != 0) mapInit.setMarker(validRequestList);
 		
 	},
 	
@@ -369,9 +401,6 @@ let mapInit = {
 					// 마커를 지도에 표시합니다. 
 					markerList.push(marker);	// list에 마커 push
 					marker.setMap(map); 
-					console.log("INDEX1: " + index);
-					
-					
 					// IndexPage 일 경우, 인포윈도우를 추가한다
 					if(isIndexPage == true){
 						// 인포윈도우를 생성합니다 
