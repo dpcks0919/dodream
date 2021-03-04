@@ -347,11 +347,33 @@ let requestInit = {
 		});		
 	},
 	
+	addRequestItem:function(id, addNum) {
+		var newAddNum = parseInt(addNum);
+		var newId = parseInt(id);
+			
+		$.ajax({
+			//회원가입 수행 요청.
+			type: "POST",
+			url: "/requestItemAddProc",
+			data: {
+				id: newId,
+				addNum: newAddNum,
+			} 
+		}).done(function(resp){
+			if(resp.status == 500){
+				alert("응답에 실패하였습니다.");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});
+	},
+	
 	saveReply:function(items) {
 		// request객체에서 id만 보내는 방법
+	
 		let requestId = {
 			id: $("#rq_id").text(),
-		}
+		};
 
 		let reply = {
 			// request 처리 방법
@@ -373,11 +395,12 @@ let requestInit = {
 			if(resp.status == 500) {
 				alert("업로드 실패하였습니다. ");
 			}else {
-
 				for(var i=0; i<items.length; i++) {
-					requestInit.saveReplyItem(i, items[i], resp.data);
+					var rid = "#response_num" + i;
+					var reply_num = parseInt($(rid).val());
+					requestInit.saveReplyItem(i, items[i], resp.data, rid, reply_num);
+					requestInit.addRequestItem(items[i].itemId, reply_num)
 				}
-				console.log(resp.data.request);
 				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
 				location.href = "/user/requestList";
 			} 
@@ -386,12 +409,9 @@ let requestInit = {
 		});
 	}, 
 	
-	saveReplyItem:function(i, item, newReply) {
+	saveReplyItem:function(i, item, newReply, rid, reply_num) {
 		// 변수 이름바꿔도 되고 parsing도 맘대로 해도 되고
 		// 해당하는 requestItem의 id랑 replyNum만 보내주면됨
-		var rid = "#response_num" + i;
-		var reply_num = parseInt($(rid).val());
-
 		let itemId = {
 			id: item.itemId,
 		}
@@ -401,9 +421,7 @@ let requestInit = {
 			replyNum: reply_num,
 			reply: newReply,
 		}
-		console.log(reply_item);
-		// 어떠한 request인지 object type으로 assign
-
+		
 		$.ajax({
 			type: "POST",
 			url: "/replyItemSaveProc",

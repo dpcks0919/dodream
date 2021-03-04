@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,18 @@ public class RequestApiController {
 		System.out.println(requestItem);
 		requestService.saveRequestItem(requestItem);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	//new
+	@PostMapping("/requestItemAddProc")
+	public ResponseDto<Integer> addRequestItem(@RequestParam(value = "id") int id, @RequestParam(value = "addNum") int addNum) {
+		RequestItem requestItem = requestService.getRequestItem(id);
+		int returnValue = requestService.addRequestItem(requestItem, addNum);
+		if(returnValue == 1) {
+			return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+		} else {
+			return null;
+		}
 	}
 	
 	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
