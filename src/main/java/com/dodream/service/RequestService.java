@@ -56,6 +56,20 @@ public class RequestService {
 		requestItemRepository.save(requestItem);
 		System.out.println("saveRequestItem");
 	}
+	
+	//new
+	@Transactional
+	public int addRequestItem(RequestItem requestItem, int addNum) {
+		int receivedNum = requestItem.getReceivedNum();
+		int itemNum = requestItem.getItemNum();
+		
+		if(itemNum >= receivedNum + addNum) {
+			requestItem.setReceivedNum(receivedNum + addNum);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 
 	@Transactional(readOnly = true)
 	public Page<Request> readRequestList(Pageable pageable) {
@@ -80,7 +94,14 @@ public class RequestService {
 	@Transactional
 	public Request getRequest(int id) {
 		return requestRepository.findById(id).orElseThrow(() -> {
-			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
+			return new IllegalArgumentException("요청글 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+	}
+	
+	@Transactional
+	public RequestItem getRequestItem(int id) {
+		return requestItemRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("요청 아이템 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 	}
 

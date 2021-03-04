@@ -44,7 +44,7 @@
 						<tr>
 							<th style="width: 17.5%;">종류</th>
 							<th style="width: 27.5%;">내역</th>
-							<th style="width: 55%;">필요 수량 / 목표 수량</th>
+							<th style="width: 55%;">현재 수량 / 목표 수량</th>
 						</tr>
 						<tr class="needs-category" id="rq_item0"></tr>
 					</table>
