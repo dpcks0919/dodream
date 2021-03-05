@@ -129,7 +129,7 @@ function openMenu() {
 		  }
 		}
 	  }
-	z
+	
 
 	  $("#modal-bg").click(function() {
 		for(var i = 0; i < items.length; i++) {
