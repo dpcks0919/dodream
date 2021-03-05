@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
 <%@include file="../layout/header.jsp"%>
 
 <link href="/css/view-reg.css" rel="stylesheet" />
@@ -67,8 +68,8 @@
 				<span class="request-name" id="rq_title2"><br></span>
 			</div>
 			<div class="content-info" style="text-align: center;">
-				<div style="border-top: 3px solid black; padding-top: 1vh; padding-bottom: 1vh;">
-					<button class="info-btn " id="myInfo" onclick="bringInfo('myInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">내 정보 가져오기</button>
+				<div class="" style="border-top: 3px solid black; height:4rem!important; padding-top: 1vh; padding-bottom: 1vh;">
+					<button class="info-btn" id="myInfo" onclick="bringInfo('myInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">내 정보 가져오기</button>
 					<button class="new-btn click_event" id="newInfo" onclick="bringInfo('newInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">새로 작성하기</button>
 				</div>
 				<div class="div-inline">
@@ -108,7 +109,7 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- modal.js에 click event 생성 -->
 		<div class="modal-ftr" style="justify-content: space-between;">
 			<div class="btn-com" id="btn-com">완료하기</div>
 			<div class="btn-back" onclick="goBack()">
@@ -134,8 +135,11 @@
 
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container ">
-				<div style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> <span id="btn-search"><i class="fas fa-search search-icon"></i></span>
+				<div class="" style="text-align: right;">
+					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> 
+					<div id="btn-search ">
+						<img class="search-icon " src="/image/search-icon.png" />
+					</div>				
 				</div>
 				<div class="sec3-middle">
 					<div class="left sec3-middle-left">
@@ -153,7 +157,7 @@
 						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
 				</div>
-				<div class="map_wrap">
+				<div class="map_wrap ">
 					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 					<!-- 지도타입 컨트롤 div 입니다 -->
 					<div class="custom_typecontrol radius_border">
@@ -166,9 +170,8 @@
 					</div>
 				</div>
 			</div>
-      
-      
-			<div class="container" style="margin-top: 30px;" id="marker-info-container">
+      		<div id="maker-info-container-blank" style="height:30px;"></div>
+			<div class="container" id="marker-info-container">
 
 				<div class="map-content">
 					<div class="map-left" style="display:block">
@@ -225,11 +228,11 @@
 							<th class="table-num">등록번호</th>
 							<th class="table-title">요청 내용</th>
 							<th class="table-date">등록일</th>
-							<th class="table-status">상태</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="request" items="${requests.content}">
+						<fmt:formatDate value="${request.regDate}" pattern="yyyy. MM. dd." var="regdate" />
 							<script>
 								var arr = new Array();
 								<c:forEach items="${request.requestItem}" var="item">
@@ -260,26 +263,12 @@
 							<tr>
 								<td class="table-num">${request.id}</td>
 								<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold">${request.title}</td>
-								<td class="table-date">${request.regDate}</td>
-								<td class="table-status"><c:choose>
-										<c:when test="${request.status eq 'APPROVED'}">
-											승인
-										</c:when>
-										<c:when test="${request.status eq 'NON_APPROVED'}">
-											미승인
-										</c:when>
-										<c:when test="${request.status eq 'WAITING'}">
-											대기
-										</c:when>
-										<c:when test="${request.status eq 'CLOSED'}">
-											마감
-										</c:when>
-									</c:choose></td>
+								<td class="table-date">${regdate}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-
+	<br>
 				<!-- 페이징할때 주의할 점 : requests.number는 0부터 시작하기 때부터 그걸 고려해서 밑에 다 수정했음. 
 	그래서 화면에 보이는 것만 1부터 보이게 설정함.
 	-->
