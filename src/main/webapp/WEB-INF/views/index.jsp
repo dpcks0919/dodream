@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="layout/header.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
 
 <link href="/css/main.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -178,38 +179,58 @@
 				</div>
 				<div class="news-body ">
 					<div class="news-body-left">
-						<div class="image-inline">
-							<div class="four_box-news">
-								<img class="news-image" src="image/news1.jpg">
-								<div class="news-image-title">이 게시물의 제목</div>
+						<c:set var="topCount" value="1" />
+						<c:forEach var="top" items="${recentNews}">
+							<div class="image-inline">
+							<c:choose>
+								<c:when test="${topCount == 1 }">
+									<div class="four_box-news">
+										<img class="news-image" src="image/news1.jpg">
+										<div class="news-image-title">${top.title}</div>
+									</div>
+								</c:when>
+								<c:when test="${topCount == 2 }">
+									<div class="four_box-news">
+										<img class="news-image" src="image/news2.jpeg">
+										<div class="news-image-title">${top.title}</div>
+									</div>
+								</c:when>
+							</c:choose>
 							</div>
-							<div class="four_box-news">
-								<img class="news-image" src="image/news2.jpeg">
-								<div class="news-image-title">이 게시물의 제목</div>
+							
+							<div class="image-inline">
+							<c:choose>
+								<c:when test="${topCount == 3 }">
+									<div class="four_box-news">
+										<img class="news-image" src="image/news3.jpg">
+										<div class="news-image-title">${top.title}</div>
+									</div>
+								</c:when>
+								<c:when test="${topCount == 4 }">
+									<div class="four_box-news">
+										<img class="news-image" src="image/news4.jpg">
+										<div class="news-image-title">${top.title}</div>
+									</div>
+								</c:when>
+							</c:choose>
 							</div>
-						</div>
-						<div class="image-inline">
-							<div class="four_box-news">
-								<img class="news-image" src="image/news3.jpg">
-								<div class="news-image-title">이 게시물의 제목</div>
-							</div>
-							<div class="four_box-news">
-								<img class="news-image" src="image/news4.jpg">
-								<div class="news-image-title">이 게시물의 제목</div>
-							</div>
-						</div>
+							<c:set var="topCount" value="${topCount + 1}" />
+						</c:forEach>
 					</div>
+					
+					
 					<div class="news-body-right">
 						<!-- 소식에 대한 리스트 -->
-						<p class="news-body-right-content">[9.30 두드림터치 소식] 두드림터치, 한동대학교</p>
-						<p class="news-body-right-content">[9.8 두드림터치 소식] 경북포항지역자활센터와</p>
-						<p class="news-body-right-content">...</p>
-						<p class="news-body-right-content">...</p>
-						<p class="news-body-right-content">...</p>
-						<p class="news-body-right-content">...</p>
-						<p class="news-body-right-content">...</p>
-						<p class="news-body-right-content">...</p>
-						<p class="news-body-right-content">...</p>
+						<c:set var="rightCount" value="1" />
+						<c:forEach var="right" items="${recentNews}">
+							<c:choose>
+								<c:when test="${rightCount < 10}">
+									<fmt:formatDate value="${right.regDate}" pattern="MM.dd" var="rightRegdate" />
+									<p class="news-body-right-content">[${rightRegdate} 두드림터치 소식] ${right.title}</p>	
+								</c:when>
+							</c:choose>
+							<c:set var="rightCount" value="${rightCount + 1}" />
+						</c:forEach>
 					</div>
 				</div>
 			</div>
