@@ -48,7 +48,8 @@ let mapInit = {
 	init: function() {
 					
 		//로딩시 marker info 란 hidden 처리
-		$("#marker-info-container").css('visibility', 'hidden');
+		
+		$("#marker-info-container").css('display', 'none');
 	
 		// defaultmark 화면 로딩시 마커 띄워주는 부분
 		this.defaultMark();
@@ -414,7 +415,7 @@ let mapInit = {
 					 kakao.maps.event.addListener(marker, 'click', function() {
 						map.setCenter(coords);	// 클릭 위치로 이동
 						mapInit.fillMarkerInfo(list);	// marker info 채우는 함수
-						$("#marker-info-container").css('visibility', 'visible');	// 상세보기 배너 띄우기
+						$("#marker-info-container").css('display', 'block');	// 상세보기 배너 띄우기
 						
 						 // 검색코드에 나타내기
 						 $("#marker-info-search-input").val(list.id);
@@ -423,7 +424,7 @@ let mapInit = {
 						$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
 						$("#marker-info-btn").on("click", () => {
 							goDetail_request(list);
-							$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+							$("#marker-info-container").css('display', 'none');	// 상세보기 배너 가리기
 						});
 							
 						//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
@@ -435,7 +436,7 @@ let mapInit = {
 							$("#marker-info-btn").off("click");	// 기존 listner 삭제(중요)
 							$("#marker-info-btn").on("click", () => {
 								goDetail_request(list);
-								$("#marker-info-container").css('visibility', 'hidden');	// 상세보기 배너 가리기
+								$("#marker-info-container").css('display', 'none');	// 상세보기 배너 가리기
 							});
 						 
 						 	//(Index 페이지일 경우에만)마커 위에 인포윈도우를 표시합니다 
