@@ -370,7 +370,6 @@ let requestInit = {
 	
 	saveReply:function(items) {
 		// request객체에서 id만 보내는 방법
-	
 		let requestId = {
 			id: $("#rq_id").text(),
 		};
