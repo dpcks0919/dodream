@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +23,7 @@ import com.dodream.dto.FileUploadDto;
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
+import com.dodream.model.UserInterest;
 import com.dodream.service.RequestService;
 
 @RestController
@@ -33,6 +33,13 @@ public class RequestApiController {
 	
 	@Value("${summernote.upload}")
 	private String uploadFilePath;
+	
+//	@PostMapping("/heart")
+//	public ResponseDto<Integer> heartSave(@RequestBody UserInterest userInterest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		requestService.saveHeart(userInterest, principalDetails);
+//		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+//	}
+//	
 	
 	@PostMapping("/requestSaveProc")
 	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
