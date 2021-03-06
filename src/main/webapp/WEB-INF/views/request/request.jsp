@@ -131,8 +131,7 @@
 						    </div>
 						  </div>
 						
-						
-						
+										
 					</div>
 
 					<div class="summernoteDiv">
@@ -173,7 +172,6 @@
 				</div>
 				<div class="request-ftr" style="justify-content: space-between;">
 					<div class="btn-upload" onclick="upload(1);">미리보기</div>
-					<!-- <div class="btn-save" onclick="save();">임시저장</div> -->
 				</div>
 			</div>
 		</section>

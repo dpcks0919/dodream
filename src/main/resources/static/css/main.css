@@ -991,7 +991,8 @@ a {
    .main1-register_mobile {
     position:relative;
     left:36%;
-    bottom:-15vh!important;
+    /* bottom:-6.5vh!important; */
+    bottom:2.5vh!important;
     transform: translateX(-50%);
   }
    .main1-register-text_mobile {
