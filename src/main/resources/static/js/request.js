@@ -1,12 +1,34 @@
 var Lat, Lng;
 var prevMarker;
 
+	/*
+function heartCheck() {
+	alert($("#rq_id").text());
+		$.ajax({
+			type: "POST",
+			url: "/heart",
+			data: {
+				id : 
+			}
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("아이템 업로드 실패하였습니다. ");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});		
+}
+*/
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
+	$(".map-div0").css("margin-bottom","2rem");
+	$(".map-div1").css("margin-bottom","2rem");
+	$(".map-div2").css("margin-bottom","1.5rem");
+	$(".map-div3").css("margin-bottom","2rem");
 }
 
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
