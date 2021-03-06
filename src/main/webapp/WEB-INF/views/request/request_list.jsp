@@ -55,7 +55,7 @@
 
 		<div class="modal-ftr">
 			<div class="btn-res" onclick="goResponse()">응답하기</div>
-			<div class="btn-icon">
+			<div class="btn-icon" onclick="heartCheck();">
 				<i class="far fa-heart"></i>
 			</div>
 		</div>

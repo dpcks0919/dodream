@@ -16,6 +16,7 @@ import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.model.ClientType;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
+import com.dodream.model.UserInterest;
 import com.dodream.repository.RequestItemRepository;
 import com.dodream.repository.RequestRepository;
 
@@ -27,7 +28,10 @@ public class RequestService {
 
 	@Autowired
 	private RequestItemRepository requestItemRepository;
-
+	
+//	@Autowired
+//	private UserInterestRepository userInterestRepository;
+	
 	@Transactional
 	public Request saveRequest(Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
@@ -56,6 +60,14 @@ public class RequestService {
 		requestItemRepository.save(requestItem);
 		System.out.println("saveRequestItem");
 	}
+	
+//	@Transactional
+//	public void saveHeart(UserInterest userInterest, @AuthenticationPrincipal PrincipalDetails principalDetails)
+//		userInterest.setUser(principalDetails.getUser());
+//		
+//		userInterestRepository.save();
+//	}
+	
 	
 	//new
 	@Transactional

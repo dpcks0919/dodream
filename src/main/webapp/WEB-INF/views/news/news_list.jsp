@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>​
 
 <link href="/css/news.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -12,10 +14,14 @@
 }
 </style>
 
+<form id="newsForm" method="post" action="/user/news/newsList" hidden>
+	<input type="hidden" name="type" id="newsType" value="">
+</form>
+
 <body id="page-top">
 	<div id="menu-back" onclick="closeNav()"></div>
 	<%@include file="../layout/sidebar_front.jsp"%>
-
+	
 	<div id="Wrapper" style="width: 100%;">
 		<!-- Navigation-->
 		<%@include file="../layout/navbar.jsp"%>		
@@ -30,38 +36,58 @@
 		</header>
 		
 		<section class="news-section1">
-			<div class="news-section1-wrapper">
-				<div class="news-header">
+			<div class="news-section1-wrapper ">
+				<div class="news-header ">
 				<!-- 제일 최근 3개   -->
 				<c:set var="topCount" value="0" />
 				<c:forEach var="top" items="${recentNews}">
 					<c:choose>
 						<c:when test="${topCount < 3}">
+							<c:set var="strNewsType" value="[이웃 소식]" />
+							<c:if test="${top.newsType == 'DODREAM'}">
+								<c:set var="strNewsType" value="[두드림 소식]" />
+							</c:if>
 							<fmt:formatDate value="${top.regDate}" pattern="yyyy. MM. dd." var="topRegdate" />
-							<div class="news-header-wrapper" style="display:inline;">
-								<img class="news-header-wrapper-image" src="/image/news1.jpg" style="width:100%;"/>
+							<div class="news-header-wrapper " style="display:inline;">
+								<img class="news-header-wrapper-image" onclick="newDetail('${top.id}');" id="topImg${topCount}" src="" style="width:100%;"/>
+								<script>
+									// 첫 img 태그만 잘라서 보여주는 태그
+									var fullStr = '${top.content}';
+									var strArray = fullStr.split('<p>');
+									for(var i=0; i<strArray.length; i++) {
+										if(strArray[i].includes('img src=')) {
+											var strDetail = strArray[i].split('<img src=');
+											if(strDetail.includes('<img src=')) {
+												var imgAddress = strDetail[0].split('style');													
+											} else {
+												var imgAddress = strDetail[1].split('style');
+											}
+											var realImg = imgAddress[0];
+											// 맨 앞 문자 자르기(" 하나)
+											realImg = realImg.substr(1);
+											// 맨 뒷 두문자 자르기(공백과 " 하나)
+											realImg = realImg.substr(0, realImg.length -2);
+											var imgId = "topImg"+${topCount};
+											document.getElementById(imgId).src= realImg;
+											break;
+										}
+									};
+									
+									
+								</script>
 								<div class="news-header-wrapper-text">
-									<p class="news-header-wrapper-title">${top.title}</p>
-									<p class="news-header-wrapper-date">${topRegdate}</p>
-									<p class="news-header-wrapper-content">${top.content}</p>						
+									<p class="news-header-wrapper-title"><a style="color:black; cursor:pointer;" onclick="newDetail('${top.id}');">${top.title}</a></p>
+									<div style="width:100%; display:flex; justify-content:space-between;">
+										<span class="news-header-wrapper-date">${topRegdate}</span>
+										<span class="news-header-wrapper-date">${strNewsType}</span>									
+									</div>
 								</div>
 							</div>			
 						</c:when>
 					</c:choose>
 					<c:set var="topCount" value="${topCount + 1}" />
 				</c:forEach>
-				
 
-				<!-- 
-						<div class="news-header-wrapper" style="display:inline;">
-							<img class="news-header-wrapper-image" src="/image/news-test.jpeg" style="width:100%;"/>
-							<div class="news-header-wrapper-text">
-								<p class="news-header-wrapper-title">두드림터치, 한동대학교 10대 프로젝트 신청</p>
-								<p class="news-header-wrapper-date">2020.09.30</p>
-								<p class="news-header-wrapper-content">지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다. 지난 9월, 한동대학교 10대 프로젝트에 두드림터치가 선정되었다. 두드림터치는 ‘지역공동체 자원 활용을 통한 지역, 마을 협동 돌봄 생태계 조성’을 주제로 지역발전프로젝트에 참여하고 있다.</p>						
-							</div>
-						</div>		
-				 -->
 				</div>
 			
 			</div>
@@ -70,25 +96,83 @@
 		<div class="news-section2-menu-wrapper">
 			<div class="news-section2-menu">
 				<a class="news-menu-title"><b>최신 콘텐츠</b></a>
-				<a class="news-menu-button news-section2-menu-selected">모든 소식</a>
-				<a class="news-menu-button">이웃 소식</a>
-				<a class="news-menu-button">두드림 소식</a>
+				<c:if test="${ntype}">
+				
+				</c:if>
+				<c:choose>
+					<c:when test="${ntype == 'ALL'}">
+						<a class="news-menu-button news-section2-menu-selected" onclick="goNews('ALL');">모든 소식</a>
+						<a class="news-menu-button" onclick="goNews('NEIGHBOR');">이웃 소식</a>
+						<a class="news-menu-button" onclick="goNews('DODREAM');">두드림 소식</a>					
+					</c:when>
+					<c:when test="${ntype == 'NEIGHBOR'}">
+						<a class="news-menu-button" onclick="goNews('ALL');">모든 소식</a>
+						<a class="news-menu-button news-section2-menu-selected" onclick="goNews('NEIGHBOR');">이웃 소식</a>
+						<a class="news-menu-button" onclick="goNews('DODREAM');">두드림 소식</a>								</c:when>
+					<c:when test="${ntype == 'DODREAM'}">
+						<a class="news-menu-button" onclick="goNews('ALL');">모든 소식</a>
+						<a class="news-menu-button" onclick="goNews('NEIGHBOR');">이웃 소식</a>
+						<a class="news-menu-button news-section2-menu-selected" onclick="goNews('DODREAM');">두드림 소식</a>								</c:when>
+				</c:choose>
 			</div>
 		</div>
 		
 		<!-- news Section-->		
 		<section class="news-section2 ">
 			<div class="news-section2-wrapper">
+				<c:set var="bottomCount" value="0" />
 				<c:forEach var="news" items="${newsList.content}">
+					<c:set var="strNewsType" value="[이웃 소식]" />
+					<c:if test="${news.newsType == 'DODREAM'}">
+						<c:set var="strNewsType" value="[두드림 소식]" />
+					</c:if>
 				<fmt:formatDate value="${news.regDate}" pattern="yyyy. MM. dd." var="regdate" />
 					<div class="news-section2-div">
-						<div class="image-container2"><img class="news-section2-image" src="/image/news2.jpeg" style="height:100%; object-fit:contain;"/></div>
-						<div class="news-section2-div-right">
-							<p class="news-section2-div-title">${news.title}</p>
-							<p class="news-section2-div-date">조회수 ${news.count}회 · ${regdate}</p>
-							<p class="news-section2-div-content">${news.content}</p>					
+						<div class="image-container2" onclick="newDetail('${news.id}');">						
+						<img class="news-section2-image" id="bottomImg${bottomCount}" src="" style="width:10rem; height:100%; object-fit:contain;"/>
+							<script>
+								// default image
+								var realImg = "/image/news2.jpeg";
+								// 첫 img 태그만 잘라서 보여주는 태그
+								var fullStr = '${news.content}';
+								// img 태그 id
+								var imgId2 = "bottomImg"+${bottomCount};
+								if(fullStr.includes('<img src=')) {
+									var strArray = fullStr.split('<p>');
+									for(var i=0; i<strArray.length; i++) {
+										if(strArray[i].includes('img src=')) {
+											var strDetail = strArray[i].split('<img src=');
+											if(strDetail.includes('<img src=')) {
+												var imgAddress = strDetail[0].split('style');													
+											} else {
+												var imgAddress = strDetail[1].split('style');
+											}
+											realImg = imgAddress[0];
+											// 맨 앞 문자 자르기(" 하나)
+											realImg = realImg.substr(1);
+											// 맨 뒷 두문자 자르기(공백과 " 하나)
+											realImg = realImg.substr(0, realImg.length -2);
+											document.getElementById(imgId2).src= realImg;
+											break;
+										}
+									}
+								} else {
+									document.getElementById(imgId2).src= realImg;									
+								}
+								
+							</script>
+						
+						
+						</div>
+						<div class="news-section2-div-right" >
+							<p class="news-section2-div-title"><a style="color:black; text-decoration:none; cursor:pointer;" onclick="newDetail('${news.id}');">${news.title}</a></p>
+							<div style="width:100%; display:flex; justify-content:space-between;">
+								<p class="news-section2-div-date">조회수 ${news.count}회 · ${regdate}</p>
+								<span class="news-header-wrapper-date">${strNewsType}</span>									
+							</div>
 						</div>
 					</div>
+					<c:set var="bottomCount" value="${bottomCount + 1}" />
 				</c:forEach>
 			</div>
 		</section>
@@ -150,6 +234,7 @@
 	</div>
 		<%@include file="../layout/sidebar_back.jsp"%>
 		<%@include file="../layout/jsFile.jsp"%>
+		<script src="/js/news.js"></script>
 	<script>
 	$(document).ready(function() {
 		$(".news-menu-button").on("click", function() {
