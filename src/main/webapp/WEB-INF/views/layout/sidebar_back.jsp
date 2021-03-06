@@ -10,8 +10,6 @@
 	<h1 style="font-size: 8rem !important; position: relative; left: 50%; transform: translateX(-50%);">
 		<i class="fa fa-user" aria-hidden="true"></i>
 	</h1>
-	<!-- <span class="login"><a style="font-size:1rem!important; display:inline; padding-right:4vh;">로그인</a>|<a style="font-size:1rem!important; display:inline; padding-left:4vh;">회원가입</a></span> -->
-
 
 	<c:choose>
 		<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
@@ -31,7 +29,22 @@
 			<!-- 로그인된 버전 -->
 			<span class="logout"><a style="font-size: 1rem !important; display: inline; position: relative; left: -1.5%;" href="/logout">로그아웃</a></span>
 			<div class="logout" style="padding-top: 4%; padding-left: 7%; padding-right: 7%; text-align: left;">
-				<a href="mypage/edit_info.html" class="menu-item-top">개인정보 수정</a> <a href="#" class="menu-item">나의 두드림</a> <a href="#" class="menu-item">응답 내역</a>
+				<c:choose>
+					<c:when test = "${principal.user.userType eq 'INDIVIDUAL'}">
+						<a href="/user/editInfo/indi" class="menu-item-top">개인정보 수정</a> 
+					</c:when>
+					<c:when test = "${principal.user.userType eq 'GROUP'}">
+						<a href="/user/editInfo/group" class="menu-item-top">개인정보 수정</a> 
+					</c:when>
+					<c:when test = "${principal.user.userType eq 'SOCIAL_WORKER'}">
+						<a href="/user/editInfo/worker" class="menu-item-top">개인정보 수정</a> 
+					</c:when>
+					<c:when test = "${principal.user.userType eq 'INSTITUTION'}">
+						<a href="/user/editInfo/org" class="menu-item-top">개인정보 수정</a> 
+					</c:when>
+				</c:choose>
+				<a href="/user/mydodream" class="menu-item">나의 두드림</a> 
+				<a href="/user/myresponse" class="menu-item">응답 내역</a>
 			</div>
 
 		</c:otherwise>

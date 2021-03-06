@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@include file="../layout/header.jsp"%>
 
 <link href="/css/view-reg.css" rel="stylesheet" />
@@ -135,7 +136,11 @@
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container ">
 				<div style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> <span id="btn-search"><i class="fas fa-search search-icon"></i></span>
+					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> 
+					<!-- <span id="btn-search"><i class="fas fa-search search-icon"></i></span> -->
+					<div id="btn-search">
+						<img class="search-icon" src="/image/search-icon.png" />
+					</div>
 				</div>
 				<div class="sec3-middle">
 					<div class="left sec3-middle-left">
@@ -201,22 +206,35 @@
 		<!-- news Section-->
 		<section class="mypage-section2" id="about" style="text-align: center;">
 			<form class="search-div">
-				<span class="search-text ">검색코드<input type="text" name="code" class="search-box-mid"></input></span> <span class="search-text">재화종류<select name="search-type" class="search-box-small">
-						<option name="all">모두</option>
-						<option name="product">물품</option>
-						<option name="money">금전</option>
-						<option name="service">서비스</option>
+				<span class="search-text">
+				<input type="text" id= "code" class="search-box-small" placeholder="검색 코드"></input></span> 
+				<span class="search-text">재화종류:<select name="search-type" id="search-type" class="search-box-small">
+						<option value="all" selected="selected">모두</option>
+						<option value="product">물품</option>
+						<option value="money">금전</option>
+						<option value="service">서비스</option>
+				</select>
+				</span>
+				<span class="search-text">이웃:<select name="search-client" id="search-client" class="search-box-small">
+						<option value="all" selected="selected">모두</option>
+						<option value="ELDERLY">노인</option>
+						<option value="CHILD">아이</option>
+						<option value="DISABLED">장애인</option>
+						<option value="OTHERS">기타</option>
 				</select>
 				</span>
 				<div class="temp"></div>
-				<span class="search-text">기간<select name="search-period" class="search-box-small">
-						<option name="all">보통(한 달 이내)</option>
-						<option name="product">긴급(7~14일 이내)</option>
-						<option name="money">매우 긴급(3일 이내)</option>
+				<span class="search-text">기간:<select name="search-period" id="search-period" class="search-box-mid">
+						<option value="all" selected="selected">모두</option>
+						<option value="normal">보통(한 달 이내)</option>
+						<option value="urgent">긴급(7~14일 이내)</option>
+						<option value="very_urgent">매우 긴급(3일 이내)</option>
 				</select>
-				</span> <span class="search-text">주소<input type="text" class="search-box-big"></input>
-				</span> <input type="submit" class="search-btn" value="검색"></input>
+				</span> 
+				<!-- <input type="submit" class="search-btn" id="search-btn" value="검색"></input> -->
 			</form>
+			<button id="search-btn" class="search-btn">검색</button>
+			
 			<div class="container">
 				<!-- searech line -->
 				<table style="table-layout: fixed">
@@ -243,6 +261,8 @@
 										itemNum: "${item.itemNum}",
 										receivedNum: "${item.receivedNum}",
 										requestType: "${item.requestType}",
+										replyNum : 0,
+										reply: 0,
 									});
 								</c:forEach>
 								const rq${request.id} = {
@@ -260,7 +280,9 @@
 							<tr>
 								<td class="table-num">${request.id}</td>
 								<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold">${request.title}</td>
-								<td class="table-date">${request.regDate}</td>
+								<td class="table-date">
+								${fn:substring(request.regDate, 0, 10)}						
+								</td>
 								<td class="table-status"><c:choose>
 										<c:when test="${request.status eq 'APPROVED'}">
 											승인
@@ -347,6 +369,7 @@
 	<script>
 	var isIndexPage = false;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
 	var lati, longi;
+	
 	<c:choose>
 		<c:when test="${user.loginCount == 0 || empty user.loginCount}">
 			lati = 36.1023014256562;
@@ -366,7 +389,8 @@
 		};
 
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		
 	</script>
 
 </body>

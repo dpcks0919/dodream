@@ -22,20 +22,11 @@ public class RequestController {
 	//	요청 목록 페이지
 	@GetMapping("user/requestList")
 	public String requestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
 		model.addAttribute("requests", requestService.readRequestList(pageable));
 		model.addAttribute("user", principalDetails.getUser());
-		//System.out.println(principalDetails.getUser());
 		return "request/request_list";
 	}
-	
-//	// 이렇게 하면 페이지가 새로 로드가 되어서 고민	
-//	@GetMapping("user/requestList/{id}")
-//	public String findById(@PathVariable int id, Model model) {
-//		model.addAttribute("request", requestService.viewDetail(id));
-//		System.out.println("viewDetail " +id);
-//		model.addAttribute("isDetail", 1);
-//		return "request/request_list";
-//	}
 	
 	//	요청하기 페이지 
 	@GetMapping("user/request")
