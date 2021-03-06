@@ -668,7 +668,7 @@ td, th {
   outline:none;
 }
 .request-title:focus {
-  border-bottom:2px solid black;
+  border-bottom:3px solid black;
 }
 .request-content {
   height:30vh;
