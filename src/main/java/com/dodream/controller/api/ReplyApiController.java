@@ -24,8 +24,8 @@ public class ReplyApiController {
 	@Autowired
 	private RequestService requestService;
 	
-	@PostMapping("/testreplyItemSaveProc")
-	public ResponseDto<Request> testsaveReplyItem(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+	@PostMapping("/replySaveProc")
+	public ResponseDto<Request> replySaveProc(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		int check = 0;
 		

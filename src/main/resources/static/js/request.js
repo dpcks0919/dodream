@@ -363,7 +363,7 @@ let requestInit = {
 		});		
 	},
 		
-	testReply:function(items, rq) {
+	saveReply:function(items, rq) {
 	
 		let requestId = {
 			id: $("#rq_id").text(),
@@ -390,7 +390,7 @@ let requestInit = {
 		
 		$.ajax({
 			type: "POST",
-			url: "/testreplyItemSaveProc",
+			url: "/replySaveProc",
 			data: JSON.stringify(allData),
 			contentType: "application/json; charset = utf-8 ",
 			dataType: "json"

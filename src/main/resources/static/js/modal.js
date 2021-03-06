@@ -80,7 +80,7 @@ function openMenu() {
 	$("#btn-com").off("click");	
 	$("#btn-com").on("click", () => {
 		if(confirm("정말 등록하시겠습니까 ?") == true){
-			requestInit.testReply(rq.requestItem);
+			requestInit.saveReply(rq.requestItem);
 	    }
 	    else{
 	        return ;
