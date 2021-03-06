@@ -38,8 +38,8 @@
 					<c:choose>
 						<c:when test="${topCount < 3}">
 							<fmt:formatDate value="${top.regDate}" pattern="yyyy. MM. dd." var="topRegdate" />
-							<div class="news-header-wrapper test" style="display:inline;">
-								<img class="news-header-wrapper-image" src="/image/news-test.jpeg" style="width:100%;"/>
+							<div class="news-header-wrapper" style="display:inline;">
+								<img class="news-header-wrapper-image" src="/image/news1.jpg" style="width:100%;"/>
 								<div class="news-header-wrapper-text">
 									<p class="news-header-wrapper-title">${top.title}</p>
 									<p class="news-header-wrapper-date">${topRegdate}</p>
@@ -82,7 +82,7 @@
 				<c:forEach var="news" items="${newsList.content}">
 				<fmt:formatDate value="${news.regDate}" pattern="yyyy. MM. dd." var="regdate" />
 					<div class="news-section2-div">
-						<div class="image-container2 test"><img class="news-section2-image" src="/image/news-test.jpeg" style="height:100%; object-fit:contain;"/></div>
+						<div class="image-container2"><img class="news-section2-image" src="/image/news2.jpeg" style="height:100%; object-fit:contain;"/></div>
 						<div class="news-section2-div-right">
 							<p class="news-section2-div-title">${news.title}</p>
 							<p class="news-section2-div-date">조회수 ${news.count}회 · ${regdate}</p>

@@ -710,12 +710,12 @@ a {
 }
 @media (max-width: 768px) {
 	.search-icon {
-  width:1.5rem;
-  color :black;
-  cursor:pointer;
-  margin:0!important;
-  margin-left:-50px!important;
-}
+	  width:1.5rem;
+	  color :black;
+	  cursor:pointer;
+	  margin:0!important;
+	  margin-left:-50px!important;
+	}
   .fbox-title {
     font-size:0.76rem!important;
   }

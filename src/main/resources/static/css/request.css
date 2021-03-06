@@ -212,6 +212,13 @@ td, th {
   .sec3-middle-left {
     border-style : none!important;
   }
+  	.search-icon {
+	  width:1.5rem;
+	  color :black;
+	  cursor:pointer;
+	  margin:0!important;
+	  margin-left:-50px!important;
+	}
 
 
 
@@ -528,14 +535,11 @@ td, th {
 }
 
 .search-icon {
+  width:2rem!important;
   color :black;
-  font-size:4vh;
   cursor:pointer;
   margin:0!important;
   margin-left:-50px!important;
-  /* position:relative; */
-  /* left:-5%; */
-  /* transform: translateX(-90%); */
 }
 
 .test {
