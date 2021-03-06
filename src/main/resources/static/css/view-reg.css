@@ -114,14 +114,17 @@ td, th {
 
 .table-num {
   text-align:right;
+  width:15%;
 }
 
 .table-title {
-  width:40vw;
+  width:60%;
   padding-left:15px;
   cursor:pointer;
 }
-
+.table-date {
+	width:20%;
+}
 .fbold {
   font-weight:bold;
 }
@@ -564,22 +567,12 @@ td, th {
   transform: translateX(-55%);
 }
 
-/* .search-icon {
+.search-icon {
+  width:2rem!important;
   color :black;
-  font-size:4vh;
   cursor:pointer;
   margin:0!important;
   margin-left:-50px!important;
-  position:relative;
-  left:-5%;
-  transform: translateX(-90%);
-} original */ 
-.search-icon {
-  width:2rem;
-  color :black;
-  cursor:pointer;
-  margin:0!important;
-  margin-left:-70px!important;
 }
 
 .test {

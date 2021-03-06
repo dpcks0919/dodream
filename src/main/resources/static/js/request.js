@@ -1,7 +1,6 @@
 var Lat, Lng;
 var prevMarker;
 
-
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -264,27 +263,7 @@ function bringInfo(type, userName, userPhone, orgName) {
 	}
 }
 
-var isEmpty = function(value){ if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ return true }else{ return false } };
-
-
-
-
 let requestInit = {
-
-
-	init:function(){
-		/*	
-		$("#search-btn").on("click", () => {
-			var typeTarget = document.getElementById("search-type");
-			var clientTarget = document.getElementById("search-client");
-			var periodTarget = document.getElementById("search-period");
-			var code = document.getElementById("code").value;
-			if( isEmpty(code)){
-				code = 0;
-			}
-			location.href= "/user/searchRequestList?code="+ code +"&type="+ typeTarget.options[typeTarget.selectedIndex].value +"&client="+ clientTarget.options[clientTarget.selectedIndex].value +"&period="+ periodTarget.options[periodTarget.selectedIndex].value;
-		}); */
-	},
 	
 	saveRequest:function(totalCnt, itemList) {
 		  var period = document.getElementById('requestPeriod').value;
@@ -346,8 +325,8 @@ let requestInit = {
 		item.itemNum.replace(',','');
 		item.itemNum = parseInt(temp_itemNum.replace(',',''));
 		
+		// 어떠한 request인지 object type으로 assign
 		item.request = newRequest;
-		
 		$.ajax({
 			type: "POST",
 			url: "/requestItemSaveProc",
@@ -362,8 +341,8 @@ let requestInit = {
 			console.log(JSON.stringify(error));
 		});		
 	},
-		
-	saveReply:function(items, rq) {
+	
+    saveReply:function(items, rq) {
 	
 		let requestId = {
 			id: $("#rq_id").text(),
@@ -411,7 +390,4 @@ let requestInit = {
 			console.log(JSON.stringify(error));
 		});		
 	},
-		
 }
-
-requestInit.init();
