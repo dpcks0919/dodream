@@ -121,6 +121,7 @@ html, body {
 	display:flex; 
 	justify-content:center;
 	margin-bottom:1rem;
+	height: 3rem;
 }
 .mission-mid-wrapper {
 	width:100%;
@@ -130,8 +131,6 @@ html, body {
 }
 .mission-mid {
 	width:100%;
-	display:flex; 
-	justify-content:center;
 	margin-bottom:1rem;
 	padding:0;
 }
@@ -280,8 +279,6 @@ html, body {
 }
 .intro2-image-wrapper {
 	width:100%!important;
-	display:flex;
-	justify-content:center!important;
 	text-align:center;
 }
 .intro2-section2-wrapper h4 {
