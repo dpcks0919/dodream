@@ -141,6 +141,12 @@ td, th {
   cursor:pointer;
 }
 
+.info-table tr td, .info-table tr th {
+	padding-top:0.5rem;
+	padding-bottom:0.5rem;
+}
+
+
 @media (max-width: 576px) {
   .map-content {
     height:13vh!important;

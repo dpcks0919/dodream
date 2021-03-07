@@ -32,7 +32,11 @@ dependencies {
 	compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.3.3.RELEASE'
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 	compile('javax.servlet:jstl:1.2')
+	// sms api
 	compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+	//email api
+	compile("org.springframework.boot:spring-boot-starter-mail")	
+	
 	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 

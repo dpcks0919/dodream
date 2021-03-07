@@ -3,8 +3,11 @@ package com.dodream.controller.api;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
@@ -13,9 +16,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +27,8 @@ import com.dodream.dto.FileUploadDto;
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
+import com.dodream.model.User;
+import com.dodream.model.UserInterest;
 import com.dodream.service.RequestService;
 
 @RestController
@@ -33,6 +38,61 @@ public class RequestApiController {
 	
 	@Value("${summernote.upload}")
 	private String uploadFilePath;
+	
+	@PostMapping("/getValidUserListProc")
+	public ResponseDto<User[]> getValidList() {
+		// Valid User 리턴
+		User[] validUserList = requestService.getValidUserListService();		
+		return new ResponseDto<User[]> (HttpStatus.OK.value(),validUserList);
+	}
+	
+	@PostMapping("/notifyByEmailProc")
+	@ResponseBody
+	public ResponseDto<Integer> notifyByEmail(@RequestParam(value = "stringUserList") String[] stringUserList, @RequestParam(value = "stringRequest") String[] stringRequest) throws UnsupportedEncodingException, MessagingException {
+		// userEmail 추출
+		String[] userEmailList = new String[stringUserList.length/24];
+		for(int i = 0; i < userEmailList.length; i++) {
+			String email = stringUserList[i * 24 + 7].substring(13, stringUserList[i * 24 + 7].length()-1);
+			userEmailList[i] = email;
+		}
+		
+		// request Title 추출
+		String requestTitle = stringRequest[0].substring(10, stringRequest[0].length()-1);
+		
+		// EmailList를 돌면서 email과 request Title 전송
+		for(int i = 0; i < userEmailList.length;i ++) {
+			requestService.sendEmailService(userEmailList[i], requestTitle);
+		}
+		
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/notifyByTextProc")
+	public ResponseDto<Integer> notifyByText(@RequestParam(value = "stringUserList") String[] stringUserList, @RequestParam(value = "stringRequest") String[] stringRequest) {
+		// userPhone 추출
+		String[] userPhoneList = new String[stringUserList.length/24];  
+		for(int i = 0; i < userPhoneList.length; i++) { 
+			String userPhone = stringUserList[i * 24 + 6].substring(13, stringUserList[i * 24 + 6].length()-1);
+			userPhoneList[i] = userPhone;
+		}
+		
+		// request Title 추출
+		String requestTitle = stringRequest[0].substring(10, stringRequest[0].length()-1);
+		
+		// PhoneList를 돌면서 phone number과 request Title 전송
+		for(int i = 0; i < userPhoneList.length; i ++) {
+			requestService.sendTextService(userPhoneList[i], requestTitle);
+		}
+		
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+//	@PostMapping("/heart")
+//	public ResponseDto<Integer> heartSave(@RequestBody UserInterest userInterest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		requestService.saveHeart(userInterest, principalDetails);
+//		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+//	}
+//	
 	
 	@PostMapping("/requestSaveProc")
 	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
