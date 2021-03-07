@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,6 +41,10 @@ public class News{
 	
 	@Lob // 대용량 데이터.
 	private String content;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)	
+	private NewsType newsType;
 	
 	@Column(columnDefinition = "int default 0")
 	private int count;

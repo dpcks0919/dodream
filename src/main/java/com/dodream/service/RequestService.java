@@ -30,6 +30,7 @@ import com.dodream.model.ClientType;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.User;
+import com.dodream.model.UserInterest;
 import com.dodream.repository.RequestItemRepository;
 import com.dodream.repository.RequestRepository;
 import com.dodream.repository.UserRepository;
@@ -61,6 +62,9 @@ public class RequestService {
 	@Value("${api.sms.send-phone}")
 	private String sendPhone;
 
+//	@Autowired
+//	private UserInterestRepository userInterestRepository;
+	
 	@Transactional
 	public Request saveRequest(Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
@@ -90,6 +94,14 @@ public class RequestService {
 		System.out.println("saveRequestItem");
 	}
 	
+//	@Transactional
+//	public void saveHeart(UserInterest userInterest, @AuthenticationPrincipal PrincipalDetails principalDetails)
+//		userInterest.setUser(principalDetails.getUser());
+//		
+//		userInterestRepository.save();
+//	}
+	
+	
 	//new
 	@Transactional
 	public int addRequestItem(RequestItem requestItem, int addNum) {
@@ -108,7 +120,7 @@ public class RequestService {
 	public Page<Request> readRequestList(Pageable pageable) {
 		return requestRepository.findAll(pageable);
 	}
-
+	
 	@Transactional
 	public Request[] requestListProcService() {
 		Request[] requestList = requestRepository.findAllByDeleteFlag(0);
@@ -118,9 +130,6 @@ public class RequestService {
 	@Transactional
 	public Request[] markProcService(String clientType) {
 		Request[] requestList = requestRepository.findAllByClientType(ClientType.valueOf(clientType));
-//		for (int i = 0; i < requestList.length; i++) {
-//			System.out.println(requestList[i].getRequestAddress());
-//		}
 		return requestList;
 	}
 

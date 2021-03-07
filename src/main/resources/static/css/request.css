@@ -396,6 +396,10 @@ td, th {
     width: 100%;
     margin-top:9rem
   }
+  .responsive-map-wrapper {
+  	width: 100%!important;
+  	display:block!important;
+  }
 
 }
 
@@ -664,7 +668,7 @@ td, th {
   outline:none;
 }
 .request-title:focus {
-  border-bottom:2px solid black;
+  border-bottom:3px solid black;
 }
 .request-content {
   height:30vh;
@@ -695,6 +699,8 @@ td, th {
   border-radius: 4px;
   color: #e95378;
   cursor: pointer;
+}
+.btn-res {
 }
 
 .btn-com, .btn-save, .btn-upload {

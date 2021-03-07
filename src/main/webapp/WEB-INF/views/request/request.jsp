@@ -69,19 +69,19 @@
 		<section class="request-section" id="request">
 			<div class="container">
 				<div class="request-form" id="requestForm">
-					<div class="" style="margin-bottom: 1rem;">
+					<div class="map-div0" style="margin-bottom: 1rem;">
 						<input type="text" class="request-title" id="requestTitle" placeholder="제목을 입력해주세요" name="title" required />
 					</div>
-					<div style="">
-						<div class="" style="width:100%; display:inline-block;">
-							<div class="" style="margin-bottom:1rem;">
+					<div class="" style="">
+						<div class="responsive-map-wrapper" style="width:45%; margin:0; display:inline-block;">
+							<div class="map-div1" style="margin-bottom:1rem;">
 								<span>기간 설정 : </span> <select class="request-period" name="period" id="requestPeriod" style="outline:none;">
 									<option name="p1">보통(한 달 이내)</option>
 									<option name="p2">긴급(7~14일 이내)</option>
 									<option name="p3">매우 긴급(3일 이내)</option>
 								</select>
 							</div>
-							<div class="" style="margin-bottom:0.5rem;">
+							<div class="map-div2" style="margin-bottom:0.5rem;">
 								<span>요청 대상 : </span> <select class="request-period" name="type" id="requestType" style="outline:none;">
 									<option name="t1">노인</option>
 									<option name="t2">아이</option>
@@ -90,49 +90,22 @@
 								</select>
 							</div>
 							<span class="" style="font-size:0.76rem; color:blue;">* 대략적인 위치 파악을 위한 주소이므로, 상세 정보는 적으시지 않아도 됩니다.</span>
-							<div class="" style="margin-bottom:0.5rem;">
-								<span>요청 장소 : </span> <input class="text-input" type="text" name="roadAddrPart1" style="width:50%; margin-right:0.5rem; font-size:0.75rem;" id="roadAddrPart1" placeholder="예시 : 포항시 북구 흥해읍 한동로 558" disabled>
+							<div class="map-div3" style="margin-bottom:0.5rem;">
+								<span>요청 장소 : </span> <input class="text-input" value="" type="text" name="roadAddrPart1" style="width:50%; margin-right:0.5rem; font-size:0.75rem;" id="roadAddrPart1" placeholder="예시 : 포항시 북구 흥해읍 한동로 558" disabled>
 								<button style="background-color:white; border:1px solid black; outline:none;" onclick="goPopup();">검색</button>
-								  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-								    지도에서 보기
-								  </button>
 							</div>
 						</div>
 						
-						  <!-- The Modal -->
-						  <div class="modal" id="myModal" style="">
-						    <div class="modal-dialog" style="width:80%!important; height:80%!important;">
-						      <div class="modal-content">
-						      
-						        <!-- Modal Header -->
-						        <div class="modal-header">
-						          <h4 class="modal-title">Modal Heading</h4>
-						          <button type="button" class="close" data-dismiss="modal">&times;</button>
-						        </div>
-						        
-						        <!-- Modal body -->
-						        <div class="modal-body" style="padding:0; margin:0;">
-	        						<!-- 지도에서 보기를 클릭하면 모달로 나오도록? -->
-									<div class="map_wrap " style="height:100%!important; display:none; padding:0!important; margin:0!important;">
-										<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-										<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-										<div class="custom_zoomcontrol radius_border" >
-											<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
-												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
-										</div>
-									</div>
-						        </div>
-						        <!-- Modal footer -->
-						        <div class="modal-footer">
-						          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-						        </div>
-						        
-						      </div>
-						    </div>
-						  </div>
-						
-						
-						
+						<div class="responsive-map-wrapper" style="width:50%; display:inline-block;">
+							<div class="map_wrap" style="width:100%; height: 10rem; padding:0!important; margin:0!important; overflow:hidden;">
+								<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+								<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+								<div class="custom_zoomcontrol radius_border" >
+									<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
+										src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<div class="summernoteDiv">
@@ -173,7 +146,6 @@
 				</div>
 				<div class="request-ftr" style="justify-content: space-between;">
 					<div class="btn-upload" onclick="upload(1);">미리보기</div>
-					<!-- <div class="btn-save" onclick="save();">임시저장</div> -->
 				</div>
 			</div>
 		</section>
