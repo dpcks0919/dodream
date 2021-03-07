@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.config.auth.PrincipalDetails;
+import com.dodream.dto.ReplyDto;
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Reply;
-import com.dodream.model.ReplyItem;
+import com.dodream.model.Request;
 import com.dodream.service.ReplyService;
+import com.dodream.service.RequestService;
 
 @RestController
 public class ReplyApiController {
@@ -19,16 +21,31 @@ public class ReplyApiController {
 	@Autowired
 	private ReplyService replyService;
 	
-	@PostMapping("/replySaveProc")
-	public ResponseDto<Reply> replySave(@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		// 해당 request의 requestItem들의 필요 수량을 다시 확인해야 됨!
-		Reply newReply = replyService.saveReply(reply, principalDetails);
-		return new ResponseDto<Reply> (HttpStatus.OK.value(), newReply);
-	}
+	@Autowired
+	private RequestService requestService;
 	
-	@PostMapping("/replyItemSaveProc")
-	public ResponseDto<ReplyItem> saveReplyItem(@RequestBody ReplyItem replyItem) {
-		ReplyItem newReplyItem = replyService.saveReplyItem(replyItem);
-		return new ResponseDto<ReplyItem> (HttpStatus.OK.value(), newReplyItem);
+	@PostMapping("/replySaveProc")
+	public ResponseDto<Request> replySaveProc(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		int check = 0;
+		
+		for(int i=0;  i < replyDto.getReplyItems().length; i ++) {
+			check += replyService.checkItemValidation(replyDto.getReplyItems()[i].getItemId(), 
+													 Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
+		}
+		
+		if (check > 0 ) {
+			return new ResponseDto<Request> (HttpStatus.OK.value(), requestService.getRequest(replyDto.getReply().getRequest().getId()));
+		}
+		
+		Reply newReply = replyService.saveReply(replyDto.getReply(), principalDetails);
+		
+		for(int i=0;  i < replyDto.getReplyItems().length; i ++) {
+			replyService.saveReplyItem(replyDto.getReplyItems()[i], newReply);
+			replyService.addReceivedNumber(replyDto.getReplyItems()[i].getItemId(), 
+											Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
+		}
+		
+		return new ResponseDto<Request> (HttpStatus.OK.value(), null);
 	}
 }

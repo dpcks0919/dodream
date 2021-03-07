@@ -1,12 +1,34 @@
 var Lat, Lng;
 var prevMarker;
 
+	/*
+function heartCheck() {
+	alert($("#rq_id").text());
+		$.ajax({
+			type: "POST",
+			url: "/heart",
+			data: {
+				id : 
+			}
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("아이템 업로드 실패하였습니다. ");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});		
+}
+*/
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
+	$(".map-div0").css("margin-bottom","2rem");
+	$(".map-div1").css("margin-bottom","2rem");
+	$(".map-div2").css("margin-bottom","1.5rem");
+	$(".map-div3").css("margin-bottom","2rem");
 }
 
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
@@ -276,11 +298,6 @@ function getDistance(firstLongi, firstLati, secondLongi, secondLati){
 }
 
 let requestInit = {
-	/*init: function() {
-		$("#btn-com").on("click", () => { 
-				this.saveReply();
-		});		
-	},*/
 	
 	// 범위 안의 유저들에게 문자, 이메일을 보내는 함수
 	notifyUser: function(requestLat, requestLng, request){		
@@ -441,94 +458,52 @@ let requestInit = {
 		});		
 	},
 	
-	addRequestItem:function(id, addNum) {
-		var newAddNum = parseInt(addNum);
-		var newId = parseInt(id);
-			
-		$.ajax({
-			//회원가입 수행 요청.
-			type: "POST",
-			url: "/requestItemAddProc",
-			data: {
-				id: newId,
-				addNum: newAddNum,
-			} 
-		}).done(function(resp){
-			if(resp.status == 500){
-				alert("응답에 실패하였습니다.");
-			}
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});
-	},
+    saveReply:function(items, rq) {
 	
-	saveReply:function(items) {
-		// request객체에서 id만 보내는 방법
 		let requestId = {
 			id: $("#rq_id").text(),
 		};
 
 		let reply = {
-			// request 처리 방법
 			replyContent: $("#reply_content").val(),
 			replyUser: $("#reply_user").val(),
 			replyOrg: $("#reply_org").val(),
 			replyPhone: $("#reply_phone").val(),
-			// status는 service에서 처리
 			request: requestId
 		};
-
+	
+		for(var i=0; i<items.length; i++) {
+			var rid = "#response_num" + i;
+			var reply_num = parseInt($(rid).val());
+			items[i].replyNum = reply_num;
+		}
+					
+		var allData = {
+			reply : reply,
+			replyItems: items,
+		}
+		
 		$.ajax({
 			type: "POST",
 			url: "/replySaveProc",
-			data: JSON.stringify(reply),
-			contentType: "application/json; charset = utf-8 ",
-			dataType: "json"
-		}).done(function(resp){
-			if(resp.status == 500) {
-				alert("업로드 실패하였습니다. ");
-			}else {
-				for(var i=0; i<items.length; i++) {
-					var rid = "#response_num" + i;
-					var reply_num = parseInt($(rid).val());
-					requestInit.saveReplyItem(i, items[i], resp.data, rid, reply_num);
-					requestInit.addRequestItem(items[i].itemId, reply_num)
-				}
-				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-				location.href = "/user/requestList";
-			} 
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});
-	}, 
-	
-	saveReplyItem:function(i, item, newReply, rid, reply_num) {
-		// 변수 이름바꿔도 되고 parsing도 맘대로 해도 되고
-		// 해당하는 requestItem의 id랑 replyNum만 보내주면됨
-		let itemId = {
-			id: item.itemId,
-		}
-		
-		let reply_item = {
-			requestItem: itemId,
-			replyNum: reply_num,
-			reply: newReply,
-		}
-		
-		$.ajax({
-			type: "POST",
-			url: "/replyItemSaveProc",
-			data: JSON.stringify(reply_item),
+			data: JSON.stringify(allData),
 			contentType: "application/json; charset = utf-8 ",
 			dataType: "json"
 		}).done(function(resp){
 			if(resp.status == 500) {
 				alert("아이템 업로드 실패하였습니다. ");
 			}
+			if( resp.data != null){
+				alert("누군가 중간에 아이템 넣음");
+				closeModal();
+				goDetail_request(resp.data);
+			}else{
+				alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+				location.href = "/user/requestList";
+			}
+			
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
 		});		
 	},
 }
-
-//requestInit.init();
