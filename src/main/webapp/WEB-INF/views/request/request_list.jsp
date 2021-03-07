@@ -134,10 +134,10 @@
 		</header>
 
 		<section class="page-section-map text-center " id="portfolio">
-			<div class="container ">
+			<div class="container">
 				<div class="" style="text-align: right;">
 					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> 
-					<div id="btn-search ">
+					<div id="btn-search">
 						<img class="search-icon " src="/image/search-icon.png" />
 					</div>				
 				</div>

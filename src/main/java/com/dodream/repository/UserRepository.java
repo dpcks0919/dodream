@@ -21,5 +21,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public User findByLoginIdAndLoginPassword(String loginId, String loginPassword);
 
 	public User[] findByUserTypeAndShowFlag(RoleType userType, int showFlag);
+
+	@Query(value = "SELECT * FROM user WHERE (user_type='GROUP' OR user_type = 'INDIVIDUAL') AND state_flag = 'APPROVED' AND (msg_flag = 1 OR email_flag = 1)", nativeQuery = true)
+	public User[] findValidUser();
 	
 }

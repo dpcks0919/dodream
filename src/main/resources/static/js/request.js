@@ -263,12 +263,100 @@ function bringInfo(type, userName, userPhone, orgName) {
 	}
 }
 
+var polyline=new daum.maps.Polyline();
+// 두 좌표 사이의 거리를 구하는 함수
+function getDistance(firstLongi, firstLati, secondLongi, secondLati){
+	var path = [
+		new kakao.maps.LatLng(firstLati, firstLongi),
+		new kakao.maps.LatLng(secondLati, secondLongi)
+	];
+	polyline.setPath(path);
+	
+	return polyline.getLength();
+}
+
 let requestInit = {
 	/*init: function() {
 		$("#btn-com").on("click", () => { 
 				this.saveReply();
 		});		
 	},*/
+	
+	// 범위 안의 유저들에게 문자, 이메일을 보내는 함수
+	notifyUser: function(requestLat, requestLng, request){		
+		$.ajax({
+			type: "POST",
+			url: "/getValidUserListProc",
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("getValidUserListProc 문제 발생!");
+			}
+			else{
+				// 1. validUserList 받기
+				var validUserList = resp.data;	
+				var notifyTextUserList = [];	// notify text할 유저들 리스트
+				var notifyEmailUserList = [];	// notify email할 유저들 리스트
+				
+				// 2. for문 돌면서 user의 notification_radius 안에 있는지 확인
+				validUserList.forEach(function(list, index) { 
+					if(list.notificationRadius >= getDistance(list.latitude, list.longitude, requestLat, requestLng) / 1000){
+						// 2-1. emailFlag == 1 이면 emailList에 넣음 
+						if(list.emailFlag == 1) {
+							notifyEmailUserList.push(list);
+						}
+						
+						// 2-2. msgFlag == 1 이면 msgList에 넣음 
+						if(list.msgFlag == 1){
+							notifyTextUserList.push(list);
+						}
+					}
+				});				
+				// 3. 각각 msg, email 보내기
+				requestInit.notifyByEmail(notifyEmailUserList, request);
+				requestInit.notifyByText(notifyTextUserList, request);
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});		
+	},
+	
+	notifyByEmail: function(userList, request){
+		$.ajax({
+			type: "POST",
+			data: {
+				stringUserList: JSON.stringify(userList),
+				stringRequest: JSON.stringify(request)
+			},
+			dataType : 'json',
+			traditional: true,
+			url: "/notifyByEmailProc",
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("notifyByEmailProc 문제 발생!");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});			
+	},
+	
+	notifyByText: function(userList, request){	
+		$.ajax({
+			type: "POST",
+			data: {
+				stringUserList: JSON.stringify(userList),
+				stringRequest: JSON.stringify(request)
+			},
+			dataType : 'json',
+			traditional: true,
+			url: "/notifyByTextProc",
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("notifyByTextProc 문제 발생!");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});			
+	},
 	
 	saveRequest:function(totalCnt, itemList) {
 		  var period = document.getElementById('requestPeriod').value;
@@ -285,6 +373,8 @@ let requestInit = {
 		  else if(type_text == '장애인') type = "DISABLED";
 		  else if(type_text == '기타') type = "OTHERS";
 
+		
+		
 		let data = {
 			title: document.getElementById('requestTitle').value,
 			clientType: type,
@@ -296,6 +386,7 @@ let requestInit = {
 			status : "NON_APPROVED",			
 			showFlag : 1
 		};
+		
 		console.log(data);
 		$.ajax({
 			type: "POST",
@@ -318,6 +409,9 @@ let requestInit = {
 			    //location.reload();
 			    location.href = "/user/requestList";
 				window.scrollTo(0,0); 
+				
+				// 해당 request 정보 user에게 notify하기 
+				requestInit.notifyUser(Lat, Lng, data);
 			} 
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
