@@ -55,7 +55,7 @@ public class ReplyService {
 	@Transactional
 	public void saveReplyItem(ReplyItemDto replyItem, Reply newReply ) {
 				
-		RequestItem requestItem = requestItemRepository.findById(replyItem.getItemId()).orElseThrow(() -> {
+		RequestItem requestItem = requestItemRepository.findById(replyItem.getId()).orElseThrow(() -> {
 			return new IllegalArgumentException("요청 아이템 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 		
