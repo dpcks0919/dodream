@@ -132,61 +132,115 @@
 				</div>
 			</div>
 		</header>
+
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container">
 				<div class="request-menu">
-					<a class="request-menu-button" href="/user/requestMap">지도로 보기</a> 
-					<a class="request-menu-button request-menu-button-selected" href="/user/requestList">목록으로 보기</a>
+					<a class="request-menu-button request-menu-button-selected" href="/user/requestMap">지도로 보기</a> 
+					<a class="request-menu-button" href="/user/requestList">목록으로 보기</a>
 				</div>
-				<div class="request-table"></div>
+				<div class="" style="text-align: right;">
+					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요.">
+					<div id="btn-search">
+						<img class="search-icon " src="/image/search-icon.png" />
+					</div>
+				</div>
+				<div class="sec3-middle">
+					<div class="left sec3-middle-left">
+						<span class="sec3-text1">돕고 싶은 이웃</span>
+						<button class="tbox-center tbox-small" id="btn-elderly">노인</button>
+						<button class="tbox-center tbox-small" id="btn-child">아이</button>
+						<button class="tbox-center tbox-small" id="btn-disabled">장애인</button>
+						<button class="tbox-center tbox-small" id="btn-others">기타</button>
+					</div>
+					<div class="left sec3-middle-right">
+						<span class="sec3-text1">돕고 싶은 재화</span>
+						<button class="tbox-center tbox-small" id="btn-stuff">물품</button>
+						<button class="tbox-center tbox-small" id="btn-finance">재정</button>
+						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
+						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
+					</div>
+				</div>
+				<div class="map_wrap ">
+					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+					<!-- 지도타입 컨트롤 div 입니다 -->
+					<div class="custom_typecontrol radius_border">
+						<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+					</div>
+					<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+					<div class="custom_zoomcontrol radius_border">
+						<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
+							src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+					</div>
+				</div>
+			</div>
+			<div id="maker-info-container-blank" style="height: 30px;"></div>
+			<div class="container" id="marker-info-container">
+
+				<div class="map-content">
+					<div class="map-left" style="display: block">
+						<p class="help-content" id="marker-info-title">주거환경개선 도움</p>
+						<p class="help-date" id="marker-info-date">등록일 2020/12/25</p>
+					</div>
+					<div class="map-mid ">
+						<p class="wrapper-status">
+							상태 <span class="help-status" id="marker-info-status">응답 대기중</span>
+						</p>
+						<p>
+							기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span>
+						</p>
+					</div>
+					<div class="map-mid ">
+						<p class="wrapper-status">
+							주소 <span class="help-status" id="marker-info-address">포항시 북구 흥해읍</span>
+						</p>
+						<p>
+							문의 <span class="help-term" id="marker-info-phone">010-1234-5678</span>
+						</p>
+					</div>
+					<div class="map-right ">
+						<span class="help-code">검색코드<input type="text" class="help-code-box" id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i
+								class="fa fa-clone copy-btn" aria-hidden="true"></i></span></span> 
+								<input type="button" class="help-detail" value="자세히 보기" id="marker-info-btn"></input>
+					</div>
+				</div>
 			</div>
 		</section>
+
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 		<%@include file="../layout/sidebar_back.jsp"%>
+
 	</div>
 
 	<%@include file="../layout/jsFile.jsp"%>
+	<%@include file="../layout/kakaoMap.jsp"%>
+	<script type="text/javascript" src="/js/map.js"></script>
 	<script src="/js/request.js"></script>
-
 	<script>
-		function initPage() {
-			$.ajax({
-				type : "GET",
-				traditional : true,
-				url : "/user/requestTable",
-			}).done(function(resp) {
-				if (resp.status == 500) {
-					alert("에러발생");
-				} else {
-					$(".request-table").html(resp);
-				}
-			}).fail(function(error) {
-				console.log(JSON.stringify(error));
-			});
-		}
+	var isIndexPage = false;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
+	var lati, longi;
+	<c:choose>
+		<c:when test="${user.loginCount == 0 || empty user.loginCount}">
+			lati = 36.1023014256562;
+			longi = 129.389266058166;
+		</c:when>
+		<c:otherwise>
+			lati = ${user.latitude};
+		  	longi = ${user.longitude};
+		</c:otherwise>
+	</c:choose>
 
-		function paging(page) {
-			$.ajax({
-				type : "GET",
-				traditional : true,
-				url : "/user/requestTable?page=" + page,
-			}).done(function(resp) {
-				if (resp.status == 500) {
-					alert("에러발생");
-				} else {
-					$(".request-table").html(resp);
-				}
-			}).fail(function(error) {
-				console.log(JSON.stringify(error));
-			});
-		}
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
 
-		$(document).ready(function() {
-			initPage();
-		});
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
 	</script>
-
 
 </body>
 </html>

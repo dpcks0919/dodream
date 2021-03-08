@@ -392,7 +392,7 @@ let mapInit = {
 					else if(list.clientType == 'DISABLED') tempMarkerImage = markerImage4;
 				    else if(list.clientType == 'OTHERS') tempMarkerImage = markerImage5	// 기타
 					 var marker = new daum.maps.Marker({ 
-						title: list.id,
+						 title: list.id,
 						 image: tempMarkerImage,	 // custome marker image(상단 전역변수 참고) 이용
 						 position: coords, 
 						 clickable: true 
