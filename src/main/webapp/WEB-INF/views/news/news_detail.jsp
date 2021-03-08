@@ -26,7 +26,6 @@
 				<div class="reg-info">
 					<h4>자세히 보기</h4>
 					<p>소식을 작성할 수 있습니다.</p>
-					<a style="border:1px solid white; color:white; cursor:pointer; padding:0.5rem;" href="/user/news/newsList">뒤로가기</a>
 				</div>
 			</div>
 		</header>
@@ -45,8 +44,20 @@
 					</div>
 					<div class="" style="overflow-y:scroll;">${newsDetail.content}</div>						
 					<div class="news-ftr" style="justify-content: space-between;">
-						<div class="btn-upload" onclick="alert('수정하기');" style="margin-right:0.5rem;">수정하기</div>
-						<a class="btn-upload" onclick="location.href='/user/news/newsList'">뒤로 가기</a>
+						<c:if test="${newsDetail.user.id == user.id}">
+						<div>
+							<div class="btn-upload" onclick="alert('권한이 없습니다.');">수정하기</div>
+							<div class="btn-upload" onclick="alert('권한이 없습니다.');" style="margin-right:0.5rem;">삭제하기</div>						
+						</div>
+						</c:if>
+						<c:if test="${newsDetail.user.id != user.id}">
+						<div>
+							<div class="btn-upload" onclick="location.href='/user/news/newsEdit/${newsDetail.id}'">수정하기</div>							
+							<div class="btn-upload" onclick="news_delete();" style="margin-right:0.5rem;">삭제하기</div>						
+						</div>
+						</c:if>					
+											
+						<a class="btn-upload" onclick="location.href='/news/newsList'">뒤로 가기</a>
 					</div>		
 				</div>
 			</div>

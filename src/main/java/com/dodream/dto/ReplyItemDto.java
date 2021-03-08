@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReplyItemDto {
-	int itemId;
+	int id;
 	String itemName;
 	String itemNum;
 	String receivedNum;

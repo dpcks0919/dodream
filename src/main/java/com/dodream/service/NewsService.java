@@ -1,6 +1,13 @@
 package com.dodream.service;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,10 +48,29 @@ public class NewsService {
 	}
 
 	public News readNewsOne(int id) {
-		System.out.println("id : " + id);
 		// TODO Auto-generated method stub
 		return newsRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("소식 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
+	}
+	
+	// 제대로 했는지 모르겠음. 잘 안됨
+	@Transactional
+	public void update(News news) {
+		System.out.println("id : " + news.getId());
+		System.out.println(news);
+		News persistance = newsRepository.findById(news.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("소식 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		persistance.setTitle(news.getTitle());
+		persistance.setContent(news.getContent());
+		persistance.setNewsType(news.getNewsType());
+		persistance.setCount(news.getCount());
+		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
 	}
 }
