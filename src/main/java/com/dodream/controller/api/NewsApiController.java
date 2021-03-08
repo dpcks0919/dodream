@@ -23,4 +23,10 @@ public class NewsApiController {
 		newsService.saveNews(news, principalDetails);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
+	
+	@PostMapping("/newsUpdateProc")
+	public ResponseDto<Integer> newsUpdate(@RequestBody News news, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		newsService.update(news);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
+	}
 }

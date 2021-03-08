@@ -14,7 +14,7 @@
 }
 </style>
 
-<form id="newsForm" method="post" action="/user/news/newsList" hidden>
+<form id="newsForm" method="post" action="/news/newsList" hidden>
 	<input type="hidden" name="type" id="newsType" value="">
 </form>
 
