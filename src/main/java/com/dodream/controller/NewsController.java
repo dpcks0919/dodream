@@ -24,8 +24,8 @@ public class NewsController {
 	private NewsService newsService;
 	
 //	@GetMapping("user/news/newsList")
-	@RequestMapping(value = "user/news/newsList", method= {RequestMethod.GET, RequestMethod.POST})
-	public String newsList(Model model, @RequestParam(defaultValue="ALL") String type, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+	@RequestMapping(value = "news/newsList", method= {RequestMethod.GET, RequestMethod.POST})
+	public String newsList(Model model, @RequestParam(defaultValue="ALL", value="type") String type, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
 		if(type.equals("ALL")) {
 			model.addAttribute("newsList", newsService.readNewsList("ALL", pageable));
 			model.addAttribute("ntype","ALL");
@@ -34,20 +34,26 @@ public class NewsController {
 			model.addAttribute("ntype",type);
 		}
 		model.addAttribute("recentNews", newsService.recentNewsList());
-		model.addAttribute("user", principalDetails.getUser());
 		return "news/news_list";
 	}
 	
-	@GetMapping("user/news/newsDetail/{id}")
+	@GetMapping("news/newsDetail/{id}")
 	public String newsDetail(Model model, @PathVariable(value="id") int id) {
 		System.out.println("controller id : "+id);
 		model.addAttribute("newsDetail", newsService.readNewsOne(id));
-		
 		return "news/news_detail";
 	}
 	
+	@GetMapping("user/news/newsEdit/{id}")
+	public String newsEdit(Model model, @PathVariable(value="id") int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("user", principalDetails.getUser());
+		model.addAttribute("newsDetail", newsService.readNewsOne(id));
+		return "news/news_edit";
+	}
+	
 	@GetMapping("user/news/newsWrite")
-	public String newsWrite() {
+	public String newsWrite(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("user", principalDetails.getUser());
 		return "news/news_write";
 	}
 

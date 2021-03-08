@@ -14,7 +14,7 @@
 }
 </style>
 
-<form id="newsForm" method="post" action="/user/news/newsList" hidden>
+<form id="newsForm" method="post" action="/news/newsList" hidden>
 	<input type="hidden" name="type" id="newsType" value="">
 </form>
 
@@ -96,8 +96,7 @@
 		<div class="news-section2-menu-wrapper">
 			<div class="news-section2-menu">
 				<a class="news-menu-title"><b>최신 콘텐츠</b></a>
-				<c:if test="${ntype}">
-				
+				<c:if test="${ntype}">		
 				</c:if>
 				<c:choose>
 					<c:when test="${ntype == 'ALL'}">

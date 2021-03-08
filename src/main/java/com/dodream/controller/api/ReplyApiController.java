@@ -43,10 +43,11 @@ public class ReplyApiController {
 		int check = 0;
 		
 		for(int i=0;  i < replyDto.getReplyItems().length; i ++) {
-			check += replyService.checkItemValidation(replyDto.getReplyItems()[i].getItemId(), 
+			System.out.println(replyDto.getReplyItems()[i].getId());
+			check += replyService.checkItemValidation(replyDto.getReplyItems()[i].getId(), 
 													 Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
 		}
-		
+				
 		if (check > 0 ) {
 			return new ResponseDto<Request> (HttpStatus.OK.value(), requestService.getRequest(replyDto.getReply().getRequest().getId()));
 		}
@@ -55,7 +56,7 @@ public class ReplyApiController {
 		
 		for(int i=0;  i < replyDto.getReplyItems().length; i ++) {
 			replyService.saveReplyItem(replyDto.getReplyItems()[i], newReply);
-			replyService.addReceivedNumber(replyDto.getReplyItems()[i].getItemId(), 
+			replyService.addReceivedNumber(replyDto.getReplyItems()[i].getId(), 
 											Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
 		}
 		

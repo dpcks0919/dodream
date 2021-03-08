@@ -41,6 +41,24 @@ public class ReplyService {
     private JavaMailSender javaMailSender;
 
 	@Transactional
+	public Reply getReply(int id) {
+		return replyRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("요청글 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+	}
+	
+	@Transactional
+	public Reply[] readReplyList(Request request) {
+		// TODO Auto-generated method stub
+		return replyRepository.findByRequest(request);
+	}
+	
+	@Transactional
+	public ReplyItem[] readReplyItemList(Reply reply) {
+		return replyItemRepository.findByReply(reply);		
+	}	
+	
+	@Transactional
 	public Reply saveReply(Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		reply.setRequest(requestService.getRequest(reply.getRequest().getId()));
@@ -50,6 +68,7 @@ public class ReplyService {
 		replyRepository.save(reply);
 		return reply;
 	}
+	
 
 	/*
 	@Transactional
@@ -65,7 +84,7 @@ public class ReplyService {
 	@Transactional
 	public void saveReplyItem(ReplyItemDto replyItem, Reply newReply ) {
 				
-		RequestItem requestItem = requestItemRepository.findById(replyItem.getItemId()).orElseThrow(() -> {
+		RequestItem requestItem = requestItemRepository.findById(replyItem.getId()).orElseThrow(() -> {
 			return new IllegalArgumentException("요청 아이템 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 		
