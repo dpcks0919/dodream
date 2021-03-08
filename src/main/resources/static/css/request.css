@@ -12,6 +12,7 @@ html, body {
 .title-info {
   height:18rem;
 }
+
 .reg-info {
   width:100%;
   margin-top:9rem;
@@ -225,6 +226,7 @@ td, th {
 }
 
 @media (max-width: 992px) {
+	
   .section2-text1 {
     margin-top:1.5vh!important;
     margin-bottom:1vh!important;
