@@ -10,8 +10,8 @@ spring:
   mail:
     host: smtp.naver.com
     port: 587
-    username: dpcks0919
-    password: Aa2031607@
+    username: #naver ID
+    password: #naver PW
     smtp.auth: true
     smtp.starttls.enable: true
   mvc:
