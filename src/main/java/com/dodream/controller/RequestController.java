@@ -19,13 +19,28 @@ public class RequestController {
 	@Autowired
 	private RequestService requestService;
 	
-	//	요청 목록 페이지
+	//	요청 페이지 지도
+	@GetMapping("user/requestMap")
+	public String requestMap(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("requests", requestService.readRequestList(pageable));
+		model.addAttribute("user", principalDetails.getUser());
+		return "request/request_map";
+	}
+	
+	//	요청 페이지 목록
 	@GetMapping("user/requestList")
 	public String requestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-
 		model.addAttribute("requests", requestService.readRequestList(pageable));
 		model.addAttribute("user", principalDetails.getUser());
 		return "request/request_list";
+	}
+	
+	//	요청 목록 불러오기
+	@GetMapping("user/requestTable")
+	public String requestTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("requests", requestService.readRequestList(pageable));
+		model.addAttribute("user", principalDetails.getUser());
+		return "request/request_table";
 	}
 	
 	//	요청하기 페이지 

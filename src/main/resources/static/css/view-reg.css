@@ -11,6 +11,25 @@ html, body {
 .title-info {
   height:18rem;
 }
+.request-menu{
+	font-size:1rem;
+	display:flex;
+	justify-content : flex-start;
+	width:50%!important;
+	line-height:1.5rem;
+	margin-bottom: 1rem;
+}
+.request-menu a{
+	margin-right:1rem;
+	color:black;
+	border:1px solid black;
+	padding:0.1rem 0.7rem;
+	cursor:pointer;
+}
+.request-menu-button-selected{
+	color:white!important;
+	background-color: black;
+}
 .reg-info {
   width:100%;
   margin-top:9rem;
