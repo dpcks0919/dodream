@@ -54,15 +54,18 @@ function openMenu() {
     if(level == 1) level = "매우 긴급(3일 이내)";
     else if(level == 2) level = "긴급(14일 이내)";
     else if(level == 3) level = "보통(한 달 이내)";
-
+    
     $("#rq_title").html("<h5>" + rq.title + "</h5>");
     $("#rq_id").html(rq.id);
     $("#rq_date").html(regDate);
     $("#rq_status").html(status);
     $("#rq_addr").html(rq.requestAddress);
     $("#rq_level").html(level);
-    //$("#rq_user").html(rq.userName);
-    $("#rq_user").html(org_name);
+ 	if( typeof(rq.user) === 'object' ) {
+ 	    $("#rq_user").html(rq.user.orgName);
+ 	}else if( typeof(rq.user) === 'string' ) {
+ 		$("#rq_user").html(rq.user);
+ 	}
     $("#rq_contents").html(rq.description);
 
     let items = rq.requestItem;
@@ -81,8 +84,9 @@ function openMenu() {
 
     $("#btn-com").off("click");	
 	$("#btn-com").on("click", () => {
-		if(confirm("정말 등록하시겠습니까 ?") == true){
-			requestInit.saveReply(rq.requestItem);
+		if(confirm("정말 등록하시겠습니까?") == true){
+			console.log(rq.requestItem);
+			saveReply(rq.requestItem)
 	    }
 	    else{
 	        return ;
