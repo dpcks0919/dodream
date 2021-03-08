@@ -10,8 +10,8 @@ spring:
   mail:
     host: smtp.naver.com
     port: 587
-    username: dpcks0919
-    password: Aa2031607@
+    username: wltjdals422
+    password: dbgmltn0422#
     smtp.auth: true
     smtp.starttls.enable: true
   mvc:
@@ -99,5 +99,4 @@ api:
     send-phone: '01068363758'
     
 summernote:
-  upload: Users/yechankim/Documents/sts-workspace/dodream/src/main/resources/static/image/summernote
-
+  upload: Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
