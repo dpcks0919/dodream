@@ -7,6 +7,13 @@ server:
       force: true
         
 spring:
+  mail:
+    host: smtp.naver.com
+    port: 587
+    username: dpcks0919
+    password: Aa2031607@
+    smtp.auth: true
+    smtp.starttls.enable: true
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -92,4 +99,5 @@ api:
     send-phone: '01068363758'
     
 summernote:
-  upload: /Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
+  upload: Users/yechankim/Documents/sts-workspace/dodream/src/main/resources/static/image/summernote
+
