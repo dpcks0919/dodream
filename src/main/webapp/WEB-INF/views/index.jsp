@@ -177,21 +177,21 @@
 					<div class="news-title">두드림터치 소식</div>
 					<div class="news-title-line"></div>
 				</div>
-				<div class="news-body ">
+				<div class="news-body" style="height:auto;">
 					<div class="news-body-left">
 						<c:set var="topCount" value="1" />
 						<c:forEach var="top" items="${recentNews}">
 							<div class="image-inline">
 							<c:choose>
 								<c:when test="${topCount == 1 }">
-									<div class="four_box-news">
-										<img class="news-image" src="image/news1.jpg">
+									<div class="four_box-news" onclick="newsDetail('${top.id}');">
+										<img class="news-image" id="topImg${topCount}" src="" >
 										<div class="news-image-title">${top.title}</div>
 									</div>
 								</c:when>
 								<c:when test="${topCount == 2 }">
-									<div class="four_box-news">
-										<img class="news-image" src="image/news2.jpeg">
+									<div class="four_box-news" onclick="newsDetail('${top.id}');">
+										<img class="news-image" id="topImg${topCount}" src="" >
 										<div class="news-image-title">${top.title}</div>
 									</div>
 								</c:when>
@@ -201,18 +201,44 @@
 							<div class="image-inline">
 							<c:choose>
 								<c:when test="${topCount == 3 }">
-									<div class="four_box-news">
-										<img class="news-image" src="image/news3.jpg">
+									<div class="four_box-news" onclick="newsDetail('${top.id}');">
+										<img class="news-image" id="topImg${topCount}" src="" >
 										<div class="news-image-title">${top.title}</div>
 									</div>
 								</c:when>
 								<c:when test="${topCount == 4 }">
-									<div class="four_box-news">
-										<img class="news-image" src="image/news4.jpg">
+									<div class="four_box-news" onclick="newsDetail('${top.id}');">
+										<img class="news-image" id="topImg${topCount}" src="" >
 										<div class="news-image-title">${top.title}</div>
 									</div>
 								</c:when>
 							</c:choose>
+								<script>
+									// 첫 img 태그만 잘라서 보여주는 태그
+									var fullStr = '${top.content}';
+									var strArray = fullStr.split('<p>');
+									for(var i=0; i<strArray.length; i++) {
+										if(strArray[i].includes('img src=')) {
+											var strDetail = strArray[i].split('<img src=');
+											if(strDetail.includes('<img src=')) {
+												var imgAddress = strDetail[0].split('style');													
+											} else {
+												var imgAddress = strDetail[1].split('style');
+											}
+											var realImg = imgAddress[0];
+											// 맨 앞 문자 자르기(" 하나)
+											realImg = realImg.substr(1);
+											// 맨 뒷 두문자 자르기(공백과 " 하나)
+											realImg = realImg.substr(0, realImg.length -2);
+											var imgId = "topImg"+${topCount};
+											document.getElementById(imgId).src= realImg;
+											break;
+										}
+									};
+									
+									
+								</script>							
+							
 							</div>
 							<c:set var="topCount" value="${topCount + 1}" />
 						</c:forEach>
@@ -226,7 +252,7 @@
 							<c:choose>
 								<c:when test="${rightCount < 10}">
 									<fmt:formatDate value="${right.regDate}" pattern="MM.dd" var="rightRegdate" />
-									<p class="news-body-right-content">[${rightRegdate} 두드림터치 소식] ${right.title}</p>	
+									<p class="news-body-right-content" onclick="newsDetail('${right.id}');">[${rightRegdate} 두드림터치 소식] ${right.title}</p>	
 								</c:when>
 							</c:choose>
 							<c:set var="rightCount" value="${rightCount + 1}" />
@@ -264,6 +290,11 @@
 	<%@include file="layout/kakaoMap.jsp"%>
 	<script type="text/javascript" src="/js/map.js"></script>
 	<script>
+	
+	function newsDetail(newsId) {
+		location.href="/news/newsDetail/"+newsId;
+	}
+	
 	var isIndexPage = true;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
 	var lati, longi;
 	<c:choose>
