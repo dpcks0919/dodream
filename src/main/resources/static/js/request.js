@@ -506,9 +506,26 @@ let requestInit = {
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
 		});		
-	},	
-    saveReply:function(items) {
+	},
 	
+	//(기부자가) 요청보기 모달창에서 '완료하기' 버튼 누를때 해당 사회복지사에게 email 알림 보내기
+	notifySocialWorkerByEmail: function(reply){
+		$.ajax({
+			type: "POST",
+			url: "/notifySocialWorkerByEmailProc",
+			data: JSON.stringify(reply),
+			contentType: "application/json; charset = utf-8 ",
+			dataType: "json"
+		}).done(function(resp){ 
+			if(resp.status == 500) {
+				alert("notifySocialWorkerByEmail 실패하였습니다. ");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});		
+	},
+	
+  saveReply:function(items) {
 		let requestId = {
 			id: $("#rq_id").text(),
 		};
@@ -548,6 +565,8 @@ let requestInit = {
 				goDetail_request(resp.data);
 			}else{
 				alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+				//사회 복지사에게 email로 알림 보내기
+				requestInit.notifySocialWorkerByEmail(reply);
 				location.href = "/user/requestList";
 			}
 			
