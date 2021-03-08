@@ -364,7 +364,7 @@ let requestInit = {
 		});		
 	},
 	
-    saveReply:function(items, rq) {
+    saveReply:function(items) {
 	
 		let requestId = {
 			id: $("#rq_id").text(),

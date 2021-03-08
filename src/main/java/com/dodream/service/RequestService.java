@@ -14,9 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.model.ClientType;
+import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
-import com.dodream.model.UserInterest;
+import com.dodream.model.User;
+import com.dodream.repository.ReplyRepository;
 import com.dodream.repository.RequestItemRepository;
 import com.dodream.repository.RequestRepository;
 
@@ -28,6 +30,9 @@ public class RequestService {
 
 	@Autowired
 	private RequestItemRepository requestItemRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 //	@Autowired
 //	private UserInterestRepository userInterestRepository;
@@ -113,6 +118,10 @@ public class RequestService {
 			return new IllegalArgumentException("요청 아이템 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 	}
-
+	
+	@Transactional
+	public Request[] readMyRequest(User user) {
+		return requestRepository.findByUser(user);
+	}
 
 }

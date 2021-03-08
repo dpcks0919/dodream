@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
-
 </style>
 
 <body id="page-top">
@@ -135,10 +134,10 @@
 		</header>
 
 		<section class="page-section-map text-center " id="portfolio">
-			<div class="container ">
+			<div class="container">
 				<div class="" style="text-align: right;">
 					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요."> 
-					<div id="btn-search ">
+					<div id="btn-search">
 						<img class="search-icon " src="/image/search-icon.png" />
 					</div>				
 				</div>
@@ -359,14 +358,12 @@
 		  	longi = ${user.longitude};
 		</c:otherwise>
 	</c:choose>
-
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
 			level : 3
 		// 지도의 확대 레벨
 		};
-
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 	</script>
