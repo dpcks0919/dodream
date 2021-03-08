@@ -26,7 +26,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
     username: root
-    password: root1234
+    password: root
     
     
   jpa:
@@ -100,6 +100,5 @@ api:
     api-secret: EVJACJDVXCTXW2ODT28UXRDIZHPZ9TUL
     send-phone: '01068363758'
 
-    
 summernote:
   upload: /Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
