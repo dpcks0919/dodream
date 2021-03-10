@@ -1,10 +1,15 @@
 package com.dodream.controller.api;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.config.auth.PrincipalDetails;
@@ -23,6 +28,14 @@ public class ReplyApiController {
 	
 	@Autowired
 	private RequestService requestService;
+	
+	@PostMapping("/notifySocialWorkerByEmailProc")
+	public ResponseDto<Integer> notifySocialWorkerByEmailProc(@RequestBody Reply reply) throws UnsupportedEncodingException, MessagingException{
+		// requestId로 해당 request 객체 찾기
+		Request request = requestService.getRequest(reply.getRequest().getId());
+		replyService.notifySocialWorkerByEmail(reply, request);
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), null); 
+	}
 	
 	@PostMapping("/replySaveProc")
 	public ResponseDto<Request> replySaveProc(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {

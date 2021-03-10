@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.dodream.model.ClientType;
 import com.dodream.model.Request;
+import com.dodream.model.User;
 // 사회복지사의 요청 Form
 public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Request[] findAllByClientType(ClientType clientType);
 
 	Request[] findAllByDeleteFlag(int i);
-	
+
 	Page<Request> findById(int id, Pageable pageable);
 
 	Page<Request> findByTitleContaining(String id, Pageable pageable);
@@ -44,5 +45,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 			String searchText, Pageable pageable);
 
 	Page<Request> findByClientTypeAndUrgentLevel(ClientType client, int urgentLevel, Pageable pageable);
+
+	Request[] findByUser(User user);
 
 }

@@ -340,11 +340,30 @@ function saveReply(items) {
 					goDetail_request(resp.data);
 				}else{
 					alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+					notifySocialWorkerByEmail(reply);
 					closeModal();
 					$(".request-table").empty();
 					paging(curPage);
 				}
 			}		
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});		
+	};
+	
+	//(기부자가) 요청보기 모달창에서 '완료하기' 버튼 누를때 해당 사회복지사에게 email 알림 보내기
+	function notifySocialWorkerByEmail(reply){
+		alert("notifySocialWorkerByEmail");
+		$.ajax({
+			type: "POST",
+			url: "/notifySocialWorkerByEmailProc",
+			data: JSON.stringify(reply),
+			contentType: "application/json; charset = utf-8 ",
+			dataType: "json"
+		}).done(function(resp){ 
+			if(resp.status == 500) {
+				alert("notifySocialWorkerByEmail 실패하였습니다. ");
+			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
 		});		
@@ -445,49 +464,51 @@ let requestInit = {
 		  else if(type_text == '장애인') type = "DISABLED";
 		  else if(type_text == '기타') type = "OTHERS";
 
-		
-		
-		let data = {
-			title: document.getElementById('requestTitle').value,
-			clientType: type,
-			requestAddress : document.getElementById('roadAddrPart1').value,
-			latitude : Lat,
-			longitude : Lng,
-			urgentLevel : period,
-			description : document.getElementById('requestContents').value,
-			status : "NON_APPROVED",			
-			showFlag : 1
-		};
-		
-		console.log(data);
-		$.ajax({
-			type: "POST",
-			url: "/requestSaveProc",
-			data: JSON.stringify(data),
-			contentType: "application/json; charset = utf-8 ",
-			dataType: "json"
-		}).done(function(resp){
+		//주소 입력했는지 체크
+		if(document.getElementById('roadAddrPart1').value == "") alert("주소를 검색해주세요.");
+		else{
+			let data = {
+				title: document.getElementById('requestTitle').value,
+				clientType: type,
+				requestAddress : document.getElementById('roadAddrPart1').value,
+				latitude : Lat,
+				longitude : Lng,
+				urgentLevel : period,
+				description : document.getElementById('requestContents').value,
+				status : "NON_APPROVED",			
+				showFlag : 1
+			};
+			
 			console.log(data);
-			console.log(resp);
-			if(resp.status == 500) {
-				alert("업로드 실패하였습니다. ");
-			}else {
-				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-				
-				for(var i=0; i<itemList.length; i++) {
-					requestInit.saveRequestItem(itemList[i], resp.data);
-				}
-				closeModal_request();
-				// 해당 request 정보 user에게 notify하기 
-				requestInit.notifyUser(Lat, Lng, data);
-			    //location.reload();
-			    location.href = "/user/requestMap";
-				window.scrollTo(0,0); 
-			} 
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});
-		// input값 초기화하기.
+			$.ajax({
+				type: "POST",
+				url: "/requestSaveProc",
+				data: JSON.stringify(data),
+				contentType: "application/json; charset = utf-8 ",
+				dataType: "json"
+			}).done(function(resp){
+				console.log(data);
+				console.log(resp);
+				if(resp.status == 500) {
+					alert("업로드 실패하였습니다. ");
+				}else {
+					alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+					
+					for(var i=0; i<itemList.length; i++) {
+						requestInit.saveRequestItem(itemList[i], resp.data);
+					}
+					closeModal_request();
+					// 해당 request 정보 user에게 notify하기 
+					requestInit.notifyUser(Lat, Lng, data);
+				    //location.reload();
+				    location.href = "/user/requestMap";
+					window.scrollTo(0,0); 
+				} 
+			}).fail(function(error){
+				console.log(JSON.stringify(error));
+			});
+			// input값 초기화하기.
+		}
 	},
 	
 	saveRequestItem:function(item, newRequest) {
@@ -511,5 +532,5 @@ let requestInit = {
 			console.log(JSON.stringify(error));
 		});		
 	},
+	
 }
-
