@@ -10,8 +10,8 @@ spring:
   mail:
     host: smtp.naver.com
     port: 587
-    username: dpcks0919
-    password: Aa2031607@
+    username: #naver ID
+    password: #naver PW
     smtp.auth: true
     smtp.starttls.enable: true
   mvc:
@@ -91,13 +91,14 @@ spring:
            
 social:
   password: dodream1234
-  
+ 
+#sms api
 api:
   sms:
     api-key: NCSOSP7IP6LI47WT
     api-secret: EVJACJDVXCTXW2ODT28UXRDIZHPZ9TUL
     send-phone: '01068363758'
-    
+
 summernote:
   upload: Users/yechankim/Documents/sts-workspace/dodream/src/main/resources/static/image/summernote
 

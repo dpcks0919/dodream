@@ -375,11 +375,13 @@
   text-overflow : ellipsis;
   font-size:0.8vw;
   margin-bottom:0.8vw;
+  cursor:pointer;
 }
 
 .news-image {
   width:inherit;
   height:inherit;
+  cursor:pointer;
 }
 
 .news-image-title {
