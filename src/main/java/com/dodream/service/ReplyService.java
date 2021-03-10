@@ -18,9 +18,12 @@ import com.dodream.model.ReplyItem;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.StatusType;
+import com.dodream.model.User;
+import com.dodream.model.UserInterest;
 import com.dodream.repository.ReplyItemRepository;
 import com.dodream.repository.ReplyRepository;
 import com.dodream.repository.RequestItemRepository;
+import com.dodream.repository.UserInterestRepository;
 
 @Service
 public class ReplyService {
@@ -36,6 +39,9 @@ public class ReplyService {
 	
 	@Autowired
 	private ReplyItemRepository replyItemRepository;
+	
+	@Autowired
+	private UserInterestRepository userInterestRepository;
 	
 	@Autowired
     private JavaMailSender javaMailSender;
@@ -156,6 +162,31 @@ public class ReplyService {
 		System.out.println("수신자메일: " + rcvEmail);
 		System.out.println("메일 제목: " + title);
 		System.out.println("메일 내용: " +msg);		
+	}
+
+	public void saveUserInterest(User user, Request request) {
+		System.out.println("ADDING USERINTEREST");		
+		System.out.println("USERID: "+ user.getId());		
+		System.out.println("REQUESTID: "+ request.getId());
+		
+		UserInterest newUserInterest = new UserInterest();
+		newUserInterest.setUser(user);
+		newUserInterest.setRequest(request);
+		
+		userInterestRepository.save(newUserInterest);
+	}
+
+	public void deleteUserInterest(int userId, int requestId) {
+		System.out.println("DELETING USERINTEREST");		
+		
+		UserInterest deletingUserInterest = userInterestRepository.findByUserIdAndRequestId(userId, requestId);
+		System.out.println("DELETE USERINTEREST ID: "+ deletingUserInterest.getId());		
+		userInterestRepository.deleteById(deletingUserInterest.getId());
+		
+	}
+
+	public Boolean checkUserInterest(int userId, int requestId) {
+		return userInterestRepository.existsByUserIdAndRequestId(userId, requestId);
 	}
 
 }

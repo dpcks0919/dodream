@@ -62,4 +62,22 @@ public class ReplyApiController {
 		
 		return new ResponseDto<Request> (HttpStatus.OK.value(), null);
 	}
+	
+	@PostMapping("/addUserInterestProc")
+	public ResponseDto<Integer> addUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		Request request = requestService.getRequest(Integer.parseInt(requestId));
+		replyService.saveUserInterest(principalDetails.getUser(), request);
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/deleteUserInterestProc")
+	public ResponseDto<Integer> deleteUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		replyService.deleteUserInterest(principalDetails.getUser().getId(), Integer.parseInt(requestId));
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/checkUserInterestProc")
+	public ResponseDto<Boolean> checkUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		return new ResponseDto<Boolean> (HttpStatus.OK.value(), replyService.checkUserInterest(principalDetails.getUser().getId(), Integer.parseInt(requestId)));
+	}
 }
