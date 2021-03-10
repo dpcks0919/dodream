@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dodream.config.auth.PrincipalDetails;
-import com.dodream.model.Reply;
 import com.dodream.model.ReplyItem;
 import com.dodream.model.RequestItem;
 import com.dodream.service.ReplyService;
@@ -35,7 +34,8 @@ public class UserController {
 	}
 	
 	@GetMapping("user/mydodream")
-	public String mydodream() {
+	public String mydodream(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("user", principalDetails.getUser());
 		return "my/mydodream";
 	}
 	
