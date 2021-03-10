@@ -38,6 +38,7 @@ function openMenu() {
     document.getElementById("page-top").style.overflow="hidden";
     document.getElementById("menu-back").style.filter = "blur(5px)";
     document.getElementById("Wrapper").style.filter = "blur(5px)";
+	
 	console.log(rq);
     var date = rq.dueDate;
     var d_date = new Date(date.valueOf());
@@ -141,7 +142,29 @@ function openMenu() {
         }
       }
     }
-  
+
+	//db와 연결해서 userInterest 여부 확인해주는 부분(heart 모양 정해주기)
+	$.ajax({
+		type : "POST",
+		url: "/checkUserInterestProc",
+		data: {requestId: rq.id},
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("checkUserInterestProc 에러발생");
+		} else {
+			//console.log(resp.data);
+			if(resp.data == true){	// 관심목록에 추가되어 있다면
+				$("#btn-heart").hide();
+				$("#btn-heart2").show();
+			}
+			else{	// 관심목록에 없다면
+				$("#btn-heart").show();
+				$("#btn-heart2").hide();
+			}
+		}
+	}).fail(function(error) {
+		console.log(JSON.stringify(error));
+	});
 
     $("#modal-bg").click(function() {
       for(var i = 0; i < items.length; i++) {
@@ -199,6 +222,18 @@ function openMenu() {
     document.getElementById("view-responseForm").style.display="none";
   }
 
+function heartClick() {
+	if($("#btn-heart").css("display") == "none"){
+		deleteUserInterest($("#rq_id").html());
+		$("#btn-heart2").hide();
+		$("#btn-heart").show();
+	}
+	else if($("#btn-heart2").css("display") == "none"){
+		addUserInterest($("#rq_id").html());
+		$("#btn-heart").hide();
+		$("#btn-heart2").show();
+	}
+}
 
 function goDetail_myrequest(rq) {
 	document.getElementById("modal-bg").style.display="block";
@@ -265,7 +300,7 @@ function goDetail_myrequest(rq) {
     $("#btn-com").off("click");	
 	$("#btn-com").on("click", () => {
 		if(confirm("정말 등록하시겠습니까 ?") == true){
-			requestInit.saveReply(rq.requestItem);
+			saveReply(rq.requestItem);
 	    }
 	    else{
 	        return ;

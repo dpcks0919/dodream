@@ -19,6 +19,43 @@ function heartCheck() {
 		});		
 }
 */
+
+// user_Interest에 추가하는 함수
+function addUserInterest(requestId){
+	console.log(requestId);
+	$.ajax({
+		type: "POST",
+		url: "/addUserInterestProc",
+		data: {requestId: requestId},
+	}).done(function(resp){
+		if(resp.status == 500) {
+			alert("addUserInterest 실패하였습니다. ");
+		}else {		
+			alert("관심목록 추가 성공");
+		} 
+	}).fail(function(error){
+		console.log(JSON.stringify(error));
+	});
+}
+
+// user_Interest 삭제하는 함수
+function deleteUserInterest(requestId){
+	console.log(requestId);
+	$.ajax({
+		type: "POST",
+		url: "/deleteUserInterestProc",
+		data: {requestId: requestId},
+	}).done(function(resp){
+		if(resp.status == 500) {
+			alert("deleteUserInterest 실패하였습니다. ");
+		}else {		
+			alert("관심목록 삭제 성공");
+		} 
+	}).fail(function(error){
+		console.log(JSON.stringify(error));
+	});
+}
+
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
