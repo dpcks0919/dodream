@@ -25,9 +25,10 @@ function goPopup(){
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
+	
 	$(".map-div0").css("margin-bottom","2rem");
 	$(".map-div1").css("margin-bottom","2rem");
-	$(".map-div2").css("margin-bottom","1.5rem");
+	$(".map-div2").css("margin-bottom","1.5rem"); 
 	$(".map-div3").css("margin-bottom","2rem");
 }
 
@@ -335,10 +336,13 @@ function saveReply(items) {
 				if( resp.data != null){
 					alert("누군가 중간에 아이템 넣음");
 					closeModal();
+					paging(curPage);
 					goDetail_request(resp.data);
 				}else{
 					alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-					location.href = "/user/requestList";
+					closeModal();
+					$(".request-table").empty();
+					paging(curPage);
 				}
 			}		
 		}).fail(function(error){
