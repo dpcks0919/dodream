@@ -94,8 +94,7 @@
 								<span>요청 장소 : </span> <input class="text-input" value="" type="text" name="roadAddrPart1" style="width:50%; margin-right:0.5rem; font-size:0.75rem;" id="roadAddrPart1" placeholder="예시 : 포항시 북구 흥해읍 한동로 558" disabled>
 								<button style="background-color:white; border:1px solid black; outline:none;" onclick="goPopup();">검색</button>
 							</div>
-						</div>
-						
+						</div>	
 						<div class="responsive-map-wrapper" style="width:50%; display:inline-block;">
 							<div class="map_wrap" style="width:100%; height: 10rem; padding:0!important; margin:0!important; overflow:hidden;">
 								<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
