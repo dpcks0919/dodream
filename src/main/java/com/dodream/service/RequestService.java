@@ -216,5 +216,93 @@ public class RequestService {
 		System.out.println("메일 제목: " + title);
 		System.out.println("메일 내용: " +msg);		
 	}
+	
+	///////////// requestSearch 
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestById(String searchText, Pageable pageable) {
+		int id = Integer.parseInt(searchText);
+		return requestRepository.findById(id, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByTitle(String searchText, Pageable pageable) {
+		return requestRepository.findByTitleContaining(searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByAddress(String searchText, Pageable pageable) {
+		return requestRepository.findByRequestAddressContaining(searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByUrgentLevelAndId(int urgentLevel, String searchText, Pageable pageable) {
+		int id = Integer.parseInt(searchText);
+		return requestRepository.findByUrgentLevelAndId(urgentLevel, id, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByUrgentLevelAndTitle(int urgentLevel,String searchText, Pageable pageable) {
+		return requestRepository.findByUrgentLevelAndTitleContaining(urgentLevel, searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByUrgentLevelAndAddress(int urgentLevel,String searchText, Pageable pageable) {
+		return requestRepository.findByUrgentLevelAndRequestAddressContaining(urgentLevel, searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByUrgentLevel(int urgentLevel, Pageable pageable) {
+		return requestRepository.findByUrgentLevel(urgentLevel , pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndId(String clientType, String searchText, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		int id = Integer.parseInt(searchText);
+		return requestRepository.findByClientTypeAndId(client, id, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndTitle(String clientType, String searchText, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		return requestRepository.findByClientTypeAndTitleContaining( client, searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndAddress(String clientType, String searchText, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		return requestRepository.findByClientTypeAndRequestAddressContaining(client, searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientType(String clientType, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		return requestRepository.findByClientType(client , pageable);
+	}
+	//
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndUrgentLevelAndId(String clientType, int urgentLevel, String searchText, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		int id = Integer.parseInt(searchText);
+		return requestRepository.findByClientTypeAndUrgentLevelAndId(client, urgentLevel, id, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndUrgentLevelAndTitle(String clientType, int urgentLevel, String searchText, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		return requestRepository.findByClientTypeAndUrgentLevelAndTitleContaining(client, urgentLevel, searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndUrgentLevelAndAddress(String clientType, int urgentLevel, String searchText, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		return requestRepository.findByClientTypeAndUrgentLevelAndRequestAddressContaining(client, urgentLevel, searchText, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> searchRequestByClientTypeAndUrgentLevel(String clientType, int urgentLevel, Pageable pageable) {
+		ClientType client = ClientType.valueOf(clientType);
+		return requestRepository.findByClientTypeAndUrgentLevel(client, urgentLevel,pageable);
+	}
 
 }

@@ -11,6 +11,7 @@
 		</tr>
 	</thead>
 	<tbody>
+		<c:set var="currentPage" value="${requests.pageable.pageNumber}"></c:set>
 		<c:forEach var="request" items="${requests.content}">
 			<fmt:formatDate value="${request.regDate}" pattern="yyyy. MM. dd." var="regdate" />
 			<script>
@@ -28,7 +29,7 @@
 						requestType: "${item.requestType}",
 					});
 				</c:forEach>
-				const rq${request.id} = {
+				var rq${request.id} = {
 					id: ${request.id},
 					title: '${request.title}',
 					regDate: '${request.regDate}',
@@ -49,31 +50,6 @@
 	</tbody>
 </table>
 <section class="mypage-section2" id="about" style="text-align: center;">
-	<!-- <form class="search-div">
-				<span class="search-text"> <input type="text" id="code" class="search-box-small" placeholder="검색 코드"></input></span> <span class="search-text">재화종류:<select name="search-type"
-					id="search-type" class="search-box-small">
-						<option value="all" selected="selected">모두</option>
-						<option value="product">물품</option>
-						<option value="money">금전</option>
-						<option value="service">서비스</option>
-				</select>
-				</span> <span class="search-text">이웃:<select name="search-client" id="search-client" class="search-box-small">
-						<option value="all" selected="selected">모두</option>
-						<option value="ELDERLY">노인</option>
-						<option value="CHILD">아이</option>
-						<option value="DISABLED">장애인</option>
-						<option value="OTHERS">기타</option>
-				</select>
-				</span> <span class="search-text">기간:<select name="search-period" id="search-period" class="search-box-mid">
-						<option value="all" selected="selected">모두</option>
-						<option value="normal">보통(한 달 이내)</option>
-						<option value="urgent">긴급(7~14일 이내)</option>
-						<option value="very_urgent">매우 긴급(3일 이내)</option>
-				</select>
-				</span>
-				<input type="submit" class="search-btn" id="search-btn" value="검색"></input>
-			</form>
-			<button id="search-btn" class="search-btn">검색</button> -->
 	<div class="container">
 		<!-- searech line -->
 		<br>
@@ -126,3 +102,7 @@
 		</div>
 	</div>
 </section>
+
+<script>
+var curPage = "${currentPage}";
+</script>
