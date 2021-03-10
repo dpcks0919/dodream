@@ -27,7 +27,7 @@
 							</div>
 
 							<div class="find-container" style="width: 100%; text-align: right; font-size: 9pt; margin-top: 1vh;">
-								<a href="" style="color: black;"><U>아이디/비밀번호 찾기</U></a>
+								<a href="findInfoForm" style="color: black;"><U>아이디/비밀번호 찾기</U></a>
 							</div>
 							<!--                           <input class="login-submit" type="submit" value="로그인" style="width:100%;padding:6px 1px 6px 1px;background-color:#ed7e95;border:none;border-radius:16px;color:white;font-size:14pt;margin-top:1.5vh;">
  -->

@@ -24,9 +24,11 @@ import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.User;
+import com.dodream.model.UserInterest;
 import com.dodream.repository.ReplyRepository;
 import com.dodream.repository.RequestItemRepository;
 import com.dodream.repository.RequestRepository;
+import com.dodream.repository.UserInterestRepository;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
@@ -49,6 +51,9 @@ public class RequestService {
 	
 	@Autowired
 	private ReplyRepository replyRepository;
+	
+	@Autowired
+	private UserInterestRepository userInterestRepository;
 
 	@Value("${api.sms.api-key}")
 	private String apiKey;
@@ -216,6 +221,21 @@ public class RequestService {
 		System.out.println("메일 제목: " + title);
 		System.out.println("메일 내용: " +msg);		
 	}
+	
+	// 찜한 request 불러오기
+//	@Transactional(readOnly = true)
+//	public Page<Request>  readInterestedRequestList(User user, Pageable pageable) {
+//		UserInterest[] userInterestList = userInterestRepository.findAllByUserId(user.getId(), pageable);
+//		Page<Request> temp = 
+//		Request[] requestList = new Request[userInterestList.length];
+//		for(int i = 0; i < userInterestList.length; i++) {
+//			requestList[i] = userInterestList[i].getRequest();
+//		}
+//		
+//		Page<Request> temp;
+//		temp.
+//		return requestRepository.findAllByRequest(requestList).
+//	}
 	
 	///////////// requestSearch 
 	@Transactional(readOnly = true)
