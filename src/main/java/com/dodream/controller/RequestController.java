@@ -55,9 +55,9 @@ public class RequestController {
 	}
 	
 	//	myresponse 목록 불러오기
-	@GetMapping("user/myResponseList")
+	@GetMapping("user/myResposeTable")
 	public String myResponseTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		model.addAttribute("requests", requestService.readMyResponseList(principalDetails.getUser(), pageable));
+		model.addAttribute("requests", requestService.readMyResponseTable(principalDetails.getUser().getId(), pageable));
 		model.addAttribute("user", principalDetails.getUser());
 		return "request/request_table";
 	}

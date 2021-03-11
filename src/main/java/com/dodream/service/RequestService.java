@@ -222,22 +222,13 @@ public class RequestService {
 	@Transactional(readOnly = true)
 	public Page<Request>  readInterestedRequestList(int userId, Pageable pageable) {
 		
-		return requestRepository.readInterestRequestByUser(userId, pageable);
+		return requestRepository.readInterestRequestByUserId(userId, pageable);
 	}
 	
 	// myresponse
 	@Transactional(readOnly = true)
-	public Page<Request> readMyResponseList(User user, Pageable pageable) {
-//		UserInterest[] userInterestList = userInterestRepository.findAllByUserId(user.getId(), pageable);
-//		Page<Request> temp = 
-//		Request[] requestList = new Request[userInterestList.length];
-//		for(int i = 0; i < userInterestList.length; i++) {
-//			requestList[i] = userInterestList[i].getRequest();
-//		}
-//		
-//		Page<Request> temp;
-//		temp.
-		return requestRepository.findAll(pageable);
+	public Page<Request> readMyResponseTable(int userId, Pageable pageable) {
+		return requestRepository.readMyReposeByUserId(userId, pageable);
 	}
 	
 	///////////// requestSearch 
