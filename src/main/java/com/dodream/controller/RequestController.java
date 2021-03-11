@@ -47,12 +47,12 @@ public class RequestController {
 	}
 	
 	//	찜한 목록 불러오기
-//	@GetMapping("user/interestedRequestTable")
-//	public String interestedRequestTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-//		model.addAttribute("requests", requestService.readInterestedRequestList(principalDetails.getUser(), pageable));
-//		model.addAttribute("user", principalDetails.getUser());
-//		return "request/request_table";
-//	}
+	@GetMapping("user/interestedRequestTable")
+	public String interestedRequestTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("requests", requestService.readInterestedRequestList(principalDetails.getUser().getId(), pageable));
+		model.addAttribute("user", principalDetails.getUser());
+		return "request/request_table";
+	}
 	
 	//	myresponse 목록 불러오기
 	@GetMapping("user/myResponseList")
