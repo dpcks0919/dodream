@@ -20,11 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.model.ClientType;
-import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.User;
-import com.dodream.model.UserInterest;
 import com.dodream.repository.ReplyRepository;
 import com.dodream.repository.RequestItemRepository;
 import com.dodream.repository.RequestRepository;
@@ -221,19 +219,11 @@ public class RequestService {
 	}
 	
 	// 찜한 request 불러오기
-//	@Transactional(readOnly = true)
-//	public Page<Request>  readInterestedRequestList(User user, Pageable pageable) {
-//		UserInterest[] userInterestList = userInterestRepository.findAllByUserId(user.getId(), pageable);
-//		Page<Request> temp = 
-//		Request[] requestList = new Request[userInterestList.length];
-//		for(int i = 0; i < userInterestList.length; i++) {
-//			requestList[i] = userInterestList[i].getRequest();
-//		}
-//		
-//		Page<Request> temp;
-//		temp.
-//		return requestRepository.findAllByRequest(requestList).
-//	}
+	@Transactional(readOnly = true)
+	public Page<Request>  readInterestedRequestList(int userId, Pageable pageable) {
+		
+		return requestRepository.readInterestRequestByUser(userId, pageable);
+	}
 	
 	// myresponse
 	@Transactional(readOnly = true)
