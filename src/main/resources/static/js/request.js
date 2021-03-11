@@ -370,17 +370,19 @@ function saveReply(items) {
 			if(resp.status == 500) {
 				alert("아이템 업로드 실패하였습니다. ");
 			}else{
-				if( resp.data != null){
+				if(resp.data != null){
 					alert("누군가 중간에 아이템 넣음");
 					closeModal();
 					paging(curPage);
 					goDetail_request(resp.data);
 				}else{
 					alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-					notifySocialWorkerByEmail(reply);
-					closeModal();
-					$(".request-table").empty();
-					paging(curPage);
+					if(notifySocialWorkerByEmail(reply) == true){ //callback기능(해당함수 끝나면 순차실행)
+						closeModal();
+						$(".request-table").empty();
+						paging(curPage);
+						return true;	//성공 
+					}
 				}
 			}		
 		}).fail(function(error){
@@ -401,9 +403,12 @@ function saveReply(items) {
 			if(resp.status == 500) {
 				alert("notifySocialWorkerByEmail 실패하였습니다. ");
 			}
+			else{
+				return true;	// 성공
+			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
-		});		
+		});
 	};
 
 let requestInit = {
@@ -440,6 +445,7 @@ let requestInit = {
 				// 3. 각각 msg, email 보내기
 				requestInit.notifyByEmail(notifyEmailUserList, request);
 				requestInit.notifyByText(notifyTextUserList, request);
+				return true;	// 성공
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -535,10 +541,11 @@ let requestInit = {
 						requestInit.saveRequestItem(itemList[i], resp.data);
 					}
 					closeModal_request();
-					// 해당 request 정보 user에게 notify하기 
-					requestInit.notifyUser(Lat, Lng, data);
+					// 해당 request 정보 user에게 notify하기 (JS 미리 실행 방지용)
+					if(requestInit.notifyUser(Lat, Lng, data) == true) {
+						location.href = "/user/requestMap";
+					}
 				    //location.reload();
-				    location.href = "/user/requestMap";
 					window.scrollTo(0,0); 
 				} 
 			}).fail(function(error){
