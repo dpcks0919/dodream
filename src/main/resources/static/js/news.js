@@ -32,7 +32,7 @@ let newsInit = {
 			alert("제목을 입력해주세요.");	
 		} else if($("#news-content").val() == "") {
 			alert("내용을 입력해주세요.");
-		} else if(!$("#news-content").val().includes('<img src=')) {
+		} else if(!$("#news-content").val().includes('<img')) {
 			alert("대표 이미지가 필요합니다. 이미지를 하나 이상 입력해주세요.");	
 		}
 		else {
