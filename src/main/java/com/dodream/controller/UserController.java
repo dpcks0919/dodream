@@ -124,5 +124,5 @@ public class UserController {
 		
 		return "my/edit_info_"+type;
 	}
-
+	
 }

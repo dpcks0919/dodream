@@ -155,7 +155,7 @@
 			$.ajax({
 				type : "GET",
 				traditional : true,
-				url : "/user/requestTable",
+				url : "/user/interestedRequestTable",
 			}).done(function(resp) {
 				if (resp.status == 500) {
 					alert("에러발생");
@@ -172,7 +172,7 @@
 			$.ajax({
 				type : "GET",
 				traditional : true,
-				url : "/user/requestTable?page=" + page
+				url : "/user/interestedRequestTable?page=" + page
 			}).done(function(resp) {
 				if (resp.status == 500) {
 					alert("에러발생");
