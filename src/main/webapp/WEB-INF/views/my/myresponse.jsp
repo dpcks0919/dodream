@@ -2,14 +2,16 @@
 <%@include file="../layout/header.jsp"%>
 
 <link href="/css/mypage.css" rel="stylesheet" />
+<link href="/css/view-reg.css" rel="stylesheet" />
+
 <link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body id="page-top">
-
-	<div class="modal-bg" id="m-background" style="display: none;" onclick="closeModal();"></div>
-	<div class="modal-container" id="m-container" style="display: none;">
+	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
+	
+	<div class="modal-container" id="view-detail">
 		<div class="modal-content">
 			<div class="content-title">
 				<h4>응답확인</h4>
@@ -67,7 +69,7 @@
 		<!-- Navigation-->
 		<%@include file="../layout/navbar.jsp"%>
 
-		<header class="text-white text-center gradient-bgcolor">
+		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info">
 					<h4>응답내역</h4>
@@ -78,53 +80,11 @@
 			</div>
 		</header>
 		<!-- news Section-->
-		<section class="mypage-section2" id="about" style="text-align: center;">
-			<div class="container ">
-				<table style="table-layout: fixed">
-					<thead>
-						<tr style="border-bottom: 3px solid #d3d3d3;">
-							<th class="table-num">등록번호</th>
-							<th class="table-title">응답 내용</th>
-							<th class="table-date">등록일</th>
-							<th class="table-status">상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">미승인</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">승인</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-					</tbody>
-				</table>
+		<section class="page-section-map text-center " id="portfolio">
+			<div class="container">
+				<div class="request-table"></div>
 			</div>
 		</section>
-
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 		<%@include file="../layout/sidebar_back.jsp"%>
@@ -134,20 +94,58 @@
 	<!-- Wrapper -->
 	<%@include file="../layout/jsFile.jsp"%>
 
-	<script>
+	 <script>
 		function openModal(item) {
-			document.getElementById("m-background").style.display = "block";
-			document.getElementById("m-container").style.display = "block";
-			document.getElementById("mainNav").style.zIndex = "9";
-			document.getElementById("menu-back").style.filter = "blur(5px)";
-			document.getElementById("Wrapper").style.filter = "blur(5px)";
+			document.getElementById("modal-bg").style.display="block";
+		    document.getElementById("view-detail").style.display="block";
+		    document.getElementById("page-top").style.overflow="hidden";
+		    document.getElementById("menu-back").style.filter = "blur(5px)";
+		    document.getElementById("Wrapper").style.filter = "blur(5px)";
 		}
 		function closeModal() {
-			document.getElementById("m-background").style.display = "none";
-			document.getElementById("m-container").style.display = "none";
+			document.getElementById("modal-bg").style.display = "none";
+			document.getElementById("view-detail").style.display = "none";
 			document.getElementById("menu-back").style.filter = "none";
 			document.getElementById("Wrapper").style.filter = "none";
 		}
+		
+		function initPage() {
+			$.ajax({
+				type : "GET",
+				traditional : true,
+				url : "/user/myresponseTable",
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					$(".request-table").html(resp);
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+		}
+
+		function paging(page) {
+
+			$.ajax({
+				type : "GET",
+				traditional : true,
+				url : "/user/myresponseTable?page=" + page
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					$(".request-table").html(resp);
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+		}
+		
+		$(document).ready(function() {
+			initPage();			
+			response_detail();
+		});
 	</script>
 </body>
 </html>
