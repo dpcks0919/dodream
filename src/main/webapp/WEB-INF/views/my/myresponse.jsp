@@ -1,65 +1,124 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>​
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@include file="../layout/header.jsp"%>
 
-<link href="/css/mypage.css" rel="stylesheet" />
+<link href="/css/view-reg.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<style>
+</style>
 
 <body id="page-top">
+	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
 
-	<div class="modal-bg" id="m-background" style="display: none;" onclick="closeModal();"></div>
-	<div class="modal-container" id="m-container" style="display: none;">
+	<!-- 요청 항목 세부정보 보기 -->
+	<div class="modal-container" id="view-detail">
 		<div class="modal-content">
-			<div class="content-title">
-				<h4>응답확인</h4>
-				<span style="margin-top: 10px; margin-right: 5px;">독거어르신 주거환경개선 도움 요청</span>
-			</div>
+			<div id="rq_title"></div>
 			<div class="content-info">
 				<table class="info-table">
 					<tr>
+						<td style="width: 17.5%;"><b>등록번호</b></td>
+						<td id="rq_id" style="width: 27.5%;"></td>
 						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td style="width: 37.5%;">2020.12.26.</td>
-						<td style="width: 15%;"><b>상태</b></td>
-						<td style="width: 30%;">승인</td>
+						<td id="rq_date" style="width: 37.5%;"></td>
 					</tr>
 					<tr>
+						<td><b>상태</b></td>
+						<td id="rq_status"></td>
 						<td><b>주소</b></td>
-						<td>경상북도 포항시 북구 흥해읍</td>
-						<td><b>요청자</b></td>
-						<td>요청을 올린 사회복지사/기관</td>
+						<td id="rq_addr"></td>
+					</tr>
+					<tr>
+						<td><b>기간</b></td>
+						<td id="rq_level"></td>
+						<td><b>요청기관</b></td>
+						<td id="rq_user"></td>
 					</tr>
 				</table>
-				<div class="content-text">독거어르신 주거환경개선을 위해 도와드리고 싶습니다. 블라블라 뭐라고 하면 좋을까요? 아무튼 여기는 응답자가 직접 작성한 내용이 보여지는 곳입니다.</div>
+				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">
 					<table class="info-table">
 						<tr>
-							<th style="width: 15%;">종류</th>
-							<th style="width: 40%;">내역</th>
-							<th style="width: 45%;">수량</th>
+							<th style="width: 17.5%;">종류</th>
+							<th style="width: 27.5%;">내역</th>
+							<th style="width: 55%;">현재 수량 / 목표 수량</th>
 						</tr>
-						<tr class="needs-category">
-							<td>물품</td>
-							<td>물품1</td>
-							<td>2개</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>물품2</td>
-							<td>3개</td>
-						</tr>
+						<tr class="needs-category" id="rq_item0"></tr>
 					</table>
 				</div>
 			</div>
 		</div>
 
-		<div class="modal-ftr" style="height: 15vh; margin-top: 5vh;">
-			<div class="response-wrapper">
-				<div class="response-title">요청자 회신</div>
-				<div class="response-content">안녕하세요. 요청올린 사회복지사 임터치입니다. 먼저 이렇게 응답해주셔서 정말 감사드립니다. 보내주신 품목은 블라블라블라 저희가 따로 문자 보내드리겠습니다:)</div>
+		<div class="modal-ftr">
+			<div class="btn-res" onclick="goResponse()">응답하기</div>
+			<div class="btn-icon" onclick="heartClick();">
+				<i class="far fa-heart" id="btn-heart"></i>
+				<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
 			</div>
 		</div>
 	</div>
+	<!-- 응답하기 -->
+	<div class="modal-container" id="view-responseForm">
+		<div class="modal-content">
+			<div class="" style="vertical-align: text-bottom !important;">
+				<h5 style="float: left">응답하기</h5>
+				<span class="request-name" id="rq_title2"><br></span>
+			</div>
+			<div class="content-info" style="text-align: center;">
+				<div class="" style="border-top: 3px solid black; height: 4rem !important; padding-top: 1vh; padding-bottom: 1vh;">
+					<button class="info-btn" id="myInfo" onclick="bringInfo('myInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">내 정보 가져오기</button>
+					<button class="new-btn click_event" id="newInfo" onclick="bringInfo('newInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">새로 작성하기</button>
+				</div>
+				<div class="div-inline">
+					<div class="response-info ">
+						<div class="info-title">
+							이름<span style="color: white;">이름</span>
+						</div>
+						<input class="info-name info-text" name="response-name" id="reply_user" type="text" value="${user.userName}" placeholder="이름 입력"></input>
+					</div>
+					<div class="response-info">
+						<div class="info-title">소속단체</div>
+						<input class="info-group info-text" name="response-org" id="reply_org" type="text" value="${user.orgName}" placeholder="소속단체 입력"></input>
+					</div>
+				</div>
+				<div class="response-info">
+					<div class="info-title">전화번호</div>
+					<input class="info-phone info-text" name="response-phone" id="reply_phone" type="text" value="${user.userPhone}" placeholder="전화번호 입력"></input>
+				</div>
+				<!-- 공간 맞추기 여백 -->
+				<div class="response-info" style="visibility: hidden !important;">
+					<div class="info-title">전화번호</div>
+					<input class="info-text" type="text" placeholder="전화번호 입력"></input>
+				</div>
+				<br>
+				<textarea class="response-info-content" name="response-content" id="reply_content"></textarea>
+				<p style="float: left; margin-bottom: 0.5vh; font-weight: bold;">도움을 드리고 싶은 품목의 수량을 입력해주세요!</p>
+				<div class="content-needs">
+					<table class="info-table">
+						<tr>
+							<th style="width: 10%;">종류</th>
+							<th style="width: 30%;">내역</th>
+							<th style="width: 30%;">수량 설정</th>
+							<th style="width: 30%;">필요 수량</th>
+						</tr>
+						<tr class="needs-category" id="rp_item0"></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- modal.js에 click event 생성 -->
+		<div class="modal-ftr" style="justify-content: space-between;">
+			<div class="btn-com" id="btn-com">완료하기</div>
+			<div class="btn-back" onclick="goBack()">
+				<span style="color: #e5e5e5; visibility: hidden;">뒤</span>뒤로<span style="color: #e5e5e5; visibility: hidden;">뒤</span>
+			</div>
+		</div>
+	</div>
+
 	<div id="menu-back" onclick="closeNav()"></div>
 	<%@include file="../layout/sidebar_front.jsp"%>
 
@@ -67,87 +126,70 @@
 		<!-- Navigation-->
 		<%@include file="../layout/navbar.jsp"%>
 
-		<header class="text-white text-center gradient-bgcolor">
+		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info">
-					<h4>응답내역</h4>
+					<h4>나의 두드림</h4>
 					<p>
-						지금까지 응답하신 내역들을<br>모두 확인할 수 있습니다.
+						지금까지 찜하신 목록들을 확인할 수 있습니다.<br>
 					</p>
 				</div>
 			</div>
 		</header>
-		<!-- news Section-->
-		<section class="mypage-section2" id="about" style="text-align: center;">
-			<div class="container ">
-				<table style="table-layout: fixed">
-					<thead>
-						<tr style="border-bottom: 3px solid #d3d3d3;">
-							<th class="table-num">등록번호</th>
-							<th class="table-title">응답 내용</th>
-							<th class="table-date">등록일</th>
-							<th class="table-status">상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">미승인</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">승인</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-						<tr class="response-item" onclick="openModal(this);">
-							<td class="table-num">#10011</td>
-							<td class="table-title fbold">독거 어르신 주거 환경 개선을 위해 도와드리고 싶습니다.</td>
-							<td class="table-date">2020.12.26</td>
-							<td class="table-status">대기</td>
-						</tr>
-					</tbody>
-				</table>
+		<section class="page-section-map text-center " id="portfolio">
+			<div class="container">
+				<div class="request-table"></div>
 			</div>
 		</section>
-
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 		<%@include file="../layout/sidebar_back.jsp"%>
-
-
 	</div>
-	<!-- Wrapper -->
+
 	<%@include file="../layout/jsFile.jsp"%>
+	<script src="/js/request.js"></script>
 
 	<script>
-		function openModal(item) {
-			document.getElementById("m-background").style.display = "block";
-			document.getElementById("m-container").style.display = "block";
-			document.getElementById("mainNav").style.zIndex = "9";
-			document.getElementById("menu-back").style.filter = "blur(5px)";
-			document.getElementById("Wrapper").style.filter = "blur(5px)";
+	
+		function initPage() {
+			$.ajax({
+				type : "GET",
+				traditional : true,
+				url : "/user/myResponseList",
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					$(".request-table").html(resp);
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
 		}
-		function closeModal() {
-			document.getElementById("m-background").style.display = "none";
-			document.getElementById("m-container").style.display = "none";
-			document.getElementById("menu-back").style.filter = "none";
-			document.getElementById("Wrapper").style.filter = "none";
+
+		function paging(page) {
+
+			$.ajax({
+				type : "GET",
+				traditional : true,
+				url : "/user/myResponseList?page=" + page
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					$(".request-table").html(resp);
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
 		}
+		
+
+
+		$(document).ready(function() {
+			initPage();					
+		});
 	</script>
+
 </body>
 </html>

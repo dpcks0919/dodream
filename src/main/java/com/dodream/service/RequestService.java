@@ -63,8 +63,6 @@ public class RequestService {
 	
 	@Value("${api.sms.send-phone}")
 	private String sendPhone;
-//	@Autowired
-//	private UserInterestRepository userInterestRepository;
 	
 	@Transactional
 	public Request saveRequest(Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -236,6 +234,21 @@ public class RequestService {
 //		temp.
 //		return requestRepository.findAllByRequest(requestList).
 //	}
+	
+	// myresponse
+	@Transactional(readOnly = true)
+	public Page<Request> readMyResponseList(User user, Pageable pageable) {
+//		UserInterest[] userInterestList = userInterestRepository.findAllByUserId(user.getId(), pageable);
+//		Page<Request> temp = 
+//		Request[] requestList = new Request[userInterestList.length];
+//		for(int i = 0; i < userInterestList.length; i++) {
+//			requestList[i] = userInterestList[i].getRequest();
+//		}
+//		
+//		Page<Request> temp;
+//		temp.
+		return requestRepository.findAll(pageable);
+	}
 	
 	///////////// requestSearch 
 	@Transactional(readOnly = true)
