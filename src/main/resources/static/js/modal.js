@@ -1,4 +1,4 @@
-function openMenu() {
+function openMenu() {	
     document.getElementById("Wrapper").style.marginLeft = "70%";
     document.getElementById("mySidebar").style.width = "70%";
     document.getElementById("mainNav").style.left = "70%";
@@ -7,7 +7,7 @@ function openMenu() {
     document.getElementById("nav-logo").style.display="none";
     document.getElementById("menu-back").style.display="block";
   }
-
+  
   function openProfile() {
     document.getElementById("Wrapper").style.marginLeft = "-70%";
     document.getElementById("mySidebar2").style.width = "70%";

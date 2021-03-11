@@ -3,6 +3,7 @@ package com.dodream.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.dodream.model.ClientType;
 import com.dodream.model.Request;
@@ -47,5 +48,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Page<Request> findByClientTypeAndUrgentLevel(ClientType client, int urgentLevel, Pageable pageable);
 
 	Request[] findByUser(User user);
-
+	
+	@Query(value = "SELECT * FROM request where id in ( select request_id from user_interest where user_id = ?1)", nativeQuery = true)
+	Page<Request> readInterestRequestByUser(int userId, Pageable pageable);
 }
