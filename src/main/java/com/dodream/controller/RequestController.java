@@ -54,6 +54,14 @@ public class RequestController {
 		return "request/request_table";
 	}
 	
+	//	myresponse 목록 불러오기
+	@GetMapping("user/myResponseList")
+	public String myResponseTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		model.addAttribute("requests", requestService.readMyResponseList(principalDetails.getUser(), pageable));
+		model.addAttribute("user", principalDetails.getUser());
+		return "request/request_table";
+	}
+	
 	//	검색된 요청 목록 불러오기
 	@GetMapping("user/searchRequestTable")
 	public String searchRequestTable(Model model, 
