@@ -23,7 +23,7 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info">
-					<h4>글쓰기 (임시)</h4>
+					<h4>글쓰기</h4>
 					<p>소식을 작성할 수 있습니다.</p>
 					<a style="border:1px solid white; color:white; cursor:pointer; padding:0.5rem;" href="/news/newsList">뒤로가기</a>
 				</div>
@@ -35,7 +35,7 @@
 				<div class=" " style="display:flex; flex-direction:column; ">
 					<input type="text" placeholder="소식 제목을 입력하세요" id="news-title"/>
 					<div class="" style="width:100%; margin-bottom:1rem;">
-						<span>소식 타입 : (컬럼 만들어야함.)</span> 
+						<span>소식 타입 : </span> 
 						<select class="news-type" name="newsType" id="news-type" style="outline:none;">
 							<option name="n1">이웃 소식</option>
 							<option name="n2">두드림 소식</option>
