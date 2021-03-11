@@ -1,25 +1,6 @@
 var Lat, Lng;
 var prevMarker;
 
-	/*
-function heartCheck() {
-	alert($("#rq_id").text());
-		$.ajax({
-			type: "POST",
-			url: "/heart",
-			data: {
-				id : 
-			}
-		}).done(function(resp){
-			if(resp.status == 500) {
-				alert("아이템 업로드 실패하였습니다. ");
-			}
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});		
-}
-*/
-
 // user_Interest에 추가하는 함수
 function addUserInterest(requestId){
 	console.log(requestId);
@@ -376,13 +357,13 @@ function saveReply(items) {
 					paging(curPage);
 					goDetail_request(resp.data);
 				}else{
+					//콜백
+					notifySocialWorkerByEmail(reply);
 					alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-					if(notifySocialWorkerByEmail(reply) == true){ //callback기능(해당함수 끝나면 순차실행)
-						closeModal();
-						$(".request-table").empty();
-						paging(curPage);
-						return true;	//성공 
-					}
+					$(".request-table").empty();
+					paging(curPage);
+					closeModal();
+					location.reload();
 				}
 			}		
 		}).fail(function(error){
@@ -402,9 +383,6 @@ function saveReply(items) {
 		}).done(function(resp){ 
 			if(resp.status == 500) {
 				alert("notifySocialWorkerByEmail 실패하였습니다. ");
-			}
-			else{
-				return true;	// 성공
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -445,7 +423,8 @@ let requestInit = {
 				// 3. 각각 msg, email 보내기
 				requestInit.notifyByEmail(notifyEmailUserList, request);
 				requestInit.notifyByText(notifyTextUserList, request);
-				return true;	// 성공
+				//끝나면 화면 전환
+				location.href = "/user/requestMap";
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -542,11 +521,8 @@ let requestInit = {
 					}
 					closeModal_request();
 					// 해당 request 정보 user에게 notify하기 (JS 미리 실행 방지용)
-					if(requestInit.notifyUser(Lat, Lng, data) == true) {
-						location.href = "/user/requestMap";
-					}
-				    //location.reload();
-					window.scrollTo(0,0); 
+
+					requestInit.notifyUser(Lat, Lng, data);
 				} 
 			}).fail(function(error){
 				console.log(JSON.stringify(error));

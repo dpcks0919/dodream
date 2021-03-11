@@ -4,9 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@include file="../layout/header.jsp"%>
 
-<link href="/css/mypage.css" rel="stylesheet" />
 <link href="/css/view-reg.css" rel="stylesheet" />
-
 <link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -15,6 +13,8 @@
 
 <body id="page-top">
 	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
+
+	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail">
 		<div class="modal-content">
 			<div id="rq_title"></div>
@@ -136,7 +136,6 @@
 				</div>
 			</div>
 		</header>
-		<!-- news Section-->
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container">
 				<div class="request-table"></div>
@@ -156,7 +155,7 @@
 			$.ajax({
 				type : "GET",
 				traditional : true,
-				url : "/user/myResponseList",
+				url : "/user/myResposeTable",
 			}).done(function(resp) {
 				if (resp.status == 500) {
 					alert("에러발생");
@@ -173,58 +172,7 @@
 			$.ajax({
 				type : "GET",
 				traditional : true,
-				url : "/user/myResponseList?page=" + page
-			}).done(function(resp) {
-				if (resp.status == 500) {
-					alert("에러발생");
-				} else {
-					$(".request-table").html(resp);
-				}
-			}).fail(function(error) {
-				console.log(JSON.stringify(error));
-			});
-		}
-
-		$(document).ready(function() {
-			initPage();			
-    }
-	 <script>
-		function openModal(item) {
-			document.getElementById("modal-bg").style.display="block";
-		    document.getElementById("view-detail").style.display="block";
-		    document.getElementById("page-top").style.overflow="hidden";
-		    document.getElementById("menu-back").style.filter = "blur(5px)";
-		    document.getElementById("Wrapper").style.filter = "blur(5px)";
-		}
-		function closeModal() {
-			document.getElementById("modal-bg").style.display = "none";
-			document.getElementById("view-detail").style.display = "none";
-			document.getElementById("menu-back").style.filter = "none";
-			document.getElementById("Wrapper").style.filter = "none";
-		}
-		
-		function initPage() {
-			$.ajax({
-				type : "GET",
-				traditional : true,
-				url : "/user/myresponseTable",
-			}).done(function(resp) {
-				if (resp.status == 500) {
-					alert("에러발생");
-				} else {
-					$(".request-table").html(resp);
-				}
-			}).fail(function(error) {
-				console.log(JSON.stringify(error));
-			});
-		}
-
-		function paging(page) {
-
-			$.ajax({
-				type : "GET",
-				traditional : true,
-				url : "/user/myresponseTable?page=" + page
+				url : "/user/myResposeTable?page=" + page
 			}).done(function(resp) {
 				if (resp.status == 500) {
 					alert("에러발생");
@@ -236,9 +184,10 @@
 			});
 		}
 		
+
+
 		$(document).ready(function() {
-			initPage();			
-			response_detail();
+			initPage();					
 		});
 	</script>
 
