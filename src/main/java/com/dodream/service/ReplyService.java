@@ -1,5 +1,9 @@
 package com.dodream.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
@@ -73,6 +77,29 @@ public class ReplyService {
 
 		replyRepository.save(reply);
 		return reply;
+	}
+	
+	
+	
+	@Transactional
+	public void submitMessage(String id, String status, String comment) {
+		Reply persistance = getReply(Integer.parseInt(id));
+		StatusType _status = null;
+		if(status.equals("WAITING")) {
+			_status = StatusType.WAITING;
+			
+		} else if(status.equals("APPROVED")) {
+			_status = StatusType.APPROVED;
+		} 
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		persistance.setComment(comment);
+		persistance.setStatus((StatusType) _status);
+		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
+		System.out.println("submitMessage");
 	}
 	
 
