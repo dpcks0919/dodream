@@ -1,7 +1,9 @@
 package com.dodream.controller.api;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.config.auth.PrincipalDetails;
@@ -31,6 +34,14 @@ public class ReplyApiController {
 	
 	@Autowired
 	private RequestService requestService;
+	
+	@PostMapping("/notifySocialWorkerByEmailProc")
+	public ResponseDto<Integer> notifySocialWorkerByEmailProc(@RequestBody Reply reply) throws UnsupportedEncodingException, MessagingException{
+		// requestId로 해당 request 객체 찾기
+		Request request = requestService.getRequest(reply.getRequest().getId());
+		replyService.notifySocialWorkerByEmail(reply, request);
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), null); 
+	}
 	
 	@PostMapping("/replySaveProc")
 	public ResponseDto<Request> replySaveProc(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -138,4 +149,21 @@ public class ReplyApiController {
 		replyService.submitMessage(id, status, comment);
 	}	
 	
+	@PostMapping("/addUserInterestProc")
+	public ResponseDto<Integer> addUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		Request request = requestService.getRequest(Integer.parseInt(requestId));
+		replyService.saveUserInterest(principalDetails.getUser(), request);
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/deleteUserInterestProc")
+	public ResponseDto<Integer> deleteUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		replyService.deleteUserInterest(principalDetails.getUser().getId(), Integer.parseInt(requestId));
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/checkUserInterestProc")
+	public ResponseDto<Boolean> checkUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		return new ResponseDto<Boolean> (HttpStatus.OK.value(), replyService.checkUserInterest(principalDetails.getUser().getId(), Integer.parseInt(requestId)));
+	}
 }

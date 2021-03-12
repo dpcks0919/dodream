@@ -39,7 +39,7 @@ public class NewsController {
 	
 	@GetMapping("news/newsDetail/{id}")
 	public String newsDetail(Model model, @PathVariable(value="id") int id) {
-		System.out.println("controller id : "+id);
+		newsService.increaseCount(id);
 		model.addAttribute("newsDetail", newsService.readNewsOne(id));
 		return "news/news_detail";
 	}
