@@ -45,24 +45,78 @@
 						<tr>
 							<th style="width: 17.5%;">종류</th>
 							<th style="width: 27.5%;">내역</th>
-							<th style="width: 55%;">내 수량 / 현재 수량 / 목표 수량</th>
+							<th style="width: 55%;">현재 수량 / 목표 수량</th>
 						</tr>
 						<tr class="needs-category" id="rq_item0"></tr>
 					</table>
 				</div>
 			</div>
-			<div class="response-wrapper" id="response-wrapper"  style="display:none">
-				<div class="response-title">요청자 회신</div>
-				<div class="response-content" id="response-content"></div>
+		</div>
+
+		<div class="modal-ftr">
+			<div class="btn-res" onclick="goResponse()">응답하기</div>
+			<div class="btn-icon" onclick="heartClick();">
+				<i class="far fa-heart" id="btn-heart"></i>
+				<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
 			</div>
 		</div>
-		<div class="modal-container" id="view-responseForm"></div>
+	</div>
+	<!-- 응답하기 -->
+	<div class="modal-container" id="view-responseForm">
+		<div class="modal-content">
+			<div class="" style="vertical-align: text-bottom !important;">
+				<h5 style="float: left">응답하기</h5>
+				<span class="request-name" id="rq_title2"><br></span>
+			</div>
+			<div class="content-info" style="text-align: center;">
+				<div class="" style="border-top: 3px solid black; height: 4rem !important; padding-top: 1vh; padding-bottom: 1vh;">
+					<button class="info-btn" id="myInfo" onclick="bringInfo('myInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">내 정보 가져오기</button>
+					<button class="new-btn click_event" id="newInfo" onclick="bringInfo('newInfo', '${user.userName}', '${user.userPhone}', '${user.orgName}')">새로 작성하기</button>
+				</div>
+				<div class="div-inline">
+					<div class="response-info ">
+						<div class="info-title">
+							이름<span style="color: white;">이름</span>
+						</div>
+						<input class="info-name info-text" name="response-name" id="reply_user" type="text" value="${user.userName}" placeholder="이름 입력"></input>
+					</div>
+					<div class="response-info">
+						<div class="info-title">소속단체</div>
+						<input class="info-group info-text" name="response-org" id="reply_org" type="text" value="${user.orgName}" placeholder="소속단체 입력"></input>
+					</div>
+				</div>
+				<div class="response-info">
+					<div class="info-title">전화번호</div>
+					<input class="info-phone info-text" name="response-phone" id="reply_phone" type="text" value="${user.userPhone}" placeholder="전화번호 입력"></input>
+				</div>
+				<!-- 공간 맞추기 여백 -->
+				<div class="response-info" style="visibility: hidden !important;">
+					<div class="info-title">전화번호</div>
+					<input class="info-text" type="text" placeholder="전화번호 입력"></input>
+				</div>
+				<br>
+				<textarea class="response-info-content" name="response-content" id="reply_content"></textarea>
+				<p style="float: left; margin-bottom: 0.5vh; font-weight: bold;">도움을 드리고 싶은 품목의 수량을 입력해주세요!</p>
+				<div class="content-needs">
+					<table class="info-table">
+						<tr>
+							<th style="width: 10%;">종류</th>
+							<th style="width: 30%;">내역</th>
+							<th style="width: 30%;">수량 설정</th>
+							<th style="width: 30%;">필요 수량</th>
+						</tr>
+						<tr class="needs-category" id="rp_item0"></tr>
+					</table>
+				</div>
+			</div>
+		</div>
 		<!-- modal.js에 click event 생성 -->
 		<div class="modal-ftr" style="justify-content: space-between;">
-			<div class="btn-com" id="btn-com">수정하기</div>
+			<div class="btn-com" id="btn-com">완료하기</div>
+			<div class="btn-back" onclick="goBack()">
+				<span style="color: #e5e5e5; visibility: hidden;">뒤</span>뒤로<span style="color: #e5e5e5; visibility: hidden;">뒤</span>
+			</div>
 		</div>
-	</div>
-
 	</div>
 
 	<div id="menu-back" onclick="closeNav()"></div>
@@ -96,6 +150,7 @@
 	<script src="/js/request.js"></script>
 
 	<script>
+	
 		function initPage() {
 			$.ajax({
 				type : "GET",
@@ -128,9 +183,11 @@
 				console.log(JSON.stringify(error));
 			});
 		}
+		
+
 
 		$(document).ready(function() {
-			initPage();
+			initPage();					
 		});
 	</script>
 
