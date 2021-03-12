@@ -101,4 +101,4 @@ api:
     send-phone: '01068363758'
 
 summernote:
-  upload: Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
+  upload: /Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
