@@ -505,10 +505,15 @@ table td {
 						alert("에러발생");
 					} else {
 						//alert("요청이 업데이트 되었습니다!");
+						alert("요청 내역이 수정되었습니다.");
+						location.href = "/user/myrequest";
 					}
 				}).fail(function(error) {
 					console.log(JSON.stringify(error));
 				});
+				
+					
+				
 			  	
 				
 			}
@@ -604,6 +609,7 @@ table td {
 				$("#"+curCount).val(items[2]);
 			}
 		}
+		
 		}
 		// request 수정 취소하고 뒤로가기.
 		function request_back() {
@@ -627,6 +633,7 @@ table td {
 		    $('#add_item').hide();
 		    $('.default_item').remove();
 		    $('#default_item').remove();
+		    $("#newItem").empty();
 		    
 		    $('#default_td').removeAttr("hidden");
 		    $('#edit_td').prop("hidden", "hidden");
