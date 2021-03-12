@@ -29,4 +29,5 @@ public class NewsApiController {
 		newsService.update(news);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
+	
 }

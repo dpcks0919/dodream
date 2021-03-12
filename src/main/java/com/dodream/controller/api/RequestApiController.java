@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -28,7 +27,6 @@ import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.User;
-import com.dodream.model.UserInterest;
 import com.dodream.service.RequestService;
 
 @RestController
@@ -92,21 +90,59 @@ public class RequestApiController {
 //		requestService.saveHeart(userInterest, principalDetails);
 //		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 //	}
-//	
 	
-	@PostMapping("/requestSaveProc")
-	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		Request newRequest = requestService.saveRequest(request, principalDetails);
-		System.out.println(newRequest.getId());
-		return new ResponseDto<Request> (HttpStatus.OK.value(), newRequest);
+	
+//	@ResponseBody
+//	@RequestMapping(value="/requestUpdateProc", method = RequestMethod.GET)
+//	public ResponseDto<Integer> requestUpdate(@RequestBody Request request, HttpServletRequest httpServletRequest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		
+//		Request _request = requestService.getRequest(id);
+//		
+//		requestService.update(request);
+//		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
+//	}
+	
+	// 기존 request item update
+	@PostMapping("/requestUpdateProc")
+	public ResponseDto<Integer> requestUpdate(@RequestBody Request request) {
+		System.out.println("요청 업데이트");
+		requestService.updateRequest(request);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
 	
-	@PostMapping("/requestItemSaveProc")
-	public ResponseDto<Integer> saveRequestItem(@RequestBody RequestItem requestItem) {
-		System.out.println(requestItem);
+	// 기존 request update
+	@PostMapping(value="/requestItemUpdateProc")
+	public ResponseDto<Integer> requestItemUpdate(@RequestBody RequestItem requestItem) {
+		System.out.println("기존 아이템 업데이트");
+		requestService.updateItem(requestItem);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
+	}
+
+	// 기존 request update : myrequest에서 사용
+	@PostMapping(value="/requestItemSaveProc_myrequest")
+	public ResponseDto<Integer> saveRequestItem_myrequest(@RequestBody RequestItem requestItem) {		
+		// request id를 받아와서, requestItem.request에 입력해야하기때문에 임시로 ReceivedNum에 값을 입력받아와서
+		// setRequest를 설정하고, ReceivedNum은 다시 0으로 초기화시켜주었다.
+		requestItem.setRequest(requestService.getRequest(requestItem.getReceivedNum()));
+		requestItem.setReceivedNum(0);
 		requestService.saveRequestItem(requestItem);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
+	
+	// 새로운 요청 아이템 등록
+	@PostMapping("/requestItemSaveProc")
+	public ResponseDto<Integer> saveRequestItem(@RequestBody RequestItem requestItem) {
+		requestService.saveRequestItem(requestItem);
+		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
+	}
+	
+	// 새로운 요청 등록
+	@PostMapping("/requestSaveProc")
+	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		Request newRequest = requestService.saveRequest(request, principalDetails);
+		return new ResponseDto<Request> (HttpStatus.OK.value(), newRequest);
+	}
+	
 	
 	//new
 	@PostMapping("/requestItemAddProc")

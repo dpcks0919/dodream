@@ -70,4 +70,9 @@ public class Reply {
 	
 	@UpdateTimestamp 
 	private Timestamp updateDate; // update 시 시간 자동 저장
+
+	public void setStatus(Enum _status) {
+		// TODO Auto-generated method stub
+		status = (StatusType) _status;
+	}
 }
