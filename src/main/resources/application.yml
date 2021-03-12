@@ -10,6 +10,7 @@ spring:
   mail:
     host: smtp.naver.com
     port: 587
+
     username: #naver ID
     password: #naver PW
     smtp.auth: true
@@ -101,4 +102,3 @@ api:
 
 summernote:
   upload: /Users/sjc/git/dodream/src/main/resources/static/image/summernote/
-

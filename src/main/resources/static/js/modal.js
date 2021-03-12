@@ -236,6 +236,14 @@ function heartClick() {
 }
 
 function goDetail_myrequest(rq) {
+    $('.rq_item').remove();
+	$('#default_item').remove();
+	$("#rq_clientType").prop('disabled', true);
+	$("#rq_urgentLevel").prop('disabled', true);
+
+    $('.default_item').remove();
+	request_back();
+	
 	document.getElementById("modal-bg").style.display="block";
 	document.getElementById("view-detail").style.display="block";
 	document.getElementById("page-top").style.overflow="hidden";
@@ -267,22 +275,43 @@ function goDetail_myrequest(rq) {
     if(c_time <= d_time) status = "응답 대기중";
     else status = "마감";
 
+	var client_type = rq.clientType;
+    var level = rq.urgentLevel;
+
     let regDate = rq.regDate.substring(0,10);
-    let level = rq.urgentLevel;
-    if(level == 1) level = "매우 긴급(3일 이내)";
-    else if(level == 2) level = "긴급(14일 이내)";
-    else if(level == 3) level = "보통(한 달 이내)";
 
-    $("#rq_title").html("<h5>" + rq.title + "</h5>");
-    $("#rq_id").html(rq.id);
-    $("#rq_date").html(regDate);
-    $("#rq_status").html(status);
-    $("#rq_addr").html(rq.requestAddress);
-    $("#rq_level").html(level);
-    //$("#rq_user").html(rq.userName);
-    $("#rq_user").html(org_name);
+    //if(level == 1) level = "매우 긴급(3일 이내)";
+    //else if(level == 2) level = "긴급(14일 이내)";
+    //else if(level == 3) level = "보통(한 달 이내)";
+
+    //$("#rq_title").html("<h5>" + rq.title + "</h5>");
+	$("#rq_title").val(rq.title);
+    //$("#rq_id").html(rq.id);
+	$("#rq_id").val(rq.id);
+    //$("#rq_date").html(regDate);
+	$("#rq_date").val(regDate);
+    //$("#rq_status").html(status);
+	$("#rq_status").val(status);
+	$("#rq_clientType").val(client_type).prop("selected", true);
+	$("#rq_urgentLevel").val(level).prop("selected", true);
+	
+    $("#roadAddrPart1").val(rq.requestAddress);
+	$("#roadLongitude").val(rq.longitude);
+	$("#roadLatitude").val(rq.latitude);
+	
+	console.log("기존 위경도 : " + $("#roadLongitude").val() +", " + $("#roadLatitude").val());
     $("#rq_contents").html(rq.description);
+	
+	// 수정하기로 변경시에 전달될 객체
+	// string들을 담은 배열로 저장해서 보낸다.
+	var arr = [];
+	for(var i=0; i<rq.requestItem.length; i++) {
+		str_arr = rq.requestItem[i].itemId+"^!@#^"+rq.requestItem[i].itemName+"^!@#^"+rq.requestItem[i].itemNum+"^!@#^"+rq.requestItem[i].receivedNum+"^!@#^"+ rq.requestItem[i].requestType;
+		arr.push(str_arr);
+	}
 
+	$("#rq_edit").attr("onclick", ("request_edit('" + arr + "')"));
+	
     let items = rq.requestItem;
 
   //종류 한글로 바꿔주기 
@@ -324,18 +353,18 @@ function goDetail_myrequest(rq) {
 
         if(items[i].requestType === items[i-1].requestType) {
           if(items[i].requestType == "재정") {
-              $(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + needs + "원" + '</td></tr>');
           } else {
-              $(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');				
           }
         } else {
           if(items[i].requestType == "재정") {
-              $(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + needs + "원" + '</td></tr>');				
           } else {
-              $(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
           }
         }

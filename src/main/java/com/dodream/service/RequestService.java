@@ -23,6 +23,7 @@ import com.dodream.model.ClientType;
 import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
+import com.dodream.model.RequestType;
 import com.dodream.model.User;
 import com.dodream.repository.ReplyRepository;
 import com.dodream.repository.RequestItemRepository;
@@ -89,7 +90,7 @@ public class RequestService {
 	@Transactional
 	public void saveRequestItem(RequestItem requestItem) {
 		requestItemRepository.save(requestItem);
-		System.out.println("saveRequestItem");
+		System.out.println("saveRequestItem(아이템 저장됨)");
 	}
 	
 //	@Transactional
@@ -146,8 +147,8 @@ public class RequestService {
 	}
 	
 	@Transactional
-	public Request[] readMyRequest(User user) {
-		return requestRepository.findByUser(user);
+	public Page<Request> readMyRequest(User user, Pageable pageable) {
+		return requestRepository.findByUser(user, pageable);
   }
 
 	@Transactional
@@ -219,6 +220,46 @@ public class RequestService {
 		System.out.println("메일 내용: " +msg);		
 	}
 	
+	@Transactional
+	public void updateItem(RequestItem requestItem) {	
+		RequestItem persistance = requestItemRepository.findById(requestItem.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
+		});
+		
+		persistance.setItemName(requestItem.getItemName());
+		persistance.setItemNum(requestItem.getItemNum());
+		persistance.setRequestType(requestItem.getRequestType());
+	}
+	
+	@Transactional
+	public void updateRequest(Request request) {
+		Request persistance = requestRepository.findById(request.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
+		});
+				
+		persistance.setTitle(request.getTitle());
+		persistance.setRequestAddress(request.getRequestAddress());
+		persistance.setLatitude(request.getLatitude());
+		persistance.setLongitude(request.getLongitude());
+		persistance.setDescription(request.getDescription());		
+		persistance.setClientType(request.getClientType());
+		
+		persistance.setUrgentLevel(request.getUrgentLevel());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(request.getUrgentLevel() == 1 ) {
+			cal.add(Calendar.DATE, 5);
+		}else if(request.getUrgentLevel() == 2 ) {
+			cal.add(Calendar.DATE, 14);
+		}else if(request.getUrgentLevel() == 3 ) {
+			cal.add(Calendar.MONTH, 1);
+		}
+		request.setDueDate(java.sql.Timestamp.valueOf(df.format(cal.getTime()) ));
+		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
+		
+	}
+
 	// 찜한 request 불러오기
 	@Transactional(readOnly = true)
 	public Page<Request>  readInterestedRequestList(int userId, Pageable pageable) {
