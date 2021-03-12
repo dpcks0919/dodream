@@ -1,5 +1,6 @@
 package com.dodream.repository;
 
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,6 +30,8 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Page<Request> findByUrgentLevel(int urgentLevel, Pageable pageable);
 
 	Page<Request> findByClientTypeAndId(ClientType client, int id, Pageable pageable);
+
+	Page<Request> findByUser(User user, Pageable pageable);
 
 	Page<Request> findByClientTypeAndTitleContaining(ClientType client, String searchText, Pageable pageable);
 
