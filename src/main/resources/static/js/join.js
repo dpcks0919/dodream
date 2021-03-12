@@ -61,7 +61,54 @@ let joinInit = {
 		$("#userid").change(function(){
 			idFlag = 0;
 		});
-
+		$("#btn-find-id").on("click", () => { 
+			this.findId();
+		});
+		$("#btn-find-password").on("click", () => {
+			this.findPassword();
+		});
+	},
+	
+	findId:function(){
+		var email = $("#input1-find-id").val() + "@" + $("#input2-find-id").val();
+		$.ajax({
+			//로그인 수행 요청.
+			type: "POST",
+			url: "/findIdProc",
+			data: {email: email}, 
+		}).done(function(resp){
+			if(resp.data == false){
+				alert("해당하는 이메일이 없습니다.");	
+			}else{
+				alert("해당 이메일로 아이디를 발송드렸습니다.");
+				location.href = "/";
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});
+	},
+	
+	findPassword:function(){
+		var id = $("#input1-find-pw").val();
+		var email = $("#input2-find-pw").val() + "@"  + $("#input3-find-pw").val();
+		$.ajax({
+			//로그인 수행 요청.
+			type: "POST",
+			url: "/findPwProc",
+			data: {
+				id: id,
+				email: email
+			}, 
+		}).done(function(resp){
+			if(resp.data == false){
+				alert("회원정보를 다시 확인해주세요.");
+			}else{
+				alert("해당 이메일로 변경된 비밀번호를 발송드렸습니다. 확인 후 로그인 부탁드립니다.");
+				location.href = "/";
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});
 	},
 	
 	selectBirth:function(){

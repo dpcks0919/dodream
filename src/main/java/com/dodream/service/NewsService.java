@@ -1,13 +1,10 @@
 package com.dodream.service;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -71,5 +68,10 @@ public class NewsService {
 		persistance.setNewsType(news.getNewsType());
 		persistance.setCount(news.getCount());
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
+	}
+
+	@Transactional
+	public void increaseCount(int id) {
+		newsRepository.increaseCount(id);
 	}
 }

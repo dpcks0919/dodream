@@ -133,10 +133,13 @@
 					</div>
 				</div>
 				<div class="section2-box">
-					<div class="section2-box-left" style="line-height: initial; margin-top: 1.25rem;">
+					<!-- <div class="section2-box-left" style="line-height: initial; margin-top: 1.25rem;">
 						<p class="section2-text1">응답 내역</p>
 						<p class="section2-text2" style="margin-bottom: 0;">새로운 응답 1</p>
 						<p class="section2-text2" style="margin-bottom: 0;">지난 응답 10</p>
+					</div> -->
+					<div class="section2-box-left" >
+						<p class="section2-text1">응답 내역</p>
 					</div>
 					<div class="section2-box-right">
 						<a class="section2-text2" href="/user/myresponse">더 보기 <i class="fas fa-chevron-right"></i></a>
