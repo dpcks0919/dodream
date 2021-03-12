@@ -10,6 +10,7 @@ spring:
   mail:
     host: smtp.naver.com
     port: 587
+
     username: wltjdals422
     password: dbgmltn0422#
     smtp.auth: true
@@ -91,12 +92,13 @@ spring:
            
 social:
   password: dodream1234
-  
+ 
+#sms api
 api:
   sms:
     api-key: NCSOSP7IP6LI47WT
     api-secret: EVJACJDVXCTXW2ODT28UXRDIZHPZ9TUL
     send-phone: '01068363758'
-    
+
 summernote:
   upload: Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
