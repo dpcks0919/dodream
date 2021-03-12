@@ -1,41 +1,39 @@
+<!-- myrequest에서 응답 내역 리스트를 보여주는 화면. -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <table class="info-table res-table">
 	<tr>
-		<th style="width: 15%;">순서</th>
-		<th style="width: 30%;">응답 내용</th>
+		<th style="width: 15%;">응답코드</th>
+		<th style="width: 30%;">응답자</th>
 		<th style="width: 40%;">응답 종류</th>
 		<th style="width: 15%;">응답 상태</th>
 	</tr>
 	<c:set var="replyCount" value="0" />
 	<c:forEach var="reply" items="${replyList}">
-		<tr class="needs-category response-row" id="response1" style="" onclick="response_detail(${reply.id});">
-			<td>1</td>
-			<td class="td-title">
-				<c:choose>
-					<c:when test="${reply.comment == null}">
-						-
-					</c:when>
-					<c:when test="${reply.comment != null}">
-						${reply.comment}					
-					</c:when>
-				</c:choose>
-			</td>
-			<c:choose>
-				<c:when test="${reply.comment == null}">
-					-
-				</c:when>
-				<c:when test="${reply.comment != null}">
-					${reply.comment}					
-				</c:when>
-			</c:choose>
+	<c:choose>
+		<c:when test="${reply.status == 'WAITING'}">
+			<c:set var="replyStatus" value="대기"/>
+		</c:when>
+		<c:when test="${reply.status == 'APPROVED'}">
+			<c:set var="replyStatus" value="승인"/>
+		</c:when>
+	</c:choose>
+	<!-- id, num,  -->
+		<tr class="needs-category response-row" id="response${replyCount}" style="" onclick="response_detail(this, ${reply.id})">
+
+		<script>
+			
+		</script>
+			<td>${reply.id}</td>
+			<td class="td-title">${reply.replyUser}</td>
 			<script>
 				$.ajax({
 					type : "GET",
 					traditional : true,
-					url : "/user/replyitemList?id="+${reply.id},
+					url : "/user/replyitemString?id="+${reply.id},
 				}).done(function(resp) {
 					if (resp.status == 500) {
 						alert("에러발생");
@@ -47,8 +45,8 @@
 				});
 			
 			</script>
-			<td id="rp-item${replyCount}">물품1 10개, 물품2 5개</td>
-			<td>${reply.status}</td>
+			<td id="rp-item${replyCount}"></td>
+			<td>${replyStatus}</td>
 		</tr>
 	<c:set var="replyCount" value="${replyCount + 1}" />
 	</c:forEach>

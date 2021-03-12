@@ -3,6 +3,9 @@ package com.dodream.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +48,9 @@ public class UserController {
 	}
 	
 	@GetMapping("user/myrequest")
-	public String myrequest(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+	public String myrequest(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
 		model.addAttribute("user", principalDetails.getUser());
-		model.addAttribute("myrequestList", requestService.readMyRequest(principalDetails.getUser()));
+		model.addAttribute("myrequestList", requestService.readMyRequest(principalDetails.getUser(), pageable));
 		System.out.println(model);
 		return "my/myrequest";
 	}
@@ -62,37 +65,7 @@ public class UserController {
 		model.addAttribute("user", principalDetails.getUser());
 		return "my/reply_table";
 	}
-	
-	// myrequest에서 request의 reply에 해당하는 replyItem들을 가져옴.
-	@ResponseBody
-	@RequestMapping(value="/user/replyitemList", method = RequestMethod.GET)
-	public String replyItemTable(Model model, HttpServletRequest httpServletRequest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		String id = httpServletRequest.getParameter("id");
-		System.out.println("id=" + id);
-		String str_replyList = "";
-		model.addAttribute("replyItemList", replyService.readReplyItemList(replyService.getReply(Integer.parseInt(id))));
-		ReplyItem[] replyList = replyService.readReplyItemList(replyService.getReply(Integer.parseInt(id)));
-		for(int i=0; i<replyList.length; i++) {
-			RequestItem _request = requestService.getRequestItem(replyList[i].getRequestItem().getId());
-			System.out.println(_request.getRequestType());
-			if(_request.getRequestType().toString().equals("Stuff")) {
-				str_replyList += "물품 : " + replyList[i].getReplyNum() + "개";
-			} else if(_request.getRequestType().toString().equals("Finance")) {
-				str_replyList += "재정 : " + replyList[i].getReplyNum() + "원";
-			} else if(_request.getRequestType().toString().equals("Service")) {
-				str_replyList += "봉사 : " + replyList[i].getReplyNum() + "개(명)";
-			} else if(_request.getRequestType().toString().equals("Etc")) {
-				str_replyList += "기타 : " + replyList[i].getReplyNum() + "개";
-			}
-			if(i+1 != replyList.length) {
-				str_replyList += ", ";
-			}
-		}
-		System.out.println(str_replyList);
-		return str_replyList;
-	}
-	
-	
+
 	
 	@GetMapping("user/pwCheck")
 	public String pwCheck() {

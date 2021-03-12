@@ -51,7 +51,6 @@ public class NewsService {
 		});
 	}
 	
-	// 제대로 했는지 모르겠음. 잘 안됨
 	@Transactional
 	public void update(News news) {
 		System.out.println("id : " + news.getId());
