@@ -8,27 +8,126 @@ function goPopup(){
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 }
 
- function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+// kakaomap.jsp include 해야 실행됨.
+function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 
-		document.regForm.roadAddrPart1.value = roadAddrPart1;
-		document.regForm.addrDetail.value = addrDetail;
-		
-		var geocoder = new daum.maps.services.Geocoder();
-		 var x,y          = "";
-	     var gap = roadAddrPart1;
-	     
-		 // 주소로 좌표를 검색
-		 geocoder.addressSearch(gap, function(result, status) {
-		  
-		  // 정상적으로 검색이 완료됐으면,
-		  if (status == daum.maps.services.Status.OK) {
-		   
-		   var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-		   Lng = result[0].x;
-		   Lat = result[0].y;
-		  }
-		 }); 
+	$("#roadAddrPart1").val(roadAddrPart1);
+	console.log("JusoCallBack");
+	
+	var geocoder = new daum.maps.services.Geocoder();
+	var x, y = "";
+	var gap = roadAddrPart1;
+
+	// 주소로 좌표를 검색
+	geocoder.addressSearch(gap, function (result, status) {
+		// 정상적으로 검색이 완료됐으면,
+		if (status == daum.maps.services.Status.OK) {
+
+			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+			Lng = result[0].x;
+			Lat = result[0].y;
+			console.log("현재 위경도 : " + Lng +", " + Lat);
+			$("#roadLongitude").val(Lng);
+			$("#roadLatitude").val(Lat);
+		}
+	});
+
 }
+
+function rowAdd() {
+  var trCnt = $('#myTable tbody[id="newItem"] tr').length;
+  var curCnt = trCnt+1;
+  var curID = 'tr' + curCnt;
+  var curItem = curID + "newItem";
+  var curName = curID + "newName";
+  var curCount = curID + "newCount";
+  var curDiv = curID + "div";
+  // alert(curItem + " "+curName + " "+curCount);
+  var innerHtml = "";
+  innerHtml += "<tr id="+curID+" class='default_item'>";
+  innerHtml += "<th class='item'><select class='request-item' id="+curItem+" onchange='alert_select_value(this, "+curCnt+",1);'>";
+  innerHtml += "<option name='STUFF' value='STUFF' selected>물품</option>";
+  innerHtml += "<option name='FINANCE' value='FINANCE'>재정</option>";
+  innerHtml += "<option name='SERVICE' value='SERVICE'>봉사</option>";
+  innerHtml += "<option name='ETC' value='ETC'>기타</option>";
+  innerHtml += "</select></th>";                  
+  innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
+  innerHtml += "<th><div id='"+curDiv+"'>";
+  innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 1);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+  innerHtml += "<i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 1);'></i>";
+  innerHtml += "</div></th>";
+  innerHtml += "<th><div class='del-btn' id="+curID+" onclick='rowDelete(this, 1);'>X</div></th>";
+  innerHtml += "</tr>";
+  $('#myTable > tbody[id="newItem"]:first').append(innerHtml);
+}
+
+function rowDelete(current) {
+  var target = document.getElementById(current.getAttribute('id')).getAttribute('id')
+  $('#'+target).remove();
+}
+
+function minusCount(_current, flag) {
+	var str = "";
+	if(flag == 0) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var target = _current.id + str;
+  var cnt = document.getElementById(target).value;
+  if(cnt>0) {
+    document.getElementById(target).value=cnt*1 - 1;
+  }
+  else {
+    alert("0이상의 수를 입력하세요.");
+  }
+}
+ 
+function plusCount(_current, flag) {
+	var str = "";
+	if(flag == 0) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var target = _current.id + str;
+  var cnt = document.getElementById(target).value;
+  // document.getElementById(target).setAttribute('value', cnt+1);
+  document.getElementById(target).value=cnt*1 + 1;
+}
+
+function numberWithCommas(curObj) {
+  var x = curObj.value;
+  var curID = "#"+curObj.id;
+  x = x.replace(/[^0-9]/g,'');   // 입력값이 숫자가 아니면 공백
+  x = x.replace(/,/g,'');          // ,값 공백처리
+  $(curID).val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // 정규식을 이용해서 3자리 마다 , 추가
+}
+
+// 도움 종류에 따라 수량 표기 변화시키는 함수
+var alert_select_value = function (select_obj, curCnt, flag) {
+	alert(flag);
+	var str = "";
+	if(flag == 0) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var selected_index = select_obj.selectedIndex;
+  var selected_value = select_obj.options[selected_index].value;
+  var curDiv = 'tr' + curCnt + "div";
+  var curCount = 'tr' + curCnt +str;
+  var newHtml = "";
+  if(selected_value === 'FINANCE') {
+    newHtml += "<input type='text' class='response-item-count-big' name='request' value='0' id='"+curCount+"' onkeyup='numberWithCommas(this)'/>원";
+  }
+  else {
+    newHtml += "<i class='fas fa-minus minus-icon' id='"+"tr"+curCnt+"' onclick='minusCount(this, "+ flag +");'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+    newHtml += "<i class='fas fa-plus plus-icon' id='"+"tr"+curCnt+"' onclick='plusCount(this, "+ flag +");'></i>";
+  }
+  document.getElementById(curDiv).innerHTML = newHtml;
+}
+
 
 let myInit = {
 	

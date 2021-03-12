@@ -38,8 +38,26 @@ html, body {
   /* height:53vh; */
   padding-bottom:150px;
   width:100%;
-
 }
+
+.myrequest-section {
+  /* height:53vh; */
+  padding-bottom:2rem;
+  width:100%;
+}
+
+.myresponse-section {
+  /* height:53vh; */
+  padding-bottom:2rem;
+  width:100%;
+}
+
+.paging-wrapper {
+	margin-bottom:2rem;
+	display:flex;
+	justify-content:center;
+}
+
 .section2-box {
   width: 25rem;
   height:7.5rem;
@@ -136,6 +154,42 @@ td, th {
 	padding-top:0.5rem;
 	padding-bottom:0.5rem;
 }
+
+.add_item th {
+  text-align:center;
+  font-size:1.5rem;
+  height:1vh!important;
+  padding-top:1vh;
+}
+.add_item-button {
+  border:2px solid #e3e3e3;
+  background-color:white;
+  color:#e3e3e3;
+  outline:none!important;
+  cursor:pointer;
+}
+
+.response-item-count {
+  height:3vh;
+  width: 3vh;
+  margin-left:1vh;
+  margin-right:1vh;
+  vertical-align:middle;
+  outline:none;
+  text-align:center;
+  font-size:0.75rem;
+}
+.response-item-count-big {
+  height:3vh;
+  width: 7vh!important;
+  margin-left:1vh;
+  margin-right:1vh;
+  vertical-align:middle;
+  outline:none;
+  text-align:center;
+  font-size:0.75rem;
+}
+
 
 @media (max-width: 576px) {
   /* header {
