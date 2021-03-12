@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.model.ClientType;
+import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.User;
@@ -227,8 +228,8 @@ public class RequestService {
 	
 	// myresponse
 	@Transactional(readOnly = true)
-	public Page<Request> readMyResponseTable(int userId, Pageable pageable) {
-		return requestRepository.readMyReposeByUserId(userId, pageable);
+	public Page<Reply> readMyResponseTable(int userId, Pageable pageable) {
+		return replyRepository.findAllByUserId(userId, pageable);
 	}
 	
 	///////////// requestSearch 

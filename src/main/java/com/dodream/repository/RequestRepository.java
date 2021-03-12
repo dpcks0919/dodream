@@ -51,7 +51,4 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	
 	@Query(value = "SELECT * FROM request where id in ( select request_id from user_interest where user_id = ?1)", nativeQuery = true)
 	Page<Request> readInterestRequestByUserId(int userId, Pageable pageable);
-	
-	@Query(value = "SELECT * FROM request where id in ( select request_id from reply where user_id = ?1)", nativeQuery = true)
-	Page<Request> readMyReposeByUserId(int userId, Pageable pageable);
 }
