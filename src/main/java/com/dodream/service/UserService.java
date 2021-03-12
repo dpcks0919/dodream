@@ -2,6 +2,7 @@ package com.dodream.service;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -243,5 +244,70 @@ public class UserService {
 		return userRepository.findByUserTypeAndShowFlag(RoleType.GROUP, 1);
 	}
 
+	@Transactional
+	public Boolean findIdService(String email) {
+		User user = userRepository.findByUserEmail(email);
+		if(user == null) return false;
+		else {
+			String content = "가입하신ID: " + user.getLoginId();
+			sendEmail(user.getUserEmail(), content);
+			return true;
+		}
+	}
+	
+	@Transactional
+	public Boolean findPwService(String id, String email) {
+		User user = userRepository.findByLoginIdAndUserEmail(id, email);
+		if(user == null) return false;
+		else {
+			String randRawPw = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다.
+			randRawPw = randRawPw.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
+		    System.out.println("RAND PW: " + randRawPw);
+		    
+			String encPassword =  encoder.encode(randRawPw);
+			user.setLoginPassword(encPassword);	// 비밀번호 저장
+			
+			String content = "바뀐 PW: " + randRawPw;
+			sendEmail(user.getUserEmail(), content);
+			return true;
+		}
+	}
+
+	public void sendEmail(String userEmail, String content) {
+		//수신자메일 
+		String rcvEmail = userEmail;
+		
+		//발신자 메일 
+        String sendMail = "";	// 사용 이메일 주소
+        String sendName = "";	// 상대방에게 표시되는 이름
+		
+        // 메일 내용 관련 
+		// 메일 제목 
+		String title = "[DoDream]";
+		
+		// 매일 내용(msg) 
+		String msg = "";
+		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h3 style='color: blue;'> " + content + "</h3>";
+		msg += "<strong></div><br/>";
+		
+		/* 일단 막아놈
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+        mimeMessageHelper.setFrom(sendMail,sendName);
+        mimeMessageHelper.setTo(rcvEmail);
+        mimeMessageHelper.setSubject(title);
+        mimeMessageHelper.setText(msg, true);
+
+        // 메일 발송 
+        javaMailSender.send(message);
+        */
+		
+		System.out.println("수신자메일: " + rcvEmail);
+		System.out.println("메일 제목: " + title);
+		System.out.println("메일 내용: " +msg);		
+	}
 
 }

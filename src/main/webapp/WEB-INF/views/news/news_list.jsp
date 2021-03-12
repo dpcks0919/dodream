@@ -30,7 +30,7 @@
 				<div class="reg-info">
 					<h4>소식 보기</h4>
 					<p>두드림의 순간들과<br>두드림터치의 이야기들을 확인할 수 있습니다.</p>
-					<a style="border:1px solid white; color: white; cursor:pointer; padding:0.5rem;" href="/user/news/newsWrite">글 쓰기(임시)</a>
+					<a style="border:1px solid white; color: white; cursor:pointer; padding:0.5rem;" href="/user/news/newsWrite">글 쓰기</a>
 				</div>
 			</div>
 		</header>
@@ -52,28 +52,22 @@
 								<img class="news-header-wrapper-image" onclick="newDetail('${top.id}');" id="topImg${topCount}" src="" style="width:100%;"/>
 								<script>
 									// 첫 img 태그만 잘라서 보여주는 태그
+									var realImg = "/image/news2.jpeg";
 									var fullStr = '${top.content}';
 									var strArray = fullStr.split('<p>');
-									for(var i=0; i<strArray.length; i++) {
-										if(strArray[i].includes('img src=')) {
-											var strDetail = strArray[i].split('<img src=');
-											if(strDetail.includes('<img src=')) {
-												var imgAddress = strDetail[0].split('style');													
-											} else {
-												var imgAddress = strDetail[1].split('style');
+									if(fullStr.includes('<img')){
+										for(var i=0; i<strArray.length; i++) {
+											if(strArray[i].includes('<img')) {
+												var strDetail = strArray[i].split('src="')[1];
+												var realImg = strDetail.split('"')[0];
+												var imgId = "topImg"+${topCount};
+												document.getElementById(imgId).src= realImg;
+												break;
 											}
-											var realImg = imgAddress[0];
-											// 맨 앞 문자 자르기(" 하나)
-											realImg = realImg.substr(1);
-											// 맨 뒷 두문자 자르기(공백과 " 하나)
-											realImg = realImg.substr(0, realImg.length -2);
-											var imgId = "topImg"+${topCount};
-											document.getElementById(imgId).src= realImg;
-											break;
-										}
-									};
-									
-									
+										};
+									}else{
+										document.getElementById(imgId).src= realImg;
+									}									
 								</script>
 								<div class="news-header-wrapper-text">
 									<p class="news-header-wrapper-title"><a style="color:black; cursor:pointer;" onclick="newDetail('${top.id}');">${top.title}</a></p>
@@ -136,31 +130,23 @@
 								var fullStr = '${news.content}';
 								// img 태그 id
 								var imgId2 = "bottomImg"+${bottomCount};
-								if(fullStr.includes('<img src=')) {
-									var strArray = fullStr.split('<p>');
+				
+								var strArray = fullStr.split('<p>');
+								if(fullStr.includes('<img')){
 									for(var i=0; i<strArray.length; i++) {
-										if(strArray[i].includes('img src=')) {
-											var strDetail = strArray[i].split('<img src=');
-											if(strDetail.includes('<img src=')) {
-												var imgAddress = strDetail[0].split('style');													
-											} else {
-												var imgAddress = strDetail[1].split('style');
-											}
-											realImg = imgAddress[0];
-											// 맨 앞 문자 자르기(" 하나)
-											realImg = realImg.substr(1);
-											// 맨 뒷 두문자 자르기(공백과 " 하나)
-											realImg = realImg.substr(0, realImg.length -2);
+										if(strArray[i].includes('<img')) {
+											var strDetail = strArray[i].split('src="')[1];
+											var realImg = strDetail.split('"')[0];
 											document.getElementById(imgId2).src= realImg;
 											break;
 										}
-									}
+									};
 								} else {
 									document.getElementById(imgId2).src= realImg;									
 								}
 								
 							</script>
-						
+							
 						
 						</div>
 						<div class="news-section2-div-right" >

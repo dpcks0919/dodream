@@ -215,28 +215,22 @@
 							</c:choose>
 								<script>
 									// 첫 img 태그만 잘라서 보여주는 태그
+									var realImg = "/image/news2.jpeg";
 									var fullStr = '${top.content}';
 									var strArray = fullStr.split('<p>');
-									for(var i=0; i<strArray.length; i++) {
-										if(strArray[i].includes('img src=')) {
-											var strDetail = strArray[i].split('<img src=');
-											if(strDetail.includes('<img src=')) {
-												var imgAddress = strDetail[0].split('style');													
-											} else {
-												var imgAddress = strDetail[1].split('style');
+									if(fullStr.includes('<img')){
+										for(var i=0; i<strArray.length; i++) {
+											if(strArray[i].includes('<img')) {
+												var strDetail = strArray[i].split('src="')[1];
+												var realImg = strDetail.split('"')[0];
+												var imgId = "topImg"+${topCount};
+												document.getElementById(imgId).src= realImg;
+												break;
 											}
-											var realImg = imgAddress[0];
-											// 맨 앞 문자 자르기(" 하나)
-											realImg = realImg.substr(1);
-											// 맨 뒷 두문자 자르기(공백과 " 하나)
-											realImg = realImg.substr(0, realImg.length -2);
-											var imgId = "topImg"+${topCount};
-											document.getElementById(imgId).src= realImg;
-											break;
-										}
-									};
-									
-									
+										};
+									}else{
+										document.getElementById(imgId).src= realImg;
+									}	
 								</script>							
 							
 							</div>

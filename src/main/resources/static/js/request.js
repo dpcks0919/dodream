@@ -1,33 +1,52 @@
 var Lat, Lng;
 var prevMarker;
 
-	/*
-function heartCheck() {
-	alert($("#rq_id").text());
-		$.ajax({
-			type: "POST",
-			url: "/heart",
-			data: {
-				id : 
-			}
-		}).done(function(resp){
-			if(resp.status == 500) {
-				alert("아이템 업로드 실패하였습니다. ");
-			}
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});		
+// user_Interest에 추가하는 함수
+function addUserInterest(requestId){
+	console.log(requestId);
+	$.ajax({
+		type: "POST",
+		url: "/addUserInterestProc",
+		data: {requestId: requestId},
+	}).done(function(resp){
+		if(resp.status == 500) {
+			alert("addUserInterest 실패하였습니다. ");
+		}else {		
+			alert("관심목록 추가 성공");
+		} 
+	}).fail(function(error){
+		console.log(JSON.stringify(error));
+	});
 }
-*/
+
+// user_Interest 삭제하는 함수
+function deleteUserInterest(requestId){
+	console.log(requestId);
+	$.ajax({
+		type: "POST",
+		url: "/deleteUserInterestProc",
+		data: {requestId: requestId},
+	}).done(function(resp){
+		if(resp.status == 500) {
+			alert("deleteUserInterest 실패하였습니다. ");
+		}else {		
+			alert("관심목록 삭제 성공");
+		} 
+	}).fail(function(error){
+		console.log(JSON.stringify(error));
+	});
+}
+
 // 도로명주소 검색
 function goPopup(){
 	var pop = window.open("/jusoPopup_request","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
+	
 	$(".map-div0").css("margin-bottom","2rem");
 	$(".map-div1").css("margin-bottom","2rem");
-	$(".map-div2").css("margin-bottom","1.5rem");
+	$(".map-div2").css("margin-bottom","1.5rem"); 
 	$(".map-div3").css("margin-bottom","2rem");
 }
 
@@ -332,18 +351,42 @@ function saveReply(items) {
 			if(resp.status == 500) {
 				alert("아이템 업로드 실패하였습니다. ");
 			}else{
-				if( resp.data != null){
+				if(resp.data != null){
 					alert("누군가 중간에 아이템 넣음");
 					closeModal();
+					paging(curPage);
 					goDetail_request(resp.data);
 				}else{
+					//콜백
+					notifySocialWorkerByEmail(reply);
 					alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-					location.href = "/user/requestList";
+					$(".request-table").empty();
+					paging(curPage);
+					closeModal();
+					location.reload();
 				}
 			}		
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
 		});		
+	};
+	
+	//(기부자가) 요청보기 모달창에서 '완료하기' 버튼 누를때 해당 사회복지사에게 email 알림 보내기
+	function notifySocialWorkerByEmail(reply){
+		alert("notifySocialWorkerByEmail");
+		$.ajax({
+			type: "POST",
+			url: "/notifySocialWorkerByEmailProc",
+			data: JSON.stringify(reply),
+			contentType: "application/json; charset = utf-8 ",
+			dataType: "json"
+		}).done(function(resp){ 
+			if(resp.status == 500) {
+				alert("notifySocialWorkerByEmail 실패하였습니다. ");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});
 	};
 
 let requestInit = {
@@ -380,6 +423,8 @@ let requestInit = {
 				// 3. 각각 msg, email 보내기
 				requestInit.notifyByEmail(notifyEmailUserList, request);
 				requestInit.notifyByText(notifyTextUserList, request);
+				//끝나면 화면 전환
+				location.href = "/user/requestMap";
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -441,49 +486,49 @@ let requestInit = {
 		  else if(type_text == '장애인') type = "DISABLED";
 		  else if(type_text == '기타') type = "OTHERS";
 
-		
-		
-		let data = {
-			title: document.getElementById('requestTitle').value,
-			clientType: type,
-			requestAddress : document.getElementById('roadAddrPart1').value,
-			latitude : Lat,
-			longitude : Lng,
-			urgentLevel : period,
-			description : document.getElementById('requestContents').value,
-			status : "NON_APPROVED",			
-			showFlag : 1
-		};
-		
-		console.log(data);
-		$.ajax({
-			type: "POST",
-			url: "/requestSaveProc",
-			data: JSON.stringify(data),
-			contentType: "application/json; charset = utf-8 ",
-			dataType: "json"
-		}).done(function(resp){
+		//주소 입력했는지 체크
+		if(document.getElementById('roadAddrPart1').value == "") alert("주소를 검색해주세요.");
+		else{
+			let data = {
+				title: document.getElementById('requestTitle').value,
+				clientType: type,
+				requestAddress : document.getElementById('roadAddrPart1').value,
+				latitude : Lat,
+				longitude : Lng,
+				urgentLevel : period,
+				description : document.getElementById('requestContents').value,
+				status : "NON_APPROVED",			
+				showFlag : 1
+			};
+			
 			console.log(data);
-			console.log(resp);
-			if(resp.status == 500) {
-				alert("업로드 실패하였습니다. ");
-			}else {
-				alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-				
-				for(var i=0; i<itemList.length; i++) {
-					requestInit.saveRequestItem(itemList[i], resp.data);
-				}
-				closeModal_request();
-				// 해당 request 정보 user에게 notify하기 
-				requestInit.notifyUser(Lat, Lng, data);
-			    //location.reload();
-			    location.href = "/user/requestMap";
-				window.scrollTo(0,0); 
-			} 
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});
-		// input값 초기화하기.
+			$.ajax({
+				type: "POST",
+				url: "/requestSaveProc",
+				data: JSON.stringify(data),
+				contentType: "application/json; charset = utf-8 ",
+				dataType: "json"
+			}).done(function(resp){
+				console.log(data);
+				console.log(resp);
+				if(resp.status == 500) {
+					alert("업로드 실패하였습니다. ");
+				}else {
+					alert("업로드되었습니다.\n요청하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
+					
+					for(var i=0; i<itemList.length; i++) {
+						requestInit.saveRequestItem(itemList[i], resp.data);
+					}
+					closeModal_request();
+					// 해당 request 정보 user에게 notify하기 (JS 미리 실행 방지용)
+
+					requestInit.notifyUser(Lat, Lng, data);
+				} 
+			}).fail(function(error){
+				console.log(JSON.stringify(error));
+			});
+			// input값 초기화하기.
+		}
 	},
 	
 	saveRequestItem:function(item, newRequest) {
@@ -506,54 +551,6 @@ let requestInit = {
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
 		});		
-	},	
-    saveReply:function(items) {
-	
-		let requestId = {
-			id: $("#rq_id").text(),
-		};
-
-		let reply = {
-			replyContent: $("#reply_content").val(),
-			replyUser: $("#reply_user").val(),
-			replyOrg: $("#reply_org").val(),
-			replyPhone: $("#reply_phone").val(),
-			request: requestId
-		};
-	
-		for(var i=0; i<items.length; i++) {
-			var rid = "#response_num" + i;
-			var reply_num = parseInt($(rid).val());
-			items[i].replyNum = reply_num;
-		}
-					
-		var allData = {
-			reply : reply,
-			replyItems: items,
-		}
-		
-		$.ajax({
-			type: "POST",
-			url: "/replySaveProc",
-			data: JSON.stringify(allData),
-			contentType: "application/json; charset = utf-8 ",
-			dataType: "json"
-		}).done(function(resp){
-			if(resp.status == 500) {
-				alert("아이템 업로드 실패하였습니다. ");
-			}
-			if( resp.data != null){
-				alert("누군가 중간에 아이템 넣음");
-				closeModal();
-				goDetail_request(resp.data);
-			}else{
-				alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-				location.href = "/user/requestList";
-			}
-			
-		}).fail(function(error){
-			console.log(JSON.stringify(error));
-		});		
 	},
+	
 }
-
