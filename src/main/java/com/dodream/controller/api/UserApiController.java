@@ -156,4 +156,16 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	@PostMapping("/findIdProc")
+	public ResponseDto<Boolean> findIdProc(@RequestParam(value = "email") String email){
+		System.out.println("Input EMAIL: " + email);
+		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.findIdService(email));
+	}
+	
+	@PostMapping("/findPwProc")
+	public ResponseDto<Boolean> findPwProc(@RequestParam(value = "id") String id, @RequestParam(value = "email") String email){
+		System.out.println("Input ID: " + id);
+		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.findPwService(id, email));
+	}
+	
 }

@@ -13,6 +13,11 @@ public class JoinController {
 		return "login/loginForm";
 	}
 	
+	@GetMapping("/findInfoForm")
+	public String findInfoForm() {
+		return "join/find_info";
+	}
+	
 	@GetMapping("/joinForm")
 	public String joinFormSelect() {
 		return "join/reg_select";

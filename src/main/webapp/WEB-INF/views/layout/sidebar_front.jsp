@@ -5,7 +5,7 @@
 	<h2>두드림터치</h2>
 	<div style="padding-top: 20%; padding-left: 7%; padding-right: 7%; text-align: left;">
 		 <a class="menu-item-top" href="/user/requestMap">요청보기</a>
-		 <a class="menu-item" href="/user/news/newsList">소식보기</a> 
+		 <a class="menu-item" href="/news/newsList">소식보기</a> 
 		 <a class="menu-item" href="/dodreamtouch">두드림터치</a>
 	</div>
 </div>

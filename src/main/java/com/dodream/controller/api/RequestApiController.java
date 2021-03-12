@@ -190,7 +190,4 @@ public class RequestApiController {
 		
 		return fileuploadDto;
 	}
-	
-
-
 }

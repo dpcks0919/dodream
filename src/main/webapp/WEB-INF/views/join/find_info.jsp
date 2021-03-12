@@ -28,7 +28,7 @@
 							<h4>아이디 잊어버린 경우</h4>
 							<p>가입하신 이메일을 입력해주세요.</p>
 							<div "email-input" style="height: 100%;">
-								<input class="find-email" type="text" name="femail">&nbsp;@ <input class="find-address" id="idaddr" type="text" name="faddr" placeholder="직접입력"> <select class="select-portal"
+								<input class="find-email" type="text" name="femail" id="input1-find-id">&nbsp;@ <input class="find-address" id="input2-find-id"" type="text" name="faddr" placeholder="직접입력"> <select class="select-portal"
 									id="idselect" name="portal" onchange="selectEmail(this)">
 									<option value="">직접입력</option>
 									<option value="naver.com">naver.com</option>
@@ -36,15 +36,16 @@
 									<option value="gmail.com">gmail.com</option>
 								</select>
 							</div>
-							<input class="find-submit" type="submit" value="아이디 찾기">
 						</form>
+						<button class="find-submit" id="btn-find-id">아이디 찾기</button>
 					</div>
 					<div class="find-input">
 						<form method="post" action="">
 							<h4>비밀번호 잊어버린 경우</h4>
-							<p>가입하신 이메일을 입력해주세요.</p>
+							<p>가입하신 ID와 이메일을 입력해주세요.</p>
 							<div "email-input" style="height: 100%;">
-								<input class="find-email" type="text" name="femail">&nbsp;@ <input class="find-address" id="pwaddr" type="text" name="faddr" placeholder="직접입력"> <select class="select-portal"
+								<input class="find-email" type="text" style="width:100%; margin-bottom:10px;" id="input1-find-pw" placeholder="ID를 입력하세요">
+								<input class="find-email" type="text" name="femail" id="input2-find-pw">&nbsp;@ <input class="find-address" id="input3-find-pw" type="text" name="faddr" placeholder="직접입력"> <select class="select-portal"
 									id="pwselect" name="portal" onchange="selectEmail(this)">
 									<option value="">직접입력</option>
 									<option value="naver.com">naver.com</option>
@@ -52,8 +53,8 @@
 									<option value="gmail.com">gmail.com</option>
 								</select>
 							</div>
-							<input class="find-submit" type="submit" value="비밀번호 찾기">
 						</form>
+						<button class="find-submit" id="btn-find-password">비밀번호 찾기</button>
 					</div>
 				</div>
 			</div>
@@ -61,12 +62,12 @@
 	</div>
 	<%@include file="../layout/sidebar_back.jsp"%>
 	<%@include file="../layout/jsFile.jsp"%>
-
+	<script src="/js/join.js"></script>
 	<script>
 		function selectEmail(ele) {
 			var $ele = $(ele);
-			var $idaddr = $('input[id=idaddr]');
-			var $pwaddr = $('input[id=pwaddr]');
+			var $idaddr = $('input[id=input2-find-id]');
+			var $pwaddr = $('input[id=input3-find-pw]');
 			if ($ele.val() == "") {
 				if (ele.id == "idselect") {
 					$idaddr.attr('readonly', false);
