@@ -46,9 +46,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 			String searchText, Pageable pageable);
 
 	Page<Request> findByClientTypeAndUrgentLevel(ClientType client, int urgentLevel, Pageable pageable);
-
-	Request[] findByUser(User user);
 	
 	@Query(value = "SELECT * FROM request where id in ( select request_id from user_interest where user_id = ?1)", nativeQuery = true)
 	Page<Request> readInterestRequestByUserId(int userId, Pageable pageable);
+
+	Page<Request> findByUser(User user, Pageable pageable);
 }
