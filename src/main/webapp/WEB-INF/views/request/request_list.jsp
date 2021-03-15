@@ -139,6 +139,40 @@
 					<a class="request-menu-button" href="/user/requestMap">지도로 보기</a> 
 					<a class="request-menu-button request-menu-button-selected" href="/user/requestList">목록으로 보기</a>
 				</div>
+				<form class="search-div">					
+ 					<select name="search-client" id="search-client" class="search-box-mid">
+ 							<option value="all" selected="selected">도움받는 대상</option>
+ 							<option value="ELDERLY">노인</option>
+ 							<option value="CHILD">아이</option>
+ 							<option value="DISABLED">장애인</option>
+ 							<option value="OTHERS">기타</option>
+ 					</select>
+ 					<!-- <select name="search-type" id="search-type" class="search-box-small">
+ 							<option value="all" selected="selected">재화 종류</option>
+ 							<option value="STUFF">물품</option>
+ 							<option value="FINANCE">금전</option>
+ 							<option value="SERVICE">서비스</option>
+ 							<option value="ETC">기타</option>
+ 					</select> -->
+ 					 <select name="search-period" id="search-period" class="search-box-mid">
+ 							<option value="0" selected="selected">기간</option>
+ 							<option value="3">보통(한 달 이내)</option>
+ 							<option value="2">긴급(7~14일 이내)</option>
+ 							<option value="1">매우 긴급(3일 이내)</option>
+ 					</select>
+ 					<select name="search-item" id="search-item" class="search-box-small">
+ 							<option value="all" selected="selected">검색항목</option>
+ 							<option value="id">등록번호</option>
+ 							<option value="title">제목</option>
+ 							<option value="address">도로명주소</option>
+ 					</select>
+ 					<span class="search-text"> 
+ 						<input type="text" id="search-text" class="search-box-mid" placeholder="검색어 입력"></input>
+ 					</span> 
+ 					<div id="btn-search">
+ 						<img class="search-icon " src="/image/search-icon.png" />
+ 				</div>			
+ 				</form>
 				<div class="request-table"></div>
 			</div>
 		</section>
@@ -151,9 +185,10 @@
 	<script src="/js/request.js"></script>
 
 	<script>
+	
 		function initPage() {
-			$.ajax({
-				type : "GET",
+ 			$.ajax({
+ 				type : "GET",
 				traditional : true,
 				url : "/user/requestTable",
 			}).done(function(resp) {
@@ -165,16 +200,51 @@
 			}).fail(function(error) {
 				console.log(JSON.stringify(error));
 			});
-		}
-
-		function paging(page) {
-			$.ajax({
-				type : "GET",
-				traditional : true,
-				url : "/user/requestTable?page=" + page,
-			}).done(function(resp) {
-				if (resp.status == 500) {
-					alert("에러발생");
+ 		}
+ 		
+ 		function paging(page) {
+ 			var clientType = $("#search-client option:selected").val();
+ 			var itemType = $("#search-type option:selected").val();
+ 			var urgentLevel = $("#search-period option:selected").val();
+ 			var searchItem = $("#search-item option:selected").val();
+ 			var searchText = $("#search-text").val();
+ 			
+ 			$.ajax({
+ 				type : "GET",
+ 				traditional : true,
+ 				url : "/user/searchRequestTable?page=" + page
+ 						+ "&clientType="+ clientType 
+ 						+ "&urgentLevel=" + urgentLevel 
+ 						+ "&searchItem=" + searchItem 
+ 						+ "&searchText=" + searchText 
+ 			}).done(function(resp) {
+ 				if (resp.status == 500) {
+ 					alert("에러발생");
+ 				} else {
+ 					$(".request-table").html(resp);
+ 				}
+ 			}).fail(function(error) {
+ 				console.log(JSON.stringify(error));
+ 			});
+ 		}
+ 		
+ 		function searchList() {
+ 			var clientType = $("#search-client option:selected").val();
+ 			var itemType = $("#search-type option:selected").val();
+ 			var urgentLevel = $("#search-period option:selected").val();
+ 			var searchItem = $("#search-item option:selected").val();
+ 			var searchText = $("#search-text").val();
+ 			
+ 			$.ajax({
+ 				type : "GET",
+ 				traditional : true,
+ 				url : "/user/searchRequestTable?clientType="+ clientType 
+ 						+ "&urgentLevel=" + urgentLevel 
+ 						+ "&searchItem=" + searchItem 
+ 						+ "&searchText=" + searchText 
+ 			}).done(function(resp) {
+ 				if (resp.status == 500) {
+ 					alert("에러발생");
 				} else {
 					$(".request-table").html(resp);
 				}
@@ -184,10 +254,31 @@
 		}
 
 		$(document).ready(function() {
-			initPage();
-		});
+ 			initPage();
+ 			
+ 			$("#btn-search").click( function() {
+ 				
+ 				var searchItem = $("#search-item option:selected").val();
+ 				var searchText = $("#search-text").val();
+ 				
+ 				if( searchText != '' && searchItem == 'all'){
+ 				 	alert("검색항목을 선택해주세요!");
+ 				 	return;
+ 				}
+ 				if( searchText == '' && searchItem != 'all' ){
+ 					alert("검색어를 입력해주세요!");
+ 					return;
+ 				}
+ 				searchList();
+ 			} );
+ 					
+ 		});
 	</script>
 
+
+	<script>
+	
+	</script>
 
 </body>
 </html>
