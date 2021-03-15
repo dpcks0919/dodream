@@ -63,7 +63,7 @@
 		<c:set var="isLast" value="5" />
 		<c:if test="${requests.totalPages == 0}">
 			<div style="margin-bottom: 2vh;">
-				<br>요청 내용이 존재하지 않습니다.
+				<br>요청이 존재하지 않습니다.
 			</div>
 			<c:set var="isLast" value="1" />
 		</c:if>
