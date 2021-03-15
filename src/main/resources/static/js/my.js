@@ -68,7 +68,7 @@ function rowDelete(current) {
 
 function minusCount(_current, flag) {
 	var str = "";
-	if(flag == 0) {
+	if(flag == 0 || flag == 2) {
 		str = "count";
 	} else if(flag == 1) {
 		str = "newCount";
@@ -77,6 +77,11 @@ function minusCount(_current, flag) {
   var cnt = document.getElementById(target).value;
   if(cnt>0) {
     document.getElementById(target).value=cnt*1 - 1;
+	if(flag == 2) {
+		var rcItemId = _current.id + "rccount";
+		var rNum = document.getElementById(rcItemId).innerText * 1;
+		document.getElementById(rcItemId).innerText = rNum - 1; 	
+	}
   }
   else {
     alert("0이상의 수를 입력하세요.");
@@ -85,7 +90,7 @@ function minusCount(_current, flag) {
  
 function plusCount(_current, flag) {
 	var str = "";
-	if(flag == 0) {
+	if(flag == 0 || flag == 2) {
 		str = "count";
 	} else if(flag == 1) {
 		str = "newCount";
@@ -93,7 +98,21 @@ function plusCount(_current, flag) {
   var target = _current.id + str;
   var cnt = document.getElementById(target).value;
   // document.getElementById(target).setAttribute('value', cnt+1);
-  document.getElementById(target).value=cnt*1 + 1;
+  if(flag == 2) {
+	var rcItemId = _current.id + "rccount";
+	var tItemId = _current.id +"tcount";
+	var rNum = document.getElementById(rcItemId).innerText * 1;	
+	var tNum = document.getElementById(tItemId).innerText * 1;
+	
+	if(rNum != tNum) {
+	    document.getElementById(target).value=cnt*1 + 1;
+		document.getElementById(rcItemId).innerText = rNum+1; 		
+	} else {
+		alert("더이상 추가할 수 없습니다.");
+	}
+  } else {
+	  document.getElementById(target).value=cnt*1 + 1;
+  }
 }
 
 function numberWithCommas(curObj) {
@@ -103,6 +122,51 @@ function numberWithCommas(curObj) {
   x = x.replace(/,/g,'');          // ,값 공백처리
   $(curID).val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // 정규식을 이용해서 3자리 마다 , 추가
 }
+
+function checkMoney(me, rcNum) {
+	// rcNum은 내가 응답한 아이템 개수를 제외한 다른 사람들이 이미 등록한 개수
+	console.log(rcNum);
+	var curValue = document.getElementById(me.id).value;
+
+	var rItemId = me.id;
+	var _temp = rItemId;
+	var tItemId = _temp.replace("count", "") + "tcount";
+	var _temp = rItemId;
+	var rcItemId = _temp.replace("count", "") +"rccount";
+	
+	var rNum = document.getElementById(rcItemId).innerText * 1;	
+	var tNum = document.getElementById(tItemId).innerText * 1;
+	
+	$("#"+rItemId).on("propertychange change keyup paste input", function() {
+		if(curValue == "") {
+			curValue = 0;
+		} else {
+			curValue = document.getElementById(rItemId).value;			
+		}
+		// 빈칸 아닐 때, 첫자리 0 방지
+		if(curValue[0] == 0 && curValue != 0) {
+			var curValue = curValue.replace(/(^0+)/, "");
+			// 맨 앞 0뺀 수
+			document.getElementById(rItemId).value = curValue; 
+		} else if(curValue == 0) {
+			// 0으로 갑 바꾸기.
+			document.getElementById(rItemId).value = 0;
+			document.getElementById(rcItemId).innerText = rcNum;
+			return 0;
+		}
+		// 여기서 현재 값이 배정된 상태. 이제 rcItem, tItem 변경해야함. 
+		// rcNum + 현재 값이 총값보다 크면 rcNum은 꽉 채워야함.
+		if (rcNum*1 + curValue*1 > tNum*1) {
+			alert('값이 초과되었습니다.');
+			document.getElementById(rItemId).value = tNum*1 - rcNum*1; 
+			document.getElementById(rcItemId).innerText = tNum;
+		}
+		 else {
+			document.getElementById(rcItemId).innerText = rcNum*1 + document.getElementById(rItemId).value *1;		
+		}
+	});
+}
+
 
 // 도움 종류에 따라 수량 표기 변화시키는 함수
 var alert_select_value = function (select_obj, curCnt, flag) {

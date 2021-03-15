@@ -81,7 +81,8 @@ table td {
 						<tr>
 							<th style="width: 17.5%;">종류</th>
 							<th style="width: 25.5%;">내역</th>
-							<th style="width: 55%;" id="default_td">현재 수량 / 목표 수량</th>
+							<th style="width: 25%;" id="default_td">현재 수량</th>
+							<th style="width: 25%;" id="default_td">목표 수량</th>
 							<th style="width: 15%;" id="edit_td" hidden>목표 수량</th>
 							<th style="width: 5%;" id="delete_td" hidden>삭제</th>
 							
@@ -208,7 +209,7 @@ table td {
 							<td class="table-num">${request.id}</td>
 							<td class="table-title fbold">${request.title}</td>
 							<td class="table-date">${regdate}</td>
-							<td class="table-status">대기</td>
+							<td class="table-status">${status}</td>
 						</tr>						
 						</c:forEach>
 						
@@ -228,7 +229,7 @@ table td {
 			<c:choose>
 				<c:when test="${myrequestList.totalPages == 0}">
 					<div style="margin-bottom: 1rem; text-align:center;">
-						두드림 소식이 존재하지 않습니다.
+						나의 요청 목록이 존재하지 않습니다.
 					</div>
 					<c:set var="isLast" value="1" />
 				</c:when>
@@ -384,7 +385,7 @@ table td {
 					alert("에러발생");
 				} else {
 					alert("등록되었습니다!");
-					
+					location.href="/user/myrequest";
 				}
 			}).fail(function(error) {
 				console.log(JSON.stringify(error));

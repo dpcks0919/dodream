@@ -228,6 +228,7 @@ public class RequestService {
 		
 		persistance.setItemName(requestItem.getItemName());
 		persistance.setItemNum(requestItem.getItemNum());
+		persistance.setReceivedNum(requestItem.getReceivedNum());
 		persistance.setRequestType(requestItem.getRequestType());
 	}
 	
