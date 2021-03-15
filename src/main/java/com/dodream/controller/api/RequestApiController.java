@@ -102,7 +102,7 @@ public class RequestApiController {
 //		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 //	}
 	
-	// 기존 request item update
+	// 기존 request update
 	@PostMapping("/requestUpdateProc")
 	public ResponseDto<Integer> requestUpdate(@RequestBody Request request) {
 		System.out.println("요청 업데이트");

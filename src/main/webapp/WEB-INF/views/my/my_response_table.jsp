@@ -29,7 +29,7 @@
 						requestType: "${item.requestType}",
 					});
 				</c:forEach>
-				var rq${reply.request.id} = {
+				var rq${reply.request.id} = { 
 					id: ${reply.request.id},
 					title: '${reply.request.title}',
 					regDate: '${reply.request.regDate}',
