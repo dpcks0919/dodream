@@ -1,15 +1,16 @@
 package com.dodream.service;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,14 @@ public class ReplyService {
 	@Transactional
 	public Reply getReply(int id) {
 		return replyRepository.findById(id).orElseThrow(() -> {
-			return new IllegalArgumentException("요청글 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+			return new IllegalArgumentException("응답글 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+	}
+	
+	@Transactional
+	public ReplyItem getReplyItem(int id) {
+		return replyItemRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("응답 아이템 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});
 	}
 	
@@ -67,6 +75,8 @@ public class ReplyService {
 	public ReplyItem[] readReplyItemList(Reply reply) {
 		return replyItemRepository.findByReply(reply);		
 	}	
+	
+	
 	
 	@Transactional
 	public Reply saveReply(Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -101,6 +111,34 @@ public class ReplyService {
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
 		System.out.println("submitMessage");
 	}
+	
+	// myreply에서 응답 내역 수정
+	@Transactional
+	public void updateReply(Reply reply) {
+		Reply persistance = replyRepository.findById(reply.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("응답 내역을 찾을 수 없습니다.");
+		});
+				
+		persistance.setReplyUser(reply.getReplyUser());
+		persistance.setReplyOrg(reply.getReplyOrg());
+		persistance.setReplyContent(reply.getReplyContent());
+		persistance.setReplyPhone(reply.getReplyPhone());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
+	}
+	
+	// myreply에서 replyItem들 수정
+	@Transactional
+	public void updateReplyItem(ReplyItem replyItem) {	
+		ReplyItem persistance = replyItemRepository.findById(replyItem.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
+		});		
+		
+		persistance.setReplyNum(replyItem.getReplyNum());
+	}
+	
 	
 
 	/*
@@ -214,6 +252,11 @@ public class ReplyService {
 
 	public Boolean checkUserInterest(int userId, int requestId) {
 		return userInterestRepository.existsByUserIdAndRequestId(userId, requestId);
+	}
+	
+	public Page<Reply> readMyReply(User user, Pageable pageable) {
+		System.out.println("service");
+		return replyRepository.findByUser(user, pageable);
 	}
 
 }

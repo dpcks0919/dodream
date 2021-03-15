@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.dodream.model.Reply;
 import com.dodream.model.Request;
+import com.dodream.model.User;
 
 
 public interface ReplyRepository extends JpaRepository<Reply, Integer>{
@@ -15,5 +16,8 @@ public interface ReplyRepository extends JpaRepository<Reply, Integer>{
 	Reply[] findByRequest(Request request);
 	
 	Page<Reply> findAllByUserId(int userId, Pageable pageable);
+
+	Page<Reply> findByUser(User user, Pageable pageable);
+
 
 }
