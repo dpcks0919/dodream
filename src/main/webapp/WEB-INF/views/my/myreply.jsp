@@ -165,7 +165,7 @@
 			<c:choose>
 				<c:when test="${myreplyList.totalPages == 0}">
 					<div style="margin-bottom: 1rem; text-align:center;">
-						두드림 소식이 존재하지 않습니다.
+						응답내역이 존재하지 않습니다.
 					</div>
 					<c:set var="isLast" value="1" />
 				</c:when>
