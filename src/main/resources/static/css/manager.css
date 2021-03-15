@@ -1,0 +1,123 @@
+@charset "UTF-8";
+@font-face {
+  src : url("../fonts/NanumSquareR.ttf");
+  font-family: "NanumSquareR";
+}
+
+.gradient-bgcolor {
+  background: linear-gradient(to right, rgb(175, 218, 231), #ed7e95);
+}
+html, body {
+  font-family: "NanumSquareR";
+  overflow-x:none;
+}
+.title-info {
+  height:18rem;
+}
+.text-white-hidden {
+	color:white; 
+	visibility:hidden;
+}
+.reg-info {
+  width:100%;
+  margin-top:9rem;
+  display:flex!important;
+  flex-direction:column;
+  justify-content:center!important;
+}
+.reg-info-small {
+  width: 100%;
+  margin-top:11rem
+}
+.reg-bottom {
+	margin-top:3rem;
+	margin-bottom:3rem;
+}
+.reg-bottom div{
+	display:inline-block;
+}
+
+.manager2, .manager3, .manager4 {
+	display:none;
+}
+
+
+.manager-menubar {
+	padding-top:1rem;
+	padding-bottom:2rem;
+	display:flex;
+	justify-content : space-between;
+	
+}
+
+.manager-menubar div {
+	display:inline-block;
+	font-weight:bold;
+	width:32%;
+	border-bottom:3px solid #d3d3d3;
+	color:#c3c3c3;
+	text-align:center;
+	cursor:pointer;
+	padding-top:0.75rem;
+	padding-bottom:0.5rem;
+}
+
+.selected-menu {
+	color:#e95378!important;
+	font-size:1.25rem;
+	border-bottom:3px solid #e95378!important;
+}
+
+
+
+
+@media (max-width: 576px) {
+
+  	.reg-info h4{
+		font-size:1rem!important;
+	}
+	
+}
+
+
+@media (max-width: 768px) {
+   	.reg-info h4{
+		font-size:1rem!important;
+	}
+	.manager-menubar div {
+		font-size:0.75rem;
+		padding-bottom:0.3rem;
+	}
+	.selected-menu {
+		color:#ed7e95!important;
+		font-size:1rem!important;
+		border-bottom:3px solid #ed7e95!important;
+	}
+
+	
+	
+}
+
+@media (max-width: 992px) {
+	.reg-info h4{
+		font-size:1.5rem;
+	}
+	 .title-info {
+		height:16rem;
+	 }
+	 .reg-info {
+		width:100%;
+		margin-top:7rem;
+	 }
+	.reg-info h4{
+		font-size:1rem!important;
+	}
+	 .reg-info-small {
+		width: 100%;
+		margin-top:9rem
+	 }
+}
+
+@media (min-width: 1200px) {
+
+}
