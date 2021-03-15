@@ -142,7 +142,7 @@
 						<p class="section2-text1">응답 내역</p>
 					</div>
 					<div class="section2-box-right">
-						<a class="section2-text2" href="/user/myresponse">더 보기 <i class="fas fa-chevron-right"></i></a>
+						<a class="section2-text2" href="/user/myreply">더 보기 <i class="fas fa-chevron-right"></i></a>
 					</div>
 				</div>
 			</div>

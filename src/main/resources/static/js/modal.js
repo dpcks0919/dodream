@@ -340,10 +340,10 @@ function goDetail_myrequest(rq) {
       let needs = items[i].itemNum - items[i].receivedNum;
       if(i == 0) {
            if(items[i].requestType == "재정") {
-             $("#rq_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td>");
+             $("#rq_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원</td><td>" + items[i].itemNum + "원</td>");
              //$("#rp_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + needs + "원" + '</td>');
           } else {
-            $("#rq_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td>");
+            $("#rq_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "</td><td>" + items[i].itemNum + "</td>");
             //$("#rp_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td>');				
           }
       }
@@ -353,18 +353,18 @@ function goDetail_myrequest(rq) {
 
         if(items[i].requestType === items[i-1].requestType) {
           if(items[i].requestType == "재정") {
-              $(qid).after('<tr class="rq_item" id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</b></td><td>" + items[i].receivedNum + "원</td><td>" + items[i].itemNum + "원</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + needs + "원" + '</td></tr>');
           } else {
-              $(qid).after('<tr class="rq_item" id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</b></td><td>" + items[i].receivedNum + "</td><td>" + items[i].itemNum + "</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');				
           }
         } else {
           if(items[i].requestType == "재정") {
-              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원</td><td>" + items[i].itemNum + "원</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + needs + "원" + '</td></tr>');				
           } else {
-              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
+              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "</td><td>" + items[i].itemNum + "</td></tr>");
               //$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + needs + '</td></tr>');
           }
         }
@@ -387,128 +387,158 @@ function goDetail_myrequest(rq) {
 
 }
 
+// 수정일 때는 myreply_edit(rp); 를 이동하도록 한다.
+// content, 연락처, 소속, 등록자 명 수정가능.
+// 요청아이템들에 대해서 가능하도록 만들어야 하기 때문에 밑에꺼에서 replyNum != 0일 때의 조건 없애면 됨.
+// 그리고 btn-back 버튼 visibility:hidden 시키고, btn-edit hidden 추가, btn-save hidden 없애기
 
 //myrespose 나의 응답용 JS
-function goDetail_myResponse(rq, rp) {
-    document.getElementById("modal-bg").style.display="block";
-    document.getElementById("view-detail").style.display="block";
-    document.getElementById("page-top").style.overflow="hidden";
-    document.getElementById("menu-back").style.filter = "blur(5px)";
-    document.getElementById("Wrapper").style.filter = "blur(5px)";
+function goDetail_myreply(rp, _state) {
+	$("#rp-back").css("visibility", "hidden");
+	$("#rp-edit").removeAttr("hidden");
+	$("#rp-save").prop("hidden", "hidden");
+	$("#rp_item0").empty();
+	$(".other-rpitem").remove();
+	$("#rp_org").prop("readonly", "true");
+	$("#rp_name").prop("readonly", "true");
+	$("#rp_phone").prop("readonly", "true");
+	$("#rp_content").prop("readonly", "true");
 	
-    var date = rq.dueDate;
-    var d_date = new Date(date.valueOf());
-    var d_time = d_date.getTime();
-    var cur = new Date(); // 현재시간
-    var c_time = cur.getTime();
-	var org_name = rq.userName;
-    var status = "";
-    if(c_time <= d_time) status = "응답 대기중";
-    else status = "마감";
-
-    let regDate = rq.regDate.substring(0,10);
-    let level = rq.urgentLevel;
-    if(level == 1) level = "매우 긴급(3일 이내)";
-    else if(level == 2) level = "긴급(14일 이내)";
-    else if(level == 3) level = "보통(한 달 이내)";
-    
-    $("#rq_title").html("<h5>" + rq.title + "</h5>");
-    $("#rq_id").html(rq.id);
-    $("#rq_date").html(regDate);
-    $("#rq_status").html(status);
-    $("#rq_addr").html(rq.requestAddress);
-    $("#rq_level").html(level);
- 	if( typeof(rq.user) === 'object' ) {
- 	    $("#rq_user").html(rq.user.orgName);
- 	}else if( typeof(rq.user) === 'string' ) {
- 		$("#rq_user").html(rq.user);
- 	}
-    $("#rq_contents").html(rq.description);
-
-    let items = rq.requestItem;
-	let replyItems = rp.replyItem;
-
-          //종류 한글로 바꿔주기 
-  for(var i = 0; i < items.length; i++){
-      if(items[i].requestType == "STUFF") items[i].requestType = "물품";		
-      else if(items[i].requestType == "FINANCE") items[i].requestType = "재정";
-      else if(items[i].requestType == "SERVICE") items[i].requestType = "봉사";
-      else if(items[i].requestType == "ETC") items[i].requestType = "기타";
-  }
-
-    items.sort(function(a, b) {
-      return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
-    });
-
-    $("#btn-com").off("click");	
-	$("#btn-com").on("click", () => {
-		if(confirm("정말 수정하시겠습니까?") == true){
-			    
-				location.href = "/user/requestMap";
-			
-	    }
-	    else{
-	        return ;
-	    }
-	});
+	$("#rp_org").css("border", "1px solid white");
+	$("#rp_name").css("border", "1px solid white");
+	$("#rp_phone").css("border", "1px solid white");
+	$("#rp_content").css("border", "1px solid white");
 	
-		console.log(items);
-		console.log(replyItems);
+	
+	if(_state != "back") {
+	    document.getElementById("modal-bg").style.display="block";
+	    document.getElementById("view-detail").style.display="block";
+	    document.getElementById("page-top").style.overflow="hidden";
+	    document.getElementById("menu-back").style.filter = "blur(5px)";
+	    document.getElementById("Wrapper").style.filter = "blur(5px)";		
+	}
+    //var date = rp.regDate;
+	//var org_name = rp.org;
+    //var status = rp.status;
+    //var regDate = rp.regDate;
+    var address = rp.rqAddress;
+    $("#rq_title").html(rp.rqTitle);
+    $("#rp_id").html(rp.id);
+    $("#rp_date").html(rp.regDate);
 
-  
-    for(var i = 0; i < items.length; i++) {
-      let needs = items[i].itemNum - items[i].receivedNum;
-      if(i == 0) {
-           if(items[i].requestType == "재정") {
-              $("#rq_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + replyItems[i].replyNum + " 원/" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td>");
-              //$("#rp_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td>");
-          } else {
-		        $("#rq_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + replyItems[i].replyNum + " / " +  items[i].receivedNum + " / " + items[i].itemNum + "</td>");
-		      	//$("#rp_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + items[i].receivedNum + " / " + items[i].itemNum + "</td>");				
-          }
-      }
-      else {
-        let qid = "#rq_item" + (i-1);
-        let pid = "#rp_item" + (i-1);
+	if(rp.status == 'WAITING') {
+	    $("#rp_status").html("대기중");
+		$("#rp-back").prop("visibility","hidden");
+		$("#rp-edit").remove("hidden");
+		$("#rp-save").prop("hidden","hidden");		
+	} else if(rp.status == 'APPROVED') {
+		$("#rp_status").html("승인됨");
+		$("#rp-back").prop("visibility","hidden");
+		$("#rp-edit").prop("hidden","hidden");
+		$("#rp-save").prop("hidden","hidden");
+	}
 
-        if(items[i].requestType === items[i-1].requestType) {
-          if(items[i].requestType == "재정") {
-              $(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + replyItems[i].replyNum + " 원/ " + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
-              //$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
-          } else {
-              $(qid).after('<tr id="rq_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>"  + replyItems[i].replyNum + " / " +  items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
-                //$(pid).after('<tr id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");				
-          }
-        } else {
-          if(items[i].requestType == "재정") {
-              $(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" +  items[i].itemName + "</td><td>" + replyItems[i].replyNum + "원 / " + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");
-                //$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><input type="text" id="response_num' + i + '" class="response-item-count-big" name="response-item" value="0"/> 원</div></td><td>' + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td></tr>");				
-          } else {
-              $(qid).after('<tr id="rq_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + replyItems[i].replyNum + " / " + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
-              //$(pid).after('<tr id="rp_item' + i + '" class="needs-category"><td>' + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + '<div><i class="fas fa-minus minus-icon" onclick="rp_minus(' + i + ')"></i><input type="text" id="response_num' + i + '" class="response-item-count" name="response-item" value="0" readonly /><i class="fas fa-plus plus-icon" onclick="rp_plus(' + i + ',' + needs + ')"></i></div></td><td>' + items[i].receivedNum + " / " + items[i].itemNum + "</td></tr>");
-          }
-        }
-      }
-    }
+	$("#rp_org").val(rp.org);
+	$("#rp_name").val(rp.userName);
+	
+	if(rp.phone == ""){
+		$("#rp_phone").val("-");		
+	} else {
+		$("#rp_phone").val(rp.phone);
+	}
+
+	$("#rp_content").val(rp.content);
 
 	//요청자 회신란 넣기
 	if(rp.comment != ""){// comment가 달려있으면 보여주기(아니면 안보여줌)
-		$("#response-wrapper").show()
 		$("#response-content").html(rp.comment);
+		$("#response-content").show();
+		$("#response-content-nothing").hide();
+	} else {// comment가 달려있으면 보여주기(아니면 안보여줌)
+		$("#response-content").hide();
+		$("#response-content-nothing").show();
 	}
-
+		
+	$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/replyItemObj_reply?replyId="+rp.id,
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러발생");
+		} else {
+			var items = new Array();
+			//requestType(request) / itemName(reply) / relyNum(reply) / receivedNum(reply) / itemNum(request)
+			for(var i=0; i<resp.length; i++) {
+				var item2 = resp[i].split("^!@#^");
+				items.push({
+					requestType : item2[0],
+					itemName : item2[1],
+					replyNum : item2[2],
+					receivedNum : item2[3],
+					itemNum : item2[4]
+				});
+			}
+			if(rp.status == 'WAITING') {
+				$("#rp-back").attr("onclick", ("myreply_back(rp"+rp.id+", "+rp.id+")"));
+				$("#rp-edit").attr("onclick", ("myreply_edit(rp"+rp.id+", "+rp.id+")"));
+				$("#rp-save").attr("onclick", ("myreply_edit_save(rp"+rp.id+", "+rp.id+")"));
+			}
+		    items.sort(function(a, b) {
+		      return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
+		    });
+			
+			var count = 0;
+			  for(var i = 0; i < items.length; i++) {
+			      let needs = items[i].itemNum - items[i].receivedNum;
+				if(items[i].replyNum != 0) {
+					count++;
+			      if(i == 0) {
+			           if(items[i].requestType == "재정") {
+			             $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum + "</td><td>" + items[i].receivedNum + "원</td><td><b>" + items[i].itemNum + "원</b></td>");
+			          } else {
+			            $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum + "</td><td>" + items[i].receivedNum + "</td><td><b>" + items[i].itemNum + "</b></td>");
+			          }
+			      }
+			      else {
+			        let pid = "#rp_item" + (i-1);
+			        if(items[i].requestType === items[i-1].requestType) {
+			          if(items[i].requestType == "재정") {
+			              $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum +"원</td><td>" + items[i].receivedNum+"원</td><td><b>"+ items[i].itemNum +'원</b></td></tr>');
+			          } else {
+						  $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum +"</td><td>" + items[i].receivedNum+"</td><td><b>"+ items[i].itemNum +'</b></td></tr>');				
+			          }
+			        } else {
+			          if(items[i].requestType == "재정") {
+						  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum +"원</td><td>" + items[i].receivedNum+"원</td><td><b>"+ items[i].itemNum +'원</b></td></tr>');				
+			          } else {
+						  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum +"</td><td>" + items[i].receivedNum+"</td><td><b>"+ items[i].itemNum +'</b></td></tr>');				
+			          }
+			        }
+			      }
+				}
+		    }
+		if(count == 0) {
+			$("#rp_item0").html("<td Colspan='5' style='text-align:center; padding-top:1.5rem!important; '><p>현재 응답한 아이템이 없습니다.</p></td>");
+		}
+		
+		
+		}
+	}).fail(function(error) {
+		console.log(JSON.stringify(error));
+	});
+/*
     $("#modal-bg").click(function() {
       for(var i = 0; i < items.length; i++) {
         let qid = "#rq_item" + i;
         let pid = "#rp_item" + i;
         if(i == 0) {
-          $(qid).empty();
           $(pid).empty();
         } else {
-          $(qid).remove();
           $(pid).remove();
         }
       }
-    });
-  }
+    });	
+*/
+}
 

@@ -1,7 +1,5 @@
 package com.dodream.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -11,13 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.dodream.config.auth.PrincipalDetails;
-import com.dodream.model.ReplyItem;
-import com.dodream.model.RequestItem;
 import com.dodream.service.ReplyService;
 import com.dodream.service.RequestService;
 
@@ -42,9 +34,12 @@ public class UserController {
 		return "my/mydodream";
 	}
 	
-	@GetMapping("user/myresponse")
-	public String myresponse() {
-		return "my/myresponse";
+	@GetMapping("user/myreply")
+	public String myreply(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
+		model.addAttribute("user", principalDetails.getUser());
+		model.addAttribute("myreplyList", replyService.readMyReply(principalDetails.getUser(), pageable));
+		System.out.println(model);
+		return "my/myreply";
 	}
 	
 	@GetMapping("user/myrequest")
@@ -54,18 +49,6 @@ public class UserController {
 		System.out.println(model);
 		return "my/myrequest";
 	}
-
-	//	myreuqest에서 request의 reply들의 List를 가져옴.
-	//@GetMapping("user/replyTable")
-	@RequestMapping(value="/user/replyTable", method = RequestMethod.GET)
-	public String replyTable(Model model, HttpServletRequest httpServletRequest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		String id = httpServletRequest.getParameter("id");
-		System.out.println(id);
-		model.addAttribute("replyList", replyService.readReplyList(requestService.getRequest(Integer.parseInt(id))));
-		model.addAttribute("user", principalDetails.getUser());
-		return "my/reply_table";
-	}
-
 	
 	@GetMapping("user/pwCheck")
 	public String pwCheck() {
