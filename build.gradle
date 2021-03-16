@@ -1,3 +1,63 @@
+/*
+plugins {
+   id 'org.springframework.boot' version '2.4.2'
+   id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+   id 'java'
+   id 'war'   //new
+}
+
+group = 'com.dodream'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+configurations {
+   compileOnly {
+      extendsFrom annotationProcessor
+   }
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+   implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+   implementation 'org.springframework.boot:spring-boot-starter-security'
+   implementation 'org.springframework.boot:spring-boot-starter-web'
+   providedCompile 'org.springframework.boot:spring-boot-starter-tomcat'   //new
+   compileOnly 'org.projectlombok:lombok'
+   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+   runtimeOnly 'mysql:mysql-connector-java'
+   //implementation group:'org.mariadb.jdbc', name:'mariadb-java-client', version:'2.4.1'   //new
+   annotationProcessor 'org.projectlombok:lombok'
+   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+   testImplementation 'org.springframework.security:spring-security-test'
+   compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.3.3.RELEASE'
+   compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+   compile('javax.servlet:jstl:1.2')
+   // sms api
+   compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+   //email api
+   compile("org.springframework.boot:spring-boot-starter-mail")   
+   
+   implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+}
+
+test {
+   useJUnitPlatform()
+}
+
+//new
+war {
+   enabled = true
+   baseName = 'spring-boot-war'
+}
+
+gradle.startParameter.showStacktrace = org.gradle.api.logging.configuration.ShowStacktrace.ALWAYS
+*/
+
 plugins {
 	id 'org.springframework.boot' version '2.4.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'

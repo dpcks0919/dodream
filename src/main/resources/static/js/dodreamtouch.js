@@ -7,7 +7,7 @@ function menuToggle(num) {
 	$(".intro"+num).show();
 	if(num==4) {
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		map = new kakao.maps.Map(mapContainer, mapOption); 
 		// 마커가 표시될 위치입니다 
 		var markerPosition  = new kakao.maps.LatLng(lati, longi); 
 	
