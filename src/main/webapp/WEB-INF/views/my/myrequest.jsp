@@ -81,8 +81,8 @@ table td {
 						<tr>
 							<th style="width: 17.5%;">종류</th>
 							<th style="width: 25.5%;">내역</th>
+							<th style="width: 25%;" id="current_td">현재 수량</th>
 							<th style="width: 25%;" id="default_td">현재 수량</th>
-							<th style="width: 25%;" id="default_td">목표 수량</th>
 							<th style="width: 15%;" id="edit_td" hidden>목표 수량</th>
 							<th style="width: 5%;" id="delete_td" hidden>삭제</th>
 							
@@ -543,11 +543,12 @@ table td {
 		    $('#rq_item0').hide();
 		    $('.rq_item').hide();
 		    $('#add_item').show();
-		    //$('#default_td').prop("visibility", "hidden");
+		    
+   		    $('#current_td').prop("hidden", "hidden");
 		    $('#default_td').prop("hidden", "hidden");
+		    
 		    $('#edit_td').removeAttr("hidden");
 		    $('#delete_td').removeAttr("hidden");
-		    
 		    
 		    var firstHtml = ("<td colspan='4' id='default_item' style='text-align:center; font-weight:bold; background-color:#e3e3e3; '>기존</td>");
 			$('#myTable > tbody[id="preItem"]:first').append(firstHtml);
@@ -635,8 +636,10 @@ table td {
 		    $('.default_item').remove();
 		    $('#default_item').remove();
 		    $("#newItem").empty();
-		    
+
+		    $('#current_td').removeAttr("hidden");
 		    $('#default_td').removeAttr("hidden");
+		    
 		    $('#edit_td').prop("hidden", "hidden");
 		    $('#delete_td').prop("hidden", "hidden");
 

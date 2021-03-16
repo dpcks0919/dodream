@@ -72,6 +72,11 @@ public class ReplyService {
 	}
 	
 	@Transactional
+	public Page<Reply> readReplyList_manager(Pageable pageable) {
+		return replyRepository.findAll(pageable);
+	}
+	
+	@Transactional
 	public ReplyItem[] readReplyItemList(Reply reply) {
 		return replyItemRepository.findByReply(reply);		
 	}	
