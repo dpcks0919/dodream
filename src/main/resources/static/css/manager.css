@@ -44,7 +44,7 @@ html, body {
 
 .manager-menubar {
 	padding-top:1rem;
-	padding-bottom:2rem;
+	padding-bottom:1rem;
 	display:flex;
 	justify-content : space-between;
 	
@@ -67,8 +67,29 @@ html, body {
 	font-size:1.25rem;
 	border-bottom:3px solid #e95378!important;
 }
+table {
+ /*  margin-top:1vh; */
+  width: 100%;
+  border-collapse: collapse;
 
+}
+.info-table tbody tr td, .info-table thead tr th {
+	padding-top:0.5rem;
+	padding-bottom:0.5rem;
+}
+th, td {
+	padding-top:0.5rem;
+	padding-bottom:0.5rem;
+    line-height:1.75rem;
+    height:1.75rem;
+    text-overflow : ellipsis!important;
+	overflow:hidden!important;
+	white-space:nowrap!important;
+}
 
+#table-wrapper {
+	margin-bottom:2rem;	
+}
 
 
 @media (max-width: 576px) {
@@ -92,6 +113,10 @@ html, body {
 		color:#ed7e95!important;
 		font-size:1rem!important;
 		border-bottom:3px solid #ed7e95!important;
+	}
+	
+	.table-userPhone, .table-date {
+		display:none;
 	}
 
 	

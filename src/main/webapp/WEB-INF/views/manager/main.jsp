@@ -33,57 +33,31 @@
 				<div class="manager-menu" onclick="menuToggle(2);">요청 관리</div>
 				<div class="manager-menu" onclick="menuToggle(3);">응답 관리</div>
 			</div>
-			<!-- 위에까지 고정. 이 밑에부터 manager1, manager2, manager3, manager3로 나뉘기. -->
-			
-			
-			<!-- 회원관리 
-			id / 이름 / userType / 등록일 / 
-			-->
-			
-			<section class="manager1">
-				
-			</section>
-			
-			<!-- 요청 관리 -->
-			<section class="manager2" >	
-			
-			</section>
-			
-			<!-- 응답 관리 -->
-			<section class="manager3" >
-				
-			</section>
+			<div class="" id="table-wrapper"></div>
 		</div>
-
-	
+		
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 	</div>
 		<%@include file="../layout/sidebar_back.jsp"%>
 		<%@include file="../layout/jsFile.jsp"%>
 	<%@include file="../layout/kakaoMap.jsp"%>
-	<script src="/js/dodreamtouch.js"></script>
+	<script src="/js/manager.js"></script>
 	
 	<script>
-	
-	
+
 	$(document).ready(function() {
+		// 처음 회원관리 로드
+		menuToggle(1);
+		
+		// menu 선택 시 효과
 		$(".manager-menu").on("click", function() {
 			$(".manager-menu").removeClass('selected-menu');
-			$(this).addClass('selected-menu');		 
+			$(this).addClass('selected-menu');
+			
 		});
 	});
-	
-	// 두드림터치 주소
-	var lati = 36.111029;
-	var longi = 129.396592;	
-	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(lati, longi), // 지도의 중심좌표
-		level : 3
-	// 지도의 확대 레벨
-	};
+
 
 
 	

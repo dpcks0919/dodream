@@ -6,13 +6,14 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.config.auth.PrincipalDetails;
-import com.dodream.model.Request;
 import com.dodream.model.RoleType;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
@@ -37,6 +38,13 @@ public class UserService {
 	
 	@Value("${api.sms.send-phone}")
 	private String sendPhone;
+	
+	@Transactional
+	public Page<User> readUserList(Pageable pageable) {
+		System.out.println("유저서비스");
+		return userRepository.findAll(pageable); 
+	}
+	
 	
 	@Transactional
 	public void increaseLoginCount(int id) {
