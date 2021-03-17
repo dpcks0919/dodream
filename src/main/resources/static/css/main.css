@@ -912,6 +912,12 @@ a {
 
 }
 @media (max-width: 992px) {
+	
+  .sec3-bottom-left {
+    width : 100%!important;
+    /* height: 100%!important; */
+    padding-bottom:2vw;
+  }
   .main1-register_mobile {
     position:relative;
     left:40%;
@@ -943,7 +949,7 @@ a {
     display :none;
   }
   .four_box {
-    min-width:40%;
+    min-width:24% !important;
     min-height:40%;
   }
   .sec3-middle {

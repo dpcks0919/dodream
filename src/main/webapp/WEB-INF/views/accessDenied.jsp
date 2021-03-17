@@ -17,10 +17,11 @@
 		<section class="page-section3 page-section-join text-center " id="portfolio" style="margin-top: 100px;">
 			<p class="text-center text-uppercase text-secondary mb-0 page-section3-title">
 				권한이 필요한 페이지 입니다!  <br>
-				액세스를 요청하거나 권한이 있는 계정으로 전환해주시기 바랍니다! <br>
-				자세한 사항은 관리자에게 문의해주세요.
+				관리자에게 액세스를 요청하거나 권한이 있는 계정으로 전환해주시기 바랍니다! <br>
+				자세한 사항은 관리자에게 문의해주세요. <br><br>
+				전화: 054-262-1070 <br>
+				이메일: dodream.touch@gmail.com
 			</p>	
-	
 		</section>
 
 		<!-- Footer-->

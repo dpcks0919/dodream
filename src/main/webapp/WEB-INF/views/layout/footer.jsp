@@ -19,10 +19,10 @@
 		</div>
 		<div class="footer-right ">
 			<div class="footer-link">
-				<a class="text-white" href="/user/requestList">요청 보기</a>
+				<a class="text-white" href="/requestMap">요청 보기</a>
 			</div>
 			<div class="footer-link">
-				<a class="text-white" href="/user/news/newsList">소식 보기</a>
+				<a class="text-white" href="/news/newsList">소식 보기</a>
 			</div>
 			<div class="footer-link">
 				<a class="text-white" href="/dodreamtouch">두드림터치</a>
