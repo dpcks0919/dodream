@@ -8,12 +8,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +56,12 @@ public class RequestService {
 	
 	@Autowired
 	private UserInterestRepository userInterestRepository;
+	
+	@Value("${spring.mail.username}")
+	private String senderEmail;
+	
+	@Value("${spring.mail.nickname}")
+	private String senderName;
 
 	@Value("${api.sms.api-key}")
 	private String apiKey;
@@ -183,26 +191,26 @@ public class RequestService {
 		}
 	
 	//해당 request 정보 email 전송하는 메소드 
-	public void sendEmailService(String userEmail, String requestTitle) throws UnsupportedEncodingException, MessagingException {
+	public void sendRequestEmailService(String userEmail, String requestTitle) throws UnsupportedEncodingException, MessagingException {
 		//수신자메일 
 		String rcvEmail = userEmail;
 		
 		//발신자 메일 
-        String sendMail = "";	// 사용 이메일 주소
-        String sendName = "";	// 상대방에게 표시되는 이름
+        String sendMail = senderEmail;	// 사용 이메일 주소
+        String sendName = senderName;	// 상대방에게 표시되는 이름
 		
         // 메일 내용 관련 
 		// 메일 제목 
-		String title = "[DoDream] " + requestTitle;
+		String title = "[DoDream] 새로운 요청이 등록되었습니다!";
 		
 		// 매일 내용(msg) 
 		String msg = "";
-		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-		msg += "<h3 style='color: blue;'>새로운 요청이 등록되었습니다</h3>";
+		msg += "<div align='center' style='border:2px solid #ed7e95; border-radius: 10px; font-family:verdana'>";
+		msg += "<h3 style='color: black;'>새로운 요청이 등록되었습니다: " + requestTitle + "</h3>";
 		msg += "<strong></div><br/>";
 		
-		/* 일단 막아놈
-
+		/*
+		// 이메일 발송 부분
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -214,6 +222,7 @@ public class RequestService {
         // 메일 발송 
         javaMailSender.send(message);
         */
+        
 		
 		System.out.println("수신자메일: " + rcvEmail);
 		System.out.println("메일 제목: " + title);
