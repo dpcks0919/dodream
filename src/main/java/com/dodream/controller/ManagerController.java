@@ -41,6 +41,14 @@ public class ManagerController {
 		model.addAttribute("users", userService.readUserList(pageable));
 		return "manager/manager_userTable";
 	}
+	//	유저 디테일 모달 채우기
+	@GetMapping("user/managerUserDetail")
+	public String managerUserDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		// 여기서 서비스는 안만들었는데 여기부터는 해보셈
+		// readUserDetail();
+		//model.addAttribute("users", userService.readUserList(pageable));
+		return "manager/manager_userDetail";
+	}
 	
 	//	요청 목록 불러오기
 	@GetMapping("user/managerRequestTable")
@@ -56,83 +64,7 @@ public class ManagerController {
 		return "manager/manager_replyTable";
 	}
 	
-//	검색된 요청 목록 불러오기
-	@GetMapping("user/searchManagerUserTable")
-	public String searchRequestTable(Model model, 
-									@RequestParam("clientType") String clientType,
-									@RequestParam("urgentLevel") int urgentLevel,
-									@RequestParam("searchItem") String searchItem,
-									@RequestParam("searchText") String searchText,
-									@PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, 
-									@AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
-
-		Page<Request> searchList = null;
-						
-		if( clientType.compareTo("all") == 0) {
-			if(urgentLevel == 0) {
-				if(searchItem.compareTo("id") == 0) {
-					// 등록번호로만 검색
-					searchList = requestService.searchRequestById(searchText, pageable);
-				}else if(searchItem.compareTo("title") == 0){
-					// 제목으로만 검색
-					searchList = requestService.searchRequestByTitle(searchText, pageable);
-				}else if(searchItem.compareTo("address") == 0) {
-					// 위치로만 검색
-					searchList = requestService.searchRequestByAddress(searchText, pageable);
-				}else {
-					searchList = requestService.readRequestList(pageable);
-				}
-			}else {
-				if(searchItem.compareTo("id") == 0) {
-					// 기간과 등록번호로 검색
-					searchList = requestService.searchRequestByUrgentLevelAndId(urgentLevel, searchText, pageable);
-				}else if(searchItem.compareTo("title") == 0){
-					// 기간과 제목으로 검색
-					searchList = requestService.searchRequestByUrgentLevelAndTitle(urgentLevel, searchText, pageable);
-				}else if(searchItem.compareTo("address") == 0) {
-					// 기간과 위치로 검색
-					searchList = requestService.searchRequestByUrgentLevelAndAddress(urgentLevel, searchText, pageable);
-				}else {
-					// 기간으로만 검색
-					searchList = requestService.searchRequestByUrgentLevel(urgentLevel, pageable);
-				}
-			}
-		}else {
-			if(urgentLevel == 0) {
-				if(searchItem.compareTo("id") == 0) {
-					// 도움받는 대상과 등록번호로 검색
-					searchList = requestService.searchRequestByClientTypeAndId(clientType, searchText, pageable);
-				}else if(searchItem.compareTo("title") == 0){
-					// 도움받는 대상과 제목으로 검색
-					searchList = requestService.searchRequestByClientTypeAndTitle(clientType, searchText, pageable);					
-				}else if(searchItem.compareTo("address") == 0) {
-					// 도움받는 대상과 위치로 검색
-					searchList = requestService.searchRequestByClientTypeAndAddress(clientType, searchText, pageable);					
-				}else {
-					// 도움받는 대상으로만 검색
-					searchList = requestService.searchRequestByClientType(clientType, pageable);
-				}
-			}else {
-				if(searchItem.compareTo("id") == 0) {
-					// 도움받는 대상과 기간과 등록번호로 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndId(clientType, urgentLevel, searchText, pageable);
-				}else if(searchItem.compareTo("title") == 0){
-					// 도움받는 대상과 기간과 제목으로 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndTitle(clientType, urgentLevel, searchText, pageable);
-				}else if(searchItem.compareTo("address") == 0) {
-					// 도움받는 대상과 기간과 위치로 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndAddress(clientType, urgentLevel, searchText, pageable);
-				}else {
-					// 도움받는 대상과 기간으로만 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevel(clientType, urgentLevel, pageable);
-				}
-			}
-		}
-
-		model.addAttribute("requests", searchList);
-		model.addAttribute("user", principalDetails.getUser());
-		return "request/request_table";
-	}
 	
+	
+		
 }
