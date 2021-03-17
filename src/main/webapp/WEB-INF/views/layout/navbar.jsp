@@ -10,8 +10,12 @@
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top shadow" id="mainNav">
 	<div class="container">
 		<img src="/image/Logo.png" class="logo" onclick="document.location.href='/'"> 
-		<a class="navbar-brand js-scroll-trigger" href="/user/request">요청하기</a>
-		<a class="navbar-brand js-scroll-trigger" href="/user/requestMap">요청 보기</a> 
+		<c:choose>
+			<c:when test=  "${principal.user.userType eq 'SOCIAL_WORKER' || principal.user.userType eq 'INSTITUTION' }" >
+				<a class="navbar-brand js-scroll-trigger" href="/user/request">요청하기</a>
+			</c:when>
+		</c:choose>
+		<a class="navbar-brand js-scroll-trigger" href="/requestMap">요청 보기</a> 
 		<a class="navbar-brand js-scroll-trigger" href="/news/newsList">소식 보기</a> 
 
 		<a class="navbar-brand js-scroll-trigger" href="/dodreamtouch">두드림터치</a>

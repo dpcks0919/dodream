@@ -4,6 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>​
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@include file="../layout/header.jsp"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 
 <link href="/css/view-reg.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
@@ -56,11 +61,18 @@
 		</div>
 
 		<div class="modal-ftr">
-			<div class="btn-res" onclick="goResponse()">응답하기</div>
-			<div class="btn-icon" onclick="heartClick();">
-				<i class="far fa-heart" id="btn-heart"></i> <i class="fas fa-heart"
-					id="btn-heart2" style="display: none"></i>
-			</div>
+			<c:choose>
+				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+					<div class="btn-res" onclick="alert('로그인이 필요합니다!')">응답하기</div>
+				</c:when>
+				<c:otherwise>
+					<div class="btn-res" onclick="goResponse()">응답하기</div>
+					<div class="btn-icon" onclick="heartClick();">
+						<i class="far fa-heart" id="btn-heart"></i>
+						<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- 응답하기 -->
@@ -152,9 +164,9 @@
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container">
 				<div class="request-menu">
-					<a class="request-menu-button" href="/user/requestMap">지도로 보기</a> <a
+					<a class="request-menu-button" href="/requestMap">지도로 보기</a> <a
 						class="request-menu-button request-menu-button-selected"
-						href="/user/requestList">목록으로 보기</a>
+						href="/requestList">목록으로 보기</a>
 				</div>
 				<form class="search-div">
 					<select name="search-client" id="search-client"
@@ -208,7 +220,7 @@
 			$.ajax({
 				type : "GET",
 				traditional : true,
-				url : "/user/requestTable",
+				url : "/requestTable",
 			}).done(function(resp) {
 				if (resp.status == 500) {
 					alert("에러발생");
@@ -231,7 +243,7 @@
 					{
 						type : "GET",
 						traditional : true,
-						url : "/user/searchRequestTable?page=" + page
+						url : "/searchRequestTable?page=" + page
 								+ "&clientType=" + clientType + "&urgentLevel="
 								+ urgentLevel + "&searchItem=" + searchItem
 								+ "&searchText=" + searchText
@@ -257,7 +269,7 @@
 					{
 						type : "GET",
 						traditional : true,
-						url : "/user/searchRequestTable?clientType="
+						url : "/searchRequestTable?clientType="
 								+ clientType + "&urgentLevel=" + urgentLevel
 								+ "&searchItem=" + searchItem + "&searchText="
 								+ searchText
