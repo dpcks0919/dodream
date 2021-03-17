@@ -87,7 +87,7 @@ function openMenu() {
 	$("#btn-com").on("click", () => {
 		if(confirm("정말 등록하시겠습니까?") == true){
 			saveReply(rq.requestItem);
-			location.href = "/user/requestMap";
+			location.href = "/requestMap";
 	    }
 	    else{
 	        return ;
