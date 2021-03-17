@@ -11,8 +11,8 @@ spring:
     host: smtp.naver.com
     port: 587
 
-    username: #naver ID
-    password: #naver PW
+    username: wltjdals422
+    password: dbgmltn0422#
     smtp.auth: true
     smtp.starttls.enable: true
   mvc:
@@ -26,7 +26,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
     username: root
-    password: root1234
+    password: root
     
     
   jpa:
@@ -101,4 +101,4 @@ api:
     send-phone: '01068363758'
 
 summernote:
-  upload: /Users/sjc/git/dodream/src/main/resources/static/image/summernote/
+  upload: /Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
