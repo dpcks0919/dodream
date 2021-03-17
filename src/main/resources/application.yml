@@ -22,17 +22,17 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
-    username: dodream777 
-    password: tomleegood77 
-    
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
-#    username: root
-#    password: root
+#    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
+#    username: dodream777 
+#    password: tomleegood77 
+    
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
+    username: root
+    password: root
     
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -113,4 +113,4 @@ api:
     send-phone: '01068363758'
 
 summernote:
-  upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/ #/Users/yechankim/git/dodream/src/main/resources/static/image/summernote/
+  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/ #/dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/ 

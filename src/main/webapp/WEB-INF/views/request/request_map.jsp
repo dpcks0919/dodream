@@ -3,13 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>​
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@include file="../layout/header.jsp"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 
 <link href="/css/view-reg.css" rel="stylesheet" />
 <link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<style>
-</style>
+
 
 <body id="page-top">
 	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
@@ -54,11 +58,18 @@
 		</div>
 
 		<div class="modal-ftr">
-			<div class="btn-res" onclick="goResponse()">응답하기</div>
-			<div class="btn-icon" onclick="heartClick();">
-				<i class="far fa-heart" id="btn-heart"></i>
-				<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
-			</div>
+			<c:choose>
+				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+					<div class="btn-res" onclick="alert('로그인이 필요합니다!')">응답하기</div>
+				</c:when>
+				<c:otherwise>
+					<div class="btn-res" onclick="goResponse()">응답하기</div>
+					<div class="btn-icon" onclick="heartClick();">
+						<i class="far fa-heart" id="btn-heart"></i>
+						<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- 응답하기 -->
@@ -137,8 +148,8 @@
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container">
 				<div class="request-menu">
-					<a class="request-menu-button request-menu-button-selected" href="/user/requestMap">지도로 보기</a> 
-					<a class="request-menu-button" href="/user/requestList">목록으로 보기</a>
+					<a class="request-menu-button request-menu-button-selected" href="/requestMap">지도로 보기</a> 
+					<a class="request-menu-button" href="/requestList">목록으로 보기</a>
 				</div>
 				<div class="" style="text-align: right;">
 					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요.">
@@ -200,7 +211,7 @@
 						</p>
 					</div>
 					<div class="map-right ">
-						<span class="help-code">검색코드<input type="text" class="help-code-box" id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i
+						<span class="help-code">등록번호<input type="text" class="help-code-box" id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i
 								class="fa fa-clone copy-btn" aria-hidden="true"></i></span></span> 
 								<input type="button" class="help-detail" value="자세히 보기" id="marker-info-btn"></input>
 					</div>
