@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
 
 <link href="/css/manager.css" rel="stylesheet" />
+<link href="/css/modal-info.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -13,11 +14,10 @@
 </style>
 
 <body id="page-top">
-		<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
-
+	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
 	<!-- 세부정보 살펴보기 -->
 	<div class="modal-container" id="view-detail">
-		<div class="modal-content"></div>
+		<div class="modal-content" id="detail-content"></div>
 	</div>
 
 	<div id="menu-back" onclick="closeNav()"></div>
