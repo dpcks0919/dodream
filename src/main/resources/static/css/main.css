@@ -382,6 +382,8 @@
   width:inherit;
   height:inherit;
   cursor:pointer;
+  object-fit:contain;
+  
 }
 
 .news-image-title {
@@ -549,7 +551,7 @@ a {
 
 @media (max-width: 576px) {
   header {
-    padding-top:15vw!important;
+    padding-top:3rem!important;
   }
   
   .carousel-youtube {
@@ -711,6 +713,10 @@ a {
 
 }
 @media (max-width: 768px) {
+	  header {
+	    padding-top:4rem!important;
+	  }
+	  
 	.search-icon {
 	  width:1.5rem;
 	  color :black;
@@ -912,11 +918,15 @@ a {
 
 }
 @media (max-width: 992px) {
-	
+
   .sec3-bottom-left {
     width : 100%!important;
     /* height: 100%!important; */
     padding-bottom:2vw;
+  }
+  
+  header {
+    padding-top:1.5rem!important;
   }
   .main1-register_mobile {
     position:relative;
