@@ -7,11 +7,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +53,12 @@ public class ReplyService {
 	
 	@Autowired
     private JavaMailSender javaMailSender;
+	
+	@Value("${spring.mail.username}")
+	private String senderEmail;
+	
+	@Value("${spring.mail.nickname}")
+	private String senderName;
 
 	@Transactional
 	public Reply getReply(int id) {
@@ -202,21 +211,21 @@ public class ReplyService {
 		String rcvEmail = request.getUser().getUserEmail();
 		
 		//발신자 메일 
-        String sendMail = "";	// 사용 이메일 주소
-        String sendName = "";	// 상대방에게 표시되는 이름
+        String sendMail = senderEmail;	// 사용 이메일 주소
+        String sendName = senderName;	// 상대방에게 표시되는 이름
 		
         // 메일 내용 관련 
 		// 메일 제목 
-		String title = "[DoDream] " + " 새로운 Reply 등록됨!";
+		String title = "[DoDream] " + " 새로운 Reply가 등록되었습니다!";
 		
 		// 매일 내용(msg) 
 		String msg = "";
-		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-		msg += "<h3 style='color: blue;'>"+ reply.getReplyContent() +"</h3>";
+		msg += "<div align='center' style='border:2px solid #ed7e95; border-radius: 10px; font-family:verdana'>";
+		msg += "<h3 style='color: black;'> Reply 내용: "+ reply.getReplyContent() +"</h3>";
 		msg += "<strong></div><br/>";
 		
-		/* 일단 막아놈
-
+		//메일 내용 부분
+		/*
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 

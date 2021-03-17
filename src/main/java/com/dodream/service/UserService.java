@@ -1,13 +1,19 @@
 package com.dodream.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,10 +31,19 @@ import net.nurigo.java_sdk.api.Message;
 public class UserService {
 	
 	@Autowired
+    private JavaMailSender javaMailSender;
+	
+	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Value("${spring.mail.username}")
+	private String senderEmail;
+	
+	@Value("${spring.mail.nickname}")
+	private String senderName;
 	
 	@Value("${api.sms.api-key}")
 	private String apiKey;
@@ -253,18 +268,19 @@ public class UserService {
 	}
 
 	@Transactional
-	public Boolean findIdService(String email) {
+	public Boolean findIdService(String email) throws UnsupportedEncodingException, MessagingException {
 		User user = userRepository.findByUserEmail(email);
 		if(user == null) return false;
 		else {
-			String content = "가입하신ID: " + user.getLoginId();
-			sendEmail(user.getUserEmail(), content);
+			String content = "가입하신 아이디: " + user.getLoginId();
+			String title = "[두드림터치] 아이디 찾기";
+			sendEmail(user.getUserEmail(), content, title);
 			return true;
 		}
 	}
 	
 	@Transactional
-	public Boolean findPwService(String id, String email) {
+	public Boolean findPwService(String id, String email) throws UnsupportedEncodingException, MessagingException {
 		User user = userRepository.findByLoginIdAndUserEmail(id, email);
 		if(user == null) return false;
 		else {
@@ -275,32 +291,30 @@ public class UserService {
 			String encPassword =  encoder.encode(randRawPw);
 			user.setLoginPassword(encPassword);	// 비밀번호 저장
 			
-			String content = "바뀐 PW: " + randRawPw;
-			sendEmail(user.getUserEmail(), content);
+			String content = "수정된 비밀번호: " + randRawPw;
+			String title = "[두드림터치] 비밀번호 찾기";
+			sendEmail(user.getUserEmail(), content, title);
 			return true;
 		}
 	}
 
-	public void sendEmail(String userEmail, String content) {
+	public void sendEmail(String userEmail, String content, String title) throws MessagingException, UnsupportedEncodingException {
 		//수신자메일 
 		String rcvEmail = userEmail;
 		
 		//발신자 메일 
-        String sendMail = "";	// 사용 이메일 주소
-        String sendName = "";	// 상대방에게 표시되는 이름
+        String sendMail = senderEmail;	// 사용 이메일 주소
+        String sendName = senderName;	// 상대방에게 표시되는 이름
 		
         // 메일 내용 관련 
-		// 메일 제목 
-		String title = "[DoDream]";
-		
-		// 매일 내용(msg) 
+		// 매일 내용(바디) 
 		String msg = "";
-		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-		msg += "<h3 style='color: blue;'> " + content + "</h3>";
+		msg += "<div align='center' style='border:2px solid #ed7e95; border-radius: 10px; font-family:verdana'>";
+		msg += "<h3 style='color: black;'> " + content + "</h3>";
 		msg += "<strong></div><br/>";
 		
-		/* 일단 막아놈
-
+		//이메일 발송 부분
+		/*
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
