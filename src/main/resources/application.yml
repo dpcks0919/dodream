@@ -8,13 +8,17 @@ server:
         
 spring:
   mail:
-    host: smtp.naver.com
+    host: smtp.gmail.com
     port: 587
-
-    username: #naver ID
-    password: #naver PW
-    smtp.auth: true
-    smtp.starttls.enable: true
+    username: # gmail ID
+    password: # gmail PW
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    nickname: 두드림터치 # mail 발송시 표기되는 송신자 이름 
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -22,17 +26,17 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
-    username: dodream777 
-    password: tomleegood77 
-    
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
-#    username: root
-#    password: root
+#    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
+#    username: dodream777 
+#    password: tomleegood77 
+    
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
+    username: root
+    password: root1234
     
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -105,7 +109,7 @@ spring:
 social:
   password: dodream1234
  
-#sms api
+#sms api / email api 정보
 api:
   sms:
     api-key: NCSOSP7IP6LI47WT
