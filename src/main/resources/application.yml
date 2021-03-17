@@ -24,9 +24,21 @@ spring:
         enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
-    username: root
-    password: root1234
+    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
+    username: dodream777 
+    password: tomleegood77 
+    
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
+#    username: root
+#    password: root
+    
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://walab.handong.edu/dodream?serverTimezone=Asia/Seoul
+#    username: dodream
+#    password: wacs0422#
     
     
   jpa:
@@ -64,7 +76,7 @@ spring:
             - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
 
           kakao:
             client-id: ccd2c184a87ab5205b193da983dd46f4
@@ -74,7 +86,7 @@ spring:
             - account_email
             client-name: kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao
             client-authentication-method: POST
             
         provider:
@@ -101,4 +113,4 @@ api:
     send-phone: '01068363758'
 
 summernote:
-  upload: /Users/sjc/git/dodream/src/main/resources/static/image/summernote/
+  upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/ #/Users/yechankim/git/dodream/src/main/resources/static/image/summernote/
