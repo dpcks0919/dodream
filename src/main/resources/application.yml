@@ -28,6 +28,9 @@ spring:
     username: root
     password: root
     
+#    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
+#    username: dodream777 
+#    password: tomleegood77 
     
   jpa:
     open-in-view: true
@@ -64,7 +67,7 @@ spring:
             - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
 
           kakao:
             client-id: ccd2c184a87ab5205b193da983dd46f4
@@ -74,7 +77,7 @@ spring:
             - account_email
             client-name: kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao
             client-authentication-method: POST
             
         provider:
@@ -102,3 +105,4 @@ api:
 
 summernote:
   upload: /Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
+
