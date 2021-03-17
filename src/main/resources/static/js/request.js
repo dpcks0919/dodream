@@ -424,7 +424,7 @@ let requestInit = {
 				requestInit.notifyByEmail(notifyEmailUserList, request);
 				requestInit.notifyByText(notifyTextUserList, request);
 				//끝나면 화면 전환
-				location.href = "/user/requestMap";
+				location.href = "/requestMap";
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));

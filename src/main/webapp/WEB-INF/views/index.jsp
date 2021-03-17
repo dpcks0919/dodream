@@ -28,23 +28,23 @@
 						<img src="image/Main1.png" class="d-block w-100 mainImage-web" alt="...">
 						<img src="image/Main1_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption1 d-md-block mainImage-web">
-							<a class=" rounded main1-register" href="#about">소식보기</a>
+							<a class=" rounded main1-register" href="/news/newsList">소식 보기</a>
 						</div>
 						<div class="carousel-caption1_mobile d-md-block mainImage-mobile">
 							<!-- 
 								<p class="main1-register-text_mobile">이번 달에는 어떤 도움의 손길들이 있었을까요?</p>
 							 -->
-							<a class=" rounded main1-register main1-register_mobile" href="#about">소식보기</a>
+							<a class=" rounded main1-register main1-register_mobile" href="/news/newsList">소식 보기</a>
 						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="image/Main2.png" class="d-block w-100 mainImage-web" alt="...">
 						<img src="image/Main2_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption2 d-md-block mainImage-web">
-							<a class="py-2 rounded js-scroll-trigger main3-register " href="#about">자세히보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register " href="/dodreamtouch">자세히 보기</a>
 						</div>
 						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="#about">자세히 보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="/dodreamtouch">자세히 보기</a>
 						</div>
 						<iframe class="carousel-youtube" src="https://www.youtube.com/embed/9Yfaj0oTw18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowfullscreen></iframe>
@@ -53,7 +53,7 @@
 						<img src="image/Main3.png" class="d-block w-100 mainImage-web" alt="...">					
 						<img src="image/Main3_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption3 d-md-block mainImage-web">
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="/requestMap">요청 보기</a>
 						</div>
 						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
 						<!-- 
@@ -63,7 +63,7 @@
 							<p style="font-size:0.75rem;">"네 이웃을 네 몸과 같이 사랑하라"</p>
 						
 						 -->
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="/user/request">요청 보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="/request">요청 보기</a>
 						</div>
 					</div>
 				</div>
@@ -128,7 +128,14 @@
 							어떤 도움이든, <br>당신의 도움은 시작이 됩니다.
 						</p>
 						<span style="color: white; margin-bottom: 7vw; font-weight: bold;" class="sec3-bottom-right-content">나의 손길이 하나의 시작이 되다.</span> 
-						<a class="py-2 rounded js-scroll-trigger main4-register" href="/loginForm">시작하기</a>
+						<c:choose>
+							<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+								<a class="py-2 rounded js-scroll-trigger main4-register" href="/loginForm">시작하기</a>
+							</c:when>
+							<c:otherwise>
+								<a class="py-2 rounded js-scroll-trigger main4-register" href="/requestMap">시작하기</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="sec3-bottom-left left ">
 						<div class="four_box">
@@ -162,8 +169,15 @@
 						</p>
 						<h4 style="color: white; margin-bottom: 7vw;" class="sec3-bottom-right-content">
 							나의 손길이 하나의 시작이 되다.
-							</h3>
-							<a class="py-2 rounded js-scroll-trigger main4-register" href="/loginForm">시작하기</a>
+						</h4>
+						<c:choose>
+							<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
+								<a class="py-2 rounded js-scroll-trigger main4-register" href="/loginForm">시작하기</a>
+							</c:when>
+							<c:otherwise>
+								<a class="py-2 rounded js-scroll-trigger main4-register" href="/requestMap">시작하기</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -268,7 +282,7 @@
 							<a class=" rounded join-btn" href="/loginForm">가입하기</a>
 					</c:when>
 					<c:otherwise>
-							<a class=" rounded join-btn" href="/user/requestList">요청보기</a>
+							<a class=" rounded join-btn" href="/requestList">요청보기</a>
 					</c:otherwise>
 					</c:choose>
 					
