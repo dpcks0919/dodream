@@ -34,7 +34,8 @@
 					<c:set var="usertype" value="기관" />
 				</c:when>
 			</c:choose>
-			<tr>
+			<!-- 여기서 tr 클릭하면 -->
+			<tr onclick="openModal_manager(${user.id}, 0)">
 				<td class="table-num">${user.id}</td>
 				<td class="table-name">${user.userName}</td>
 				<td class="table-userPhone">${user.userPhone}</td>
