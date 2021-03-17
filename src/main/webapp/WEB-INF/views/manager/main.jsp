@@ -13,6 +13,13 @@
 </style>
 
 <body id="page-top">
+		<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
+
+	<!-- 세부정보 살펴보기 -->
+	<div class="modal-container" id="view-detail">
+		<div class="modal-content"></div>
+	</div>
+
 	<div id="menu-back" onclick="closeNav()"></div>
 	<%@include file="../layout/sidebar_front.jsp"%>
 
