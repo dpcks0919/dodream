@@ -23,26 +23,29 @@ public class RequestController {
 	private RequestService requestService;
 	
 	//	요청 페이지 지도
-	@GetMapping("user/requestMap")
+	@GetMapping("requestMap")
 	public String requestMap(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("requests", requestService.readRequestList(pageable));
-		model.addAttribute("user", principalDetails.getUser());
+		if(principalDetails != null)
+			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_map";
 	}
 	
 	//	요청 페이지 목록
-	@GetMapping("user/requestList")
+	@GetMapping("requestList")
 	public String requestList(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		//model.addAttribute("requests", requestService.readRequestList(pageable));
-		model.addAttribute("user", principalDetails.getUser());
+		if(principalDetails != null)
+			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_list";
 	}
 	
 	//	요청 목록 불러오기
-	@GetMapping("user/requestTable")
+	@GetMapping("requestTable")
 	public String requestTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("requests", requestService.readRequestList(pageable));
-		model.addAttribute("user", principalDetails.getUser());
+		if(principalDetails != null)
+			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_table";
 	}
 	
@@ -54,10 +57,8 @@ public class RequestController {
 		return "request/request_table";
 	}
 	
-
-	
 	//	검색된 요청 목록 불러오기
-	@GetMapping("user/searchRequestTable")
+	@GetMapping("searchRequestTable")
 	public String searchRequestTable(Model model, 
 									@RequestParam("clientType") String clientType,
 									@RequestParam("urgentLevel") int urgentLevel,
@@ -131,7 +132,8 @@ public class RequestController {
 		}
 
 		model.addAttribute("requests", searchList);
-		model.addAttribute("user", principalDetails.getUser());
+		if(principalDetails != null)
+			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_table";
 	}
 	

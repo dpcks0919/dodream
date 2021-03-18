@@ -21,7 +21,7 @@ function openModal_manager(id, num) {
 			console.log(JSON.stringify(error));
 		});	
 	}
-	// request Detail
+	// request Detail check
 	else if(num == 1) {
 		$.ajax({
 			type : "GET",

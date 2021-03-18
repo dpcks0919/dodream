@@ -136,14 +136,18 @@
 				</c:choose>
 				
 				<!-- 사회복지사가 자기가 요청한 내역을 확인함 -->
-				<div class="section2-box">
-					<div class="section2-box-left">
-						<span class="section2-text1">내 요청 내역</span>
-					</div>
-					<div class="section2-box-right">
-						<a class="section2-text2" href="/user/myrequest">더 보기 <i class="fas fa-chevron-right"></i></a>
-					</div>
-				</div>
+				<c:choose>
+					<c:when test="${user.userType eq 'SOCIAL_WORKER' || user.userType eq 'INSTITUTION'  }">
+						<div class="section2-box">
+							<div class="section2-box-left">
+								<span class="section2-text1">내 요청 내역</span>
+							</div>
+							<div class="section2-box-right">
+								<a class="section2-text2" href="/user/myrequest">더 보기 <i class="fas fa-chevron-right"></i></a>
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
 				
 				<div class="section2-box">
 					<div class="section2-box-left">
@@ -160,20 +164,25 @@
 						<p class="section2-text2" style="margin-bottom: 0;">지난 응답 10</p>
 					</div> -->
 					<div class="section2-box-left" >
-						<p class="section2-text1">응답 내역</p>
+						<p class="section2-text1">내 응답 내역</p>
 					</div>
 					<div class="section2-box-right">
 						<a class="section2-text2" href="/user/myreply">더 보기 <i class="fas fa-chevron-right"></i></a>
 					</div>
 				</div>
-				<div class="section2-box">
-					<div class="section2-box-left" >
-						<p class="section2-text1">관리자 페이지</p>
-					</div>
-					<div class="section2-box-right">
-						<a class="section2-text2" href="/user/manager">더 보기 <i class="fas fa-chevron-right"></i></a>
-					</div>
-				</div>
+				
+				<c:choose>
+					<c:when test="${user.userType eq 'ADMIN' }">
+						<div class="section2-box">
+							<div class="section2-box-left" >
+								<p class="section2-text1">관리자 페이지</p>
+							</div>
+							<div class="section2-box-right">
+								<a class="section2-text2" href="/user/manager">더 보기 <i class="fas fa-chevron-right"></i></a>
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
 			</div>
 		</section>
 
