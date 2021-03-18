@@ -219,6 +219,9 @@ public class ReplyApiController {
 	
 	@PostMapping("/checkUserInterestProc")
 	public ResponseDto<Boolean> checkUserInterestProc(@RequestParam(value = "requestId") String requestId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		return new ResponseDto<Boolean> (HttpStatus.OK.value(), replyService.checkUserInterest(principalDetails.getUser().getId(), Integer.parseInt(requestId)));
+		if(principalDetails != null)
+			return new ResponseDto<Boolean> (HttpStatus.OK.value(), replyService.checkUserInterest(principalDetails.getUser().getId(), Integer.parseInt(requestId)));
+		
+		return null;
 	}
 }
