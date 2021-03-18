@@ -194,6 +194,12 @@ function openMenu() {
     if($(pid).val() < max) $(pid).val(num += 1);
     else alert("최대 수량입니다.");
   }
+	function openModal_manager() {
+		$("#view-detail").css("display", "block");
+		$("#modal-bg").css("display", "block");
+		document.getElementById("page-top").style.overflow="hidden";
+
+	}
 
   function closeModal() {
     document.getElementById("modal-bg").style.display="none";
@@ -201,6 +207,13 @@ function openMenu() {
     document.getElementById("view-responseForm").style.display="none";
     document.getElementById("page-top").style.overflow="visible";
     document.getElementById("menu-back").style.filter = "none";
+    document.getElementById("Wrapper").style.filter = "none";
+  }
+
+  function closeModal_manager() {
+    document.getElementById("modal-bg").style.display="none";
+    document.getElementById("view-detail").style.display="none";
+    document.getElementById("page-top").style.overflow="visible";
     document.getElementById("Wrapper").style.filter = "none";
   }
 
@@ -236,6 +249,7 @@ function heartClick() {
 }
 
 function goDetail_myrequest(rq) {
+	alert(rq);
     $('.rq_item').remove();
 	$('#default_item').remove();
 	$("#rq_clientType").prop('disabled', true);
