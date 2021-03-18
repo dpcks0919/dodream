@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.dto.FileUploadDto;
+import com.dodream.dto.RequestDto;
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
@@ -154,6 +157,14 @@ public class RequestApiController {
 		} else {
 			return null;
 		}
+	}
+	
+	
+	@GetMapping("user/ManagerViewRequest")
+	public RequestDto ManagerViewRequest(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		Request request = requestService.getRequest(Integer.parseInt(id));
+		System.out.println("requestAPI Controller");
+		return new RequestDto (request);
 	}
 	
 	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")

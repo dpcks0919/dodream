@@ -40,7 +40,7 @@
 					<c:set var="replytype" value="대기" />
 				</c:when>
 			</c:choose>
-			<tr>
+			<tr class="info-table-tr" onclick="openModal_manager(${reply.id}, 2)">
 				<td class="table-num">${reply.id}</td>
 				<td class="table-title">${reply.request.title}</td>
 				<td class="table-content">${reply.replyContent}</td>
