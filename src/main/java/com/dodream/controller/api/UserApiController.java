@@ -1,5 +1,9 @@
 package com.dodream.controller.api;
  
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -157,13 +161,13 @@ public class UserApiController {
 	}
 	
 	@PostMapping("/findIdProc")
-	public ResponseDto<Boolean> findIdProc(@RequestParam(value = "email") String email){
+	public ResponseDto<Boolean> findIdProc(@RequestParam(value = "email") String email) throws UnsupportedEncodingException, MessagingException{
 		System.out.println("Input EMAIL: " + email);
 		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.findIdService(email));
 	}
 	
 	@PostMapping("/findPwProc")
-	public ResponseDto<Boolean> findPwProc(@RequestParam(value = "id") String id, @RequestParam(value = "email") String email){
+	public ResponseDto<Boolean> findPwProc(@RequestParam(value = "id") String id, @RequestParam(value = "email") String email) throws UnsupportedEncodingException, MessagingException{
 		System.out.println("Input ID: " + id);
 		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.findPwService(id, email));
 	}

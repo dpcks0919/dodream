@@ -1,13 +1,20 @@
 package com.dodream.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +36,16 @@ public class UserService {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	@Qualifier("deskSender") // Desk(회원가입 관련 계정)
+    private JavaMailSender deskSender;
+	
+	@Value("${spring.mail.desk.username}")
+	private String senderEmail;
+	
+	@Value("${spring.mail.desk.nickname}")
+	private String senderName;
 	
 	@Value("${api.sms.api-key}")
 	private String apiKey;
@@ -174,7 +191,7 @@ public class UserService {
 		params.put("to", userPhone); 
 		params.put("from", sendPhone); //사전에 사이트에서 번호를 인증하고 등록하여야 함 
 		params.put("type", "SMS"); 
-		params.put("text", "[DoDream]\nHere's your verification code: " + randNum); //메시지 내용 
+		params.put("text", "[두드림터치]\n인증코드: " + randNum); //메시지 내용 
 		params.put("app_version", "test app 1.2"); 
 		
 //		try { 
@@ -253,18 +270,19 @@ public class UserService {
 	}
 
 	@Transactional
-	public Boolean findIdService(String email) {
+	public Boolean findIdService(String email) throws UnsupportedEncodingException, MessagingException {
 		User user = userRepository.findByUserEmail(email);
 		if(user == null) return false;
 		else {
-			String content = "가입하신ID: " + user.getLoginId();
-			sendEmail(user.getUserEmail(), content);
+			String content = "가입하신 아이디: " + user.getLoginId();
+			String title = "[두드림터치] 아이디 찾기";
+			sendEmail(user.getUserEmail(), content, title);
 			return true;
 		}
 	}
 	
 	@Transactional
-	public Boolean findPwService(String id, String email) {
+	public Boolean findPwService(String id, String email) throws UnsupportedEncodingException, MessagingException {
 		User user = userRepository.findByLoginIdAndUserEmail(id, email);
 		if(user == null) return false;
 		else {
@@ -275,44 +293,36 @@ public class UserService {
 			String encPassword =  encoder.encode(randRawPw);
 			user.setLoginPassword(encPassword);	// 비밀번호 저장
 			
-			String content = "바뀐 PW: " + randRawPw;
-			sendEmail(user.getUserEmail(), content);
+			String content = "수정된 비밀번호: " + randRawPw;
+			String title = "[두드림터치] 비밀번호 찾기";
+			sendEmail(user.getUserEmail(), content, title);
 			return true;
 		}
 	}
 
-	public void sendEmail(String userEmail, String content) {
+	public void sendEmail(String userEmail, String content, String title) throws MessagingException, UnsupportedEncodingException {
 		//수신자메일 
 		String rcvEmail = userEmail;
 		
-		//발신자 메일 
-        String sendMail = "";	// 사용 이메일 주소
-        String sendName = "";	// 상대방에게 표시되는 이름
-		
         // 메일 내용 관련 
-		// 메일 제목 
-		String title = "[DoDream]";
-		
-		// 매일 내용(msg) 
+		// 매일 내용(바디) 
 		String msg = "";
-		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-		msg += "<h3 style='color: blue;'> " + content + "</h3>";
+		msg += "<div align='center' style='border:2px solid #ed7e95; border-radius: 10px; font-family:verdana'>";
+		msg += "<h3 style='color: black;'> " + content + "</h3>";
 		msg += "<strong></div><br/>";
 		
-		/* 일단 막아놈
-
-        MimeMessage message = javaMailSender.createMimeMessage();
+		//이메일 발송 부분
+        MimeMessage message = deskSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-        mimeMessageHelper.setFrom(sendMail,sendName);
+        mimeMessageHelper.setFrom(senderEmail, senderName);
         mimeMessageHelper.setTo(rcvEmail);
         mimeMessageHelper.setSubject(title);
         mimeMessageHelper.setText(msg, true);
 
         // 메일 발송 
-        javaMailSender.send(message);
-        */
-		
+        deskSender.send(message);
+        
 		System.out.println("수신자메일: " + rcvEmail);
 		System.out.println("메일 제목: " + title);
 		System.out.println("메일 내용: " +msg);		

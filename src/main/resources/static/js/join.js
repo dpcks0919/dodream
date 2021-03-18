@@ -56,7 +56,13 @@ let joinInit = {
 			this.idCheck();		
 		});
 		$("#btn-login").on("click", () => { 
-			this.login();
+			if (  $("#loginid").val() == '' ){
+				alert("아이디를 입력하여 주세요!");
+			}else if (  $("#loginpw").val() == '' ){
+				alert("비밀번호를 입력하여 주세요!");
+			}else{
+				this.login();
+			}
 		});
 		$("#userid").change(function(){
 			idFlag = 0;
