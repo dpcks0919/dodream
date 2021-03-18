@@ -10604,3 +10604,8 @@ form .row:first-child .floating-label-form-group {
 .pagination a:hover:not(.active) {
 	background-color: #ddd;
 }
+
+.del-btn {
+	cursor:pointer;
+}
+

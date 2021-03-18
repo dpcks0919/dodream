@@ -147,4 +147,5 @@ public class RequestController {
 	public String jusoPopup() {
 		return "join/jusoPopup";
 	}
+
 }
