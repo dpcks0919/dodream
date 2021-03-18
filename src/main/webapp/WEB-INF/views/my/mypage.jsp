@@ -159,7 +159,7 @@
 						<p class="section2-text2" style="margin-bottom: 0;">새로운 응답 1</p>
 						<p class="section2-text2" style="margin-bottom: 0;">지난 응답 10</p>
 					</div> -->
-					<div class="section2-box-left" >
+					<div class="section2-box-left">
 						<p class="section2-text1">응답 내역</p>
 					</div>
 					<div class="section2-box-right">
