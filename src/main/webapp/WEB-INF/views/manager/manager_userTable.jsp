@@ -35,7 +35,7 @@
 				</c:when>
 			</c:choose>
 			<!-- 여기서 tr 클릭하면 -->
-			<tr onclick="openModal_manager(${user.id}, 0)">
+			<tr onclick="openModal_manager(${user.id}, 0)" style="cursor:pointer;">
 				<td class="table-num">${user.id}</td>
 				<td class="table-name">${user.userName}</td>
 				<td class="table-userPhone">${user.userPhone}</td>
