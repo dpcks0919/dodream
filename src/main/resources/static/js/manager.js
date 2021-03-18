@@ -6,15 +6,16 @@ function openModal_manager(id, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
+			data: id,
 			url : "/user/managerUserDetail",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				alert(id + " : " +num);
 				$("#view-detail").css("display", "block");
 				$("#modal-bg").css("display", "block");
-				$("#detail-content").html(resp);			
+				$("#detail-content").html(resp);		
+				$("#uid").html("<h1>" + id + "</h1>");	
 			}
 		}).fail(function(error) {
 			console.log(JSON.stringify(error));

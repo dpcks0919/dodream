@@ -1,1 +1,2 @@
-<h1>UDETAIL</h1>
+<script src="/js/manager.js"></script>
+<div id="uid"></div>
