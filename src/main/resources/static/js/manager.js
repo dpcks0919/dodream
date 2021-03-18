@@ -1,3 +1,64 @@
+// id는 user면 user id, request면 request id, reply면 reply id
+// num은 user : 0, request : 1, reply : 2
+function openModal_manager(id, num) {
+	// user Detail
+	if(num == 0) {
+		$.ajax({
+			type : "GET",
+			traditional : true,
+			url : "/user/managerUserDetail",
+		}).done(function(resp) {
+			if (resp.status == 500) {
+				alert("에러발생");
+			} else {
+				alert(id + " : " +num);
+				$("#view-detail").css("display", "block");
+				$("#modal-bg").css("display", "block");
+				$("#detail-content").html(resp);			
+			}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});	
+	}
+	// request Detail check
+	else if(num == 1) {
+		$.ajax({
+			type : "GET",
+			traditional : true,
+			url : "/user/managerRequestDetail",
+		}).done(function(resp) {
+			if (resp.status == 500) {
+				alert("에러발생");
+			} else {
+				$("#view-detail").css("display", "block");
+				$("#modal-bg").css("display", "block");
+				$("#detail-content").html(resp);			
+			}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});	
+	} 
+	// reply Detail
+	else if(num == 2) {
+		$.ajax({
+			type : "GET",
+			traditional : true,
+			url : "/user/managerReplyDetail",
+		}).done(function(resp) {
+			if (resp.status == 500) {
+				alert("에러발생");
+			} else {
+				$("#view-detail").css("display", "block");
+				$("#modal-bg").css("display", "block");
+				$("#detail-content").html(resp);			
+			}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});	
+	}
+	
+}
+
 function menuToggle(num) {
 	// 회원 관리
 	if(num == 1) {
