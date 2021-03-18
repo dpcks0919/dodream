@@ -62,7 +62,7 @@ public class RequestApiController {
 		
 		// EmailList를 돌면서 email과 request Title 전송
 		for(int i = 0; i < userEmailList.length;i ++) {
-			requestService.sendEmailService(userEmailList[i], requestTitle);
+			requestService.sendRequestEmailService(userEmailList[i], requestTitle);
 		}
 		
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
