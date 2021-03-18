@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,10 +39,6 @@ import net.nurigo.java_sdk.api.Message;
 @Service
 public class RequestService {
 	
-	//application.yml과 연결되어 해당 설정으로 사용할수 있게함?
-	@Autowired
-    private JavaMailSender javaMailSender;
-	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -57,10 +54,14 @@ public class RequestService {
 	@Autowired
 	private UserInterestRepository userInterestRepository;
 	
-	@Value("${spring.mail.username}")
+	@Autowired
+	@Qualifier("helpSender") // Help(요청응답 관련 계정)
+    private JavaMailSender helpSender;
+	
+	@Value("${spring.mail.help.username}")
 	private String senderEmail;
 	
-	@Value("${spring.mail.nickname}")
+	@Value("${spring.mail.help.nickname}")
 	private String senderName;
 
 	@Value("${api.sms.api-key}")
@@ -174,7 +175,7 @@ public class RequestService {
 		params.put("to", userPhone); 
 		params.put("from", sendPhone); //사전에 사이트에서 번호를 인증하고 등록하여야 함 
 		params.put("type", "SMS"); 
-		params.put("text", "[DoDream] 새로운 요청이 등록되었습니다: " + requestTitle); //메시지 내용 
+		params.put("text", "[두드림터치] 새로운 요청이 등록되었습니다: " + requestTitle); //메시지 내용 
 		params.put("app_version", "test app 1.2"); 
 		
 //		try { 
@@ -195,35 +196,28 @@ public class RequestService {
 		//수신자메일 
 		String rcvEmail = userEmail;
 		
-		//발신자 메일 
-        String sendMail = senderEmail;	// 사용 이메일 주소
-        String sendName = senderName;	// 상대방에게 표시되는 이름
-		
         // 메일 내용 관련 
 		// 메일 제목 
-		String title = "[DoDream] 새로운 요청이 등록되었습니다!";
+		String title = "[두드림터치] 새로운 요청이 등록되었습니다!";
 		
 		// 매일 내용(msg) 
 		String msg = "";
 		msg += "<div align='center' style='border:2px solid #ed7e95; border-radius: 10px; font-family:verdana'>";
-		msg += "<h3 style='color: black;'>새로운 요청이 등록되었습니다: " + requestTitle + "</h3>";
+		msg += "<h3 style='color: black;'>새로운 요청이 등록되었습니다 : " + requestTitle + "</h3>";
 		msg += "<strong></div><br/>";
 		
-		/*
 		// 이메일 발송 부분
-        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessage message =  helpSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-        mimeMessageHelper.setFrom(sendMail,sendName);
+        mimeMessageHelper.setFrom(senderEmail, senderName);
         mimeMessageHelper.setTo(rcvEmail);
         mimeMessageHelper.setSubject(title);
         mimeMessageHelper.setText(msg, true);
 
         // 메일 발송 
-        javaMailSender.send(message);
-        */
-        
-		
+        helpSender.send(message);
+
 		System.out.println("수신자메일: " + rcvEmail);
 		System.out.println("메일 제목: " + title);
 		System.out.println("메일 내용: " +msg);		
