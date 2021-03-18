@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,12 +53,13 @@ public class ReplyService {
 	private UserInterestRepository userInterestRepository;
 	
 	@Autowired
-    private JavaMailSender javaMailSender;
+	@Qualifier("helpSender") // Help(요청응답 관련 계정)
+    private JavaMailSender helpSender;
 	
-	@Value("${spring.mail.username}")
+	@Value("${spring.mail.help.username}")
 	private String senderEmail;
 	
-	@Value("${spring.mail.nickname}")
+	@Value("${spring.mail.help.nickname}")
 	private String senderName;
 
 	@Transactional
@@ -211,12 +213,12 @@ public class ReplyService {
 		String rcvEmail = request.getUser().getUserEmail();
 		
 		//발신자 메일 
-        String sendMail = senderEmail;	// 사용 이메일 주소
-        String sendName = senderName;	// 상대방에게 표시되는 이름
+//        String sendMail = senderEmail;	// 사용 이메일 주소
+//        String sendName = senderName;	// 상대방에게 표시되는 이름
 		
         // 메일 내용 관련 
 		// 메일 제목 
-		String title = "[DoDream] " + " 새로운 Reply가 등록되었습니다!";
+		String title = "[두드림터치] " + " 새로운 Reply가 등록되었습니다!";
 		
 		// 매일 내용(msg) 
 		String msg = "";
@@ -225,18 +227,16 @@ public class ReplyService {
 		msg += "<strong></div><br/>";
 		
 		//메일 내용 부분
-		/*
-        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessage message = helpSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-        mimeMessageHelper.setFrom(sendMail,sendName);
+        mimeMessageHelper.setFrom(senderEmail,senderName);
         mimeMessageHelper.setTo(rcvEmail);
         mimeMessageHelper.setSubject(title);
         mimeMessageHelper.setText(msg, true);
 
         // 메일 발송 
-        javaMailSender.send(message);
-        */
+        helpSender.send(message);
 		
 		System.out.println("수신자메일: " + rcvEmail);
 		System.out.println("메일 제목: " + title);
