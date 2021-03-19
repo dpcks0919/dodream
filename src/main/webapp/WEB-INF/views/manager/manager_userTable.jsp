@@ -34,8 +34,30 @@
 					<c:set var="usertype" value="기관" />
 				</c:when>
 			</c:choose>
+			<script>
+				var usr${user.id} = {
+					id: ${user.id},
+					uaddr: '${user.address}',
+					uemail_flag: ${user.emailFlag},
+					umsg_flag: ${user.msgFlag},
+					uradius: ${user.notificationRadius},
+					uid: '${user.loginId}',
+					usex: ${user.userSex},
+					utype: '${user.userType}',
+					udob: '${user.userDob}',
+					uemail: '${user.userEmail}',
+					uname: '${user.userName}',
+					uphone: '${user.userPhone}',
+					uorg: '${user.orgName}',
+					uorg_role: '${user.orgUserRole}',
+					uorg_phone: '${user.orgPhone}',
+					ushow_flag: ${user.showFlag},
+					ustate_flag: '${user.stateFlag}',
+					is_social: ${user.isSocial},
+				};
+			</script>
 			<!-- 여기서 tr 클릭하면 -->
-			<tr onclick="openModal_manager(${user.id}, 0)" style="cursor:pointer;">
+			<tr onclick="openModal_manager(usr${user.id}, 0)" style="cursor:pointer;">
 				<td class="table-num">${user.id}</td>
 				<td class="table-name">${user.userName}</td>
 				<td class="table-userPhone">${user.userPhone}</td>
@@ -45,7 +67,7 @@
 						<c:set var="state" value="승인" />
 						<td class="table-state">${state}</td>
 					</c:when>
-					<c:when test="${user.stateFlag == 'NON_APPROVED'}">
+					<c:when test="${user.stateFlag == 'NON_APPROVED' or user.stateFlag == 'WAITING'}">
 						<c:set var="state" value="미승인" />
 						<td class="table-state" style="color:red;">${state}</td>
 					</c:when>
@@ -113,7 +135,6 @@
 		</div>
 	</div>
 </section>
-
 <script>
 var curPage = "${currentPage}";
 </script>
