@@ -37,7 +37,7 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 
 // id는 user면 user id, request면 request id, reply면 reply id
 // num은 user : 0, request : 1, reply : 2
-function openModal_manager(id, num) {
+function openModal_manager(user, num) {
 	// user Detail
 	if(num == 0) {
 		$.ajax({
