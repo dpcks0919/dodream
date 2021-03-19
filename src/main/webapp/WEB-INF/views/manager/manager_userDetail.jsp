@@ -1,1 +1,97 @@
-<h1>UDETAIL</h1>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>​
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<script src="/js/manager.js"></script>
+<link href="/css/modal-info.css" rel="stylesheet" />
+
+<div id="input_id"></div>
+<div id="input_ustate_flag_container">
+	<span>승인 여부: </span>
+	<input type="radio" name="apinfo" id="input_ustate_flag_y" value="APPROVED">&nbsp;승인 
+	<input type="radio" name="apinfo" id="input_ustate_flag_n" value="NOTAPPROVED">&nbsp;미승인
+</div>
+<div id="input_utype_container">
+	<span>사용자 유형: </span>
+	<select id="input_utype" name="utype">
+		<option value="INDIVIDUAL">개인</option>
+		<option value="GROUP">단체</option>
+		<option value="SOCIAL_WORKER">사회복지사</option>
+		<option value="INSTITUTION">사회복지기관</option>
+		<option value="ADMIN">관리자</option>
+	</select>
+</div>
+<div id="input_uid_container">
+	<span>사용자 아이디: </span>
+	<input type="text" id="input_uid">
+</div>
+<div id="input_uname_container">
+	<span>사용자 이름: </span>
+	<input type="text" id="input_uname">
+</div>
+<div id="input_uphone_container">
+	<span>사용자 전화번호: </span>
+	<input type="text" id="input_uphone">
+</div>
+<div id="input_umsg_flag_container">
+	<span>SMS 수신 동의: </span>
+	<input type="radio" name="smsinfo" id="input_umsg_flag_y" value="1">&nbsp;예
+	<input type="radio" name="smsinfo" id="input_umsg_flag_n" value="0">&nbsp;아니오
+</div>
+<div id="input_uemail_container">
+	<span>사용자 이메일: </span>
+	<input type="text" id="input_uemail">
+</div>
+<div id="input_uemail_flag_container">
+	<span>이메일 수신 동의: </span>
+	<input type="radio" name="eminfo" id="input_uemail_flag_y" value="1">&nbsp;예
+	<input type="radio" name="eminfo" id="input_uemail_flag_n" value="0">&nbsp;아니오
+</div>
+<div id="input_uaddr_container">
+	<span>사용자 주소: </span>
+	<input type="text" id="input_uaddr">
+</div>
+<div id="input_ushow_flag_container">
+	<span>지도 표시 여부: </span>
+	<input type="radio" name="showinfo" id="input_ushow_flag_y" value="1" checked>&nbsp;예
+	<input type="radio" name="showinfo" id="input_ushow_flag_n" value="0">&nbsp;아니오
+</div>
+<div id="input_uradius_container">
+	<span>알림 반경</span>
+	<select id="input_uradius" name="uradius">
+		<option value="3">3</option>
+		<option value="5">5</option>
+		<option value="7">7</option>
+		<option value="10">10</option>
+		<option value="15">15</option>
+	</select>
+	<span>km</span>
+</div>
+<div id="input_udob_container">
+	<span>생년월일</span>
+	<select class="select-date" id="selectyear"></select> <input type="hidden" id="dob_year">
+	<select class="select-date" id="selectmonth"></select> <input type="hidden" id="dob_month">
+	<select class="select-date" id="selectdate"></select> <input type="hidden" id="dob_date">
+</div>
+<div id="input_usex_container">
+	<span>성별: </span>
+	<select id="input_usex" name="usex">
+		<option value="1">남자</option>
+		<option value="2">여자</option>
+	</select>
+</div>
+<div id="input_uorg_container">
+	<span>기관명: </span>
+	<input type="text" id="input_uorg">
+</div>
+<div id="input_uorg_role_container">
+	<span id="role_type"></span>
+	<input type="text" id="input_uorg_role">
+</div>
+<div id="input_uorg_phone_container">
+	<span>기관 전화번호: </span>
+	<input type="text" id="input_uorg_phone">
+</div>
+<div class="modal-ftr">
+	<div class="btn-res" onclick="">수정하기</div>
+</div>
