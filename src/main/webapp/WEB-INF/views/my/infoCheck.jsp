@@ -15,7 +15,7 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info-small">
-					<h4>비밀번호 변경</h4>
+					<h4>정보 수정</h4>
 				</div>
 			</div>
 		</header>

@@ -87,7 +87,6 @@ function openMenu() {
 	$("#btn-com").on("click", () => {
 		if(confirm("정말 등록하시겠습니까?") == true){
 			saveReply(rq.requestItem);
-			location.href = "/requestMap";
 	    }
 	    else{
 	        return ;
@@ -194,6 +193,12 @@ function openMenu() {
     if($(pid).val() < max) $(pid).val(num += 1);
     else alert("최대 수량입니다.");
   }
+	function openModal_manager() {
+		$("#view-detail").css("display", "block");
+		$("#modal-bg").css("display", "block");
+		document.getElementById("page-top").style.overflow="hidden";
+
+	}
 
   function closeModal() {
     document.getElementById("modal-bg").style.display="none";
@@ -201,6 +206,13 @@ function openMenu() {
     document.getElementById("view-responseForm").style.display="none";
     document.getElementById("page-top").style.overflow="visible";
     document.getElementById("menu-back").style.filter = "none";
+    document.getElementById("Wrapper").style.filter = "none";
+  }
+
+  function closeModal_manager() {
+    document.getElementById("modal-bg").style.display="none";
+    document.getElementById("view-detail").style.display="none";
+    document.getElementById("page-top").style.overflow="visible";
     document.getElementById("Wrapper").style.filter = "none";
   }
 
@@ -213,6 +225,7 @@ function openMenu() {
   }
 
   function goResponse() {
+	
     document.getElementById("view-responseForm").style.display="block";
     document.getElementById("view-detail").style.display="none";
     document.getElementById("page-top").style.overflow="hidden";
@@ -236,6 +249,7 @@ function heartClick() {
 }
 
 function goDetail_myrequest(rq) {
+	alert(rq);
     $('.rq_item').remove();
 	$('#default_item').remove();
 	$("#rq_clientType").prop('disabled', true);
@@ -326,15 +340,6 @@ function goDetail_myrequest(rq) {
       return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
     });
 
-    $("#btn-com").off("click");	
-	$("#btn-com").on("click", () => {
-		if(confirm("정말 등록하시겠습니까 ?") == true){
-			saveReply(rq.requestItem);
-	    }
-	    else{
-	        return ;
-	    }
-	});
 
     for(var i = 0; i < items.length; i++) {
       let needs = items[i].itemNum - items[i].receivedNum;

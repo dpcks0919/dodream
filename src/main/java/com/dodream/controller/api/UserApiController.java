@@ -115,6 +115,11 @@ public class UserApiController {
 		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.idCheckService(userId));
 	}
 	
+	@PostMapping("/emailCheckProc")
+	public ResponseDto<Boolean> emailCheck(@RequestParam(value = "useremail") String useremail) {	// boolean 값 리턴(false: 이메일 중복)
+		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.emailCheckService(useremail));
+	}
+	
 	@PostMapping("/passwordCheckProc")
 	public ResponseDto<Boolean> passwordCheck(@RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails) {	// boolean 값 리턴(false: 아이디 중복)
 	

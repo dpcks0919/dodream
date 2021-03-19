@@ -231,6 +231,7 @@
 	<script src="/js/request.js"></script>
 	<script>
 	var isIndexPage = false;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
+	var isMapPage = true;
 	var lati, longi;
 	<c:choose>
 		<c:when test="${user.loginCount == 0 || empty user.loginCount}">

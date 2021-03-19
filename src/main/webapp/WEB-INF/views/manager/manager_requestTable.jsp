@@ -12,7 +12,6 @@
 	}
 }
 
-
 </style>
 <table class="" id="info-table" style="table-layout: fixed;">
 	<thead>
@@ -29,6 +28,38 @@
 		<c:set var="requestCount" value="0" />
 		<c:set var="currentPage" value="${requests.pageable.pageNumber}"></c:set>
 		<c:forEach var="request" items="${requests.content}">
+		<script>
+			var arr = new Array();
+			<c:forEach items="${request.requestItem}" var="item">
+					if("${item.requestType}" == "STUFF") var type = "물품";
+				else if("${item.requestType}" == "SERVICE") var type = "봉사";
+				else if("${item.requestType}" == "FINANCE") var type = "재정";
+				else var type = "기타"; 
+				arr.push({
+					itemId: ${item.id},
+					itemName: "${item.itemName}",
+					itemNum: "${item.itemNum}",
+					receivedNum: "${item.receivedNum}",
+					requestType: "${item.requestType}",
+				});
+			</c:forEach>
+			const rq${request.id} = {
+				id: ${request.id},
+				title: '${request.title}',
+				regDate: '${request.regDate}',
+				dueDate: '${request.dueDate}',
+				requestAddress: '${request.requestAddress}',
+				clientType : '${request.clientType}',
+				urgentLevel: '${request.urgentLevel}',
+				userName: '${request.user.userName}',
+				description: '${request.description}',
+				longitude: '${request.longitude}',
+				latitude: '${request.latitude}',
+				requestItem: arr,
+			};
+		</script>
+		
+		
 			<c:choose>
 				<c:when test="${request.status == 'APPROVED'}">
 					<c:set var="requesttype" value="승인" />
@@ -43,7 +74,7 @@
 					<c:set var="requesttype" value="마감" />
 				</c:when>
 			</c:choose>
-			<tr>
+			<tr class="info-table-tr" onclick="openModal_manager(${request.id}, 1)">
 				<td class="table-num">${request.id}</td>
 				<td class="table-title">${request.title}</td>
 				<td class="table-status"><b>${requesttype}</b></td>

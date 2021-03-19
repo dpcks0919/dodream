@@ -3,6 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>​
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 
 <link href="/css/news.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,7 +35,9 @@
 				<div class="reg-info">
 					<h4>소식 보기</h4>
 					<p>두드림의 순간들과<br>두드림터치의 이야기들을 확인할 수 있습니다.</p>
-					<a style="border:1px solid white; color: white; cursor:pointer; padding:0.5rem;" href="/user/news/newsWrite">글 쓰기</a>
+					<c:if test = "${principal.user.userType eq 'ADMIN'}">
+						<a style="border:1px solid white; color: white; cursor:pointer; padding:0.5rem;" href="/user/news/newsWrite">글 쓰기</a>
+					</c:if>
 				</div>
 			</div>
 		</header>

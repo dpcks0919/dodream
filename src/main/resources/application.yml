@@ -8,17 +8,18 @@ server:
         
 spring:
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: # gmail ID
-    password: # gmail PW
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-    nickname: 두드림터치 # mail 발송시 표기되는 송신자 이름 
+    help: 
+      host: smtp.gmail.com
+      port: 587
+      username: dodream.help@gmail.com # gmail ID
+      password: enemfla1! # gmail PW
+      nickname: help두드림터치 # mail 발송시 표기되는 송신자 이름 
+    desk:
+      host: smtp.gmail.com
+      port: 587
+      username: dodream.desk@gmail.com # gmail ID
+      password: enemfla1! # gmail PW
+      nickname: 회원가입두드림터치 # mail 발송시 표기되는 송신자 이름 
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -117,4 +118,5 @@ api:
     send-phone: '01068363758'
 
 summernote:
-  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/ #/dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/ 
+  #upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/  
+  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/

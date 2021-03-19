@@ -40,8 +40,8 @@
 						<div class="sns-title">네이버로 회원가입</div>
 					</div>
 					<div class="sns-card" onclick="document.location.href='/oauth2/authorization/facebook'">
-						<div class="sns-logo" style="background-image: url('/image/facelogo.png');">로고</div>
-						<div class="sns-title">페이스북으로 회원가입</div>
+						<div class="sns-logo" style="background-image: url('/image/googlelogo.png');">로고</div>
+						<div class="sns-title">구글로 회원가입</div>
 					</div>
 				</div>
 			</div>

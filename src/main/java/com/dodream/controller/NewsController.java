@@ -25,7 +25,7 @@ public class NewsController {
 	
 //	@GetMapping("user/news/newsList")
 	@RequestMapping(value = "news/newsList", method= {RequestMethod.GET, RequestMethod.POST})
-	public String newsList(Model model, @RequestParam(defaultValue="ALL", value="type") String type, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
+	public String newsList(Model model, @RequestParam(defaultValue="ALL", value="type") String type, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		if(type.equals("ALL")) {
 			model.addAttribute("newsList", newsService.readNewsList("ALL", pageable));
 			model.addAttribute("ntype","ALL");
