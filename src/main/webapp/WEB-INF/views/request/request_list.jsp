@@ -63,7 +63,7 @@
 		<div class="modal-ftr">
 			<c:choose>
 				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
-					<div class="btn-res" onclick="alert('로그인이 필요합니다!')">응답하기</div>
+					<div class="btn-res" onclick="alert('로그인이 필요한 서비스입니다!')">응답하기</div>
 				</c:when>
 				<c:otherwise>
 					<div class="btn-res" onclick="goResponse()">응답하기</div>
@@ -216,6 +216,8 @@
 	<script src="/js/request.js"></script>
 
 	<script>
+		var isMapPage = false;
+	
 		function initPage() {
 			$.ajax({
 				type : "GET",

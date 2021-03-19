@@ -49,6 +49,9 @@ public class News{
 	@Column(columnDefinition = "int default 0")
 	private int count;
 	
+	@Column(columnDefinition = "int default 0")
+	private int deleteFlag;
+	
 	@CreationTimestamp
 	private Timestamp regDate;
 	

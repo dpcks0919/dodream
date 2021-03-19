@@ -87,7 +87,6 @@ function openMenu() {
 	$("#btn-com").on("click", () => {
 		if(confirm("정말 등록하시겠습니까?") == true){
 			saveReply(rq.requestItem);
-			location.href = "/requestMap";
 	    }
 	    else{
 	        return ;
@@ -213,6 +212,7 @@ function openMenu() {
   }
 
   function goResponse() {
+	
     document.getElementById("view-responseForm").style.display="block";
     document.getElementById("view-detail").style.display="none";
     document.getElementById("page-top").style.overflow="hidden";
@@ -326,15 +326,6 @@ function goDetail_myrequest(rq) {
       return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
     });
 
-    $("#btn-com").off("click");	
-	$("#btn-com").on("click", () => {
-		if(confirm("정말 등록하시겠습니까 ?") == true){
-			saveReply(rq.requestItem);
-	    }
-	    else{
-	        return ;
-	    }
-	});
 
     for(var i = 0; i < items.length; i++) {
       let needs = items[i].itemNum - items[i].receivedNum;
