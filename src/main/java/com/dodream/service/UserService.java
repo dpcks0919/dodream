@@ -214,6 +214,12 @@ public class UserService {
 	}
 	
 	@Transactional
+	public Boolean emailCheckService(String useremail) {	// 이메일 중복 테스트
+		if(userRepository.findByUserEmail(useremail) == null) return true;
+		else return false;	//있으면(중복) false
+	}
+	
+	@Transactional
 	public Boolean loginService(User loginInfo, PrincipalDetails principalDetails) {
 		
 		if((principalDetails != null && principalDetails.getUser().getLoginCount() == 0) || principalDetails == null) {	// 1. 소셜 계정 세션은 유지되는데, 회원가입은 하지 않고 일반계정 로그인으로 진행하는 경우 2. 세션이 없고 그냥 쌩으로 로그인 하는 경우 
