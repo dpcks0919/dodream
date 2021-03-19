@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.config.auth.PrincipalDetails;
@@ -27,6 +28,12 @@ public class NewsApiController {
 	@PostMapping("/newsUpdateProc")
 	public ResponseDto<Integer> newsUpdate(@RequestBody News news, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		newsService.update(news);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
+	}
+	
+	@PostMapping("/newsDeleteProc")
+	public ResponseDto<Integer> newsDelete(@RequestParam(value = "newsId") int newsId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		newsService.delete(newsId);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
 	

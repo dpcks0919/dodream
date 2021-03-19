@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,18 +32,19 @@ import net.nurigo.java_sdk.api.Message;
 public class UserService {
 	
 	@Autowired
-    private JavaMailSender javaMailSender;
-	
-	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
-	@Value("${spring.mail.username}")
+	@Autowired
+	@Qualifier("deskSender") // Desk(회원가입 관련 계정)
+    private JavaMailSender deskSender;
+	
+	@Value("${spring.mail.desk.username}")
 	private String senderEmail;
 	
-	@Value("${spring.mail.nickname}")
+	@Value("${spring.mail.desk.nickname}")
 	private String senderName;
 	
 	@Value("${api.sms.api-key}")
@@ -189,7 +191,7 @@ public class UserService {
 		params.put("to", userPhone); 
 		params.put("from", sendPhone); //사전에 사이트에서 번호를 인증하고 등록하여야 함 
 		params.put("type", "SMS"); 
-		params.put("text", "[DoDream]\nHere's your verification code: " + randNum); //메시지 내용 
+		params.put("text", "[두드림터치]\n인증코드: " + randNum); //메시지 내용 
 		params.put("app_version", "test app 1.2"); 
 		
 //		try { 
@@ -208,6 +210,12 @@ public class UserService {
 	@Transactional
 	public Boolean idCheckService(String userId) {	// 아이디 중복 테스트 
 		if(userRepository.findByLoginId(userId) == null) return true;
+		else return false;	//있으면(중복) false
+	}
+	
+	@Transactional
+	public Boolean emailCheckService(String useremail) {	// 이메일 중복 테스트
+		if(userRepository.findByUserEmail(useremail) == null) return true;
 		else return false;	//있으면(중복) false
 	}
 	
@@ -302,10 +310,6 @@ public class UserService {
 		//수신자메일 
 		String rcvEmail = userEmail;
 		
-		//발신자 메일 
-        String sendMail = senderEmail;	// 사용 이메일 주소
-        String sendName = senderName;	// 상대방에게 표시되는 이름
-		
         // 메일 내용 관련 
 		// 매일 내용(바디) 
 		String msg = "";
@@ -314,19 +318,17 @@ public class UserService {
 		msg += "<strong></div><br/>";
 		
 		//이메일 발송 부분
-		/*
-        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessage message = deskSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-        mimeMessageHelper.setFrom(sendMail,sendName);
+        mimeMessageHelper.setFrom(senderEmail, senderName);
         mimeMessageHelper.setTo(rcvEmail);
         mimeMessageHelper.setSubject(title);
         mimeMessageHelper.setText(msg, true);
 
         // 메일 발송 
-        javaMailSender.send(message);
-        */
-		
+        deskSender.send(message);
+        
 		System.out.println("수신자메일: " + rcvEmail);
 		System.out.println("메일 제목: " + title);
 		System.out.println("메일 내용: " +msg);		

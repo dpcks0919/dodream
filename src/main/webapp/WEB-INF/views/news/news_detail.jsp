@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 
 <link href="/css/news.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,17 +49,11 @@
 					</div>
 					<div class="" style="overflow-y:scroll;">${newsDetail.content}</div>						
 					<div class="news-ftr" style="justify-content: space-between;">
-						<c:if test="${newsDetail.user.id == user.id}">
-						<div>
-							<div class="btn-upload" onclick="alert('권한이 없습니다.');">수정하기</div>
-							<div class="btn-upload" onclick="alert('권한이 없습니다.');" style="margin-right:0.5rem;">삭제하기</div>						
-						</div>
-						</c:if>
-						<c:if test="${newsDetail.user.id != user.id}">
-						<div>
-							<div class="btn-upload" onclick="location.href='/user/news/newsEdit/${newsDetail.id}'">수정하기</div>							
-							<div class="btn-upload" onclick="news_delete();" style="margin-right:0.5rem;">삭제하기</div>						
-						</div>
+						<c:if test = "${principal.user.userType eq 'ADMIN'}">
+							<div>
+								<div class="btn-upload" onclick="location.href='/user/news/newsEdit/${newsDetail.id}'">수정하기</div>							
+								<div class="btn-upload" onclick="news_delete(${newsDetail.id});" style="margin-right:0.5rem;">삭제하기</div>						
+							</div>
 						</c:if>					
 											
 						<a class="btn-upload" onclick="location.href='/news/newsList'">뒤로 가기</a>

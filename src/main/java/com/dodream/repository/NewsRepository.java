@@ -19,4 +19,11 @@ public interface NewsRepository extends JpaRepository<News, Integer>{
 	@Modifying
 	@Query(value = "update news set count = count+1 where id = ?1", nativeQuery = true)
 	void increaseCount(int id);
+
+	Page<News> findAllByDeleteFlag(Pageable pageable, int i);
+
+	Page<News> findByNewsTypeAndDeleteFlag(NewsType valueOf, int i, Pageable pageable);
+
+	@Query(value = "select * from news where delete_flag = ?1 order by reg_date desc", nativeQuery = true)
+	List<News> findAllByDeleteFlagAndOrderByRegDateDesc(int id);
 }

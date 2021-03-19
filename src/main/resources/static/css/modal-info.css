@@ -61,6 +61,7 @@
   color: #e95378;
   margin-right: 3.5%;
   cursor: pointer;
+  margin-top: 0.3rem;
 }
 .btn-res, .btn-com, .btn-edit {
   height: 2rem;

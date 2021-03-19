@@ -40,8 +40,8 @@
 								<div style="font-size: 10pt; color: #CACACA;">간편 로그인</div>
 								<div class="divider-custom-line"></div>
 							</div>
-							<img class="snslgbtn" src="/image/kakao.png" alt="" onclick="javascript:location.href='/oauth2/authorization/kakao'" /> <img class="snslgbtn" src="/image/naver.png" alt=""
-								onclick="javascript:location.href='/oauth2/authorization/naver'" /> <img class="snslgbtn" src="/image/facebook.png" alt="" onclick="javascript:location.href='/oauth2/authorization/google'" />
+							<img class="snslgbtn" src="/image/kakao.png" alt="" onclick="javascript:location.href='/oauth2/authorization/kakao'" /> <img class="snslgbtn"  src="/image/naver.png" alt=""
+								onclick="javascript:location.href='/oauth2/authorization/naver'" /> <img class="snslgbtn" src="/image/google.png" alt="" onclick="javascript:location.href='/oauth2/authorization/google'" />
 						</div>
 					</div>
 					<div class="login-explain" style="height: 100%; text-align: left; padding-left: 4.5rem; padding-top: 22.5vh;">
