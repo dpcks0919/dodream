@@ -17,9 +17,13 @@ function news_upload(type, id) {
 	}
 }
 
-function news_delete() {
-	alert('삭제합니다.');
-	
+function news_delete(id) {
+	if(confirm("정말 삭제하시겠습니까?") == true){
+		newsInit.deleteNews(id);
+    }
+    else{
+        return;
+ 	}
 } 
 
 let newsInit = {
@@ -107,6 +111,24 @@ let newsInit = {
 			});			
 		}
 		
+	},
+	
+	deleteNews:function(newsId) {
+				
+		$.ajax({
+			type:"POST",
+			url: "/newsDeleteProc",
+			data: {"newsId": newsId},
+		}).done(function(resp) {
+			if(resp.status == 500) {
+				alert("삭제 실패");
+			} else {
+				alert("소식이 삭제되었습니다.");
+				location.href = "/news/newsList";
+			}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});				
 	}	
 	
 }

@@ -113,4 +113,5 @@ api:
     send-phone: '01068363758'
 
 summernote:
-  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/ #/dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/ 
+  #upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/  
+  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/

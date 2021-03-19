@@ -138,7 +138,7 @@ public class RequestController {
 	}
 	
 	//	요청하기 페이지 
-	@GetMapping("user/request")
+	@GetMapping("social/request")
 	public String requestForm() {
 		return "request/request";
 	}
