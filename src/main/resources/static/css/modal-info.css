@@ -63,6 +63,7 @@
   cursor: pointer;
 }
 .btn-res, .btn-com, .btn-edit {
+  height: 2rem;
   border: 2px solid #e95378;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -70,7 +71,7 @@
   padding-right: 15px;
   border-radius: 4px;
   color: #e95378;
-  line-height: 200%;
+  line-height: 1.8rem;
   cursor: pointer;
 }
 
