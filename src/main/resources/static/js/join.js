@@ -293,6 +293,11 @@ let joinInit = {
 				alert("이메일 형식에 맞게 작성해주세요.");
 				return false;
 			}
+			
+			if(!joinInit.emailCheck($("#useremail").val())){
+				alert("중복되는 이메일이 존재합니다. 다시 한번 확인해주세요.");
+				return false;
+			}
 		}  
 		if($("#type").val() != "INSTITUTION" && !$("#userphone").attr('disabled')){	// userPhone
 			alert("문자 인증을 진행해 주세요."); 
@@ -320,6 +325,25 @@ let joinInit = {
 		return true;
 	},
 	
+	emailCheck:function(useremail){	// email 중복 체크
+		var emailCheckFlag = false;
+		$.ajax({
+			type: "POST",
+			url: "/emailCheckProc",
+			data: {useremail: useremail},
+			async: false,
+		}).done(function(resp){ 
+			if(resp.status == 500){
+				alert("emailCheck 에러");
+			}else{
+				emailCheckFlag = resp.data;
+			}
+		}).fail(function(error){
+			console.log("emailCheck에러: " + JSON.stringify(error));
+		}); 
+		return emailCheckFlag;
+	},
+	
 	idCheck:function(){	// 코드 확인 함수 
 		let userId;
 		
@@ -333,7 +357,7 @@ let joinInit = {
 					url: "/idCheckProc",	// 보내기 
 					data: {userId: userId},
 					type: "POST",
-					}).done(function(resp){	// verify code를 data로 리턴
+					}).done(function(resp){
 					if(resp.status == 500){
 						alert("다시 한번 확인해주세요!");
 					}else{
