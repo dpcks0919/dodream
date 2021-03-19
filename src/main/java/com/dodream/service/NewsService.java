@@ -33,15 +33,15 @@ public class NewsService {
 	@Transactional(readOnly = true)
 	public Page<News> readNewsList(String type, Pageable pageable) {
 		if(type.equals("ALL")) {
-			return newsRepository.findAll(pageable);			
+			return newsRepository.findAllByDeleteFlag(pageable, 0);			
 		} else {
-			return newsRepository.findByNewsType(NewsType.valueOf(type), pageable);
+			return newsRepository.findByNewsTypeAndDeleteFlag(NewsType.valueOf(type), 0,pageable);
 		}
 	}
 	
 	
 	public List<News> recentNewsList() {
-		return newsRepository.findAllByOrderByRegDateDesc();
+		return newsRepository.findAllByDeleteFlagAndOrderByRegDateDesc(0);
 	}
 
 	public News readNewsOne(int id) {
@@ -73,5 +73,14 @@ public class NewsService {
 	@Transactional
 	public void increaseCount(int id) {
 		newsRepository.increaseCount(id);
+	}
+
+	@Transactional
+	public void delete(int id) {
+		News persistance = newsRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("소식 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+		
+		persistance.setDeleteFlag(1);
 	}
 }

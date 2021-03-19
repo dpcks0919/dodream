@@ -11,8 +11,8 @@
 	<div class="container">
 		<img src="/image/Logo.png" class="logo" onclick="document.location.href='/'"> 
 		<c:choose>
-			<c:when test=  "${principal.user.userType eq 'SOCIAL_WORKER' || principal.user.userType eq 'INSTITUTION' }" >
-				<a class="navbar-brand js-scroll-trigger" href="/user/request">요청하기</a>
+			<c:when test=  "${principal.user.userType eq 'ADMIN' || principal.user.userType eq 'SOCIAL_WORKER' || principal.user.userType eq 'INSTITUTION' }" >
+				<a class="navbar-brand js-scroll-trigger" href="/social/request">요청하기</a>
 			</c:when>
 		</c:choose>
 		<a class="navbar-brand js-scroll-trigger" href="/requestMap">요청 보기</a> 
