@@ -177,6 +177,7 @@ function plusCount(_current) {
 }
 
 // 임시 저장 (db에 올리기)
+/*
 function save() {
   // 제목
   var title = document.getElementById('requestTitle').value;
@@ -212,6 +213,7 @@ function save() {
 
   }
 }
+*/
 // 최종 제출 (db에 올리기)
 function upload(step) {
   var title = document.getElementById('requestTitle').value;
@@ -317,6 +319,8 @@ function getDistance(firstLongi, firstLati, secondLongi, secondLati){
 }
 
 function saveReply(items) {
+	
+		var check = false;
     	
 		let requestId = {
 			id: $("#rq_id").text(),
@@ -333,7 +337,13 @@ function saveReply(items) {
 		for(var i=0; i<items.length; i++) {
 			var rid = "#response_num" + i;
 			var reply_num = parseInt($(rid).val());
+			if(reply_num > 0 ) check = true;
 			items[i].replyNum = reply_num;
+		}
+		
+		if( check == false ){
+			alert("수량을 설정해주세요!");
+			return;
 		}
 					
 		var allData = {
@@ -352,7 +362,7 @@ function saveReply(items) {
 				alert("아이템 업로드 실패하였습니다. ");
 			}else{
 				if(resp.data != null){
-					alert("누군가 중간에 아이템 넣음");
+					alert("수량이 변동되었습니다. \n 다시 입력 부탁드립니다.");
 					closeModal();
 					paging(curPage);
 					goDetail_request(resp.data);
@@ -360,10 +370,13 @@ function saveReply(items) {
 					//콜백
 					notifySocialWorkerByEmail(reply);
 					alert("업로드되었습니다.\n응답하신 내용은 [마이페이지]에서 확인하실 수 있습니다.");
-					$(".request-table").empty();
-					paging(curPage);
-					closeModal();
-					location.reload();
+					if(isMapPage == true){
+						location.href = "/requestMap";
+					}else{
+						//$(".request-table").empty();
+						paging(curPage);
+						closeModal();
+					}	
 				}
 			}		
 		}).fail(function(error){
@@ -432,7 +445,6 @@ let requestInit = {
 	},
 	
 	notifyByEmail: function(userList, request){
-		alert("이메일 전송");
 		$.ajax({
 			type: "POST",
 			data: {
@@ -445,6 +457,8 @@ let requestInit = {
 		}).done(function(resp){
 			if(resp.status == 500) {
 				alert("notifyByEmailProc 문제 발생!");
+			}else{
+				alert("요청 등록 후 주변 이웃들에게 이메일 전송");
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -452,7 +466,6 @@ let requestInit = {
 	},
 	
 	notifyByText: function(userList, request){	
-		alert("문자 전송");
 		$.ajax({
 			type: "POST",
 			data: {
@@ -465,6 +478,8 @@ let requestInit = {
 		}).done(function(resp){
 			if(resp.status == 500) {
 				alert("notifyByTextProc 문제 발생!");
+			}else{
+				alert("요청 등록 후 주변 이웃들에게 문자 전송");
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -472,6 +487,7 @@ let requestInit = {
 	},
 	
 	saveRequest:function(totalCnt, itemList) {
+		
 		  var period = document.getElementById('requestPeriod').value;
 		  var period_text = period;
 		  if(period_text == '보통(한 달 이내)') period = 3;
@@ -485,6 +501,14 @@ let requestInit = {
 		  else if(type_text == '아이') type = "CHILD";
 		  else if(type_text == '장애인') type = "DISABLED";
 		  else if(type_text == '기타') type = "OTHERS";
+
+			for(var i=0; i<itemList.length; i++) {
+				if (itemList[i].itemNum == 0 ){
+					alert("수량을 입력하여 주시기 바랍니다!");
+					return;
+				}
+			}
+
 
 		//주소 입력했는지 체크
 		if(document.getElementById('roadAddrPart1').value == "") alert("주소를 검색해주세요.");

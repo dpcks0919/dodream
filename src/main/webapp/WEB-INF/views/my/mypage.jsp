@@ -115,7 +115,7 @@
 					<c:when test="${user.userType eq 'ADMIN' }">
 						<div class="section2-box">
 							<div class="section2-box-left">
-								<span class="section2-text1">내 정보 (기관)</span>
+								<span class="section2-text1">내 정보 (관리자)</span>
 							</div>
 							<c:choose>
 								<c:when test="${user.isSocial eq 0 }">
