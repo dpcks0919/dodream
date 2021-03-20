@@ -41,6 +41,7 @@ function openMenu() {
 	
 	//console.log(rq);
     var date = rq.dueDate;
+	date = date.split(' ')[0];
     var d_date = new Date(date.valueOf());
     var d_time = d_date.getTime();
     var cur = new Date(); // 현재시간
@@ -48,7 +49,7 @@ function openMenu() {
 	var org_name = rq.userName;
     var status = "";
     if(c_time <= d_time) status = "응답 대기중";
-    else status = "마감";
+    else status = "<span style='color: red'>  마감 </span>";
 
     let regDate = rq.regDate.substring(0,10);
     let level = rq.urgentLevel;
@@ -83,6 +84,19 @@ function openMenu() {
       return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
     });
 
+	$(".btn-res").off("click");	
+	$(".btn-res").removeAttr('onclick');
+
+	if( status.includes('마감')) {
+		$(".btn-res").on("click", () => {
+			alert("마감되었습니다.");
+	});
+	}else{
+		$(".btn-res").on("click", () => {
+			goResponse();
+	});
+	}
+	
     $("#btn-com").off("click");	
 	$("#btn-com").on("click", () => {
 		if(confirm("정말 등록하시겠습니까?") == true){
