@@ -109,7 +109,7 @@
 								
 								<script>
 
-								const rp1${reply.id} = {
+								const rp${reply.id} = {
 										id: ${reply.id},
 										userName : "${reply.replyUser}",
 										org : "${reply.replyOrg}",
@@ -142,7 +142,7 @@
 								<c:set var="replyContent" value="[${reply.request.title}]에 대한 응답" />
 								<c:if test="${reply.replyContent ==  ''}">
 								</c:if>
-								<tr class="reply-item" onclick="goDetail_myreply(rp1${reply.id}, 'default');" style="cursor:pointer;">
+								<tr class="reply-item" onclick="goDetail_myreply(rp${reply.id}, 'default');" style="cursor:pointer;">
 									<td class="table-num">${reply.id}</td>
 									<td class="table-title fbold">${replyContent}</td>
 									<td class="table-date">${regdate}</td>
