@@ -91,13 +91,16 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 }
 
 // 모달
-function goRequestDetail(title, period_text, contents, totalCnt, itemList) {
+function goRequestDetail(title, type, date, address, period_text, contents, totalCnt, itemList) {
   document.getElementById("modal-bg").style.display="block";
   document.getElementById("view-detail").style.display="block";
   document.getElementById("page-top").style.overflow="hidden";
   document.getElementById("menu-back").style.filter = "blur(5px)";
   document.getElementById("Wrapper").style.filter = "blur(5px)";
   document.getElementById("modal-title").innerHTML = title;
+  document.getElementById("modal-type").innerHTML = type;
+  document.getElementById("modal-date").innerHTML = date;
+  document.getElementById("modal-address").innerHTML = address;
   document.getElementById("modal-contents").innerHTML = contents;
   document.getElementById("modal-period").innerHTML = period_text;
   document.getElementById("modal-reset").innerHTML = "";
@@ -217,9 +220,13 @@ function save() {
 // 최종 제출 (db에 올리기)
 function upload(step) {
   var title = document.getElementById('requestTitle').value;
+  var date_str = new Date();
+  var date = date_str.getFullYear() +'.' + (date_str.getMonth()+1) + '.' + date_str.getDate();
+  var type = document.getElementById('requestType').value; 
   var period = document.getElementById('requestPeriod').value;
   var period_text = period;
-  var contents = document.getElementById('requestContents').value;
+  var address = document.getElementById('roadAddrPart1').value;
+  var contents = document.getElementById('requestContents').value;	
 
   if(title =='') {
     alert("제목을 입력해주세요!");
@@ -248,7 +255,7 @@ function upload(step) {
     }
 	// Modal 창 켜짐 
 	if(step == 1) {
-    	goRequestDetail(title, period_text, contents, totalCnt, itemList);
+    	goRequestDetail(title, type, date, address, period_text, contents, totalCnt, itemList);
 	}
 	// 바로 upload
 	else if(step == 2) {
