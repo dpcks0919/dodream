@@ -101,7 +101,7 @@ let newsInit = {
 				console.log(data);
 				console.log(resp);
 				if(resp.status == 500) {
-					alert("업로드 실패");
+					alert("수정 실패");
 				} else {
 					alert("소식이 수정되었습니다.");
 					location.href = "/news/newsList";

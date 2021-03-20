@@ -39,7 +39,7 @@ function openMenu() {
     document.getElementById("menu-back").style.filter = "blur(5px)";
     document.getElementById("Wrapper").style.filter = "blur(5px)";
 	
-	console.log(rq);
+	//console.log(rq);
     var date = rq.dueDate;
     var d_date = new Date(date.valueOf());
     var d_time = d_date.getTime();
@@ -249,7 +249,6 @@ function heartClick() {
 }
 
 function goDetail_myrequest(rq) {
-	alert(rq);
     $('.rq_item').remove();
 	$('#default_item').remove();
 	$("#rq_clientType").prop('disabled', true);
@@ -278,7 +277,6 @@ function goDetail_myrequest(rq) {
 	    document.getElementById("Wrapper").style.filter = "none";
 	});
 	
-	console.log("rq" + rq);
     var date = rq.dueDate;
     var d_date = new Date(date.valueOf());
     var d_time = d_date.getTime();
@@ -313,7 +311,7 @@ function goDetail_myrequest(rq) {
 	$("#roadLongitude").val(rq.longitude);
 	$("#roadLatitude").val(rq.latitude);
 	
-	console.log("기존 위경도 : " + $("#roadLongitude").val() +", " + $("#roadLatitude").val());
+	//console.log("기존 위경도 : " + $("#roadLongitude").val() +", " + $("#roadLatitude").val());
     $("#rq_contents").html(rq.description);
 	
 	// 수정하기로 변경시에 전달될 객체

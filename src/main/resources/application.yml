@@ -7,6 +7,11 @@ server:
       force: true
         
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
   mail:
     help: 
       host: smtp.gmail.com
@@ -37,7 +42,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
     username: root
-    password: rootroot
+    password: root
     
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
