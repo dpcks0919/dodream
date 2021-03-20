@@ -120,16 +120,10 @@
 							<c:choose>
 								<c:when test="${user.isSocial eq 0 }">
 									<div class="section2-box-right box-right-two">
-										<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/infoCheck/org">정보 수정 <i class="fas fa-chevron-right"></i></a></p>
-										<div style="height:0.5rem;"></div>
+										<div style="height:1rem;"></div>
 										<p class="section2-text2" style="margin-bottom:0;"><a class="section2-text2" href="/user/pwCheck">비밀번호 변경 <i class="fas fa-chevron-right"></i></a></p>
 									</div>
-								</c:when>
-								<c:when test="${user.isSocial eq 1 }">
-									<div class="section2-box-right">
-										<a class="section2-text2" href="/user/infoCheck/org">정보 수정 <i class="fas fa-chevron-right"></i></a>
-									</div>
-								</c:when>
+								</c:when>							
 							</c:choose>
 						</div>
 					</c:when>

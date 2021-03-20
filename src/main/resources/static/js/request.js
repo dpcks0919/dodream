@@ -12,7 +12,7 @@ function addUserInterest(requestId){
 		if(resp.status == 500) {
 			alert("관심 목록 추가에 실패하였습니다. ");
 		}else {		
-			alert("관심 목록에 추가하였습니다. \n 관심 목록은 [나의 두드림]에서 확인할 수 있습니다.");
+			alert("관심 목록에 추가하였습니다. \n관심 목록은 [나의 두드림]에서 확인할 수 있습니다.");
 		} 
 	}).fail(function(error){
 		console.log(JSON.stringify(error));
@@ -43,11 +43,11 @@ function goPopup(){
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
-	
+/*	
 	$(".map-div0").css("margin-bottom","2rem");
 	$(".map-div1").css("margin-bottom","2rem");
 	$(".map-div2").css("margin-bottom","1.5rem"); 
-	$(".map-div3").css("margin-bottom","2rem");
+	$(".map-div3").css("margin-bottom","2rem"); */
 }
 
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
