@@ -17,7 +17,7 @@
 		<div class="modal-bg" id="modal-bg" onclick="closeModal_manager();"></div>
 	<!-- 세부정보 살펴보기 -->
 	<div class="modal-container" id="view-detail">
-		<div class="modal-content" id="detail-content"></div>
+		<div class="modal-content" id="detail-content" style="height:100%;"></div>
 	</div>
 
 	<div id="menu-back" onclick="closeNav()"></div>
