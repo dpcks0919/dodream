@@ -270,7 +270,7 @@ let mapInit = {
 		  var c_time = cur.getTime();
 	      var status = "";
 		  if(c_time <= d_time) status = "응답 대기중";
-	      else status = "응답 완료";
+	      else status = "마감";
 		 $("#marker-info-status").text(status);
 	
 		 // 긴급정도 나타내기

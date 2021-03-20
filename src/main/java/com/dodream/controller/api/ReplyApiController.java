@@ -49,9 +49,12 @@ public class ReplyApiController {
 		int check = 0;
 		
 		for(int i=0;  i < replyDto.getReplyItems().length; i ++) {
-			System.out.println(replyDto.getReplyItems()[i].getId());
-			check += replyService.checkItemValidation(replyDto.getReplyItems()[i].getId(), 
-													 Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
+			if( Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum() ) != 0  ) {
+				System.out.println(replyDto.getReplyItems()[i]);
+				check += replyService.checkItemValidation(replyDto.getReplyItems()[i].getId(), 
+						 Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
+			}
+			
 		}
 				
 		if (check > 0 ) {

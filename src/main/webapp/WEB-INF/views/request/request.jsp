@@ -95,7 +95,7 @@
 								<button style="background-color:white; border:1px solid black; outline:none;" onclick="goPopup();">검색</button>
 							</div>
 						</div>	
-						<div class="responsive-map-wrapper" style="width:50%; display:inline-block;">
+						<div class="responsive-map-wrapper" style="width:50%; display:inline-block; float: right;">
 							<div class="map_wrap" style="width:100%; height: 10rem; padding:0!important; margin:0!important; overflow:hidden;">
 								<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 								<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
@@ -106,7 +106,7 @@
 							</div>
 						</div>
 					</div>
-
+					<div style="margin-top: 30px; font-size:0.76rem; color:blue;">* 첨부 파일의 최대크기는 <span style="color:red;">10MB</span>입니다.</div>
 					<div class="summernoteDiv">
 						<textarea type="text" class="request-content summernote" id="requestContents" name="content" required></textarea>
 					</div>

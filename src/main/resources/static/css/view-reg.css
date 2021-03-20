@@ -267,14 +267,14 @@ td, th {
     left:50%!important;
     bottom:0vh;
     transform: translateX(0%);
-    height:14vh;
+    height:16vh;
     width:100%;
     background-color:white;
     padding-left:3%;
     padding-right:3%;
     padding-top:2vh;
     padding-bottom:0.5%;
-    font-size:0.75rem;
+    font-size:1rem;
     display:block;
     /* align-items:center; */
     margin-bottom:2vh;
@@ -294,11 +294,9 @@ td, th {
     border-style:none;
     padding-top:0.5vw;
     float:left!important;
-
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color:pink;
   }
   .map-mid {
     width:29%;
@@ -354,18 +352,18 @@ td, th {
 
   .help-content {
     font-weight:bold;
-    font-size:1.0rem;
+    font-size:1.5rem;
     display:inline!important;
     margin-right:3vh!important;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .help-date {
-    font-size:0.5rem;
+    font-size:1rem;
     display:inline!important;
   }
   .help-status {
-    font-size:0.5rem;
+    font-size:0.9rem;
     margin-left:1vh;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -376,14 +374,14 @@ td, th {
     text-overflow: ellipsis;
   }
   .help-term {
-    font-size:0.5rem;
+    font-size:0.9rem;
     margin-left:1vh;
   }
   .help-code {
-    font-size:0.5rem;
+    font-size:1rem;
   }
   .help-code-box {
-    font-size:0.5rem;
+    font-size:0.7rem;
     width:50%;
     margin-left:1vh;
     height:1.0rem;
@@ -400,7 +398,7 @@ td, th {
   .help-detail {
     padding:0;
     width:80%;
-    height:2.7vh;
+    height:3vh;
     line-height:2vh;
     font-weight:bold;
     font-size:1.5vh;
