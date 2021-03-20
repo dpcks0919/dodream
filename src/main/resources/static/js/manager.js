@@ -54,7 +54,8 @@ function openModal_manager(id, num) {
 				$("#modal-bg").css("display", "block");
 				$("#detail-content").html(resp);
 		
-				$("#input_id").html("<h4>" + String(user.id) + "</h4>");
+				$("#title_id").html("<h4>" + String(user.id) + "</h4>");
+				$("#input_id").val(user.id);
 				if(user.ustate_flag == "APPROVED") {
 					$("#input_ustate_flag_y").prop("checked", true);
 				} else {
@@ -97,7 +98,7 @@ function openModal_manager(id, num) {
 				if(user.utype != "GROUP") {
 					$("#input_ushow_flag_container").css("display", "none");
 				}
-				
+				$("#noradius").css("display", "none");
 				if(user.uradius == 3) {
 					$("#input_uradius").val("3").prop("selected", true);
 				} else if(user.uradius == 5) {
@@ -108,6 +109,8 @@ function openModal_manager(id, num) {
 					$("#input_uradius").val("10").prop("selected", true);
 				} else if(user.uradius == 15) {
 					$("#input_uradius").val("15").prop("selected", true);
+				} else {
+					$("#input_uradius").val("0").prop("selected", true);
 				}
 				if(user.utype != "INDIVIDUAL" && user.utype != "GROUP") {
 					$("#input_uradius_container").css("display", "none");
@@ -164,6 +167,9 @@ function openModal_manager(id, num) {
 				$("#input_uorg_phone").val(user.uorg_phone);
 				if(user.utype != "SOCIAL_WORKER" && user.utype != "INSTITUTION") {
 					$("#input_uorg_phone_container").css("display", "none");
+				}
+				if(user.utype != "INDIVIDUAL" && user.utype != "SOCIAL_WORKER") {
+					$("#input_uorg_phone").val($("#input_uphone").val());
 				}
 			}
 		}).fail(function(error) {
@@ -596,48 +602,87 @@ function manager_editRequest(rid) {
 
 }
 
-/*
+
 function update(){
-		
+	var idNum = $("#input_id").val();
+	var isApproved;
+	if($("#input_ustate_flag_y").is(":checked")) {
+		isApproved = "APPROVED";
+	} else {
+		isApproved = "WAITING";
+	}
+	var utype = $("#input_utype option:selected").val();
+	var uid = $("#input_uid").val();
+	var uname = $("#input_uname").val();
+	var uphone = $("#input_uphone").val();
+	var msgflag;
+	if($("#input_umsg_flag_y").is(":checked")) {
+		msgflag = 1;
+	} else {
+		msgflag = 0;
+	}
+	var uemail = $("#input_uemail").val();
+	var emailflag;
+	if($("#input_uemail_flag_y").is(":checked")) {
+		emailflag = 1;
+	} else {
+		emailflag = 0;
+	}
+	var uaddr = $("#input_uaddr").val();
+	var showflag;
+	if($("#input_ushow_flag_y").is(":checked")) {
+		showflag = 1;
+	} else {
+		showflag = 0;
+	}
+	var uradius = Number($("#input_uradius option:selected").val());
 	var birthyear = $("#dob_year").val();
 	var birthmonth =  $("#dob_month").val();
  	var birthdate =  $("#dob_date").val();	
-	var birthdob = new Date(birthyear+ "/" + birthmonth + "/" + birthdate);				
+	var udob;
+	if(utype != "INDIVIDUAL" && utype != "SOCIAL_WORKER") {
+		udob = null;
+	} else {
+		udob = new Date(birthyear+ "/" + birthmonth + "/" + birthdate);
+	}				
+	var usex = Number($("#input_usex option:selected").val());
+	var uorg = $("#input_uorg").val();
+	var uorgrole = $("#input_uorg_role").val();
+	var uorgphone = $("#input_uorg_phone").val();
 	
 	let data = {
-		stateFlag: ,
-		userType: ,
-		loginId: ,
-		userName: ,
-		userPhone: ,
-		msgFlag: ,
-		userEmail: ,
-		emailFlag: ,
-		address: ,
-		showFlag: ,
-		notificationRadius: ,
-		userDob: ,
-		userSex: ,
-		orgName: ,
-		orgUserRole: ,
-		orgPhone: ,
+		id: idNum,
+		stateFlag: isApproved,
+		userType: utype,
+		loginId: uid,
+		userName: uname,
+		userPhone: uphone,
+		msgFlag: msgflag,
+		userEmail: uemail,
+		emailFlag: emailflag,
+		address: uaddr,
+		showFlag: showflag,
+		notificationRadius: uradius,
+		userDob: udob,
+		userSex: usex,
+		orgName: uorg,
+		orgUserRole: uorgrole,
+		orgPhone: uorgphone,
 	};	
-			
 	$.ajax({
 		type: "PUT",
-		url: "/updateProc",
+		url: "/updateUserProc",
 		data: JSON.stringify(data), //json으로 변경, 
 		contentType: "application/json; charset = utf-8 ",  // body 데이터가 어떤 타입인지
-		dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열, (생긴게 json이라면 => javascript로 변경해줌)
+		//dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열, (생긴게 json이라면 => javascript로 변경해줌)
 	}).done(function(resp){ // 응답의 결과를 받아주는 parameter
 		if(resp.status == 500){
 			alert("수정에 실패하였습니다.");
 		}else{
 			alert("수정이 완료되었습니다.");
-			location.href = "/";
+			location.href = "manager";
 		}
 	}).fail(function(error){
 		console.log(JSON.stringify(error));
 	});
 }
-*/
