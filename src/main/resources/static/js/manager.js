@@ -69,7 +69,6 @@ function openModal_manager(id, num) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				//openModal_manager();
 				$("#view-detail").css("display", "block");
 				$("#modal-bg").css("display", "block");
 				$(".modal-content").html(resp);		
@@ -89,8 +88,10 @@ function openModal_manager(id, num) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				openModal_manager();
-				$(".modal-content").html(resp);			
+				$("#view-detail").css("display", "block");
+				$("#modal-bg").css("display", "block");
+				$(".modal-content").html(resp);
+				manager_viewReply(id); 			
 			}
 		}).fail(function(error) {
 			console.log(JSON.stringify(error));
@@ -299,7 +300,277 @@ function manager_viewRequest(rid) {
 		});
 }
 
+//myrespose 나의 응답용 JS
+function manager_viewReply(rid) {
+		$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/ManagerViewReply?id=" + rid
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러 발생!");
+		} else {
+			var rp = resp.reply;
+			console.log(rp);
+			$("#rp_item0").empty();
+			$(".other-rpitem").remove();
 
+		    var address = rp.rqAddress;
+		    $("#rq_title").html("등록번호 #"+rp.request.id+" : "+rp.request.title);
+		    $("#rp_id").html(rp.id);
+		    let regDate = rp.regDate.substring(0,10);
+		    $("#rp_date").html(regDate);
+
+			$("#rp_org").val(rp.replyOrg);
+			$("#rp_name").val(rp.replyUser);
+			$("#rp_status").val(rp.status).prop("selected", true);
+			
+			if(rp.replyPhone == ""){
+				$("#rp_phone").val("");		
+			} else {
+				$("#rp_phone").val(rp.replyPhone);
+			}
+		
+			$("#rp_content").val(rp.replyContent);
+		
+			//요청자 회신란 넣기
+			if(rp.comment != ""){// comment가 달려있으면 보여주기(아니면 안보여줌)
+				$("#response-content").html(rp.comment);
+			} else {// comment가 달려있으면 보여주기(아니면 안보여줌)
+				$("#response-content").html("");
+			}
+			$.ajax({
+				type : "GET",
+				traditional : true,
+				url : "/user/replyItemObj_reply?replyId="+rid,
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					var items = new Array();
+					for(var i=0; i<resp.length; i++) {
+						var item2 = resp[i].split("^!@#^");
+						items.push({
+							requestType : item2[0],
+							itemName : item2[1],
+							replyNum : item2[2],
+							receivedNum : item2[3],
+							itemNum : item2[4],
+							replyItemId : item2[5] 
+						});
+					}
+				
+				    items.sort(function(a, b) {
+				      return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
+				    });
+					
+					  for(var i = 0; i < items.length; i++) {
+						  // 수정하려는 응답 아이템 개수
+						  var curID = 'tr' + items[i].replyItemId;
+						  var rcNum = items[i].receivedNum - items[i].replyNum;
+						  var rItemId = curID + "count";
+						  // 응답 아이템 개수의 변동에 따른 쌓이는 수
+						  var rcItemId = curID + "rccount";
+						  var tItemId = curID + "tcount";
+					      let needs = items[i].itemNum - items[i].receivedNum;
+					      if(i == 0) {
+					           if(items[i].requestType == "재정") {
+					             $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney_reply(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span>원</td>");
+					          } else {
+					            $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span></td>");
+					          }
+					      }
+					      else {
+					        let pid = "#rp_item" + (i-1);
+					        if(items[i].requestType === items[i-1].requestType) {
+					          if(items[i].requestType == "재정") { 
+					              $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney_reply(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');
+					          } else {
+								  $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span></td></tr>');				
+					          }
+					        } else {
+					          if(items[i].requestType == "재정") {
+								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney_reply(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');				
+					          } else {
+								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span></td></tr>');				
+					          }
+					        }
+					      }
+				    }
+					$("#rp-save").attr("onclick", ("manager_editReply('"+ rp.id +"')"));
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+			
+			
+		}
+	});
+}
+
+function manager_editReply(rid) {	
+	console.log("rid : "+rid);
+	// 관리자의 reply 수정
+	$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/replyItemObj_reply?replyId="+rid,
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러발생");
+		} else {
+			var items = new Array();
+			for(var i=0; i<resp.length; i++) {
+				var item2 = resp[i].split("^!@#^");
+				items.push({
+					requestType : item2[0],
+					itemName : item2[1],
+					replyNum : item2[2],
+					receivedNum : item2[3],
+					itemNum : item2[4],
+					replyItemId : item2[5] 
+				});
+			}
+		
+		    items.sort(function(a, b) {
+		      return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
+		    });
+			
+			  for(var i = 0; i < items.length; i++) {
+				  // 수정하려는 응답 아이템 개수
+				  var replyItemID = items[i].replyItemId;
+				  var curID = 'tr' + items[i].replyItemId;
+				  var rItemId = curID + "count";
+				  // 응답 아이템 개수의 변동에 따른 쌓이는 수
+				  var rcItemId = curID + "rccount";
+				  var tItemId = curID + "tcount";
+				  
+				  var receivedNum = document.getElementById(rcItemId).innerText * 1;
+				  var replyNum = document.getElementById(rItemId).value * 1;
+				  var totalNum = document.getElementById(tItemId).innerText * 1;
+
+				  $.ajax({
+						type : "GET",
+						traditional : true,
+						url : "/user/replyItemEdit?replyItemId="+replyItemID+"&replyNum="+replyNum+"&receivedNum="+receivedNum,
+					}).done(function(resp) {
+						if (resp.status == 500) {
+							alert("에러발생");
+						} else {
+							alert("replyItem 업데이트 완료!");
+						}
+					}).fail(function(error) {
+						console.log(JSON.stringify(error));
+					});
+		    }
+			  
+			// reply Update 
+			let data = {
+				id : rid,
+				replyOrg : $("#rp_org").val(),
+				replyUser : $("#rp_name").val(),
+				replyPhone : $("#rp_phone").val(),
+				replyContent : $("#rp_content").val()
+			};
+			console.log(data);
+			
+			$.ajax({
+				type : "POST",
+				url : "/replyUpdateProc",
+				data: JSON.stringify(data),
+				contentType: "application/json; charset = utf-8 ",
+				dataType: "json"
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					alert("응답 내역이 수정되었습니다.");
+					$.ajax({
+						type : "GET",
+						traditional : true,
+						url : "/user/replyUpload?id="+rid+"&status="+$("#rp_status").val()+"&message="+ $("#response-content").val(),
+					}).done(function(resp) {
+						if (resp.status == 500) {
+							alert("에러발생");
+						} else {
+							alert("등록되었습니다!");
+							menuToggle(3);
+							closeModal_manager();
+						}
+					}).fail(function(error) {
+						console.log(JSON.stringify(error));
+					});
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+		}
+	}).fail(function(error) {
+		console.log(JSON.stringify(error));
+	});
+	
+			
+}
+// 관리자 페이지 for reply
+function minusCount(_current, flag, receivedNum) {
+	var str = "";
+	if(flag == 0 || flag == 2) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var target = _current.id + str;
+  var cnt = document.getElementById(target).value;
+  if(cnt>receivedNum) {
+    document.getElementById(target).value=cnt*1 - 1;
+	if(flag == 2) {
+		var rcItemId = _current.id + "rccount";
+		var rNum = document.getElementById(rcItemId).innerText * 1;
+		document.getElementById(rcItemId).innerText = rNum - 1; 	
+	}
+  }
+  else {
+	if(flag == 0) {
+		if(receivedNum == 0) {
+			alert("0이상의 수를 입력하세요.");
+		} else {
+			alert("응답된 항목이 존재합니다. "+ receivedNum + " 이상의 수를 입력하세요.");			
+		}
+	} else if(flag == 2) {
+		alert("0이상의 수를 입력하세요.");		
+	} 
+  }
+}
+// 관리자 페이지 for reply
+function plusCount(_current, flag) {
+	var str = "";
+	if(flag == 0 || flag == 2) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var target = _current.id + str;
+  var cnt = document.getElementById(target).value;
+  // document.getElementById(target).setAttribute('value', cnt+1);
+  if(flag == 2) {
+	var rcItemId = _current.id + "rccount";
+	var tItemId = _current.id +"tcount";
+	var rNum = document.getElementById(rcItemId).innerText * 1;	
+	var tNum = document.getElementById(tItemId).innerText * 1;
+	
+	if(rNum != tNum) {
+	    document.getElementById(target).value=cnt*1 + 1;
+		document.getElementById(rcItemId).innerText = rNum+1; 		
+	} else {
+		alert("더이상 추가할 수 없습니다.");
+	}
+  } else {
+	  document.getElementById(target).value=cnt*1 + 1;
+  }
+}
+
+
+// 관리자 페이지 요청 관리에서 사용
 function rowAdd() {
   var trCnt = $('#myTable tbody[id="newItem"] tr').length;
   var curCnt = trCnt+1;
@@ -331,6 +602,52 @@ function rowDelete(current) {
   $('#'+target).remove();
 }
 
+// 관리자 페이지 for reply
+function checkMoney_reply(me, rcNum) {
+	// rcNum은 내가 응답한 아이템 개수를 제외한 다른 사람들이 이미 등록한 개수
+	console.log(rcNum);
+	var curValue = document.getElementById(me.id).value;
+
+	var rItemId = me.id;
+	var _temp = rItemId;
+	var tItemId = _temp.replace("count", "") + "tcount";
+	var _temp = rItemId;
+	var rcItemId = _temp.replace("count", "") +"rccount";
+	
+	var rNum = document.getElementById(rcItemId).innerText * 1;	
+	var tNum = document.getElementById(tItemId).innerText * 1;
+	
+	$("#"+rItemId).on("propertychange change keyup paste input", function() {
+		if(curValue == "") {
+			curValue = 0;
+		} else {
+			curValue = document.getElementById(rItemId).value;			
+		}
+		// 빈칸 아닐 때, 첫자리 0 방지
+		if(curValue[0] == 0 && curValue != 0) {
+			var curValue = curValue.replace(/(^0+)/, "");
+			// 맨 앞 0뺀 수
+			document.getElementById(rItemId).value = curValue; 
+		} else if(curValue == 0) {
+			// 0으로 갑 바꾸기.
+			document.getElementById(rItemId).value = 0;
+			document.getElementById(rcItemId).innerText = rcNum;
+			return 0;
+		}
+		// 여기서 현재 값이 배정된 상태. 이제 rcItem, tItem 변경해야함. 
+		// rcNum + 현재 값이 총값보다 크면 rcNum은 꽉 채워야함.
+		if (rcNum*1 + curValue*1 > tNum*1) {
+			alert('값이 초과되었습니다.');
+			document.getElementById(rItemId).value = tNum*1 - rcNum*1; 
+			document.getElementById(rcItemId).innerText = tNum;
+		}
+		 else {
+			document.getElementById(rcItemId).innerText = rcNum*1 + document.getElementById(rItemId).value *1;		
+		}
+	});
+}
+
+// 관리자 페이지 for request
 function checkMoney(me) {
 	var delID = me.id;
 	var curValue = document.getElementById(delID).value;

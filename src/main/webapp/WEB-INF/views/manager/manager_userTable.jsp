@@ -56,9 +56,11 @@
 		</c:forEach>
 	</tbody>
 </table>
+<!-- 
 <c:if test="${userCount == 0}">
 	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">유저 정보가 존재하지 않습니다.</div>
 </c:if>
+ -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">
@@ -74,7 +76,7 @@
 		<c:set var="isLast" value="5" />
 		<c:if test="${users.totalPages == 0}">
 			<div style="margin-bottom: 2vh;">
-				<br>요청이 존재하지 않습니다.
+				<br>유저 정보가 존재하지 않습니다.
 			</div>
 			<c:set var="isLast" value="1" />
 		</c:if>
