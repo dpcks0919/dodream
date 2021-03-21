@@ -17,12 +17,12 @@
 <table class="" id="info-table" style="table-layout: fixed;">
 	<thead>
 		<tr style="border-bottom: 3px solid #d3d3d3;">
-			<th class="table-num" style="width:10%;">등록 번호</th>
-			<th class="table-title" style="width:15%;">요청 제목</th>
-			<th class="table-content" style="width:25%;">응답 내용</th>
+			<th class="table-num" style="width:10%;">응답번호</th>
+			<th class="table-content" style="width:15%;">응답 내용</th>
 			<th class="table-status" style="width:12.5%;">승인여부</th>
 			<th class="table-name" style="width:10%;">응답자</th>
 			<th class="table-regdate" style="width:10%;">등록일</th>
+			<th class="table-title" style="width:25%;">관련 요청</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -40,21 +40,27 @@
 					<c:set var="replytype" value="대기" />
 				</c:when>
 			</c:choose>
-			<tr class="info-table-tr" onclick="openModal_manager(${reply.id}, 2)">
-				<td class="table-num">${reply.id}</td>
-				<td class="table-title">${reply.request.title}</td>
-				<td class="table-content">${reply.replyContent}</td>
-				<td class="table-status"><b>${replytype}</b></td>
-				<td class="table-name">${reply.user.userName}</td>
-				<td class="table-regdate">${fn:substring(reply.regDate, 0, 10)}</td>
+			<c:set var="rcontent" value="${reply.replyContent}"/>
+			<c:if test="${reply.replyContent == ''}">
+				<c:set var="rcontent" value="-"/>
+			</c:if>
+			<tr class="info-table-tr" >
+				<td class="table-num" onclick="openModal_manager(${reply.id}, 2)">${reply.id}</td>
+				<td class="table-content" onclick="openModal_manager(${reply.id}, 2)">${rcontent}</td>
+				<td class="table-status" onclick="openModal_manager(${reply.id}, 2)"><b>${replytype}</b></td>
+				<td class="table-name" onclick="openModal_manager(${reply.id}, 2)">${reply.user.userName}</td>
+				<td class="table-regdate" onclick="openModal_manager(${reply.id}, 2)">${fn:substring(reply.regDate, 0, 10)}</td>
+				<td class="table-title" onclick="openModal_manager(${reply.request.id}, 1)">[#${reply.request.id}] ${reply.request.title}</td>
 			</tr>
 			<c:set var="replyCount" value="${replyCount + 1}" />
 		</c:forEach>
 	</tbody>
 </table>
+<!-- 
 <c:if test="${replyCount == 0}">
 	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">응답글이 존재하지 않습니다.</div>
 </c:if>
+ -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">
@@ -70,7 +76,7 @@
 		<c:set var="isLast" value="5" />
 		<c:if test="${replys.totalPages == 0}">
 			<div style="margin-bottom: 2vh;">
-				<br>요청이 존재하지 않습니다.
+				<br>응답이 존재하지 않습니다.
 			</div>
 			<c:set var="isLast" value="1" />
 		</c:if>

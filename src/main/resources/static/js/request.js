@@ -3,16 +3,16 @@ var prevMarker;
 
 // user_Interest에 추가하는 함수
 function addUserInterest(requestId){
-	console.log(requestId);
+	//console.log(requestId);
 	$.ajax({
 		type: "POST",
 		url: "/addUserInterestProc",
 		data: {requestId: requestId},
 	}).done(function(resp){
 		if(resp.status == 500) {
-			alert("addUserInterest 실패하였습니다. ");
+			alert("관심 목록 추가에 실패하였습니다. ");
 		}else {		
-			alert("관심목록 추가 성공");
+			alert("관심 목록에 추가하였습니다. \n관심 목록은 [나의 두드림]에서 확인할 수 있습니다.");
 		} 
 	}).fail(function(error){
 		console.log(JSON.stringify(error));
@@ -21,16 +21,16 @@ function addUserInterest(requestId){
 
 // user_Interest 삭제하는 함수
 function deleteUserInterest(requestId){
-	console.log(requestId);
+	//console.log(requestId);
 	$.ajax({
 		type: "POST",
 		url: "/deleteUserInterestProc",
 		data: {requestId: requestId},
 	}).done(function(resp){
 		if(resp.status == 500) {
-			alert("deleteUserInterest 실패하였습니다. ");
+			alert("관심 목록 삭제에 실패하였습니다. ");
 		}else {		
-			alert("관심목록 삭제 성공");
+			alert("관심 목록에서 삭제하였습니다. ");
 		} 
 	}).fail(function(error){
 		console.log(JSON.stringify(error));
@@ -43,11 +43,11 @@ function goPopup(){
 	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
-	
+/*	
 	$(".map-div0").css("margin-bottom","2rem");
 	$(".map-div1").css("margin-bottom","2rem");
 	$(".map-div2").css("margin-bottom","1.5rem"); 
-	$(".map-div3").css("margin-bottom","2rem");
+	$(".map-div3").css("margin-bottom","2rem"); */
 }
 
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
@@ -91,13 +91,16 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 }
 
 // 모달
-function goRequestDetail(title, period_text, contents, totalCnt, itemList) {
+function goRequestDetail(title, type, date, address, period_text, contents, totalCnt, itemList) {
   document.getElementById("modal-bg").style.display="block";
   document.getElementById("view-detail").style.display="block";
   document.getElementById("page-top").style.overflow="hidden";
   document.getElementById("menu-back").style.filter = "blur(5px)";
   document.getElementById("Wrapper").style.filter = "blur(5px)";
   document.getElementById("modal-title").innerHTML = title;
+  document.getElementById("modal-type").innerHTML = type;
+  document.getElementById("modal-date").innerHTML = date;
+  document.getElementById("modal-address").innerHTML = address;
   document.getElementById("modal-contents").innerHTML = contents;
   document.getElementById("modal-period").innerHTML = period_text;
   document.getElementById("modal-reset").innerHTML = "";
@@ -217,9 +220,13 @@ function save() {
 // 최종 제출 (db에 올리기)
 function upload(step) {
   var title = document.getElementById('requestTitle').value;
+  var date_str = new Date();
+  var date = date_str.getFullYear() +'.' + (date_str.getMonth()+1) + '.' + date_str.getDate();
+  var type = document.getElementById('requestType').value; 
   var period = document.getElementById('requestPeriod').value;
   var period_text = period;
-  var contents = document.getElementById('requestContents').value;
+  var address = document.getElementById('roadAddrPart1').value;
+  var contents = document.getElementById('requestContents').value;	
 
   if(title =='') {
     alert("제목을 입력해주세요!");
@@ -248,7 +255,7 @@ function upload(step) {
     }
 	// Modal 창 켜짐 
 	if(step == 1) {
-    	goRequestDetail(title, period_text, contents, totalCnt, itemList);
+    	goRequestDetail(title, type, date, address, period_text, contents, totalCnt, itemList);
 	}
 	// 바로 upload
 	else if(step == 2) {
@@ -395,7 +402,7 @@ function saveReply(items) {
 			dataType: "json"
 		}).done(function(resp){ 
 			if(resp.status == 500) {
-				alert("notifySocialWorkerByEmail 실패하였습니다. ");
+				alert("이메일 전송에 실패하였습니다. ");
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -525,7 +532,7 @@ let requestInit = {
 				showFlag : 1
 			};
 			
-			console.log(data);
+			//console.log(data);
 			$.ajax({
 				type: "POST",
 				url: "/requestSaveProc",
@@ -533,8 +540,8 @@ let requestInit = {
 				contentType: "application/json; charset = utf-8 ",
 				dataType: "json"
 			}).done(function(resp){
-				console.log(data);
-				console.log(resp);
+				//console.log(data);
+				//console.log(resp);
 				if(resp.status == 500) {
 					alert("업로드 실패하였습니다. ");
 				}else {

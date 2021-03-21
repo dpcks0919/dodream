@@ -43,17 +43,134 @@ function openModal_manager(id, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			data: id,
 			url : "/user/managerUserDetail",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				//openModal_manager();
+				let user = id;
+				document.getElementById("Wrapper").style.filter = "blur(5px)";
 				$("#view-detail").css("display", "block");
 				$("#modal-bg").css("display", "block");
-				$("#detail-content").html(resp);		
-				$("#uid").html("<h1>" + id + "</h1>");	
+				$("#detail-content").html(resp);
+		
+				$("#title_id").html("<h4>" + String(user.id) + "</h4>");
+				$("#input_id").val(user.id);
+				if(user.ustate_flag == "APPROVED") {
+					$("#input_ustate_flag_y").prop("checked", true);
+				} else {
+					$("#input_ustate_flag_n").prop("checked", true);
+				}
+				if(user.utype == "INDIVIDUAL") {
+					$("#input_utype").val("INDIVIDUAL").prop("selected", true);
+				} else if(user.utype == "GROUP") {
+					$("#input_utype").val("GROUP").prop("selected", true);
+				} else if(user.utype == "SOCIAL_WORKER") {
+					$("#input_utype").val("SOCIAL_WORKER").prop("selected", true);
+				} else if(user.utype == "INSTITUTION") {
+					$("#input_utype").val("INSTITUTION").prop("selected", true);
+				} else if(user.utype == "ADMIN") {
+					$("#input_utype").val("ADMIN").prop("selected", true);
+				}
+				$("#input_uid").val(user.uid);
+				if(user.is_social == 1) {
+					$("#input_uid_container").css("display", "none");
+				}
+				$("#input_uname").val(user.uname);
+				$("#input_uphone").val(user.uphone);
+				if(user.umsg_flag == 1) {
+					$("#input_umsg_flag_y").prop("checked", true);
+				} else {
+					$("#input_umsg_flag_n").prop("checked", true);
+				}
+				$("#input_uemail").val(user.uemail);
+				if(user.uemail_flag == 1) {
+					$("#input_uemail_flag_y").prop("checked", true);
+				} else {
+					$("#input_uemail_flag_n").prop("checked", true);
+				}
+				$("#input_uaddr").val(user.uaddr);
+				if(user.ushow_flag == 1) {
+					$("#input_ushow_flag_y").prop("checked", true);
+				} else {
+					$("#input_ushow_flag_n").prop("checked", true);
+				}
+				if(user.utype != "GROUP") {
+					$("#input_ushow_flag_container").css("display", "none");
+				}
+				$("#noradius").css("display", "none");
+				if(user.uradius == 3) {
+					$("#input_uradius").val("3").prop("selected", true);
+				} else if(user.uradius == 5) {
+					$("#input_uradius").val("5").prop("selected", true);
+				} else if(user.uradius == 7) {
+					$("#input_uradius").val("7").prop("selected", true);
+				} else if(user.uradius == 10) {
+					$("#input_uradius").val("10").prop("selected", true);
+				} else if(user.uradius == 15) {
+					$("#input_uradius").val("15").prop("selected", true);
+				} else {
+					$("#input_uradius").val("0").prop("selected", true);
+				}
+				if(user.utype != "INDIVIDUAL" && user.utype != "GROUP") {
+					$("#input_uradius_container").css("display", "none");
+				}
+				
+				if(user.utype == "INDIVIDUAL" || user.utype == "SOCIAL_WORKER") {
+					let today = new Date()
+	              	let fullYear = today.getFullYear();
+	              	let limit = fullYear - 90;
+					let dob = (user.udob).substring(0, 10);
+					let year = dob.substring(0, 4);
+					let month = dob.substring(5, 7);
+					if(month.substring(0, 1) == '0') {
+						month = month.substring(1);
+					}
+					let date = dob.substring(8, 10);           
+	              	for(var i = year; i >= limit; i--) {
+	                	$("#selectyear").append("<option value='" + i + "'>" + i + "</option>");
+	              	}
+	             	for(var i = 1; i <= 12; i++) {
+	                	$("#selectmonth").append("<option value='" + i + "'>" + i + "</option>");
+	              	}
+	              	for(var i = 1; i <= 31; i++) {
+	                	$("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+	              	}
+					$('#selectyear').val(year).attr('selected', 'selected');
+					$('#selectmonth').val(month).attr('selected', 'selected');
+					$('#selectdate').val(date).attr('selected', 'selected');			
+					$('#dob_year').val($('#selectyear').val());
+					$('#dob_month').val($('#selectmonth').val());
+					$('#dob_date').val($('#selectdate').val());
+				} else {
+					$("#input_udob_container").css("display", "none");
+				}
+				
+				if(user.utype != "INDIVIDUAL" && user.utype != "SOCIAL_WORKER") {
+					$("#input_usex_container").css("display", "none");
+				} else {
+					if(user.usex == 1) {
+						$("#input_usex").val("1").prop("selected", true);
+					} else if(user.usex == 2) {
+						$("#input_usex").val("2").prop("selected", true);
+					}
+				}
+				$("#input_uorg").val(user.uorg);
+				$("#input_uorg_role").val(user.uorg_role);
+				if(user.utype == "INDIVIDUAL") {
+					$("#role_type").text("직위 / 역할: ");
+				} else if(user.utype == "SOCIAL_WORKER") {
+					$("#role_type").text("복지사 자격증 번호: ");
+				} else {
+					$("#input_uorg_role_container").css("display", "none");
+				}
+				$("#input_uorg_phone").val(user.uorg_phone);
+				if(user.utype != "SOCIAL_WORKER" && user.utype != "INSTITUTION") {
+					$("#input_uorg_phone_container").css("display", "none");
+				}
+				if(user.utype != "INDIVIDUAL" && user.utype != "SOCIAL_WORKER") {
+					$("#input_uorg_phone").val($("#input_uphone").val());
+				}
 			}
 		}).fail(function(error) {
 			console.log(JSON.stringify(error));
@@ -69,7 +186,6 @@ function openModal_manager(id, num) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				//openModal_manager();
 				$("#view-detail").css("display", "block");
 				$("#modal-bg").css("display", "block");
 				$(".modal-content").html(resp);		
@@ -89,8 +205,10 @@ function openModal_manager(id, num) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				openModal_manager();
-				$(".modal-content").html(resp);			
+				$("#view-detail").css("display", "block");
+				$("#modal-bg").css("display", "block");
+				$(".modal-content").html(resp);
+				manager_viewReply(id); 			
 			}
 		}).fail(function(error) {
 			console.log(JSON.stringify(error));
@@ -299,7 +417,277 @@ function manager_viewRequest(rid) {
 		});
 }
 
+//myrespose 나의 응답용 JS
+function manager_viewReply(rid) {
+		$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/ManagerViewReply?id=" + rid
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러 발생!");
+		} else {
+			var rp = resp.reply;
+			console.log(rp);
+			$("#rp_item0").empty();
+			$(".other-rpitem").remove();
 
+		    var address = rp.rqAddress;
+		    $("#rq_title").html("등록번호 #"+rp.request.id+" : "+rp.request.title);
+		    $("#rp_id").html(rp.id);
+		    let regDate = rp.regDate.substring(0,10);
+		    $("#rp_date").html(regDate);
+
+			$("#rp_org").val(rp.replyOrg);
+			$("#rp_name").val(rp.replyUser);
+			$("#rp_status").val(rp.status).prop("selected", true);
+			
+			if(rp.replyPhone == ""){
+				$("#rp_phone").val("");		
+			} else {
+				$("#rp_phone").val(rp.replyPhone);
+			}
+		
+			$("#rp_content").val(rp.replyContent);
+		
+			//요청자 회신란 넣기
+			if(rp.comment != ""){// comment가 달려있으면 보여주기(아니면 안보여줌)
+				$("#response-content").html(rp.comment);
+			} else {// comment가 달려있으면 보여주기(아니면 안보여줌)
+				$("#response-content").html("");
+			}
+			$.ajax({
+				type : "GET",
+				traditional : true,
+				url : "/user/replyItemObj_reply?replyId="+rid,
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					var items = new Array();
+					for(var i=0; i<resp.length; i++) {
+						var item2 = resp[i].split("^!@#^");
+						items.push({
+							requestType : item2[0],
+							itemName : item2[1],
+							replyNum : item2[2],
+							receivedNum : item2[3],
+							itemNum : item2[4],
+							replyItemId : item2[5] 
+						});
+					}
+				
+				    items.sort(function(a, b) {
+				      return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
+				    });
+					
+					  for(var i = 0; i < items.length; i++) {
+						  // 수정하려는 응답 아이템 개수
+						  var curID = 'tr' + items[i].replyItemId;
+						  var rcNum = items[i].receivedNum - items[i].replyNum;
+						  var rItemId = curID + "count";
+						  // 응답 아이템 개수의 변동에 따른 쌓이는 수
+						  var rcItemId = curID + "rccount";
+						  var tItemId = curID + "tcount";
+					      let needs = items[i].itemNum - items[i].receivedNum;
+					      if(i == 0) {
+					           if(items[i].requestType == "재정") {
+					             $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney_reply(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span>원</td>");
+					          } else {
+					            $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span></td>");
+					          }
+					      }
+					      else {
+					        let pid = "#rp_item" + (i-1);
+					        if(items[i].requestType === items[i-1].requestType) {
+					          if(items[i].requestType == "재정") { 
+					              $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney_reply(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');
+					          } else {
+								  $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span></td></tr>');				
+					          }
+					        } else {
+					          if(items[i].requestType == "재정") {
+								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney_reply(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');				
+					          } else {
+								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span></td></tr>');				
+					          }
+					        }
+					      }
+				    }
+					$("#rp-save").attr("onclick", ("manager_editReply('"+ rp.id +"')"));
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+			
+			
+		}
+	});
+}
+
+function manager_editReply(rid) {	
+	console.log("rid : "+rid);
+	// 관리자의 reply 수정
+	$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/replyItemObj_reply?replyId="+rid,
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러발생");
+		} else {
+			var items = new Array();
+			for(var i=0; i<resp.length; i++) {
+				var item2 = resp[i].split("^!@#^");
+				items.push({
+					requestType : item2[0],
+					itemName : item2[1],
+					replyNum : item2[2],
+					receivedNum : item2[3],
+					itemNum : item2[4],
+					replyItemId : item2[5] 
+				});
+			}
+		
+		    items.sort(function(a, b) {
+		      return a.requestType < b.requestType ? -1 : a.requestType > b.requestType ? 1 : 0;
+		    });
+			
+			  for(var i = 0; i < items.length; i++) {
+				  // 수정하려는 응답 아이템 개수
+				  var replyItemID = items[i].replyItemId;
+				  var curID = 'tr' + items[i].replyItemId;
+				  var rItemId = curID + "count";
+				  // 응답 아이템 개수의 변동에 따른 쌓이는 수
+				  var rcItemId = curID + "rccount";
+				  var tItemId = curID + "tcount";
+				  
+				  var receivedNum = document.getElementById(rcItemId).innerText * 1;
+				  var replyNum = document.getElementById(rItemId).value * 1;
+				  var totalNum = document.getElementById(tItemId).innerText * 1;
+
+				  $.ajax({
+						type : "GET",
+						traditional : true,
+						url : "/user/replyItemEdit?replyItemId="+replyItemID+"&replyNum="+replyNum+"&receivedNum="+receivedNum,
+					}).done(function(resp) {
+						if (resp.status == 500) {
+							alert("에러발생");
+						} else {
+							//alert("replyItem 업데이트 완료!");
+						}
+					}).fail(function(error) {
+						console.log(JSON.stringify(error));
+					});
+		    }
+			  
+			// reply Update 
+			let data = {
+				id : rid,
+				replyOrg : $("#rp_org").val(),
+				replyUser : $("#rp_name").val(),
+				replyPhone : $("#rp_phone").val(),
+				replyContent : $("#rp_content").val()
+			};
+			console.log(data);
+			
+			$.ajax({
+				type : "POST",
+				url : "/replyUpdateProc",
+				data: JSON.stringify(data),
+				contentType: "application/json; charset = utf-8 ",
+				dataType: "json"
+			}).done(function(resp) {
+				if (resp.status == 500) {
+					alert("에러발생");
+				} else {
+					//alert("응답 내역이 수정되었습니다.");
+					$.ajax({
+						type : "GET",
+						traditional : true,
+						url : "/user/replyUpload?id="+rid+"&status="+$("#rp_status").val()+"&message="+ $("#response-content").val(),
+					}).done(function(resp) {
+						if (resp.status == 500) {
+							alert("에러발생");
+						} else {
+							//alert("등록되었습니다!");
+							menuToggle(3);
+							closeModal_manager();
+						}
+					}).fail(function(error) {
+						console.log(JSON.stringify(error));
+					});
+				}
+			}).fail(function(error) {
+				console.log(JSON.stringify(error));
+			});
+		}
+	}).fail(function(error) {
+		console.log(JSON.stringify(error));
+	});
+	
+			
+}
+// 관리자 페이지 for reply
+function minusCount(_current, flag, receivedNum) {
+	var str = "";
+	if(flag == 0 || flag == 2) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var target = _current.id + str;
+  var cnt = document.getElementById(target).value;
+  if(cnt>receivedNum) {
+    document.getElementById(target).value=cnt*1 - 1;
+	if(flag == 2) {
+		var rcItemId = _current.id + "rccount";
+		var rNum = document.getElementById(rcItemId).innerText * 1;
+		document.getElementById(rcItemId).innerText = rNum - 1; 	
+	}
+  }
+  else {
+	if(flag == 0) {
+		if(receivedNum == 0) {
+			alert("0이상의 수를 입력하세요.");
+		} else {
+			alert("응답된 항목이 존재합니다. "+ receivedNum + " 이상의 수를 입력하세요.");			
+		}
+	} else if(flag == 2) {
+		alert("0이상의 수를 입력하세요.");		
+	} 
+  }
+}
+// 관리자 페이지 for reply
+function plusCount(_current, flag) {
+	var str = "";
+	if(flag == 0 || flag == 2) {
+		str = "count";
+	} else if(flag == 1) {
+		str = "newCount";
+	}
+  var target = _current.id + str;
+  var cnt = document.getElementById(target).value;
+  // document.getElementById(target).setAttribute('value', cnt+1);
+  if(flag == 2) {
+	var rcItemId = _current.id + "rccount";
+	var tItemId = _current.id +"tcount";
+	var rNum = document.getElementById(rcItemId).innerText * 1;	
+	var tNum = document.getElementById(tItemId).innerText * 1;
+	
+	if(rNum != tNum) {
+	    document.getElementById(target).value=cnt*1 + 1;
+		document.getElementById(rcItemId).innerText = rNum+1; 		
+	} else {
+		alert("더이상 추가할 수 없습니다.");
+	}
+  } else {
+	  document.getElementById(target).value=cnt*1 + 1;
+  }
+}
+
+
+// 관리자 페이지 요청 관리에서 사용
 function rowAdd() {
   var trCnt = $('#myTable tbody[id="newItem"] tr').length;
   var curCnt = trCnt+1;
@@ -331,6 +719,52 @@ function rowDelete(current) {
   $('#'+target).remove();
 }
 
+// 관리자 페이지 for reply
+function checkMoney_reply(me, rcNum) {
+	// rcNum은 내가 응답한 아이템 개수를 제외한 다른 사람들이 이미 등록한 개수
+	console.log(rcNum);
+	var curValue = document.getElementById(me.id).value;
+
+	var rItemId = me.id;
+	var _temp = rItemId;
+	var tItemId = _temp.replace("count", "") + "tcount";
+	var _temp = rItemId;
+	var rcItemId = _temp.replace("count", "") +"rccount";
+	
+	var rNum = document.getElementById(rcItemId).innerText * 1;	
+	var tNum = document.getElementById(tItemId).innerText * 1;
+	
+	$("#"+rItemId).on("propertychange change keyup paste input", function() {
+		if(curValue == "") {
+			curValue = 0;
+		} else {
+			curValue = document.getElementById(rItemId).value;			
+		}
+		// 빈칸 아닐 때, 첫자리 0 방지
+		if(curValue[0] == 0 && curValue != 0) {
+			var curValue = curValue.replace(/(^0+)/, "");
+			// 맨 앞 0뺀 수
+			document.getElementById(rItemId).value = curValue; 
+		} else if(curValue == 0) {
+			// 0으로 갑 바꾸기.
+			document.getElementById(rItemId).value = 0;
+			document.getElementById(rcItemId).innerText = rcNum;
+			return 0;
+		}
+		// 여기서 현재 값이 배정된 상태. 이제 rcItem, tItem 변경해야함. 
+		// rcNum + 현재 값이 총값보다 크면 rcNum은 꽉 채워야함.
+		if (rcNum*1 + curValue*1 > tNum*1) {
+			alert('값이 초과되었습니다.');
+			document.getElementById(rItemId).value = tNum*1 - rcNum*1; 
+			document.getElementById(rcItemId).innerText = tNum;
+		}
+		 else {
+			document.getElementById(rcItemId).innerText = rcNum*1 + document.getElementById(rItemId).value *1;		
+		}
+	});
+}
+
+// 관리자 페이지 for request
 function checkMoney(me) {
 	var delID = me.id;
 	var curValue = document.getElementById(delID).value;
@@ -483,4 +917,89 @@ function manager_editRequest(rid) {
 			}
 		});
 
+}
+
+
+function update(){
+	var idNum = $("#input_id").val();
+	var isApproved;
+	if($("#input_ustate_flag_y").is(":checked")) {
+		isApproved = "APPROVED";
+	} else {
+		isApproved = "WAITING";
+	}
+	var utype = $("#input_utype option:selected").val();
+	var uid = $("#input_uid").val();
+	var uname = $("#input_uname").val();
+	var uphone = $("#input_uphone").val();
+	var msgflag;
+	if($("#input_umsg_flag_y").is(":checked")) {
+		msgflag = 1;
+	} else {
+		msgflag = 0;
+	}
+	var uemail = $("#input_uemail").val();
+	var emailflag;
+	if($("#input_uemail_flag_y").is(":checked")) {
+		emailflag = 1;
+	} else {
+		emailflag = 0;
+	}
+	var uaddr = $("#input_uaddr").val();
+	var showflag;
+	if($("#input_ushow_flag_y").is(":checked")) {
+		showflag = 1;
+	} else {
+		showflag = 0;
+	}
+	var uradius = Number($("#input_uradius option:selected").val());
+	var birthyear = $("#dob_year").val();
+	var birthmonth =  $("#dob_month").val();
+ 	var birthdate =  $("#dob_date").val();	
+	var udob;
+	if(utype != "INDIVIDUAL" && utype != "SOCIAL_WORKER") {
+		udob = null;
+	} else {
+		udob = new Date(birthyear+ "/" + birthmonth + "/" + birthdate);
+	}				
+	var usex = Number($("#input_usex option:selected").val());
+	var uorg = $("#input_uorg").val();
+	var uorgrole = $("#input_uorg_role").val();
+	var uorgphone = $("#input_uorg_phone").val();
+	
+	let data = {
+		id: idNum,
+		stateFlag: isApproved,
+		userType: utype,
+		loginId: uid,
+		userName: uname,
+		userPhone: uphone,
+		msgFlag: msgflag,
+		userEmail: uemail,
+		emailFlag: emailflag,
+		address: uaddr,
+		showFlag: showflag,
+		notificationRadius: uradius,
+		userDob: udob,
+		userSex: usex,
+		orgName: uorg,
+		orgUserRole: uorgrole,
+		orgPhone: uorgphone,
+	};	
+	$.ajax({
+		type: "PUT",
+		url: "/updateUserProc",
+		data: JSON.stringify(data), //json으로 변경, 
+		contentType: "application/json; charset = utf-8 ",  // body 데이터가 어떤 타입인지
+		//dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열, (생긴게 json이라면 => javascript로 변경해줌)
+	}).done(function(resp){ // 응답의 결과를 받아주는 parameter
+		if(resp.status == 500){
+			alert("수정에 실패하였습니다.");
+		}else{
+			alert("수정이 완료되었습니다.");
+			location.href = "manager";
+		}
+	}).fail(function(error){
+		console.log(JSON.stringify(error));
+	});
 }

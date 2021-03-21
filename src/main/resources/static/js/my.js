@@ -12,7 +12,6 @@ function goPopup(){
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 
 	$("#roadAddrPart1").val(roadAddrPart1);
-	console.log("JusoCallBack");
 	
 	var geocoder = new daum.maps.services.Geocoder();
 	var x, y = "";
@@ -26,7 +25,7 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 			Lng = result[0].x;
 			Lat = result[0].y;
-			console.log("현재 위경도 : " + Lng +", " + Lat);
+			//console.log("현재 위경도 : " + Lng +", " + Lat);
 			$("#roadLongitude").val(Lng);
 			$("#roadLatitude").val(Lat);
 		}
@@ -53,7 +52,7 @@ function rowAdd() {
   innerHtml += "</select></th>";                  
   innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
   innerHtml += "<th><div id='"+curDiv+"'>";
-  innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 1);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+  innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 1, 0);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
   innerHtml += "<i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 1);'></i>";
   innerHtml += "</div></th>";
   innerHtml += "<th><div class='del-btn' id="+curID+" onclick='rowDelete(this, 1);'>X</div></th>";
@@ -66,7 +65,7 @@ function rowDelete(current) {
   $('#'+target).remove();
 }
 
-function minusCount(_current, flag) {
+function minusCount(_current, flag, receivedNum) {
 	var str = "";
 	if(flag == 0 || flag == 2) {
 		str = "count";
@@ -75,7 +74,7 @@ function minusCount(_current, flag) {
 	}
   var target = _current.id + str;
   var cnt = document.getElementById(target).value;
-  if(cnt>0) {
+  if(cnt>receivedNum) {
     document.getElementById(target).value=cnt*1 - 1;
 	if(flag == 2) {
 		var rcItemId = _current.id + "rccount";
@@ -84,7 +83,15 @@ function minusCount(_current, flag) {
 	}
   }
   else {
-    alert("0이상의 수를 입력하세요.");
+	if(flag == 0) {
+		if(receivedNum == 0) {
+			alert("0이상의 수를 입력하세요.");
+		} else {
+			alert("응답된 항목이 존재합니다. "+ receivedNum + " 이상의 수를 입력하세요.");			
+		}
+	} else if(flag == 2) {
+		alert("0이상의 수를 입력하세요.");		
+	} 
   }
 }
  
@@ -125,7 +132,7 @@ function numberWithCommas(curObj) {
 
 function checkMoney(me, rcNum) {
 	// rcNum은 내가 응답한 아이템 개수를 제외한 다른 사람들이 이미 등록한 개수
-	console.log(rcNum);
+	//console.log(rcNum);
 	var curValue = document.getElementById(me.id).value;
 
 	var rItemId = me.id;
@@ -170,7 +177,7 @@ function checkMoney(me, rcNum) {
 
 // 도움 종류에 따라 수량 표기 변화시키는 함수
 var alert_select_value = function (select_obj, curCnt, flag) {
-	alert(flag);
+
 	var str = "";
 	if(flag == 0) {
 		str = "count";
@@ -366,7 +373,7 @@ let myInit = {
 			if(resp.status == 500){
 				alert("비밀번호 변경에 실패하였습니다.");
 			}else{
-				alert("비밀번호 변경이 완료되었습니다.");
+				alert("비밀번호가 변경되었습니다.");
 				location.href = "/user/mypage";
 			}
 		});
