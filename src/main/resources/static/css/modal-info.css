@@ -76,6 +76,22 @@
   cursor: pointer;
 }
 
+.btn-cng {
+  width: 3rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 2px solid #e95378;
+  border-radius: 4px;
+  color: #e95378;
+  cursor: pointer;
+  display:none;
+  height:1.75rem;
+  line-height:1.5rem;
+  text-align:center;
+}
+
 .btn-com {
   float:right;
 }
@@ -162,9 +178,50 @@
   width:100%;
 }
 
-/* nav, header, section {
-  filter: blur(5px);
-} */
+/* user-info-modal */
+.input-container {
+	height: 3rem;
+}
+.userModal {
+	width:100%;
+	border-bottom:2px solid black;
+}
+.userInfoTitle {
+	display: inline-block;
+	text-align: right;
+	width:35%;
+	font-weight:bold;
+	padding-right:0.2rem;
+}
+.userInfoContent {
+	display: inline-block;
+	width:60%;
+}
+.userInfoInput {
+	width:55%;
+	height: 1.75rem;
+}
+.userPwChange {
+	color: lightgray;
+	height:1.75rem;
+	line-height:1.5rem;
+}
+.userPwInput {
+	border: 1px solid lightgray;
+	border-radius: 2px;
+	height:1.75rem;
+}
+.select-date {
+	width:17.6%;
+	height: 1.75rem;
+}
+.user_flex_left, .user_flex_right {
+	width:50%;
+}
+.user_flex_left {
+	text-align:left;
+}
+	
 @media (max-width: 992px) {
   .modal-container {
     width:80%;
