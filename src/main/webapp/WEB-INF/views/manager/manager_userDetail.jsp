@@ -4,31 +4,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script src="/js/manager.js"></script>
 <link href="/css/modal-info.css" rel="stylesheet" />
-<style>
-	.input-container {
-		height: 3rem;
-	}
-	.userInfoTitle {
-		display: inline-block;
-		text-align: right;
-		width:35%;
-		font-weight:bold;
-		padding-right:0.2rem;
-	}
-	.userInfoContent {
-		display: inline-block;
-		width:60%;
-	}
-	.userInfoInput {
-		width:55%;
-	}
-</style>
-<div style="width:100%;border-bottom:2px solid black;">
+<div class="content-title userModal">
 	<div id="title_id"></div>
 	<input type="hidden" id="input_id">
+	<div class="input-container content-title" id="input_upw_container">
+		<div style="height:1.75rem;"><input type="checkbox" name="pwCheck" id="isPwChange" style="margin-top:0.3rem;"></div>
+		<div class="userInfoTitle userPwChange" id="input_upw_title">비밀번호 변경: </div>
+		<div class="userInfoContent" style="padding-right:1rem;"><input type="password" class="userPwInput" id="input_upw" disabled></div>
+		<div class="btn-cng" id="pw_change_btn" onclick="pwChange();">변경</div>
+	</div>
 </div>
 <div style="display: flex; flex-direction: row; justify-content: space-around;padding-top:1.5rem;border-bottom:2px solid black;">
-<div class="user_flex_left" style="width:50%;text-align:left;">
+<div class="user_flex_left">
 	<div class="input-container" id="input_ustate_flag_container">
 		<div class="userInfoTitle">승인 여부: </div>
 		<div class="userInfoContent">
@@ -73,7 +60,7 @@
 		<input type="radio" name="eminfo" id="input_uemail_flag_n" value="0">&nbsp;아니오
 	</div>
 </div>
-<div class="user_flex_right" style="width:50%;">
+<div class="user_flex_right">
 	<div class="input-container" id="input_uaddr_container">
 		<span class="userInfoTitle">사용자 주소: </span>
 		<input class="userInfoInput" type="text" id="input_uaddr">
@@ -98,9 +85,9 @@
 	</div>
 	<div class="input-container" id="input_udob_container">
 		<span class="userInfoTitle">생년월일</span>
-		<select class="select-date" id="selectyear" style="width:17.6%;"></select> <input type="hidden" id="dob_year">
-		<select class="select-date" id="selectmonth" style="width:17.6%;"></select> <input type="hidden" id="dob_month">
-		<select class="select-date" id="selectdate" style="width:17.6%;"></select> <input type="hidden" id="dob_date">
+		<select class="select-date" id="selectyear"></select> <input type="hidden" id="dob_year">
+		<select class="select-date" id="selectmonth"></select> <input type="hidden" id="dob_month">
+		<select class="select-date" id="selectdate"></select> <input type="hidden" id="dob_date">
 	</div>
 	<div class="input-container" id="input_usex_container">
 		<span class="userInfoTitle">성별: </span>
