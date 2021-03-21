@@ -585,7 +585,7 @@ table td {
 			innerHtml += "</select></th>";                  
 			innerHtml += "<th style='width:27.5%'><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
 			innerHtml += "<th style='width:30%'><div id='"+curDiv+"'>";
-			innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 0);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+			innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 0, "+ items[3] +");'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
 			innerHtml += "<i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 0);'></i>";
 			innerHtml += "</div></th>";
 			innerHtml += "<th style='width:10%'><div class='del-btn' id="+curID+" >-</div></th>";

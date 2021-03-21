@@ -11,7 +11,7 @@
 <div class="content-info" id="request-info">
 	<table class="info-table" style="border-top: none; margin-top: 0;">
 		<tr>
-			<td style="width: 17.5%;"><b>등록번호</b></td>
+			<td style="width: 17.5%;"><b>요청번호</b></td>
 			<td style="width: 27.5%;"><input id="rq_id"  type="text" style="border-style:none;" disabled/></td>
 			<td style="width: 17.5%;"><b>등록날짜</b></td>
 			<td id="" style="width: 37.5%;"><input id="rq_date" type="text" style="border-style:none;" disabled/></td>
@@ -56,7 +56,7 @@
 		<tr>
 			<td style="width: 17.5%"><b>요청자</b></td>
 			<td style="width:27.5%">
-				<input type="text" name="userName" id="rq_userName" style="border-style:none" readonly />
+				<input type="text" name="userName" id="rq_userName" style="border-style:none" disabled />
 			</td>
 			<td style="width: 17.5%"><b></b></td>
 			<td style="width:27.5%">
@@ -90,6 +90,6 @@
 	</div>
 	<div style="width:100%; display:flex; justify-content:space-between;" class="">
 		<div class="btn-res btn-edit" id="rq_back" onclick="closeModal_manager();">뒤로가기</div>
-		<div class="btn-res btn-edit" id="rq_save" onclick="">저장하기</div>
+		<div class="btn-res" id="rq_save" onclick="">저장하기</div>
 	</div>
 </div>
