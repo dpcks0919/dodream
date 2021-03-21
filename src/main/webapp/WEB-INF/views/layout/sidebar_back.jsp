@@ -46,7 +46,7 @@
 					</c:when>
 				</c:choose>
 				<a href="/user/mydodream" class="menu-item">나의 두드림</a> 
-				<a href="/user/myresponse" class="menu-item">내 응답 내역</a>
+				<a href="/user/myreply" class="menu-item">내 응답 내역</a>
 			</div>
 
 		</c:otherwise>

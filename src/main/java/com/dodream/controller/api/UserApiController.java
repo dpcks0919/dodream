@@ -3,6 +3,7 @@ package com.dodream.controller.api;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.RoleType;
+import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.service.UserService;
 
@@ -115,6 +117,11 @@ public class UserApiController {
 		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.idCheckService(userId));
 	}
 	
+	@PostMapping("/emailCheckProc")
+	public ResponseDto<Boolean> emailCheck(@RequestParam(value = "useremail") String useremail) {	// boolean 값 리턴(false: 이메일 중복)
+		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.emailCheckService(useremail));
+	}
+	
 	@PostMapping("/passwordCheckProc")
 	public ResponseDto<Boolean> passwordCheck(@RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails) {	// boolean 값 리턴(false: 아이디 중복)
 	
@@ -125,7 +132,7 @@ public class UserApiController {
 	}
 	
 	@PutMapping("/updateProc")
-	public ResponseDto<Integer> updateUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
+	public ResponseDto<Integer> update(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
 		
 		int isSocial = principalDetails.getUser().getIsSocial();
 		Authentication authentication;
@@ -141,6 +148,20 @@ public class UserApiController {
 		}
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@PutMapping("/updateUserProc")
+	public ResponseDto<Integer> updateUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
+		//String loginId = httpServletRequest.getParameter("uid");
+		//User user = userService.getUser(loginId);
+		StatusType getStatus = user.getStateFlag();
+		String status = getStatus.toString();
+		RoleType getRole = user.getUserType();
+		String role = getRole.toString();
+		
+		userService.managerUpdate(user, status, role);
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}

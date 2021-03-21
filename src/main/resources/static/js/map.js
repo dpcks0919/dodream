@@ -270,7 +270,7 @@ let mapInit = {
 		  var c_time = cur.getTime();
 	      var status = "";
 		  if(c_time <= d_time) status = "응답 대기중";
-	      else status = "응답 완료";
+	      else status = "마감";
 		 $("#marker-info-status").text(status);
 	
 		 // 긴급정도 나타내기
@@ -291,7 +291,7 @@ let mapInit = {
 			url: "/requestListProc",
 		}).done(function(resp) {
 			if (resp.status == 500) {
-				alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+				alert("requestListProc에서 에러 발생");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
 			} else {
 				defaultRequestList = resp.data;	// defaultRequestList 는 전역변수화 해서 어디서든 접근 가능하도록 한다
 				currRequestList = defaultRequestList;
@@ -300,7 +300,7 @@ let mapInit = {
 				if(selectedCnt == 0) mapInit.setMarker(defaultRequestList);
 			}
 		}).fail(function(error) {
-			alert("requestListProc error: " + JSON.stringify(error));
+			console.log("requestListProc error: " + JSON.stringify(error));
 		});
 		
 		if(selectedCnt == 0){// 카운트가 0일때(버튼이 하나도 안눌렸을 때)만 그룹마커 찍기
@@ -310,7 +310,7 @@ let mapInit = {
 				url: "/groupListProc",
 			}).done(function(resp) {
 				if (resp.status == 500) {
-					alert("주소가 DB에 없습니다.");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
+					alert("groupListProc에서 에러 발생");	//1. 등록된 아이디가 아예 없거나 / 2. 아이디와 비번 매치가 안되거나
 				} else {
 					groupList = resp.data;
 					
@@ -342,7 +342,7 @@ let mapInit = {
 					});
 				}
 			}).fail(function(error) {
-				alert("groupListProc error: " + JSON.stringify(error));
+				console.log("groupListProc error: " + JSON.stringify(error));
 			});
 		}
 	},

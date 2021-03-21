@@ -2,6 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>​
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
+%>
+<c:set var = "today" value= "<%=sf.format(nowTime)%>"></c:set>
 <table style="table-layout: fixed">
 	<thead>
 		<tr style="border-bottom: 3px solid #d3d3d3;">
@@ -13,7 +20,8 @@
 	<tbody>
 		<c:set var="currentPage" value="${requests.pageable.pageNumber}"></c:set>
 		<c:forEach var="request" items="${requests.content}">
-			<fmt:formatDate value="${request.regDate}" pattern="yyyy. MM. dd." var="regdate" />
+			<fmt:formatDate value="${request.regDate}" pattern="yyyy.MM.dd" var="regdate" />
+			<fmt:formatDate value="${request.dueDate}" pattern="yyyyMMdd" var="duedate" />
 			<script>
 				var arr = new Array();
 				<c:forEach items="${request.requestItem}" var="item">
@@ -43,8 +51,10 @@
 			</script>
 			<tr>
 				<td class="table-num">${request.id}</td>
-				<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold">${request.title}</td>
-				<td class="table-date">${fn:substring(request.regDate, 0, 10)}</td>
+				<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold" 
+				style="<c:if test='${ today >= duedate }'>color: gray </c:if>">
+				${request.title} </td>
+				<td class="table-date">${regdate}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
