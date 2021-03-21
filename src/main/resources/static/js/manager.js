@@ -457,7 +457,7 @@ function manager_editReply(rid) {
 						if (resp.status == 500) {
 							alert("에러발생");
 						} else {
-							alert("replyItem 업데이트 완료!");
+							//alert("replyItem 업데이트 완료!");
 						}
 					}).fail(function(error) {
 						console.log(JSON.stringify(error));
@@ -484,7 +484,7 @@ function manager_editReply(rid) {
 				if (resp.status == 500) {
 					alert("에러발생");
 				} else {
-					alert("응답 내역이 수정되었습니다.");
+					//alert("응답 내역이 수정되었습니다.");
 					$.ajax({
 						type : "GET",
 						traditional : true,
@@ -493,7 +493,7 @@ function manager_editReply(rid) {
 						if (resp.status == 500) {
 							alert("에러발생");
 						} else {
-							alert("등록되었습니다!");
+							//alert("등록되었습니다!");
 							menuToggle(3);
 							closeModal_manager();
 						}
