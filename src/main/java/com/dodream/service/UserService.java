@@ -57,6 +57,12 @@ public class UserService {
 	private String sendPhone;
 	
 	@Transactional
+	public User getUser(String loginId) {
+		User u = userRepository.findByLoginId(loginId);
+		return u;
+	}
+	
+	@Transactional
 	public Page<User> readUserList(Pageable pageable) {
 		System.out.println("유저서비스");
 		return userRepository.findAll(pageable); 
@@ -214,6 +220,12 @@ public class UserService {
 	}
 	
 	@Transactional
+	public Boolean emailCheckService(String useremail) {	// 이메일 중복 테스트
+		if(userRepository.findByUserEmail(useremail) == null) return true;
+		else return false;	//있으면(중복) false
+	}
+	
+	@Transactional
 	public Boolean loginService(User loginInfo, PrincipalDetails principalDetails) {
 		
 		if((principalDetails != null && principalDetails.getUser().getLoginCount() == 0) || principalDetails == null) {	// 1. 소셜 계정 세션은 유지되는데, 회원가입은 하지 않고 일반계정 로그인으로 진행하는 경우 2. 세션이 없고 그냥 쌩으로 로그인 하는 경우 
@@ -248,6 +260,50 @@ public class UserService {
 			persistance.setAddress(user.getAddress());
 			persistance.setLatitude(user.getLatitude());
 			persistance.setLongitude(user.getLongitude());
+		}
+
+	}
+	
+	@Transactional
+	public void managerUpdate(User user, String status, String role) {
+				
+		User persistance = userRepository.findByLoginId(user.getLoginId());
+		
+		persistance.setUserName(user.getUserName());
+		persistance.setUserSex(user.getUserSex());
+		persistance.setUserDob(user.getUserDob());
+		persistance.setUserPhone(user.getUserPhone());
+		persistance.setUserEmail(user.getUserEmail());
+		persistance.setOrgName(user.getOrgName());
+		persistance.setOrgUserRole(user.getOrgUserRole());
+		persistance.setNotificationRadius(user.getNotificationRadius());
+		persistance.setMsgFlag(user.getMsgFlag());
+		persistance.setEmailFlag(user.getEmailFlag());
+		persistance.setOrgPhone(user.getOrgPhone());
+		persistance.setShowFlag(user.getShowFlag());
+		
+		if( ! user.getAddress().trim().equals(persistance.getAddress().trim())) {
+			persistance.setAddress(user.getAddress());
+			persistance.setLatitude(user.getLatitude());
+			persistance.setLongitude(user.getLongitude());
+		}
+		
+		if(status == "APPROVED") {
+			persistance.setStateFlag(StatusType.APPROVED);
+		} else if(status == "WAITING") {
+			persistance.setStateFlag(StatusType.WAITING);
+		}
+		
+		if(role == "INDIVIDUAL") {
+			persistance.setUserType(RoleType.INDIVIDUAL);
+		} else if(role == "GROUP") {
+			persistance.setUserType(RoleType.GROUP);
+		} else if(role == "SOCIAL_WORKER") {
+			persistance.setUserType(RoleType.SOCIAL_WORKER);
+		} else if(role == "INSTITUTION") {
+			persistance.setUserType(RoleType.INSTITUTION);
+		} else if(role == "ADMIN") {
+			persistance.setUserType(RoleType.ADMIN);
 		}
 
 	}

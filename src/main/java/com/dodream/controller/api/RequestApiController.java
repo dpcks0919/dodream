@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -79,6 +81,9 @@ public class RequestApiController {
 		
 		// request Title 추출
 		String requestTitle = stringRequest[0].substring(10, stringRequest[0].length()-1);
+		
+		// 중복 번호 제거(다른 계정 같은 전번일 시)
+		userPhoneList = new HashSet<String>(Arrays.asList(userPhoneList)).toArray(new String[0]);
 		
 		// PhoneList를 돌면서 phone number과 request Title 전송
 		for(int i = 0; i < userPhoneList.length; i ++) {

@@ -12,14 +12,16 @@
 			<div class="content-info">
 				<table class="info-table">
 					<tr>
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td style="width: 27.5%;">#10011</td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td style="width: 37.5%;">2020.10.21.</td>
+						<td style="width: 13.5%;"><b>등록날짜</b></td>
+						<td style="width: 36.5%;"  id="modal-date"></td>
+						<td style="width: 13.5%;"><b>요청대상</b></td>
+						<td style="width: 36.5%;"  id="modal-type"></td>
 					</tr>
 					<tr>
 						<td><b>기간</b></td>
 						<td id="modal-period"></td>
+						<td><b>주소</b></td>
+						<td id="modal-address"></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -95,7 +97,7 @@
 								<button style="background-color:white; border:1px solid black; outline:none;" onclick="goPopup();">검색</button>
 							</div>
 						</div>	
-						<div class="responsive-map-wrapper" style="width:50%; display:inline-block;">
+						<div class="responsive-map-wrapper" style="width:50%; display:inline-block; float: right;">
 							<div class="map_wrap" style="width:100%; height: 10rem; padding:0!important; margin:0!important; overflow:hidden;">
 								<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 								<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
@@ -106,7 +108,7 @@
 							</div>
 						</div>
 					</div>
-
+					<div style="margin-top: 30px; font-size:0.76rem; color:blue;">* 첨부 파일의 최대크기는 <span style="color:red;">10MB</span>입니다.</div>
 					<div class="summernoteDiv">
 						<textarea type="text" class="request-content summernote" id="requestContents" name="content" required></textarea>
 					</div>

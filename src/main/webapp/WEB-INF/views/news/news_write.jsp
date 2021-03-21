@@ -41,11 +41,9 @@
 							<option name="n2">두드림 소식</option>
 						</select>
 					</div>
-					<!-- 
-					 <div style="width:100%; margin-right:4rem;">소식 내용 : <input type="text" placeholder="내용을 입력하세요" id="news-content"/></div>					
-					 -->
 					<div class="news-tip">* 소식내용에는 그림 첨부를 이용하여 <span style="color:red;">반드시 하나 이상의 사진이 첨부</span>되어야 합니다.</div>
-					<div class="news-tip" style="margin-bottom:1rem;">순서상 첫번째 사진이 <span style="color:red;">대표사진</span>으로 등록되며, 아래 작성한 폼으로 게시글이 등록됩니다.</div>
+					<div class="news-tip">* 순서상 첫번째 사진이 <span style="color:red;">대표사진</span>으로 등록되며, 아래 작성한 폼으로 게시글이 등록됩니다.</div>
+					<div class="news-tip" style="margin-bottom:1rem;">* 첨부 파일의 최대크기는 <span style="color:red;">10MB</span>입니다.</div>
 					<div class="summernoteDiv">
 						<textarea type="text" class="request-content summernote" id="news-content" name="content" required></textarea>
 					</div>
