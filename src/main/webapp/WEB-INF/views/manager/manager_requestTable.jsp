@@ -86,9 +86,12 @@
 		</c:forEach>
 	</tbody>
 </table>
+<!-- 
 <c:if test="${requestCount == 0}">
 	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">요청글이 존재하지 않습니다.</div>
 </c:if>
+
+ -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">
@@ -104,7 +107,7 @@
 		<c:set var="isLast" value="5" />
 		<c:if test="${requests.totalPages == 0}">
 			<div style="margin-bottom: 2vh;">
-				<br>요청이 존재하지 않습니다.
+				<br>요청 목록이 존재하지 않습니다.
 			</div>
 			<c:set var="isLast" value="1" />
 		</c:if>

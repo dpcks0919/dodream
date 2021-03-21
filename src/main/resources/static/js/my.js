@@ -52,7 +52,7 @@ function rowAdd() {
   innerHtml += "</select></th>";                  
   innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
   innerHtml += "<th><div id='"+curDiv+"'>";
-  innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 1);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+  innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 1, 0);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
   innerHtml += "<i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 1);'></i>";
   innerHtml += "</div></th>";
   innerHtml += "<th><div class='del-btn' id="+curID+" onclick='rowDelete(this, 1);'>X</div></th>";
@@ -65,7 +65,7 @@ function rowDelete(current) {
   $('#'+target).remove();
 }
 
-function minusCount(_current, flag) {
+function minusCount(_current, flag, receivedNum) {
 	var str = "";
 	if(flag == 0 || flag == 2) {
 		str = "count";
@@ -74,7 +74,7 @@ function minusCount(_current, flag) {
 	}
   var target = _current.id + str;
   var cnt = document.getElementById(target).value;
-  if(cnt>0) {
+  if(cnt>receivedNum) {
     document.getElementById(target).value=cnt*1 - 1;
 	if(flag == 2) {
 		var rcItemId = _current.id + "rccount";
@@ -83,7 +83,15 @@ function minusCount(_current, flag) {
 	}
   }
   else {
-    alert("0이상의 수를 입력하세요.");
+	if(flag == 0) {
+		if(receivedNum == 0) {
+			alert("0이상의 수를 입력하세요.");
+		} else {
+			alert("응답된 항목이 존재합니다. "+ receivedNum + " 이상의 수를 입력하세요.");			
+		}
+	} else if(flag == 2) {
+		alert("0이상의 수를 입력하세요.");		
+	} 
   }
 }
  
