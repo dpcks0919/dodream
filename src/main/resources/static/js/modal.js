@@ -33,6 +33,7 @@ function openMenu() {
   }
 
   function goDetail_request(rq) {
+	$("#reply_content").val("");
     document.getElementById("modal-bg").style.display="block";
     document.getElementById("view-detail").style.display="block";
     document.getElementById("page-top").style.overflow="hidden";
@@ -249,7 +250,6 @@ function heartClick() {
 }
 
 function goDetail_myrequest(rq) {
-	alert(rq);
     $('.rq_item').remove();
 	$('#default_item').remove();
 	$("#rq_clientType").prop('disabled', true);
