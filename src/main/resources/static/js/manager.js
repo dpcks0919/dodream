@@ -1019,8 +1019,6 @@ function update(){
 		console.log(JSON.stringify(error));
 	});
 }
-<<<<<<< HEAD
-=======
 
 function pwChange(){
 		var userId = $("#input_uid").val();
@@ -1051,4 +1049,3 @@ function pwChange(){
 			});
 		}
 	}
->>>>>>> branch 'master' of https://github.com/dpcks0919/dodream.git
