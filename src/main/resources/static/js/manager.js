@@ -55,7 +55,6 @@ function openModal_manager(id, num) {
 				$("#detail-content").html(resp);
 		
 				$("#title_id").html("<h4>" + String(user.id) + "</h4>");
-
 				$("#isPwChange").change(function() {
 					if($("#isPwChange").is(":checked")) {
 						$("#input_upw_title").css("color", "black");
@@ -1036,7 +1035,7 @@ function pwChange(){
 				}, //json으로 변경, 
 			}).done(function(resp){ // 응답의 결과를 받아주는 parameter
 				if(resp.status == 500){
-					alert("비밀번호 변경에 실패하였습니다.");
+					alert("비밀번호 변경에 실패하였습니다."); 
 				}else{
 					alert("비밀번호가 변경되었습니다.");
 					$("#isPwChange").prop("checked", false);
