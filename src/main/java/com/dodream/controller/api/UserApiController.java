@@ -154,8 +154,6 @@ public class UserApiController {
 	
 	@PutMapping("/updateUserProc")
 	public ResponseDto<Integer> updateUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
-		//String loginId = httpServletRequest.getParameter("uid");
-		//User user = userService.getUser(loginId);
 		StatusType getStatus = user.getStateFlag();
 		String status = getStatus.toString();
 		RoleType getRole = user.getUserType();
@@ -178,6 +176,13 @@ public class UserApiController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
 		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@PutMapping("/updateUserPwProc")
+	public ResponseDto<Integer> managerUpdateUserpw(@RequestParam(value = "id") String id, @RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails){
+	
+		userService.updatepw(id, password);		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
