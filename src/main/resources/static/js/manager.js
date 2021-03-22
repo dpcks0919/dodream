@@ -55,6 +55,22 @@ function openModal_manager(id, num) {
 				$("#detail-content").html(resp);
 		
 				$("#title_id").html("<h4>" + String(user.id) + "</h4>");
+
+				$("#isPwChange").change(function() {
+					if($("#isPwChange").is(":checked")) {
+						$("#input_upw_title").css("color", "black");
+						$("#input_upw").css("border", "1px solid black");
+						$("#input_upw").prop("disabled", false);
+						$("#pw_change_btn").css("display", "block");
+					} else {
+						$("#input_upw_title").css("color", "lightgray");
+						$("#input_upw").css("border", "1px solid lightgray");
+						$("#input_upw").val(null);
+						$("#input_upw").prop("disabled", true);
+						$("#pw_change_btn").css("display", "none");
+					}
+				})
+				
 				$("#input_id").val(user.id);
 				if(user.ustate_flag == "APPROVED") {
 					$("#input_ustate_flag_y").prop("checked", true);
@@ -1003,3 +1019,36 @@ function update(){
 		console.log(JSON.stringify(error));
 	});
 }
+<<<<<<< HEAD
+=======
+
+function pwChange(){
+		var userId = $("#input_uid").val();
+		var password = $("#input_upw").val();
+		if(password == "") {
+			alert("비밀번호를 입력하세요.");
+		} else {
+			$.ajax({
+				//회원가입 수행 요청.
+				type: "PUT",
+				url: "/updateUserPwProc",
+				data: {
+					id: userId,
+					password: password,
+				}, //json으로 변경, 
+			}).done(function(resp){ // 응답의 결과를 받아주는 parameter
+				if(resp.status == 500){
+					alert("비밀번호 변경에 실패하였습니다.");
+				}else{
+					alert("비밀번호가 변경되었습니다.");
+					$("#isPwChange").prop("checked", false);
+					$("#input_upw_title").css("color", "lightgray");
+					$("#input_upw").css("border", "1px solid lightgray");
+					$("#input_upw").val(null);
+					$("#input_upw").prop("disabled", true);
+					$("#pw_change_btn").css("display", "none");
+				}
+			});
+		}
+	}
+>>>>>>> branch 'master' of https://github.com/dpcks0919/dodream.git
