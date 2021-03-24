@@ -39,7 +39,7 @@
 								</p>
 								<div class="reg-button" onclick="document.location.href='/joinForm/indi'">가입하기</div>
 							</div>
-							<div style="width: 3%;"></div>
+							<!-- <div style="width: 3%;"></div>
 							<div class="reg-card response-bgcolor">
 								<div class="card-title">
 									<h4>단체</h4>
@@ -48,10 +48,11 @@
 									이웃의 요청에<br>응답하고자 하는<br>단체인 경우<br>(동호회, 교회 등)
 								</p>
 								<div class="reg-button" onclick="document.location.href='/joinForm/group'">가입하기</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
-					<div style="width: 1.25%;"></div>
+					<!-- <div style="width: 1.25%;"></div> -->
+					<div style="width: 5%;"></div>
 					<div class="reg-request" style="height: 55vh;">
 						<div class="reg-title request-bgcolor">이웃의 도움을 요청하고 싶은 경우</div>
 						<div style="height: 2.5%;"></div>
@@ -65,7 +66,7 @@
 								</p>
 								<div class="reg-button" onclick="document.location.href='/joinForm/worker'">가입하기</div>
 							</div>
-							<div style="width: 3%;"></div>
+							<!-- <div style="width: 3%;"></div>
 							<div class="reg-card request-bgcolor">
 								<div class="card-title">
 									<h4>사회복지기관</h4>
@@ -74,7 +75,7 @@
 									사회복지사들의<br>소속 기관인 경우
 								</p>
 								<div class="reg-button" onclick="document.location.href='/joinForm/org'">가입하기</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

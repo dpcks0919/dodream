@@ -21,7 +21,7 @@
 			</span>
 
 			<div class="logout" style="padding-top: 4%; padding-left: 7%; padding-right: 7%; text-align: left;">
-				<a href="mypage/edit_info.html" class="menu-item-top"></a>
+				<a class="menu-item-top"></a>
 			</div>
 
 		</c:when>
