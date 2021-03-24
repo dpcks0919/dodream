@@ -169,42 +169,37 @@
 						href="/requestList">목록으로 보기</a>
 				</div>
 				<form class="search-div">
-					<select name="search-client" id="search-client"
-						class="search-box-mid">
-						<option value="all" selected="selected">도움받는 대상</option>
-						<option value="ELDERLY">노인</option>
-						<option value="CHILD">아이</option>
-						<option value="DISABLED">장애인</option>
-						<option value="OTHERS">기타</option>
-					</select>
-					<!-- <select name="search-type" id="search-type" class="search-box-small">
- 							<option value="all" selected="selected">재화 종류</option>
- 							<option value="STUFF">물품</option>
- 							<option value="FINANCE">금전</option>
- 							<option value="SERVICE">서비스</option>
- 							<option value="ETC">기타</option>
- 					</select> -->
-					<select name="search-period" id="search-period" class="search-box-mid">
-						<option value="0" selected="selected">기간</option>
-						<option value="3">보통(한 달 이내)</option>
-						<option value="2">긴급(7~14일 이내)</option>
-						<option value="1">매우 긴급(3일 이내)</option>
-					</select>
-					<div style="display: inline-block">
+					<div class="inline">
+						<select name="search-client" id="search-client" class="search-box-mid">
+							<option value="all" selected="selected">도움받는 대상</option>
+							<option value="ELDERLY">노인</option>
+							<option value="CHILD">아이</option>
+							<option value="DISABLED">장애인</option>
+							<option value="OTHERS">기타</option>
+						</select>
+						<select name="search-period" id="search-period" class="search-box-mid">
+							<option value="0" selected="selected">기간</option>
+							<option value="3">보통(한 달 이내)</option>
+							<option value="2">긴급(7~14일 이내)</option>
+							<option value="1">매우 긴급(3일 이내)</option>
+						</select>
+					</div>
+					<div class="inline">
 						<select name="search-item" id="search-item" class="search-box-small">
 							<option value="all" selected="selected">검색항목</option>
 							<option value="id">등록번호</option>
 							<option value="title">제목</option>
 							<option value="address">도로명주소</option>
-						</select> <span class="search-text"> 
-						<input type="text" id="search-text" class="search-box-mid" placeholder="검색어 입력"></input>
+						</select> 
+						<span class="search-text"> 
+						<input type="text" id="search-text" class="search-box-mid" onkeyup="enterkey();" placeholder="검색어 입력"></input>
 						</span>
-						<div id="btn-search" style="display: inline-block">
-							<img class="search-icon " src="/image/search-icon.png" />
-						</div>
+					</div>	
+					<div id="btn-search" class="inline">
+						<img class="search-icon " src="/image/search-icon.png" />
 					</div>
 				</form>
-				<div class="request-table"></div>
+				<div class="request-table" style="margin-top: -2rem;"></div>
 			</div>
 		</section>
 		<!-- Footer-->
@@ -217,6 +212,28 @@
 
 	<script>
 		var isMapPage = false;
+		
+		function enterkey() {
+	        if (window.event.keyCode == 13) {
+	        	var searchItem = $("#search-item option:selected").val();
+				var searchText = $("#search-text").val();
+
+				if (searchText != '' && searchItem == 'all') {
+					alert("검색항목을 선택해주세요!");
+					return;
+				}
+				if (searchText == '' && searchItem != 'all') {
+					alert("검색어를 입력해주세요!");
+					return;
+				}
+				if( searchItem == 'id' && isNaN(searchText)) {
+					alert("등록번호는 숫자만 검색가능합니다!");
+					return;
+				}
+				
+				searchList();
+	        }
+		}
 	
 		function initPage() {
 			$.ajax({
@@ -302,16 +319,17 @@
 					alert("검색어를 입력해주세요!");
 					return;
 				}
+				if( searchItem == 'id' && isNaN(searchText)) {
+					alert("등록번호는 숫자만 검색가능합니다!");
+					return;
+				}
+
 				searchList();
 			});
 
 		});
 	</script>
 
-
-	<script>
-		
-	</script>
 
 </body>
 </html>

@@ -152,7 +152,7 @@
 					<a class="request-menu-button" href="/requestList">목록으로 보기</a>
 				</div>
 				<div class="" style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" id="input-addr" placeholder="위치를 검색하세요.">
+					<input type="text" class="tbox-center tbox-big" id="input-addr" onkeyup="enterkey();" placeholder="위치를 검색하세요.">
 					<div id="btn-search">
 						<img class="search-icon " src="/image/search-icon.png" />
 					</div>
@@ -230,19 +230,26 @@
 	<script type="text/javascript" src="/js/map.js"></script>
 	<script src="/js/request.js"></script>
 	<script>
-	var isIndexPage = false;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
-	var isMapPage = true;
-	var lati, longi;
-	<c:choose>
-		<c:when test="${user.loginCount == 0 || empty user.loginCount}">
-			lati = 36.1023014256562;
-			longi = 129.389266058166;
-		</c:when>
-		<c:otherwise>
-			lati = ${user.latitude};
-		  	longi = ${user.longitude};
-		</c:otherwise>
-	</c:choose>
+		var isIndexPage = false;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
+		var isMapPage = true;
+		var lati, longi;
+		<c:choose>
+			<c:when test="${user.loginCount == 0 || empty user.loginCount}">
+				lati = 36.1023014256562;
+				longi = 129.389266058166;
+			</c:when>
+			<c:otherwise>
+				lati = ${user.latitude};
+			  	longi = ${user.longitude};
+			</c:otherwise>
+		</c:choose>
+		
+		function enterkey() {
+	        if (window.event.keyCode == 13) {
+	        	var addr = $("#input-addr").val()
+				mapInit.searchAndLocate(addr);
+	        }
+		}
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {

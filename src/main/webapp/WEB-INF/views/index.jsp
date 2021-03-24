@@ -41,7 +41,7 @@
 						<img src="image/Main2.png" class="d-block w-100 mainImage-web" alt="...">
 						<img src="image/Main2_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption2 d-md-block mainImage-web">
-							<a class="py-2 rounded js-scroll-trigger main3-register " href="/dodreamtouch">자세히 보기</a>
+							<a class="py-2 rounded js-scroldl-trigger main3-register " href="/dodreamtouch">자세히 보기</a>
 						</div>
 						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/dodreamtouch">자세히 보기</a>
@@ -63,7 +63,7 @@
 							<p style="font-size:0.75rem;">"네 이웃을 네 몸과 같이 사랑하라"</p>
 						
 						 -->
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="/request">요청 보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" href="/requestMap">요청 보기</a>
 						</div>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 			</p>
 			<div class="container">
 				<div style="text-align: right;">
-					<input type="text" class="tbox-center tbox-big" placeholder="위치를 검색하세요." id="input-addr">
+					<input type="text" class="tbox-center tbox-big" onkeyup="enterkey();" placeholder="위치를 검색하세요." id="input-addr">
 					<div id="btn-search">
 						<img class="search-icon" src="image/search-icon.png" />
 					</div>
@@ -118,9 +118,6 @@
 							src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
 					</div>
 				</div>
-				<!-- <div style="position:absolute;bottom:0;width:70%;left:24%;transform:translate(45%,-150%);background-color: rgba(255, 255, 255, 0.2);border:1px solid white;border-radius:16px;padding:2px 20px 2px 20px;font-size:14pt;font-weight:bold;cursor:pointer;">회원가입</div> -->
-				<!-- 				<div class="text-center main-map" id="map"></div>
- -->
 
 				<div class="container-sec3">
 					<div class="sec3-bottom-right-tmp left">
@@ -301,6 +298,13 @@
 	
 	function newsDetail(newsId) {
 		location.href="/news/newsDetail/"+newsId;
+	}
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	var addr = $("#input-addr").val()
+			mapInit.searchAndLocate(addr);
+        }
 	}
 	
 	var isIndexPage = true;	// index page인지 판별하는 변수(map.js에서 구분 위해 필요)
