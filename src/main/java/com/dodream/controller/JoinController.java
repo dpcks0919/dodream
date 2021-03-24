@@ -39,9 +39,4 @@ public class JoinController {
 		return "join/reg_"+type; 
 	}
 	
-	@RequestMapping(value="/jusoPopup")
-	public String jusoPopup() {
-		return "join/jusoPopup";
-	}
-
 }

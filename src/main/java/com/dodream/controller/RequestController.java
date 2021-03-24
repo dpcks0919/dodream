@@ -143,9 +143,4 @@ public class RequestController {
 		return "request/request";
 	}
 	
-	@RequestMapping(value="/jusoPopup_request")
-	public String jusoPopup() {
-		return "join/jusoPopup";
-	}
-
 }
