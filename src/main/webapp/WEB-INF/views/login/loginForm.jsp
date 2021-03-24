@@ -23,21 +23,20 @@
 						<form method="post">
 							<div class="idpw-container" style="margin-top: 4vh; color: black;">
 								<input class="input-id" type="text" name="userid" placeholder="아이디 입력" style="width: 100%; height: 2.5rem; border: none; border-bottom: 2px solid lightgray;" id="loginid"> <input
-									class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" style="width: 100%; height: 2.5rem; border: none; border-bottom: 2px solid lightgray;" id="loginpw"><br>
+									class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" onkeyup="enterkey();" style="width: 100%; height: 2.5rem; border: none;  border-bottom: 2px solid lightgray;" id="loginpw"><br>
 							</div>
 
-							<div class="find-container" style="width: 100%; text-align: right; font-size: 9pt; margin-top: 1vh;">
+							<div class="find-container" style="width: 100%; text-align: right; font-size: 9pt; margin-top: 2vh;">
+								<a class="sign-up" href="joinForm" style="color: black;"><U>회원가입  <br></U></a>
 								<a href="findInfoForm" style="color: black;"><U>아이디/비밀번호 찾기</U></a>
 							</div>
-							<!--                           <input class="login-submit" type="submit" value="로그인" style="width:100%;padding:6px 1px 6px 1px;background-color:#ed7e95;border:none;border-radius:16px;color:white;font-size:14pt;margin-top:1.5vh;">
- -->
 						</form>
 						<button id="btn-login" class="login-submit" type="submit"
 							style="width: 100%; padding: 6px 1px 6px 1px; background-color: #ed7e95; border: none; border-radius: 16px; color: white; font-size: 14pt; margin-top: 2.5vh;">로그인</button>
 						<div class="login-sns" style="margin-top: 5.5vh;">
 							<div class="divider-custom">
 								<div class="divider-custom-line"></div>
-								<div style="font-size: 10pt; color: #CACACA;">간편 로그인</div>
+								<div class="divider-custom-text" style="font-size: 10pt; color: #CACACA;">간편 로그인</div>
 								<div class="divider-custom-line"></div>
 							</div>
 							<img class="snslgbtn" src="/image/kakao.png" alt="" onclick="javascript:location.href='/oauth2/authorization/kakao'" /> <img class="snslgbtn"  src="/image/naver.png" alt=""
@@ -61,5 +60,12 @@
 	</div>
 	<%@include file="../layout/jsFile.jsp"%>
 	<script type="text/javascript" src="/js/join.js"></script>
+	<script>
+		function enterkey() {
+	        if (window.event.keyCode == 13) {
+	 	    	joinInit.login();
+	        }
+		}
+	</script>
 </body>
 </html>

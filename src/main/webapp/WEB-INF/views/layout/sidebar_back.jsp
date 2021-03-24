@@ -31,17 +31,17 @@
 			<div class="logout" style="padding-top: 4%; padding-left: 7%; padding-right: 7%; text-align: left;">
 				<c:choose>
 					<c:when test = "${principal.user.userType eq 'INDIVIDUAL'}">
-						<a href="/user/editInfo/indi" class="menu-item-top">개인정보 수정</a> 
+						<a href="/user/infoCheck/indi" class="menu-item-top">개인정보 수정</a> 
 					</c:when>
 					<c:when test = "${principal.user.userType eq 'GROUP'}">
-						<a href="/user/editInfo/group" class="menu-item-top">개인정보 수정</a> 
+						<a href="/user/infoCheck/group" class="menu-item-top">개인정보 수정</a> 
 					</c:when>
 					<c:when test = "${principal.user.userType eq 'SOCIAL_WORKER'}">
-						<a href="/user/editInfo/worker" class="menu-item-top">개인정보 수정</a> 
+						<a href="/user/infoCheck/worker" class="menu-item-top">개인정보 수정</a> 
 						<a href="/user/myrequest" class="menu-item">내 요청 내역</a> 
 					</c:when>
 					<c:when test = "${principal.user.userType eq 'INSTITUTION'}">
-						<a href="/user/editInfo/org" class="menu-item-top">개인정보 수정</a> 
+						<a href="/user/infoCheck/org" class="menu-item-top">개인정보 수정</a> 
 						<a href="/user/myrequest" class="menu-item">내 요청 내역</a> 
 					</c:when>
 				</c:choose>

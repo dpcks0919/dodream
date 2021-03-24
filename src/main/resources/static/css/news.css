@@ -221,6 +221,7 @@ td, th {
 	justify-content : center;
 	padding-top:1rem;
 	margin-bottom:1rem;
+	margin-left: 1rem;
 }
 
 .news-section2-menu {
@@ -340,6 +341,7 @@ td, th {
 	}
 	.news-menu-title {
 		margin-right:2rem;
+		font-size: 1rem;
 	}
 	.news-section2-menu {
 		font-size:0.8rem;
@@ -349,7 +351,7 @@ td, th {
 		line-height:1.5rem;
 	}
 	.news-section2-div-title {
-		font-size:1rem;
+		font-size:1rem !important;
 		line-height:1.5rem;
 		height:2rem;
 		font-weight:bold;
@@ -374,17 +376,18 @@ td, th {
 	.news-section2-div {
 		height:8rem;
 	}
+	.title-info {
+	    height:16rem;
+	}
+	.reg-info {
+	    width:100%;
+	    margin-top:7rem;
+	}
+	.reg-info-small {
+	    width: 100%;
+	    margin-top:9rem
+	}
 }
-
-
-@media (max-width: 576px) {
-  .section2-box-left {
-    padding-left:0.5vh;
-    padding-right:0.5vh;
-  }
-}
-
-
 
 
 @media (max-width: 768px) {
@@ -397,23 +400,17 @@ td, th {
     border-radius:15px;
     text-align:left;
   }
-}
-
-@media (max-width: 992px) {
-
-  .title-info {
-    height:16rem;
+  .news-section2-menu {
+		font-size:0.7rem;
   }
-  .reg-info {
-    width:100%;
-    margin-top:7rem;
-  }
-  .reg-info-small {
-    width: 100%;
-    margin-top:9rem
+  .news-menu-title {
+		font-size:0.9rem !important;
   }
 }
 
-@media (min-width: 1200px) {
-
+@media (max-width: 576px) {
+  .section2-box-left {
+    padding-left:0.5vh;
+    padding-right:0.5vh;
+  }
 }
