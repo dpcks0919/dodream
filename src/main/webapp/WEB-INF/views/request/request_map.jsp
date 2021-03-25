@@ -140,7 +140,8 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info-small">
-					<h4>도움이 필요한 주변 이웃을 확인하세요!</h4>
+					<h4>요청 보기</h4>
+					<p>도움이 필요한 주변 이웃을 확인하세요!</p>
 				</div>
 			</div>
 		</header>

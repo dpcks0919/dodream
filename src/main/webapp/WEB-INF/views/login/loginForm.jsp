@@ -23,7 +23,7 @@
 						<form method="post">
 							<div class="idpw-container" style="margin-top: 4vh; color: black;">
 								<input class="input-id" type="text" name="userid" placeholder="아이디 입력" style="width: 100%; height: 2.5rem; border: none; border-bottom: 2px solid lightgray;" id="loginid"> <input
-									class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" onkeyup="enterkey();" style="width: 100%; height: 2.5rem; border: none;  border-bottom: 2px solid lightgray;" id="loginpw"><br>
+									class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" onkeydown="enterkey();" style="width: 100%; height: 2.5rem; border: none;  border-bottom: 2px solid lightgray;" id="loginpw"><br>
 							</div>
 
 							<div class="find-container" style="width: 100%; text-align: right; font-size: 9pt; margin-top: 2vh;">
@@ -64,6 +64,7 @@
 		function enterkey() {
 	        if (window.event.keyCode == 13) {
 	 	    	joinInit.login();
+	 	    	event.preventDefault();
 	        }
 		}
 	</script>

@@ -297,4 +297,14 @@ input[type='radio']:checked {
   .reg-request, .reg-response {
     width: 100%; 
   }
+  .input-content {
+	display:block;
+	width:80%;
+	margin-left: 1rem;
+	margin-bottom:1.5rem;
+  }
+  .sign-submit, .sign-submit-s {
+    width:80%;
+    margin-left: 1rem;
+  }
 }
