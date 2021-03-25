@@ -36,7 +36,7 @@ html, body {
 }
 .reg-info-small {
   width: 100%;
-  margin-top:11rem
+  margin-top:10rem;
 }
 .mypage-section1 {
   margin-top:5.5vw;
@@ -291,6 +291,7 @@ td, th {
   border:1px solid black;
   outline:none;
 }
+
 
 @media (max-width: 1200px) {
   .section2-text1 {
@@ -638,9 +639,7 @@ td, th {
 }
 
 @media (max-width: 768px) {
-  /* table {
-    font-size:10px;
-  } */
+  
   .tbox-big{
   	width: 85%;
   }
@@ -675,6 +674,15 @@ td, th {
   }
   .sec3-middle-left {
     border-style : none!important;
+  }
+  .title-info{
+  	height: 11rem;
+  }
+  .reg-info-small {
+  	margin-top:5rem;
+  }
+  .reg-info-small h4{
+   	font-size: 1.2rem !important;
   }
 }
 

@@ -28,9 +28,10 @@
 						<form method="post" action="">
 							<div class="input-content">
 								<span class="input-title">새 비밀번호 </span><br> <input class="text-input" type="password" name="userpw" id="userpw" placeholder="비밀번호 입력">
+								<span class="extra-info" style="color: #e95378">문자, 특수문자를 조합하여 사용하세요.</span>
 							</div>
 							<div class="input-content">
-								<span class="input-title">비밀번호 확인 </span><br> <input class="text-input" type="password" name="userpwchk" id="userpwchk" placeholder="비밀번호 입력">
+								<span class="input-title">비밀번호 확인 </span><br> <input class="text-input" type="password" onkeydown="enterkey();" name="userpwchk" id="userpwchk" placeholder="비밀번호 입력">
 							</div>
 						</form>
 						<button id="btn-change" class="sign-submit" style="margin-top: 1rem;">변경하기</button>
@@ -42,5 +43,13 @@
 	<%@include file="../layout/sidebar_back.jsp"%>
 	<%@include file="../layout/jsFile.jsp"%>
 	<script src="/js/my.js"></script>
+	<script>
+		function enterkey(){
+			if (window.event.keyCode == 13) {
+	        	myInit.passwordChange();
+				event.preventDefault();
+	        } 
+		}
+	</script>
 </body>
 </html>
