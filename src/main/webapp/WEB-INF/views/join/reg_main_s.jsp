@@ -16,7 +16,7 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info">
-					<h4>회원가입</h4>
+					<h4>소셜 회원가입</h4>
 					<p>
 						회원가입 하시면, 주변 이웃들의 필요가 나타날 때마다<br> 알림을 받으실 수 있습니다!
 					</p>
@@ -52,7 +52,7 @@
 							</div> -->
 						</div>
 					</div>
-					<div style="width: 1.25%;"></div>
+					<div style="width: 5%;"></div>
 					<div class="reg-request" style="height: 55vh;">
 						<div class="reg-title request-bgcolor">이웃의 도움을 요청하고 싶은 경우</div>
 						<div style="height: 2.5%;"></div>

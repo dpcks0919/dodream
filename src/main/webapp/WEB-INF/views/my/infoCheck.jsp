@@ -24,9 +24,10 @@
 				<div class="find-container">
 					<div style="height: 2rem;"></div>
 					<div class="find-input">
-						<form method="post" action="">
+						<form method="post">
 							<div class="input-content">
-								<span class="input-title">비밀번호 입력</span><br> <input class="text-input" type="password" name="userpw" id="password" placeholder="비밀번호 입력">
+								<span class="input-title">현재 비밀번호 입력</span><br> 
+								<input class="text-input" type="password" name="userpw" id="password" onkeydown="enterkey();" placeholder="비밀번호 입력">
 							</div>
 							<c:choose>
 								<c:when test="${userType eq 'INDIVIDUAL'}">
@@ -43,7 +44,7 @@
 								</c:when>
 							</c:choose>
 						</form>
-						<button id="btn-check" class="sign-submit" style="margin-top: 1rem;">확인</button>
+						<button id="btn-check" type="submit" class="sign-submit" style="margin-top: 1rem;">확인</button>
 					</div>
 				</div>
 			</div>
@@ -52,5 +53,13 @@
 	<%@include file="../layout/sidebar_back.jsp"%>
 	<%@include file="../layout/jsFile.jsp"%>
 	<script src="/js/my.js"></script>
+	<script>
+		function enterkey() {
+	        if (window.event.keyCode == 13) {
+	        	myInit.passwordCheck();
+				event.preventDefault();
+	        } 
+		}
+	</script>
 </body>
 </html>

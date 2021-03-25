@@ -41,7 +41,7 @@ function goPopup(){
 	
 	var pop;
 	
-	if( $(window).width() < 1024 ){
+	if( $(window).width() < 600 ){
 		pop = window.open("/jusoPopupMobile","pop","scrollbars=yes, resizable=yes"); 
 	}else{
 		pop = window.open("/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
