@@ -45,6 +45,7 @@ body {
 									<div class="input-content">
 										<span class="input-title">비밀번호</span><span>&nbsp;<em>*</em></span><br>
 										<input class="text-input" type="password" name="userpw" placeholder="비밀번호 입력" id="userpw">
+										<span class="extra-info" style="color: #e95378">문자, 특수문자를 조합하여 사용하세요.</span>
 									</div>
 									<div class="input-content">
 										<span class="input-title">비밀번호 확인</span><span>&nbsp;<em>*</em></span><br>
