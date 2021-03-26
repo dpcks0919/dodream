@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body id="page-top">
 	<div class="modal-bg" id="modal-bg" onclick="closeModal();"></div>
 
@@ -23,26 +22,82 @@
 		<div class="modal-content">
 			<div id="rq_title"></div>
 			<div class="content-info">
+			
+				<div class="div-table">
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rq_id"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><span class="input-span" id="rq_date"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></b></div><span class="input-span" id="rq_status"></span>
+						</div>
+						<div class="div-table-left">
+							<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="rq_level"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-right">
+							<div class="div-table-title"><b>요청기관</b></div><span class="input-span" id="rq_user"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="rq_addr"></span>
+					</div>				
+				</div>
+				
+				<!-- 
 				<table class="info-table">
-					<tr>
+					<tr class="responsive-big">
 						<td style="width: 17.5%;"><b>등록번호</b></td>
 						<td id="rq_id" style="width: 27.5%;"></td>
 						<td style="width: 17.5%;"><b>등록날짜</b></td>
 						<td id="rq_date" style="width: 37.5%;"></td>
 					</tr>
-					<tr>
+					<tr class="responsive-big">
 						<td><b>상태</b></td>
 						<td id="rq_status"></td>
 						<td><b>주소</b></td>
 						<td id="rq_addr"></td>
 					</tr>
-					<tr>
+					<tr class="responsive-big">
 						<td><b>기간</b></td>
 						<td id="rq_level"></td>
 						<td><b>요청기관</b></td>
 						<td id="rq_user"></td>
 					</tr>
+						<tr class="responsive-small">
+							<td style="width: 17.5%;"><b>등록번호</b></td>
+							<td id="rq_id" style="width: 27.5%;"></td>
+						</tr>
+						<tr class="responsive-small">
+							<td style="width: 17.5%;"><b>등록날짜</b></td>
+							<td id="rq_date" style="width: 37.5%;"></td>
+						</tr>
+						<tr class="responsive-small">
+							<td><b>상태</b></td>
+							<td id="rq_status"></td>
+						</tr>
+						<tr class="responsive-small">
+							<td><b>주소</b></td>
+							<td id="rq_addr"></td>					
+						</tr>
+						<tr class="responsive-small">
+							<td><b>기간</b></td>
+							<td id="rq_level"></td>
+						</tr>
+						<tr class="responsive-small">
+							<td><b>요청기관</b></td>
+							<td id="rq_user"></td>
+						</tr>
 				</table>
+				-->
+				
+				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">
 					<table class="info-table">
@@ -60,14 +115,18 @@
 		<div class="modal-ftr">
 			<c:choose>
 				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
-					<div class="btn-res" onclick="alert('로그인이 필요합니다!')">응답하기</div>
+					<div class="">
+						<div class="btn-close " onclick="closeModal();">창 닫기</div>
+						<div class="btn-notlogin " onclick="alert('로그인이 필요합니다!')">응답하기</div>				
+					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="btn-res" onclick="goResponse()">응답하기</div>
 					<div class="btn-icon" onclick="heartClick();">
 						<i class="far fa-heart" id="btn-heart"></i>
 						<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
-					</div>
+					</div>					
+					<div class="btn-close " onclick="closeModal();">창 닫기</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -86,7 +145,7 @@
 				</div>
 				<div class="div-inline">
 					<div class="response-info ">
-						<div class="info-title">
+						<div class="info-title ">
 							이름<span style="color: white;">이름</span>
 						</div>
 						<input class="info-name info-text" name="response-name" id="reply_user" type="text" value="${user.userName}" placeholder="이름 입력"></input>
@@ -140,7 +199,8 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info-small">
-					<h4>도움이 필요한 주변 이웃을 확인하세요!</h4>
+					<h4>요청 보기</h4>
+					<p>도움이 필요한 주변 이웃을 확인하세요!</p>
 				</div>
 			</div>
 		</header>
@@ -176,9 +236,12 @@
 				<div class="map_wrap ">
 					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 					<!-- 지도타입 컨트롤 div 입니다 -->
+					<!-- 
 					<div class="custom_typecontrol radius_border">
 						<span id="btnRoadmap" class="btn" onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
 					</div>
+					
+					 -->
 					<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
 					<div class="custom_zoomcontrol radius_border">
 						<span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span> <span onclick="zoomOut()"><img
@@ -188,32 +251,47 @@
 			</div>
 			<div id="maker-info-container-blank" style="height: 30px;"></div>
 			<div class="container" id="marker-info-container">
-
+			<!-- 
+			작은 화면일 때에 아래로 내려가야함. (990 이하)
+			큰 화면일 때에 위에 있어야 함.
+			
+			 -->
 				<div class="map-content">
-					<div class="map-left" style="display: block">
-						<p class="help-content" id="marker-info-title">주거환경개선 도움</p>
-						<p class="help-date" id="marker-info-date">등록일 2020/12/25</p>
+					<div class="map-left " style="display: block">
+						<p class="help-content " id="marker-info-title">주거환경개선 도움</p>
+						<p class="help-date " id="marker-info-date">등록일 2020/12/25</p>
 					</div>
 					<div class="map-mid ">
-						<p class="wrapper-status">
+						<p class="wrapper-status ">
 							상태 <span class="help-status" id="marker-info-status">응답 대기중</span>
 						</p>
-						<p>
+						<p class="help-limit">
 							기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span>
 						</p>
 					</div>
 					<div class="map-mid ">
-						<p class="wrapper-status">
+						<p class="wrapper-status responsive-help-hidden">
 							주소 <span class="help-status" id="marker-info-address">포항시 북구 흥해읍</span>
 						</p>
-						<p>
+						<p class="help-phone">
 							문의 <span class="help-term" id="marker-info-phone">010-1234-5678</span>
 						</p>
 					</div>
 					<div class="map-right ">
-						<span class="help-code">등록번호<input type="text" class="help-code-box" id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i
+						<span class="help-code responsive-help-hidden">등록번호<input type="text" class="help-code-box" id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i
 								class="fa fa-clone copy-btn" aria-hidden="true"></i></span></span> 
-								<input type="button" class="help-detail" value="자세히 보기" id="marker-info-btn"></input>
+
+					<div class="responsive-help-div">
+						<div class="responsive-help-div-left "><b>상태 </b><span class="help-status" id="marker-info-status" style="">응답 대기중</span></div>
+						<div>기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span></div>						
+					</div>
+					<div class="responsive-help-div responsive-help-hidden-mobile">
+						<div>기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span></div>
+						<div>문의 <span class="help-term" id="marker-info-phone">010-1234-5678</span></div>
+					</div>
+					
+					<div class="responsive-help-div-right "><span class="help-code"><b>등록번호</b><input type="text" class="help-code-box" id="marker-info-search-input" readonly="false"></input><span id="marker-info-search-btn"><i class="fa fa-clone copy-btn" aria-hidden="true"></i></span></span> </div>
+					<input type="button" class="help-detail" value="자세히 보기" id="marker-info-btn"></input>
 					</div>
 				</div>
 			</div>
@@ -261,6 +339,5 @@
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 	</script>
-
 </body>
 </html>

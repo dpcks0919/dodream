@@ -1,12 +1,12 @@
 
-var Lat, Lng, idFlag, verifyCode; 
+var Lat, Lng, idFlag = 0, verifyCode; 
 let smsFlag = 0;
 
 function goPopup(){
 	
 	var pop;
 	
-	if( $(window).width() < 1024 ){
+	if( $(window).width() < 600 ){
 		pop = window.open("/jusoPopupMobile","pop","scrollbars=yes, resizable=yes"); 
 	}else{
 		pop = window.open("/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -35,6 +35,16 @@ function goPopup(){
 		  }
 		 }); 
 }   
+
+function checkSpecial(str) { 
+	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi; 
+	if(special_pattern.test(str) == true) { 
+		return true; 
+	} else {
+		return false; 
+	} 
+}
+
 
 let joinInit = {
 	init: function(){
@@ -187,9 +197,6 @@ let joinInit = {
 			loginPassword : $("#loginpw").val(),
 		}
 		
-		//alert("LogInID: " + data.loginId);
-		//alert("LoginPW: " + data.loginPassword);
-		
 		$.ajax({
 			//로그인 수행 요청.
 			type: "POST",
@@ -261,17 +268,27 @@ let joinInit = {
 	},
 	
 	validation:function(){	// Valditaion
-		if($('#userid').length){	// 아이디 
+		if($('#userid').length){	// 아이디
 			if( idFlag == 0 ){
 				alert("아이디 중복 확인 눌러주세요."); // 1.아이디 체크 여부 확인
 				return false;
 			}
 		}
 		 if($("#userpw").length){ // 패스워드
-			if($("#userpw").val() == "" || $("#userpw").val() != $("#userpwchk").val()){
-				alert("비밀번호를 다시 확인해주세요.");	// 2.pw 체크
+			var pass = $("#userpw").val() ;
+			var passcheck = $("#userpwchk").val() ;
+
+			if( pass == "" ){
+				alert("비밀번호를 입력하여주세요.");	// 2.pw 체크
+				return false;
+			}else if( !checkSpecial(pass) ){
+				alert("특수문자와 조합하여 사용해주세요.");
+				return false;
+			}else if( pass !=  passcheck ){
+				alert("비밀번호가 일치하지 않습니다.");	// 2.pw 체크
 				return false;
 			}
+			
 		}
 		if($("#username").length){	// 이름
 			if(!$("#username").val()){

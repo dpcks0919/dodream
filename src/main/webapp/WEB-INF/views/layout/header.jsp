@@ -9,7 +9,7 @@
 <meta name="author" content="" />
 <title>두드림터치</title>
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="/image/dodreamtouch_favicon.png" />
+<link rel="icon" type="image/x-icon" href="/image/dodreamtouch_favicon.ico" />
  <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
 <!-- Google fonts-->
