@@ -3,8 +3,10 @@ package com.dodream.config;
 import javax.servlet.http.HttpSessionListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.dodream.config.auth.PrincipalDetailsService;
 import com.dodream.config.oauth.PrincipalOauth2UserService;
+import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -77,4 +80,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		    .exceptionHandling().accessDeniedPage("/WEB-INF/views/accessDenied.jsp");
 			;
 	}
+	
+	// naver lucy xss filter
+	@Bean
+    public FilterRegistrationBean<XssEscapeServletFilter> getFilterRegistrationBean(){
+        FilterRegistrationBean<XssEscapeServletFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new XssEscapeServletFilter());
+        registrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
+        registrationBean.addUrlPatterns("*.do", "*.jsp");
+        return registrationBean;
+    }
 }
