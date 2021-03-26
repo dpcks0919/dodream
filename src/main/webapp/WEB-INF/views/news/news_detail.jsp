@@ -51,7 +51,7 @@
 					<div class="news-ftr" style="justify-content: space-between;">
 						<c:if test = "${principal.user.userType eq 'ADMIN'}">
 							<div>
-								<div class="btn-upload" onclick="location.href='/user/news/newsEdit/${newsDetail.id}'">수정하기</div>							
+								<div class="btn-upload" onclick="location.href='/admin/news/newsEdit/${newsDetail.id}'">수정하기</div>							
 								<div class="btn-upload" onclick="news_delete(${newsDetail.id});" style="margin-right:0.5rem;">삭제하기</div>						
 							</div>
 						</c:if>					
