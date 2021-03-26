@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +36,7 @@ import com.dodream.repository.UserInterestRepository;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class RequestService {
@@ -184,9 +186,9 @@ public class RequestService {
 //		} catch (CoolsmsException e) {
 //			System.out.println(e.getMessage()); 
 //			System.out.println(e.getCode()); 
-//			return null;	//발송불가 시 null 리턴 
+//			System.out.println("Request Send Text Error!");
 //		}
-//		
+		
 		System.out.println("발송번호: " + params.get("to"));
 		System.out.println("문자 내용: " + params.get("text"));
 		}

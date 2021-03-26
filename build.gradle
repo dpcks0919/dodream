@@ -43,6 +43,8 @@ dependencies {
    compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
    //email api
    compile("org.springframework.boot:spring-boot-starter-mail")   
+   	// xss servlet filter
+	implementation group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
    
    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }
@@ -102,6 +104,9 @@ dependencies {
 	compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 	//email api
 	compile("org.springframework.boot:spring-boot-starter-mail")	
+	// xss servlet filter
+	implementation group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.1'
+
 	
 	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }
