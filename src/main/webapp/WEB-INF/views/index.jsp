@@ -19,7 +19,7 @@
 		<header class="carousel-masthead text-white text-center">
 			<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
-					<li class="first-link" data-target="#carouselExampleCaptions" data-slide-to="0"></li>
+					<li class="first-link active" data-target="#carouselExampleCaptions" data-slide-to="0" style=""></li>
 					<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
 					<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
 				</ol>
@@ -30,11 +30,11 @@
 						<div class="carousel-caption1 d-md-block mainImage-web">
 							<a class=" rounded main1-register" href="/news/newsList">소식 보기</a>
 						</div>
-						<div class="carousel-caption1_mobile d-md-block mainImage-mobile">
+						<div class="carousel-caption1_mobile d-md-block mainImage-mobile ">
 							<!-- 
 								<p class="main1-register-text_mobile">이번 달에는 어떤 도움의 손길들이 있었을까요?</p>
+							<a class=" rounded main1-register main1-register_mobile test" href="/news/newsList">소식 보기</a>
 							 -->
-							<a class=" rounded main1-register main1-register_mobile" href="/news/newsList">소식 보기</a>
 						</div>
 					</div>
 					<div class="carousel-item">
