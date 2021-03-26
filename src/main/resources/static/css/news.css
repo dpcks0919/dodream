@@ -410,6 +410,9 @@ td, th {
       border-radius:15px;
       text-align:left;
   }
+   .reg-info a{
+  	display: none;
+  }
 }
 
 @media (max-width: 576px) {

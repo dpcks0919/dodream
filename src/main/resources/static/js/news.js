@@ -52,7 +52,7 @@ let newsInit = {
 			console.log(data);
 			$.ajax({
 				type:"POST",
-				url: "/newsSaveProc",
+				url: "/admin/newsSaveProc",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset = utf-8 ",
 				dataType: "json"
@@ -93,7 +93,7 @@ let newsInit = {
 			};
 			$.ajax({
 				type:"POST",
-				url: "/newsUpdateProc",
+				url: "/admin/newsUpdateProc",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset = utf-8 ",
 				dataType: "json"
@@ -117,7 +117,7 @@ let newsInit = {
 				
 		$.ajax({
 			type:"POST",
-			url: "/newsDeleteProc",
+			url: "/admin/newsDeleteProc",
 			data: {"newsId": newsId},
 		}).done(function(resp) {
 			if(resp.status == 500) {

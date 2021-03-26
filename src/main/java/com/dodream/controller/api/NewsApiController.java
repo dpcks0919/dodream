@@ -18,20 +18,20 @@ public class NewsApiController {
 	@Autowired
 	private NewsService newsService;
 	
-	@PostMapping("/newsSaveProc")
+	@PostMapping("/admin/newsSaveProc")
 	public ResponseDto<Integer> newsSave(@RequestBody News news, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		System.out.println(news);
 		newsService.saveNews(news, principalDetails);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
 	
-	@PostMapping("/newsUpdateProc")
+	@PostMapping("/admin/newsUpdateProc")
 	public ResponseDto<Integer> newsUpdate(@RequestBody News news, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		newsService.update(news);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
 	
-	@PostMapping("/newsDeleteProc")
+	@PostMapping("/admin/newsDeleteProc")
 	public ResponseDto<Integer> newsDelete(@RequestParam(value = "newsId") int newsId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		newsService.delete(newsId);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
