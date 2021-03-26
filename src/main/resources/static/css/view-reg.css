@@ -280,8 +280,13 @@ td, th {
 .search-box-big {
   /* margin-left:2vh; */
   margin-right:2vh;
-  width:80%!important;
+  /* width:80%!important; */
+  width: 18vh;
 }
+.extra-search{
+	display: inline;
+}
+
 .search-btn {
   height:1.5rem;
   width:4rem;
@@ -666,6 +671,18 @@ td, th {
   }
   .reg-info-small h4{
    	font-size: 1.2rem !important;
+  }
+  .extra-search{
+  	display: none;
+  }
+  .search{
+  	width: 100%;
+  }
+  .search-input{
+  	width: 60%;
+  }
+  .reg-info{
+  	margin-top: 5.5rem;
   }
 }
 

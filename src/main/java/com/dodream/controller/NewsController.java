@@ -44,14 +44,14 @@ public class NewsController {
 		return "news/news_detail";
 	}
 	
-	@GetMapping("user/news/newsEdit/{id}")
+	@GetMapping("admin/news/newsEdit/{id}")
 	public String newsEdit(Model model, @PathVariable(value="id") int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("user", principalDetails.getUser());
 		model.addAttribute("newsDetail", newsService.readNewsOne(id));
 		return "news/news_edit";
 	}
 	
-	@GetMapping("user/news/newsWrite")
+	@GetMapping("admin/news/newsWrite")
 	public String newsWrite(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("user", principalDetails.getUser());
 		return "news/news_write";
