@@ -7,7 +7,7 @@ function openMenu() {
     document.getElementById("nav-logo").style.display="none";
     document.getElementById("menu-back").style.display="block";
   }
-  
+
   function openProfile() {
     document.getElementById("Wrapper").style.marginLeft = "-70%";
     document.getElementById("mySidebar2").style.width = "70%";
@@ -124,6 +124,9 @@ function openMenu() {
   
     for(var i = 0; i < items.length; i++) {
       let needs = items[i].itemNum - items[i].receivedNum;
+	  if(needs < 0) {
+		needs = 0;
+	  }
       if(i == 0) {
            if(items[i].requestType == "재정") {
               $("#rq_item0").html("<td>" + items[i].requestType + "</td><td>" + items[i].itemName + "</td><td>" + items[i].receivedNum + "원 / " + items[i].itemNum + "원</td>");
@@ -415,6 +418,7 @@ function goDetail_myreply(rp, _state) {
 	$("#rp-back").css("visibility", "hidden");
 	$("#rp-edit").removeAttr("hidden");
 	$("#rp-save").prop("hidden", "hidden");
+	$("#rp-close").css("display", "block");
 	$("#rp_item0").empty();
 	$(".other-rpitem").remove();
 	$("#rp_org").prop("readonly", "true");

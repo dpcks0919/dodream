@@ -22,26 +22,56 @@
 				<span id="rq_title" style="font-size:0.75rem;"></span>
 			</div>
 			<div class="content-info">
-				<table class="info-table">
-					<tr>
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td id="rp_id" style="width: 27.5%;"></td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="rp_date" style="width: 37.5%;"></td>
-					</tr>
-					<tr>
-						<td><b>상태</b></td>
-						<td id="rp_status"></td>
-						<td><b>소속</b></td>
-						<td><input id="rp_org" style="border:1px solid white;" readonly /></td>
-					</tr>
-					<tr>
-						<td><b>등록자 명</b></td>
-						<td><input id="rp_name" style="border:1px solid white;" readonly/></td>
-						<td><b>연락처</b></td>
-						<td><input id="rp_phone" style="border:1px solid white;" readonly /></td>
-					</tr>
-				</table>
+				<div class="div-table" style="border-top:none; padding-bottom:1rem;">
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rp_id"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><span class="input-span" id="rp_date"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></b></div><span class="input-span" id="rp_status"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>소속<span style="visibility:hidden;">소속</span></b></div><input id="rp_org" style="border:1px solid white;" readonly />
+						</div>						
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>요청자<span style="visibility:hidden;">요</span></b></div><input id="rp_name" style="border:1px solid white;" readonly/>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>연락처<span style="visibility:hidden;">연</span></b></div><input id="rp_phone" style="border:1px solid white;" readonly />
+						</div>						
+					</div>
+				</div>
+				<!-- 
+					<table class="info-table">
+						<tr>
+							<td style="width: 17.5%;"><b>등록번호</b></td>
+							<td id="rp_id" style="width: 27.5%;"></td>
+							<td style="width: 17.5%;"><b>등록날짜</b></td>
+							<td id="rp_date" style="width: 37.5%;"></td>
+						</tr>
+						<tr>
+							<td><b>상태</b></td>
+							<td id="rp_status"></td>
+							<td><b>소속</b></td>
+							<td><input id="rp_org" style="border:1px solid white;" readonly /></td>
+						</tr>
+						<tr>
+							<td><b>등록자 명</b></td>
+							<td><input id="rp_name" style="border:1px solid white;" readonly/></td>
+							<td><b>연락처</b></td>
+							<td><input id="rp_phone" style="border:1px solid white;" readonly /></td>
+						</tr>
+					</table>
+				 -->
+				
+				
 				<div class="content-text">
 					<textarea style="border:1px solid white; width:100%; resize: none; outline:none;" id="rp_content" placeholder="-" readonly></textarea>
 				
@@ -63,6 +93,7 @@
 			<div class="modal-container" id="view-responseForm"></div>
 			<!-- modal.js에 click event 생성 -->
 			<div class=" " style="width:100%; display:flex; justify-content: space-between; margin-bottom:1rem;">
+				<div class="btn-close" id="rp-close" onclick="closeModal();" style="position:relative; float:left;">창 닫기</div>
 				<div class="btn-com" id="rp-back" style="visibility:hidden;">뒤로가기</div>
 				<div class="btn-res" id="rp-edit">수정하기</div>
 				<div class="btn-res" id="rp-save" hidden>저장하기</div>
@@ -232,6 +263,7 @@
 			alert("수정 후 저장하시면 됩니다.");
 			$("#rp-back").css("visibility", "visible");
 			$("#rp-edit").prop("hidden", "hidden");
+			$("#rp-close").css("display", "none");
 			$("#rp-save").removeAttr("hidden");
 			$("#rp_org").removeAttr("readonly");
 			$("#rp_name").removeAttr("readonly");
@@ -403,7 +435,8 @@
 			$("#rp-edit").removeAttr("hidden");
 			$("#rp-save").prop("hidden", "hidden");
 			$("#rp-back").css("visibility", "hidden");
-			
+			$("#rp-close").css("display", "block");
+
 			
 			$("#rp-edit").removeAttr("hidden");
 			$("#rp_org").val(rp.org);
