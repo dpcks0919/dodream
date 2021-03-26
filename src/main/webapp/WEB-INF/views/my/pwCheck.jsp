@@ -27,11 +27,11 @@
 					<div class="find-input">
 						<form method="post" action="">
 							<div class="input-content">
-								<span class="input-title">현재 비밀번호 입력</span><br> <input class="text-input" type="password" name="userpw" id="password" placeholder="비밀번호 입력">
+								<span class="input-title">현재 비밀번호 입력</span><br> <input class="text-input" type="password" onkeydown="enterkey();" name="userpw" id="password" placeholder="비밀번호 입력">
 							</div>
 							<input type="hidden" value="1" id="pwchange">
 						</form>
-						<button id="btn-check" class="sign-submit" style="margin-top: 1rem;">확인</button>
+						<button id="btn-check" type="submit" class="sign-submit" style="margin-top: 1rem;">확인</button>
 					</div>
 				</div>
 			</div>
@@ -41,5 +41,13 @@
 	<%@include file="../layout/jsFile.jsp"%>
 	<%@include file="../layout/kakaoMap.jsp"%>
 	<script src="/js/my.js"></script>
+	<script>
+		function enterkey() {
+	        if (window.event.keyCode == 13) {
+	        	myInit.passwordCheck();
+				event.preventDefault();
+	        } 
+		}
+	</script>
 </body>
 </html>

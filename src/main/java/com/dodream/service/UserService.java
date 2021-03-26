@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,7 @@ import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class UserService {
@@ -208,7 +210,7 @@ public class UserService {
 //			System.out.println(e.getCode()); 
 //			return null;	//발송불가 시 null 리턴 
 //		}
-		System.out.println(randNum);
+//		System.out.println(randNum);
 		
 		return randNum; // 최종적으로 verifyCode 리턴 
 	}

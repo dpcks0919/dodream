@@ -2,6 +2,10 @@ package com.dodream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+
+import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 
 @SpringBootApplication
 public class DodreamApplication {

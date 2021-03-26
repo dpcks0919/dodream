@@ -4,7 +4,7 @@ function goPopup(){
 	
 	var pop;
 	
-	if( $(window).width() < 1024 ){
+	if( $(window).width() < 600 ){
 		pop = window.open("/jusoPopupMobile","pop","scrollbars=yes, resizable=yes"); 
 	}else{
 		pop = window.open("/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -203,6 +203,14 @@ var alert_select_value = function (select_obj, curCnt, flag) {
   document.getElementById(curDiv).innerHTML = newHtml;
 }
 
+function checkSpecial(str) { 
+	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi; 
+	if(special_pattern.test(str) == true) { 
+		return true; 
+	} else {
+		return false; 
+	} 
+}
 
 let myInit = {
 	
@@ -358,16 +366,22 @@ let myInit = {
 	
 	passwordChange:function(){
 		var password = "";
-		if($("#userpw").length){ // 패스워드
-			if($("#userpw").val() == "" || $("#userpw").val() != $("#userpwchk").val()){
-				alert("비밀번호를 다시 확인해주세요.");
-				return false;
-			} else {
-				password = $("#userpw").val();
-			}
+		var pass = $("#userpw").val();
+		var passcheck = $("#userpwchk").val() ;
+
+		if( pass == "" ){
+			alert("비밀번호를 입력하여주세요.");	// 2.pw 체크
+			return false;
+		}else if( !checkSpecial(pass) ){
+			alert("특수문자와 조합하여 사용해주세요.");
+			return false;
+		}else if( pass !=  passcheck ){
+			alert("비밀번호가 일치하지 않습니다.");	// 2.pw 체크
+			return false;
+		}else{
+			password = $("#userpw").val();
 		}
 		
-
 		$.ajax({
 			//회원가입 수행 요청.
 			type: "PUT",

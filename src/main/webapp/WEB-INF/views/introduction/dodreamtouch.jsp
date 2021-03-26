@@ -43,7 +43,7 @@
 				<div class="intro-menu selected-menu" onclick="menuToggle(1);">미션</div>
 				<div class="intro-menu" onclick="menuToggle(2);">성장</div>
 				<div class="intro-menu" onclick="menuToggle(3);">조직도</div>
-				<div class="intro-menu" onclick="menuToggle(4);">찾아오시는 길</div>
+				<div class="intro-menu" onclick="menuToggle(4);">오시는 길</div>
 			</div>
 			<!-- 위에까지 고정. 이 밑에부터 intro1, intro2, intro3, intro3로 나뉘기. -->
 			

@@ -734,9 +734,10 @@ padding-top:0!important;
 }
 
 @media (max-width: 768px) {
-  header {
-    padding-top:4rem!important;
-  }  
+	.carousel-masthead {
+	  padding-top: calc(30px)!important;
+	  /* padding-bottom: 6rem; */
+	}
   .search-icon {
   	width:1.5rem;
   	color :black;
@@ -1108,6 +1109,7 @@ padding-top:0!important;
   .main1-register_mobile {
     position:relative !important;
     left:36% !important;
+    bottom:0!important;
     transform: translateX(-50%) !important;
   }
   .main1-register-text_mobile {
