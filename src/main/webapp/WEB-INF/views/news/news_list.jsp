@@ -36,7 +36,7 @@
 					<h4>소식 보기</h4>
 					<p>두드림의 순간들과<br>두드림터치의 이야기들을 확인할 수 있습니다.</p>
 					<c:if test = "${principal.user.userType eq 'ADMIN'}">
-						<a style="border:1px solid white; color: white; cursor:pointer; padding:0.5rem;" href="/user/news/newsWrite">글 쓰기</a>
+						<a style="border:1px solid white; color: white; cursor:pointer; padding:0.5rem;" href="/admin/news/newsWrite">글 쓰기</a>
 					</c:if>
 				</div>
 			</div>

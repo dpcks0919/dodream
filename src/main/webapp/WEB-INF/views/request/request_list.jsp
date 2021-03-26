@@ -149,7 +149,7 @@
 						placeholder="전화번호 입력"></input>
 				</div>
 				<!-- 공간 맞추기 여백 -->
-				<div class="response-info" style="visibility: hidden !important;">
+				<div class="response-info margin-info" style="visibility: hidden !important;">
 					<div class="info-title">전화번호</div>
 					<input class="info-text" type="text" placeholder="전화번호 입력"></input>
 				</div>
@@ -204,7 +204,7 @@
 						href="/requestList">목록으로 보기</a>
 				</div>
 				<form class="search-div ">
-					<div class="inline" style="display:none;">
+					<div class="extra-search" >
 						<select name="search-client" id="search-client" class="search-box-mid">
 							<option value="all" selected="selected">도움받는 대상</option>
 							<option value="ELDERLY">노인</option>
@@ -219,14 +219,14 @@
 							<option value="1">매우 긴급(3일 이내)</option>
 						</select>
 					</div>
-					<div class="inline" style="width:100%;">
+					<div class="search" >
 						<select name="search-item" id="search-item" class="search-box-small">
 							<option value="all" selected="selected">검색항목</option>
 							<option value="id">등록번호</option>
 							<option value="title">제목</option>
 							<option value="address">도로명주소</option>
 						</select> 
-						<input type="text" id="search-text" class="search-box-big" onkeydown="enterkey();" placeholder="검색어 입력"></input>
+						<input type="text" id="search-text" class="search-box-big search-input" onkeydown="enterkey();" placeholder="검색어 입력"></input>
 					</div>	
 					<div id="btn-search" class="inline">
 						<img class="search-icon " src="/image/search-icon.png" />
