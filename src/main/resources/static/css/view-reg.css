@@ -36,7 +36,7 @@ html, body {
 }
 .reg-info-small {
   width: 100%;
-  margin-top:11rem
+  margin-top:10rem;
 }
 .mypage-section1 {
   margin-top:5.5vw;
@@ -375,6 +375,12 @@ td, th {
   display:block;
 }
 
+@media (max-width: 1200px) {
+  .section2-text1 {
+    margin-top:1.5vh!important;
+    margin-bottom:1vh!important;
+  }
+}
 .container p {
   margin:0;
 }
@@ -651,6 +657,15 @@ td, th {
   }
   .sec3-middle-left {
     border-style : none!important;
+  }
+  .title-info{
+  	height: 11rem;
+  }
+  .reg-info-small {
+  	margin-top:5rem;
+  }
+  .reg-info-small h4{
+   	font-size: 1.2rem !important;
   }
 }
 

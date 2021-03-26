@@ -191,7 +191,8 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="container d-flex flex-column title-info">
 				<div class="reg-info-small">
-					<h4>도움이 필요한 주변 이웃을 확인하세요!</h4>
+					<h4>요청 보기</h4>
+					<p>도움이 필요한 주변 이웃을 확인하세요!</p>
 				</div>
 			</div>
 		</header>
@@ -225,7 +226,7 @@
 							<option value="title">제목</option>
 							<option value="address">도로명주소</option>
 						</select> 
-						<input type="text" id="search-text" class="search-box-big" onkeyup="enterkey();" placeholder="검색어 입력"></input>
+						<input type="text" id="search-text" class="search-box-big" onkeydown="enterkey();" placeholder="검색어 입력"></input>
 					</div>	
 					<div id="btn-search" class="inline">
 						<img class="search-icon " src="/image/search-icon.png" />
@@ -252,18 +253,22 @@
 
 				if (searchText != '' && searchItem == 'all') {
 					alert("검색항목을 선택해주세요!");
+					event.preventDefault();
 					return;
 				}
 				if (searchText == '' && searchItem != 'all') {
 					alert("검색어를 입력해주세요!");
+					event.preventDefault();
 					return;
 				}
 				if( searchItem == 'id' && isNaN(searchText)) {
 					alert("등록번호는 숫자만 검색가능합니다!");
+					event.preventDefault();
 					return;
 				}
 				
 				searchList();
+				event.preventDefault();
 	        }
 		}
 	
