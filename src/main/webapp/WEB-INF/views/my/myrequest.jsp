@@ -34,44 +34,94 @@ table td {
 				</div>
 			</div>
 			<div class="content-info" id="request-info" style="display: none;">
-				<table class="info-table" style="border-top: none; margin-top: 0;">
-					<tr>
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td style="width: 27.5%;"><input id="rq_id"  type="text" style="border-style:none;" disabled/></td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="" style="width: 37.5%;"><input id="rq_date" type="text" style="border-style:none;" disabled/></td>
-					</tr>
-					<tr>
-						<td><b>상태</b></td>
-						<td id=""><input id="rq_status" type="text" style="border-style:none;" disabled/></td>
-						<td><b>주소</b></td>
-						<td id="">
-							<input class="text-input" type="text" name="roadAddrPart1" style="width:50%;" id="roadAddrPart1" disabled>			
-							<input type="text" name="roadLongitude" id="roadLongitude" hidden />
-							<input type="text" name="roadLatitude" id="roadLatitude" hidden />
-							<button id="rq_search" style="background-color:white; border:1px solid black; outline:none; display:none;" onclick="goPopup();">검색</button>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 17.5%;"><b>요청대상</b></td>
-						<td style="width: 27.5%;">
+				<div class="div-table" style="border-top:none; padding-bottom:1rem;">
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>등록번호</b></div><input id="rq_id"  type="text" style="border-style:none;" disabled/>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><input id="rq_date" type="text" style="border-style:none;" disabled/>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></b></div><input id="rq_status" type="text" style="border-style:none;" disabled/>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>소속<span style="visibility:hidden;">소속</span></b></div><input id="rp_org" style="border:1px solid white;" readonly />
+						</div>						
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>요청대상</b></div>								
 							<select class="request-period" name="type" id="rq_clientType" style="outline:none;" disabled>
 								<option value="ELDERLY">노인</option>
 								<option value="CHILD">아이</option>
 								<option value="DISABLED">장애인</option>
 								<option value="OTHERS">기타</option>
 							</select>
-						</td>
-						<td style="width: 17.5%;"><b>기간 설정</b></td>
-						<td id="" style="width: 37.5%;">
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>기간설정</b></div>
 							<select class="request-period" name="period" id="rq_urgentLevel" style="outline:none;" disabled>
 								<option value="3">보통(한 달 이내)</option>
 								<option value="2">긴급(7~14일 이내)</option>
 								<option value="1">매우 긴급(3일 이내)</option>
-							</select>
-						</td>
-					</tr>
-				</table>
+							</select>						
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-right">
+							<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div>
+							<input class="text-input" type="text" name="roadAddrPart1" style="width:50%;" id="roadAddrPart1" disabled>			
+							<input type="text" name="roadLongitude" id="roadLongitude" hidden />
+							<input type="text" name="roadLatitude" id="roadLatitude" hidden />
+							<button id="rq_search" style="background-color:white; border:1px solid black; outline:none; display:none;" onclick="goPopup();">검색</button>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 
+					<table class="info-table" style="border-top: none; margin-top: 0;">
+						<tr>
+							<td style="width: 17.5%;"><b>등록번호</b></td>
+							<td style="width: 27.5%;"><input id="rq_id"  type="text" style="border-style:none;" disabled/></td>
+							<td style="width: 17.5%;"><b>등록날짜</b></td>
+							<td id="" style="width: 37.5%;"><input id="rq_date" type="text" style="border-style:none;" disabled/></td>
+						</tr>
+						<tr>
+							<td><b>상태</b></td>
+							<td id=""><input id="rq_status" type="text" style="border-style:none;" disabled/></td>
+							<td><b>주소</b></td>
+							<td id="">
+								<input class="text-input" type="text" name="roadAddrPart1" style="width:50%;" id="roadAddrPart1" disabled>			
+								<input type="text" name="roadLongitude" id="roadLongitude" hidden />
+								<input type="text" name="roadLatitude" id="roadLatitude" hidden />
+								<button id="rq_search" style="background-color:white; border:1px solid black; outline:none; display:none;" onclick="goPopup();">검색</button>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 17.5%;"><b>요청대상</b></td>
+							<td style="width: 27.5%;">
+								<select class="request-period" name="type" id="rq_clientType" style="outline:none;" disabled>
+									<option value="ELDERLY">노인</option>
+									<option value="CHILD">아이</option>
+									<option value="DISABLED">장애인</option>
+									<option value="OTHERS">기타</option>
+								</select>
+							</td>
+							<td style="width: 17.5%;"><b>기간 설정</b></td>
+							<td id="" style="width: 37.5%;">
+								<select class="request-period" name="period" id="rq_urgentLevel" style="outline:none;" disabled>
+									<option value="3">보통(한 달 이내)</option>
+									<option value="2">긴급(7~14일 이내)</option>
+									<option value="1">매우 긴급(3일 이내)</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				 -->			
+				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="summernoteDiv" id="rq_contents_summernotes" style="display:none;">
 					<textarea type="text" class="request-content summernote" id="rq_contents1" name="content" required></textarea>
@@ -270,7 +320,9 @@ table td {
 				</c:otherwise>
 			</c:choose>
 		</div>
-
+		<c:if test="${myrequestList.number < 5 }">		
+			<div style="height:30%;"></div>
+		</c:if>
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 		<%@include file="../layout/sidebar_back.jsp"%>

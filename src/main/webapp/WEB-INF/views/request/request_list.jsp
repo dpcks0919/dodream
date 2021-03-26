@@ -26,6 +26,34 @@
 		<div class="modal-content">
 			<div id="rq_title"></div>
 			<div class="content-info">
+				<div class="div-table">
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rq_id"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><span class="input-span" id="rq_date"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></b></div><span class="input-span" id="rq_status"></span>
+						</div>
+						<div class="div-table-left">
+							<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="rq_level"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-right">
+							<div class="div-table-title"><b>요청기관</b></div><span class="input-span" id="rq_user"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="rq_addr"></span>
+					</div>				
+				</div>
+			
+			<!-- 
 				<table class="info-table">
 					<tr>
 						<td style="width: 17.5%;"><b>등록번호</b></td>
@@ -46,6 +74,8 @@
 						<td id="rq_user"></td>
 					</tr>
 				</table>
+			 -->
+				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">
 					<table class="info-table">
@@ -63,7 +93,10 @@
 		<div class="modal-ftr">
 			<c:choose>
 				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
-					<div class="btn-res" onclick="alert('로그인이 필요한 서비스입니다!')">응답하기</div>
+					<div class="" style="width:100%; display:flex; justify-content:space-between;">
+						<div class="btn-close " onclick="closeModal();">창 닫기</div>
+						<div class="btn-res" onclick="alert('로그인이 필요합니다!')">응답하기</div>				
+					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="btn-res" onclick="goResponse()">응답하기</div>
@@ -71,6 +104,7 @@
 						<i class="far fa-heart" id="btn-heart"></i>
 						<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
 					</div>
+					<div class="btn-close " onclick="closeModal();">창 닫기</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -168,8 +202,8 @@
 						class="request-menu-button request-menu-button-selected"
 						href="/requestList">목록으로 보기</a>
 				</div>
-				<form class="search-div">
-					<div class="inline">
+				<form class="search-div ">
+					<div class="inline" style="display:none;">
 						<select name="search-client" id="search-client" class="search-box-mid">
 							<option value="all" selected="selected">도움받는 대상</option>
 							<option value="ELDERLY">노인</option>
@@ -184,16 +218,14 @@
 							<option value="1">매우 긴급(3일 이내)</option>
 						</select>
 					</div>
-					<div class="inline">
+					<div class="inline" style="width:100%;">
 						<select name="search-item" id="search-item" class="search-box-small">
 							<option value="all" selected="selected">검색항목</option>
 							<option value="id">등록번호</option>
 							<option value="title">제목</option>
 							<option value="address">도로명주소</option>
 						</select> 
-						<span class="search-text"> 
-						<input type="text" id="search-text" class="search-box-mid" onkeyup="enterkey();" placeholder="검색어 입력"></input>
-						</span>
+						<input type="text" id="search-text" class="search-box-big" onkeyup="enterkey();" placeholder="검색어 입력"></input>
 					</div>	
 					<div id="btn-search" class="inline">
 						<img class="search-icon " src="/image/search-icon.png" />

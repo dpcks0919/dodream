@@ -199,6 +199,19 @@ td, th {
   text-align:center;
   font-size:0.75rem;
 }
+@media (max-width: 576px) {
+	.response-item-count-big, .response-item-big {
+	  height:3vh;
+	  width: 7vh!important;
+	  margin-left:1vh;
+	  margin-right:1vh;
+	  vertical-align:middle;
+	  outline:none;
+	  text-align:center;
+	  font-size:0.75rem;
+	}
+
+}
 
 @media (max-width: 576px) {
   /* header {
