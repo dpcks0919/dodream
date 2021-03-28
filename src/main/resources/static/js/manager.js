@@ -404,12 +404,12 @@ function manager_viewRequest(rid) {
 				  var delNumID = "delNum" + items[i].id;
 				  var deltypeID = "delType" + items[i].id;
 				  var delNameID = "delName" + items[i].id;
-				  var selectStr = "<td class='item'><select class='request-item' id="+deltypeID+"><option name='STUFF' value='STUFF' selected>물품</option><option name='FINANCE' value='FINANCE'>재정</option><option name='SERVICE' value='SERVICE'>봉사</option><option name='ETC' value='ETC'>기타</option></select></td>" 
+				  var selectStr = "<td class='item'><select class='request-item' class='responsive-input' id="+deltypeID+"><option name='STUFF' value='STUFF' selected>물품</option><option name='FINANCE' value='FINANCE'>재정</option><option name='SERVICE' value='SERVICE'>봉사</option><option name='ETC' value='ETC'>기타</option></select></td>" 
 			      if(i == 0) {
 			           if(items[i].requestType == "재정") {
-			             $("#rq_item0").html(selectStr+"<td><input type='text' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "원</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/> 원</td><td>-</td>");
+			             $("#rq_item0").html(selectStr+"<td><input type='text' class='responsive-input' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "원</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/> 원</td><td>-</td>");
 			          } else {
-			            $("#rq_item0").html(selectStr+"<td><input type='text' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/></td><td>-</td>");
+			            $("#rq_item0").html(selectStr+"<td><input type='text' class='responsive-input' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/></td><td>-</td>");
 			          }
 			      }
 			      else {
@@ -417,15 +417,15 @@ function manager_viewRequest(rid) {
 			
 			        if(items[i].requestType === items[i-1].requestType) {
 			          if(items[i].requestType == "재정") {
-			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '">' + selectStr + "<td><input type='text' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "원</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/>원</td><td>-</td></tr>");
+			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '">' + selectStr + "<td><input type='text' class='responsive-input' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "원</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/>원</td><td>-</td></tr>");
 			          } else {
-			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '">' + selectStr + "<td><input type='text' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/></td><td>-</td></tr>");
+			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '">' + selectStr + "<td><input type='text' class='responsive-input' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/></td><td>-</td></tr>");
 			          }
 			        } else {
 			          if(items[i].requestType == "재정") {
-			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category">' + selectStr + "<td><input type='text' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "원</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/>원</td><td>-</td></tr>");
+			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category">' + selectStr + "<td><input type='text' class='responsive-input' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "원</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/>원</td><td>-</td></tr>");
 			          } else {
-			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category">' + selectStr + "<td><input type='text' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/></td><td>-</td></tr>");
+			              $(qid).after('<tr class="rq_item" id="rq_item' + i + '" class="needs-category">' + selectStr + "<td><input type='text' class='responsive-input' id='" + delNameID + "' value='" + items[i].itemName + "'/></td><td>" + items[i].receivedNum + "</td><td><input type='number' class='response-item-count-mid' value='" + items[i].itemNum + "' id='" + delNumID + "' onkeyup='checkMoney(this)'/></td><td>-</td></tr>");
 			          }
 			        }
 			      }
@@ -724,7 +724,7 @@ function rowAdd() {
   innerHtml += "<option name='SERVICE' value='SERVICE'>봉사</option>";
   innerHtml += "<option name='ETC' value='ETC'>기타</option>";
   innerHtml += "</select></th>";                  
-  innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th><th>-</th>";
+  innerHtml += "<th><input type='text' class='request-item-name responsive-input' placeholder='이름 입력' id='"+curName+"'/></th><th>-</th>";
   innerHtml += "<th><div id='"+curDiv+"'>";
   innerHtml += "<input type='number' class='response-item-count-mid' name='request' placeholder='0' value='0' id='"+curCount+"' onkeyup='checkMoney(this)'/>";
   innerHtml += "</div></th>";

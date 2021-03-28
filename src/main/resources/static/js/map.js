@@ -259,7 +259,13 @@ let mapInit = {
 	
 	// (마커 클릭시 나타나게 되는) 상세 정보 배너 채우기
 	fillMarkerInfo: function(InputRequest){	// index: requestList의 index
-			$("#marker-info-title").text(InputRequest.title); 
+			if($("#marker-info-title").text() == InputRequest.title) {
+				$("#marker-info-container").css('display', 'none');
+				$("#marker-info-title").text('');
+				return ;
+			} else {
+				$("#marker-info-title").text(InputRequest.title); 				
+			}
 			$("#marker-info-date").text(InputRequest.regDate.substring(0,10)); 
 	
 		  // 날짜로 상태 계산 
@@ -281,6 +287,7 @@ let mapInit = {
 		 $("#marker-info-urgentlevel").text(urgentLevel); 
 		 $("#marker-info-address").text(InputRequest.requestAddress); 
 		 $("#marker-info-phone").text(InputRequest.user.userPhone); 
+		$("#marker-info-container").css('display', 'block');
 	},
 
 	// 마크하기 
@@ -413,12 +420,17 @@ let mapInit = {
 					 kakao.maps.event.addListener(marker, 'click', function() {
 						map.setCenter(coords);	// 클릭 위치로 이동
 						mapInit.fillMarkerInfo(list);	// marker info 채우는 함수
+						//$("#marker-info-container").css('display', 'block');
+
+						/*
 						// 상세보기 배너 띄우기 (이미 띄워져 있으면 없애는 기능)
 						if($("#marker-info-container").css('display') == 'block') {
+							// 만약 클릭한 marker의 정보가 이전 정보와 같다면
 							$("#marker-info-container").css('display', 'none');
 						} else if($("#marker-info-container").css('display') == 'none') {
 							$("#marker-info-container").css('display', 'block');
 						}
+						*/
 						 // 검색코드에 나타내기
 						 $("#marker-info-search-input").val(list.id);
 				
