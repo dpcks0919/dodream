@@ -5,36 +5,43 @@
 
 <p style="font-weight:bold;">* 응답 내역을 수정한 후 [저장하기]를 누르시면 수정된 내역이 바로 저장됩니다.</p>
 
-			<div class="" style="display:flex; justify-content:space-between;">
-				<h5>응답 내역 확인</h5>
+			<div class="responsive-reply-div" style="display:flex; justify-content:space-between;">
+				<h5 class="">응답 내역 확인</h5>
 				<span id="rq_title" style="font-size:0.75rem;"></span>
 			</div>
 			<div class="content-info">
-				<table class="info-table">
-					<tr>
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td id="rp_id" style="width: 27.5%;"></td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="rp_date" style="width: 37.5%;"></td>
-					</tr>
-					<tr>
-						<td><b>승인여부</b></td>
-						<td>
+				<div class="div-table" style="padding-bottom:1rem;">
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rp_id"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><span class="input-span" id="rp_date"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></b></div>
 							<select class="request-period" name="type" id="rp_status" style="outline:none;">
 								<option value="WAITING">대기</option>
 								<option value="APPROVED">승인</option>
 							</select>
-						</td>
-						<td><b>소속</b></td>
-						<td><input id="rp_org" style="outline:none;"/></td>
-					</tr>
-					<tr>
-						<td><b>등록자 명</b></td>
-						<td><input id="rp_name" style="outline:none;" /></td>
-						<td><b>연락처</b></td>
-						<td><input id="rp_phone" style="outline:none;" /></td>
-					</tr>
-				</table>
+							
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>소속<span style="visibility:hidden;">소속</span></b></div><input id="rp_org" style="outline:none;"/>
+						</div>						
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>응답자<span style="visibility:hidden;">요</span></b></div><input id="rp_name" style="border:1px solid white;" readonly/>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>연락처<span style="visibility:hidden;">연</span></b></div><input id="rp_phone" style="outline:none;" />
+						</div>						
+					</div>
+				</div>		
+				
 				<div class="content-text">
 					<textarea style="width:100%; padding:0.5rem; resize: none; outline:none;" id="rp_content" placeholder="응답에 대한 설명입니다."></textarea>
 				
