@@ -19,26 +19,30 @@
 		<div class="modal-content">
 			<div id="rq_title"></div>
 			<div class="content-info">
-				<table class="info-table">
-					<tr>
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td id="rq_id" style="width: 27.5%;"></td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="rq_date" style="width: 37.5%;"></td>
-					</tr>
-					<tr>
-						<td><b>상태</b></td>
-						<td id="rq_status"></td>
-						<td><b>주소</b></td>
-						<td id="rq_addr"></td>
-					</tr>
-					<tr>
-						<td><b>기간</b></td>
-						<td id="rq_level"></td>
-						<td><b>요청기관</b></td>
-						<td id="rq_user"></td>
-					</tr>
-				</table>
+				<div class="div-table">	
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rq_id"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><span class="input-span" id="rq_date"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></span></b></div><span class="input-span" id="rq_status"></span>
+						</div>
+						<div class="div-table-left">
+							<div class="div-table-title"><b>요청기관</b></div><span class="input-span" id="rq_user"></span>
+						</div>
+					</div>					
+					<div class="div-table-wrapper">
+						<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="rq_level"></span>
+					</div>								
+					<div class="div-table-wrapper">
+						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="rq_addr"></span>
+					</div>				
+				</div>
 				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">
 					<table class="info-table">
@@ -59,6 +63,7 @@
 				<i class="far fa-heart" id="btn-heart"></i>
 				<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
 			</div>
+			<div class="btn-close " onclick="closeModal();">창 닫기</div>			
 		</div>
 	</div>
 	<!-- 응답하기 -->

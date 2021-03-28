@@ -145,10 +145,11 @@ function rowAdd() {
   innerHtml += "<option name='FINANCE' value='FINANCE'>재정</option>";
   innerHtml += "<option name='SERVICE' value='SERVICE'>봉사</option>";
   innerHtml += "<option name='ETC' value='ETC'>기타</option>";
-  innerHtml += "</select></th>";                  innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
+  innerHtml += "</select></th>";                  
+  innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
   innerHtml += "<th><div id='"+curDiv+"'>";
-  innerHtml += "<i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
-  innerHtml += "<i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this);'></i>";
+  innerHtml += "<i class='fas fa-minus minus-icon responsive-disappear' id='"+curID+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+  innerHtml += "<i class='fas fa-plus plus-icon responsive-disappear' id='"+curID+"' onclick='plusCount(this);'></i>";
   innerHtml += "</div></th>";
   innerHtml += "<th><div class='del-btn' id="+curID+" onclick='rowDelete(this);'>X</div></th>";
   innerHtml += "</tr>";

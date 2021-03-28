@@ -10,22 +10,25 @@
 		<div class="modal-content">
 			<h5 id="modal-title">독거어르신 주거환경개선 도움 요청</h5>
 			<div class="content-info">
-				<table class="info-table">
-					<tr>
-						<td style="width: 13.5%;"><b>등록날짜</b></td>
-						<td style="width: 36.5%;"  id="modal-date"></td>
-						<td style="width: 13.5%;"><b>요청대상</b></td>
-						<td style="width: 36.5%;"  id="modal-type"></td>
-					</tr>
-					<tr>
-						<td><b>기간</b></td>
-						<td id="modal-period"></td>
-						<td><b>주소</b></td>
-						<td id="modal-address"></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
+				<div class="div-table">	
+					<div class="div-table-wrapper">
+						<div class="div-table-right">
+							<div class="div-table-title"><b>등록날짜</b></div><span class="input-span" id="modal-date"></span>
+						</div>
+						<div class="div-table-left">
+							<div class="div-table-title"><b>요청대상</b></div><span class="input-span" id="modal-type"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="modal-period"></span>
+						</div>
+					</div>
+					<div class="div-table-wrapper">
+						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="modal-address"></span>
+					</div>				
+				</div>
+				
 				<div class="content-text" id="modal-contents"></div>
 				<div class="content-needs">
 					<table class="info-table" id="modal-table">

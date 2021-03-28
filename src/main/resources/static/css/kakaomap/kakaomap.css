@@ -71,4 +71,9 @@
 	box-sizing: content-box;
 }
 
+@media (max-width: 576px) {
+	.map_wrap {
+		height:300px!important;
+	}	
+}
 
