@@ -10610,3 +10610,9 @@ form .row:first-child .floating-label-form-group {
 	cursor:pointer;
 }
 
+@media (max-width: 576px) {
+  .responsive-disappear {
+  	display:none!important;
+  }
+}
+

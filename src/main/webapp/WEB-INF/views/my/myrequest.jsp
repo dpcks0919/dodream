@@ -26,7 +26,7 @@ table td {
 
 	<!-- 요청 항목 세부정보 보기 -->
 	<div class="modal-container" id="view-detail" style="display: none;">
-		<div class="modal-content" style="height: 100%;">
+		<div class="modal-content" style="height: 95%;">
 			<div class="modal-title">
 				<input id ="rq_title" type="text" style="border-style:none; font-size:1.25rem; font-weight:bold;" readonly/>
 				<div class="dropdown dd-down" id="change-req" onclick="requestdown(this);">
@@ -172,6 +172,11 @@ table td {
 			<div class="content-info" id="response-info" style="display: block;">
 				<div class="content-needs" id="content-responseList"></div>
 			</div>
+			<div>
+			</div>
+		</div>
+		<div class="" style="width:100%; padding-top:0.25rem;">
+			<div class="btn-close2 " onclick="closeModal_request();">창 닫기</div>					
 		</div>
 	</div>
 

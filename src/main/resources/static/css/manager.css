@@ -100,9 +100,11 @@ th, td {
   outline:none!important;
   cursor:pointer;
 }
-
+ .responsive-input {
+ 	width:auto!important;
+ }
 .response-item-count-mid {
-  height:3vh;
+  height:1.5rem;
   width: auto!important;
   vertical-align:middle;
   outline:none;
@@ -131,9 +133,21 @@ th, td {
 		border-bottom:3px solid #ed7e95!important;
 	}
 	
-	.table-userPhone, .table-date {
+	.table-userPhone, .table-date, .table-title {
 		display:none;
 	}
+  .responsive-input {
+  	width:4rem!important;
+  }
+  .response-item-count-mid {
+  	width:2rem!important;
+  }
+  .response-item-big {
+  	width:4rem!important;
+  } 
+  .responsive-reply-div {
+  	flex-direction: column!important;
+  } 
 
 	
 	

@@ -11,7 +11,7 @@ function openMenu() {
   function openProfile() {
     document.getElementById("Wrapper").style.marginLeft = "-70%";
     document.getElementById("mySidebar2").style.width = "70%";
-    document.getElementById("mainNav").style.right = "70%";
+    document.getElementById("mainNav").style.left = "-70%";
     document.getElementById("page-top").style.overflow = "hidden";
     document.getElementById("nav-burger").style.color="white";
     document.getElementById("nav-logo").style.display="none";
