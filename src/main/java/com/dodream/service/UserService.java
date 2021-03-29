@@ -311,6 +311,34 @@ public class UserService {
 	}
 	
 	@Transactional
+	public void userDelete(User user) {
+		User persistance = userRepository.findByLoginId(user.getLoginId());
+		
+		persistance.setUserName("0");
+		persistance.setUserSex(0);
+		persistance.setUserPhone("0");
+		persistance.setUserEmail("0");
+		persistance.setOrgName("0");
+		persistance.setOrgUserRole("0");
+		persistance.setNotificationRadius(0);
+		persistance.setMsgFlag(0);
+		persistance.setEmailFlag(0);
+		persistance.setOrgPhone("0");
+		persistance.setShowFlag(0);
+		persistance.setAddress("0");
+		persistance.setLatitude(0);
+		persistance.setLongitude(0);
+		persistance.setIsSocial(0);
+		persistance.setRegDate(null);
+		persistance.setUserDob(null);
+		persistance.setLoginCount(0);
+		
+		persistance.setStateFlag(StatusType.DELETED);
+		persistance.setUserType(RoleType.DELETED);
+
+	}
+	
+	@Transactional
 	public void updatepw(String currentId, String password) {		
 		User persistance = userRepository.findByLoginId(currentId);
 		String encPassword =  encoder.encode(password);
