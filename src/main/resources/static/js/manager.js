@@ -1023,6 +1023,39 @@ function update(){
 	});
 }
 
+function withdraw() {
+	var conf = confirm("삭제하시겠습니까?")
+	var idNum = $("#input_id").val();
+	var uid = $("#input_uid").val();
+	var udob = new Date();
+	
+	let data = {
+		id: idNum,
+		loginId: uid,
+		userDob: udob,
+	};	
+	
+	if(conf == true) {
+		$.ajax({
+			type: "PUT",
+			url: "/deleteUserProc",
+			data: JSON.stringify(data), //json으로 변경, 
+			contentType: "application/json; charset = utf-8 ",  // body 데이터가 어떤 타입인지
+			//dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열, (생긴게 json이라면 => javascript로 변경해줌)
+		}).done(function(resp){ // 응답의 결과를 받아주는 parameter
+			if(resp.status == 500){
+				alert("삭제에 실패하였습니다.");
+			}else{
+				alert("삭제되었습니다.");
+				location.href = "manager";
+			}
+		}).fail(function(error){
+			alert(error);
+			console.log(JSON.stringify(error));
+		});
+	}
+}
+
 function pwChange(){
 		var userId = $("#input_uid").val();
 		var password = $("#input_upw").val();
@@ -1052,3 +1085,4 @@ function pwChange(){
 			});
 		}
 	}
+	

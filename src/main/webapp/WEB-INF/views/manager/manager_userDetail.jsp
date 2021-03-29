@@ -110,6 +110,7 @@
 	</div>
 </div>
 </div>
-<div class="modal-ftr" style="position:absolute;bottom:0;right:0;">
+<div class="modal-ftr" style="width:100%;position:absolute;bottom:0;right:0;display:flex;flex-direction:row;justify-content:space-between;">
+	<div class="btn-res" onclick="withdraw();">삭제하기</div>
 	<div class="btn-res" onclick="update();">수정하기</div>
 </div>

@@ -152,6 +152,14 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	@PutMapping("/deleteUserProc")
+	public ResponseDto<Integer> deleteUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+		userService.userDelete(user);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
 	@PutMapping("/updateUserProc")
 	public ResponseDto<Integer> updateUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
 		StatusType getStatus = user.getStateFlag();
