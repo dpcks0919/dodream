@@ -45,49 +45,40 @@ public class ManagerController {
 		return "manager/main";
 	}
 	
-	//	유저 목록 불러오기
+	//	User list
 	@GetMapping("user/managerUserTable")
 	public String managerUserList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("users", userService.readUserList(pageable));
 		return "manager/manager_userTable";
 	}
-	//	유저 디테일 모달 채우기
+	//	User detail
 	@GetMapping("user/managerUserDetail")
 	public String managerUserDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		// 여기서 서비스는 안만들었는데 여기부터는 해보셈
-		// readUserDetail();
-		//model.addAttribute("users", userService.readUserList(pageable));
 		return "manager/manager_userDetail";
 	}
 	
-	//	요청 목록 불러오기
+	//	Request list
 	@GetMapping("user/managerRequestTable")
 	public String managerRequestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("requests", requestService.readRequestList(pageable));
 		return "manager/manager_requestTable";
 	}
 	
-	//	유저 디테일 모달 채우기
+	//	Request detail
 	@GetMapping("user/managerRequestDetail")
 	public String managerRequestDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		// 여기서 서비스는 안만들었는데 여기부터는 해보셈
-		// readUserDetail();
-		//model.addAttribute("users", userService.readUserList(pageable));
 		return "manager/manager_requestDetail";
 	}
 	
-	//	응답 목록 불러오기
+	//	Reply list
 	@GetMapping("user/managerReplyTable")
 	public String managerReplyList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("replys", replyService.readReplyList_manager(pageable));
 		return "manager/manager_replyTable";
 	}
-	//	유저 디테일 모달 채우기
+	//	Reply detail
 	@GetMapping("user/managerReplyDetail")
 	public String managerReplyDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		// 여기서 서비스는 안만들었는데 여기부터는 해보셈
-		// readUserDetail();
-		// model.addAttribute("users", userService.readUserList(pageable));
 		return "manager/manager_replyDetail";
 	}
 		

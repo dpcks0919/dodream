@@ -39,7 +39,6 @@ public class ReplyApiController {
 	
 	@PostMapping("/notifySocialWorkerByEmailProc")
 	public ResponseDto<Integer> notifySocialWorkerByEmailProc(@RequestBody Reply reply) throws UnsupportedEncodingException, MessagingException{
-		// requestId로 해당 request 객체 찾기
 		Request request = requestService.getRequest(reply.getRequest().getId());
 		replyService.notifySocialWorkerByEmail(reply, request);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), null); 
@@ -52,7 +51,6 @@ public class ReplyApiController {
 		
 		for(int i=0;  i < replyDto.getReplyItems().length; i ++) {
 			if( Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum() ) != 0  ) {
-				System.out.println(replyDto.getReplyItems()[i]);
 				check += replyService.checkItemValidation(replyDto.getReplyItems()[i].getId(), 
 						 Integer.parseInt(replyDto.getReplyItems()[i].getReplyNum()));
 			}
@@ -83,10 +81,16 @@ public class ReplyApiController {
 		return _reply;
 	}
 	
+	@GetMapping("user/deleteReply")
+	public ResponseDto<Integer> deleteReply(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		Reply reply = replyService.getReply(Integer.parseInt(id));
+		replyService.replyDelete(reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
+	}
+	
 	@GetMapping("user/ManagerViewReply")
 	public ReplyDto ManagerViewReply(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		Reply reply = replyService.getReply(Integer.parseInt(id));
-		System.out.println("requestAPI Controller");
 		return new ReplyDto (reply, null);
 	}
 	// myrequest에서 request의 reply에 해당하는 replyItem들을 가져옴.
@@ -122,15 +126,11 @@ public class ReplyApiController {
 	public String[] replyItemObject(HttpServletRequest httpServletRequest) {
 		String id = httpServletRequest.getParameter("id");
 		String str_replyType = "";
-		// 여기서 id는 reply id이다.
-		// 가져올 것은 replyList에서의 reply_num, requestItemList에서의 이름, 물품 타입, 
 		ReplyItem[] replyItemList = replyService.readReplyItemList(replyService.getReply(Integer.parseInt(id)));
 		String[] itemList = new String[replyItemList.length];
 		for(int i=0; i<replyItemList.length; i++) {
 			// 응답 아이템들 중에 하나의 id를 가져와서 requestItem에서 이름, 물품 타입들을 찾는다.
 			RequestItem _request = requestService.getRequestItem(replyItemList[i].getRequestItem().getId());
-			
-//			System.out.println("타입 : " + _request.getRequestType() + ", 이름 : " + _request.getItemName() + ", 응답 아이템 개수 : " + replyItemList[i].getReplyNum());
 			if(_request.getRequestType().toString().equals("Stuff")) {
 				str_replyType = "물품";
 			} else if(_request.getRequestType().toString().equals("Finance")) {
@@ -141,8 +141,6 @@ public class ReplyApiController {
 				str_replyType = "기타";
 			}
 			itemList[i] = str_replyType + "^!@#^" + _request.getItemName() + "^!@#^" +  replyItemList[i].getReplyNum();
-			// 타입^^이름^^개수
-//			System.out.println(itemList[i]);
 		}
 		
 		return itemList;
@@ -162,7 +160,6 @@ public class ReplyApiController {
 		for(int i=0; i<replyItemList.length; i++) {
 			// 응답 아이템들 중에 하나의 id를 가져와서 requestItem에서 이름, 물품 타입들을 찾는다.
 			RequestItem request = requestService.getRequestItem(replyItemList[i].getRequestItem().getId());
-//			System.out.println("타입 : " + _request.getRequestType() + ", 이름 : " + _request.getItemName() + ", 응답 아이템 개수 : " + replyItemList[i].getReplyNum());
 			if(request.getRequestType().toString().equals("Stuff")) {
 				str_replyType = "물품";
 			} else if(request.getRequestType().toString().equals("Finance")) {
@@ -173,7 +170,6 @@ public class ReplyApiController {
 				str_replyType = "기타";
 			}
 			itemList[i] = str_replyType + "^!@#^" + request.getItemName() + "^!@#^" +  replyItemList[i].getReplyNum() + "^!@#^" + request.getReceivedNum() + "^!@#^" + request.getItemNum() + "^!@#^" + replyItemList[i].getId() + "^!@#^";
-			// 타입^^이름^^응답한 개수^^응답된개수^^목표개수
 		}
 		return itemList;
 	}	
@@ -199,7 +195,6 @@ public class ReplyApiController {
 	// myreply에서 기존 reply update
 	@PostMapping("/replyUpdateProc")
 	public ResponseDto<Integer> replyUpdateProc(@RequestBody Reply reply) {
-		System.out.println("응답 업데이트");
 		replyService.updateReply(reply);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
@@ -207,11 +202,9 @@ public class ReplyApiController {
 	@ResponseBody
 	@RequestMapping(value="/user/replyUpload", method = RequestMethod.GET)
 	public void replyUpload(HttpServletRequest httpServletRequest) {	
-		System.out.println("replyUpload");
 		String id = httpServletRequest.getParameter("id");
 		String status = httpServletRequest.getParameter("status");
 		String comment = httpServletRequest.getParameter("message");
-		System.out.println(id+", "+status+", "+comment);
 		replyService.submitMessage(id, status, comment);
 	}	
 	

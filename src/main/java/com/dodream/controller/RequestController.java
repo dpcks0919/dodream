@@ -34,7 +34,6 @@ public class RequestController {
 	//	요청 페이지 목록
 	@GetMapping("requestList")
 	public String requestList(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		//model.addAttribute("requests", requestService.readRequestList(pageable));
 		if(principalDetails != null)
 			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_list";
@@ -43,7 +42,7 @@ public class RequestController {
 	//	요청 목록 불러오기
 	@GetMapping("requestTable")
 	public String requestTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		model.addAttribute("requests", requestService.readRequestList(pageable));
+		model.addAttribute("requests", requestService.readRequestList(0, pageable));
 		if(principalDetails != null)
 			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_table";

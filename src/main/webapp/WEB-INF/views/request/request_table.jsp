@@ -46,6 +46,7 @@
 					urgentLevel: '${request.urgentLevel}',
 					user: '${request.user.orgName}', //기관 이름
 					description: '${request.description}',
+					status: '${request.status}',
 					requestItem: arr,
 				};
 			</script>

@@ -16,7 +16,6 @@ function goPopup(){
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 
 	$("#roadAddrPart1").val(roadAddrPart1);
-	console.log("JusoCallBack");
 	
 	var geocoder = new daum.maps.services.Geocoder();
 	var x, y = "";
@@ -30,7 +29,6 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 			Lng = result[0].x;
 			Lat = result[0].y;
-			console.log("현재 위경도 : " + Lng +", " + Lat);
 			$("#roadLongitude").val(Lng);
 			$("#roadLatitude").val(Lat);
 		}
@@ -430,10 +428,84 @@ function manager_viewRequest(rid) {
 			        }
 			      }
 					$("#"+deltypeID).val(items[i].requestType).prop("selected", true);
+					if(req.status == 'DELETED') {
+						$("#"+delNameID).prop("disabled","disabled");
+						$("#"+delNumID).prop("disabled","disabled");
+						$("#" + deltypeID).prop("disabled","disabled");
+					}
 			    }
-				$("#rq_save").attr("onclick", ("manager_editRequest('"+ req.id +"')"));
+				
+				if(req.status == 'DELETED') {
+					$("#rq_save").attr("onclick", ("alert('이미 삭제된 요청입니다.')"));
+					$("#rq_delete").attr("onclick", ("alert('이미 삭제된 요청입니다.')"));
+					
+					$("#rq_title").prop("disabled","disabled");
+					$("#rq_clientType").prop("disabled","disabled");
+					$("#rq_status").prop("disabled","disabled");
+					$("#rq_urgentLevel").prop("disabled","disabled");
+					$('.summernote').summernote('disable');
+					$("#rq_search").prop("disabled","disabled");
+					$(".add_item-button").prop("disabled","disabled");
+				} else {
+					$("#rq_save").attr("onclick", ("manager_editRequest('"+ req.id +"')"));
+					$("#rq_delete").attr("onclick", ("manager_deleteRequest('"+ req.id +"')"));					
+				}
 			}
 		});
+}
+/*
+(1). 요청내역을 삭제 - deleteFlag = 1로 설정
+(2). 요청의 상태 - DELETED로 설정
+(3). 관련 응답의 상태 - DELETED로 설정
+(4). 응답상태가 DELETED 라면 응답의 comment들에 모두 "요청자 혹은 응답자에 의해 삭제된 응답입니다.  문의 사항이 있다면 dodream.touch@gmail.com(
+054-262-1070)로 문의해주시면 감사하겠습니다." 라는 문구가 보이게 한다. (DB 입력 X)
+(5). 응답상태가 DELETED라면 [내 응답 내역]에서 수정 기능 제한하기.
+(6). [내 요청내역]에서 deleteFlag가 1이라면 항목이 보이지 않도록 한다.
+*/
+
+function manager_deleteRequest(rid) {
+	if(confirm("해당 요청을 삭제하시겠습니까?")) {
+		$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/deleteRequest?id=" + rid
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러 발생!");
+		} else {
+			alert("해당 요청이 삭제되었습니다.");
+			menuToggle(2);
+			closeModal_manager();
+		}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});
+	} else {
+		alert("취소하였습니다");
+	}
+}
+
+// 여기 하다말았음
+function manager_deleteReply(rid) {
+	if(confirm("해당 요청을 삭제하시겠습니까?")) {
+		$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/deleteReply?id=" + rid
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러 발생!");
+		} else {
+			alert("해당 응답 내역이 삭제되었습니다.");
+			menuToggle(3);
+			closeModal_manager();
+		}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});
+	} else {
+		alert("취소하였습니다");
+	}
 }
 
 //myrespose 나의 응답용 JS
@@ -468,7 +540,6 @@ function manager_viewReply(rid) {
 			}
 		
 			$("#rp_content").val(rp.replyContent);
-		
 			//요청자 회신란 넣기
 			if(rp.comment != ""){// comment가 달려있으면 보여주기(아니면 안보여줌)
 				$("#response-content").html(rp.comment);
@@ -532,8 +603,26 @@ function manager_viewReply(rid) {
 					          }
 					        }
 					      }
+						if(rp.status == 'DELETED') {
+							$("#"+rItemId).prop("disabled","disabled");
+							$(".minus-icon").prop("hidden","hidden");
+							$(".plus-icon").prop("hidden","hidden");							
+						}
 				    }
-					$("#rp-save").attr("onclick", ("manager_editReply('"+ rp.id +"')"));
+
+					if(rp.status == 'DELETED') {
+						$("#response-content").html("요청이 삭제된 응답 혹은 응답자에 의해 삭제된 응답입니다.\n문의 사항이 있다면 dodream.touch@gmail.com(054-262-1070)로 문의해주시면 감사하겠습니다.");
+						$("#response-content").prop("disabled","disabled");
+						$("#rp_org").prop("disabled","disabled");
+						$("#rp_phone").prop("disabled","disabled");
+						$("#rp_status").prop("disabled","disabled");
+						$('#rp_content').prop("disabled", "disabled");
+						$("#rp-save").attr("onclick", ("alert('이미 삭제된 응답입니다.')"));
+						$("#rq_delete").attr("onclick", ("alert('이미 삭제된 응답입니다.')"));
+					} else {
+						$("#rp-save").attr("onclick", ("manager_editReply('"+ rp.id +"')"));
+						$("#rq_delete").attr("onclick", ("manager_deleteReply('"+ rp.id +"')"));											
+					}
 				}
 			}).fail(function(error) {
 				console.log(JSON.stringify(error));
@@ -629,7 +718,7 @@ function manager_editReply(rid) {
 						if (resp.status == 500) {
 							alert("에러발생");
 						} else {
-							//alert("등록되었습니다!");
+							alert("수정되었습니다!");
 							menuToggle(3);
 							closeModal_manager();
 						}
@@ -822,7 +911,6 @@ function manager_editRequest(rid) {
 				for(var i=0; i<default_item_list1.length; i++) {
 					default_item_id.push(default_item_list1[i].id);
 				} 
-				console.log(default_item_id);
 				for(var i=0; i<default_item_id.length; i++) {
 				  var delNumID = "delNum" + default_item_id[i];
 				  var deltypeID = "delType" + default_item_id[i];
@@ -871,7 +959,6 @@ function manager_editRequest(rid) {
 						itemName : newName,
 						requestType : newItem.toUpperCase()
 					};
-					console.log(data2);
 					$.ajax({
 						type : "POST",
 						url : "/requestItemSaveProc_myrequest",
@@ -913,7 +1000,6 @@ function manager_editRequest(rid) {
 					description : rqContents,
 					status : rq_status
 				};
-				console.log(data3);
 				
 				$.ajax({
 					type : "POST",

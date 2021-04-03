@@ -80,18 +80,12 @@
 		</c:forEach>
 	</tbody>
 </table>
-<!-- 
-<c:if test="${userCount == 0}">
-	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">유저 정보가 존재하지 않습니다.</div>
-</c:if>
- -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">
 		<!-- searech line -->
 		<br>
-		<!-- 페이징할때 주의할 점 : users.number는 0부터 시작하기 때부터 그걸 고려해서 밑에 다 수정했음. 
-				그래서 화면에 보이는 것만 1부터 보이게 설정함. -->
+
 		<c:set var="page" value="${users.number}" />
 		<!-- 첫번째 페이지 -->
 		<c:set var="startNum" value="${page - (page) % 5}" />
