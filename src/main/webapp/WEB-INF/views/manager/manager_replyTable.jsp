@@ -19,7 +19,7 @@
 		<tr style="border-bottom: 3px solid #d3d3d3;">
 			<th class="table-num" style="width:10%;">응답번호</th>
 			<th class="table-content" style="width:15%;">응답 내용</th>
-			<th class="table-status" style="width:12.5%;">승인여부</th>
+			<th class="table-status" style="width:12.5%;">상태</th>
 			<th class="table-name" style="width:10%;">응답자</th>
 			<th class="table-regdate" style="width:10%;">등록일</th>
 			<th class="table-title" style="width:25%;">관련 요청</th>
@@ -39,6 +39,9 @@
 				<c:when test="${reply.status == 'WAITING'}">
 					<c:set var="replytype" value="대기" />
 				</c:when>
+				<c:when test="${reply.status == 'DELETED'}">
+					<c:set var="replytype" value="삭제" />
+				</c:when>
 			</c:choose>
 			<c:set var="rcontent" value="${reply.replyContent}"/>
 			<c:if test="${reply.replyContent == ''}">
@@ -56,11 +59,6 @@
 		</c:forEach>
 	</tbody>
 </table>
-<!-- 
-<c:if test="${replyCount == 0}">
-	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">응답글이 존재하지 않습니다.</div>
-</c:if>
- -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">

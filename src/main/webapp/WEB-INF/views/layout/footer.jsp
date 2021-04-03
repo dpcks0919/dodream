@@ -26,9 +26,6 @@
 			</div>
 			<div class="footer-link">
 				<a class="text-white" href="/dodreamtouch">두드림터치</a>
-				<!-- <a class="footer-link-list">두드림터치</a>
-             	<a class="footer-link-list">인사말</a>
-            	<a class="footer-link-list">오시는길</a> -->
 			</div>
 		</div>
 	</div>

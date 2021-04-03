@@ -38,15 +38,13 @@ public class UserController {
 	public String myreply(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
 		model.addAttribute("user", principalDetails.getUser());
 		model.addAttribute("myreplyList", replyService.readMyReply(principalDetails.getUser(), pageable));
-		System.out.println(model);
 		return "my/myreply";
 	}
 	
 	@GetMapping("user/myrequest")
 	public String myrequest(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
 		model.addAttribute("user", principalDetails.getUser());
-		model.addAttribute("myrequestList", requestService.readMyRequest(principalDetails.getUser(), pageable));
-		System.out.println(model);
+		model.addAttribute("myrequestList", requestService.readMyRequest(0, principalDetails.getUser(), pageable));
 		return "my/myrequest";
 	}
 	
@@ -61,7 +59,6 @@ public class UserController {
 	
 	@GetMapping("user/infoCheck/{type}")
 	public String infoCheck(@PathVariable(value="type") String type, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
 		int isSocial = principalDetails.getUser().getIsSocial();
 		model.addAttribute("userType", principalDetails.getUser().getUserType());
 		
@@ -76,8 +73,6 @@ public class UserController {
 	@GetMapping("user/editInfo/{type}")
 	public String editInfo(@PathVariable(value="type") String type, Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("user", principalDetails.getUser());
-		System.out.println(type);
-		
 		return "my/edit_info_"+type;
 	}
 	

@@ -22,7 +22,7 @@
 				<span id="rq_title" style="font-size:0.75rem;"></span>
 			</div>
 			<div class="content-info">
-				<div class="div-table" style="border-top:none; padding-bottom:1rem;">
+				<div class="div-table" style="border-top:2px solid black; padding-top:1rem!important; padding-bottom:1rem;">
 					<div class="div-table-wrapper">
 						<div class="div-table-left">
 							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rp_id"></span>
@@ -48,30 +48,7 @@
 						</div>						
 					</div>
 				</div>
-				<!-- 
-					<table class="info-table">
-						<tr>
-							<td style="width: 17.5%;"><b>등록번호</b></td>
-							<td id="rp_id" style="width: 27.5%;"></td>
-							<td style="width: 17.5%;"><b>등록날짜</b></td>
-							<td id="rp_date" style="width: 37.5%;"></td>
-						</tr>
-						<tr>
-							<td><b>상태</b></td>
-							<td id="rp_status"></td>
-							<td><b>소속</b></td>
-							<td><input id="rp_org" style="border:1px solid white;" readonly /></td>
-						</tr>
-						<tr>
-							<td><b>등록자 명</b></td>
-							<td><input id="rp_name" style="border:1px solid white;" readonly/></td>
-							<td><b>연락처</b></td>
-							<td><input id="rp_phone" style="border:1px solid white;" readonly /></td>
-						</tr>
-					</table>
-				 -->
-				
-				
+			
 				<div class="content-text">
 					<textarea style="border:1px solid white; width:100%; resize: none; outline:none;" id="rp_content" placeholder="-" readonly></textarea>
 				
@@ -167,6 +144,9 @@
 									</c:when>
 									<c:when test="${reply.status == 'CLOSED'}" >
 										<c:set var="status" value="마감"/>
+									</c:when>
+									<c:when test="${reply.status == 'DELETED'}" >
+										<c:set var="status" value="삭제됨"/>
 									</c:when>
 								</c:choose>
 								<c:set var="replyContent" value="${reply.replyContent}"/>

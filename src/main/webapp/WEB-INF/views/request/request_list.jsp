@@ -52,30 +52,6 @@
 						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="rq_addr"></span>
 					</div>				
 				</div>
-			
-			<!-- 
-				<table class="info-table">
-					<tr>
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td id="rq_id" style="width: 27.5%;"></td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="rq_date" style="width: 37.5%;"></td>
-					</tr>
-					<tr>
-						<td><b>상태</b></td>
-						<td id="rq_status"></td>
-						<td><b>주소</b></td>
-						<td id="rq_addr"></td>
-					</tr>
-					<tr>
-						<td><b>기간</b></td>
-						<td id="rq_level"></td>
-						<td><b>요청기관</b></td>
-						<td id="rq_user"></td>
-					</tr>
-				</table>
-			 -->
-				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">
 					<table class="info-table">
@@ -89,16 +65,12 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="modal-ftr">
 			<c:choose>
 				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
 					<div class="" style="width:100%;">
 						<div class="btn-close " onclick="closeModal();">창 닫기</div>
 						<div class="btn-close " style="position:relative!important; float:right;" onclick="alert('로그인이 필요합니다!');">응답하기</div>
-						<!-- 
-							 <div class="btn-res" onclick="alert('로그인이 필요합니다!')" style="float:right;">응답하기</div>										
-						 -->
 					</div>
 				</c:when>
 				<c:otherwise>

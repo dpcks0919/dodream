@@ -10,7 +10,7 @@
 				<span id="rq_title" style="font-size:0.75rem;"></span>
 			</div>
 			<div class="content-info">
-				<div class="div-table" style="padding-bottom:1rem;">
+				<div class="div-table" style="padding-bottom:1rem; padding-top:1rem!important;">
 					<div class="div-table-wrapper">
 						<div class="div-table-left">
 							<div class="div-table-title"><b>등록번호</b></div><span class="input-span" id="rp_id"></span>
@@ -25,6 +25,7 @@
 							<select class="request-period" name="type" id="rp_status" style="outline:none;">
 								<option value="WAITING">대기</option>
 								<option value="APPROVED">승인</option>
+								<option value="DELETED">삭제</option>
 							</select>
 							
 						</div>
@@ -67,6 +68,9 @@
 			<div class="modal-container" id="view-responseForm"></div>
 			<!-- modal.js에 click event 생성 -->
 			<div class=" " style="width:100%; display:flex; justify-content: space-between; margin-bottom:1rem;">
-				<div class="btn-com btn-edit" id="rp-back">뒤로가기</div>
-				<div class="btn-res" id="rp-save">저장하기</div>
+				<div class="btn-com btn-edit" id="rp-back" onclick="closeModal_manager();">뒤로가기</div>
+				<div style="height:2rem!important;">
+					<div class="btn-res" id="rq_delete" style="display:inline-block;" onclick="">삭제하기</div>					
+					<div class="btn-res" id="rp-save" style="display:inline-block;" onclick="">저장하기</div>		
+				</div>
 			</div>

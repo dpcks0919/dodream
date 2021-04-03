@@ -31,7 +31,6 @@ public class ReplyController {
 	@RequestMapping(value="/user/replyTable", method = RequestMethod.GET)
 	public String replyTable(Model model, HttpServletRequest httpServletRequest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		String id = httpServletRequest.getParameter("id");
-		System.out.println(id);
 		model.addAttribute("replyList", replyService.readReplyList(requestService.getRequest(Integer.parseInt(id))));
 		model.addAttribute("user", principalDetails.getUser());
 		return "my/reply_table";
