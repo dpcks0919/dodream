@@ -29,12 +29,33 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 			Lng = result[0].x;
 			Lat = result[0].y;
-			//console.log("현재 위경도 : " + Lng +", " + Lat);
 			$("#roadLongitude").val(Lng);
 			$("#roadLatitude").val(Lat);
 		}
 	});
 
+}
+
+function deleteRequest() {
+	let rid = $("#rq_id").val();
+	if(confirm("해당 요청을 삭제하시겠습니까?\n해당 요청을 삭제하게 되면, 응답된 내역도 함께 삭제됩니다.")) {
+		$.ajax({
+		type : "GET",
+		traditional : true,
+		url : "/user/deleteRequest?id=" + rid
+	}).done(function(resp) {
+		if (resp.status == 500) {
+			alert("에러 발생!");
+		} else {
+			alert("해당 요청이 삭제되었습니다.");
+			location.reload();
+		}
+		}).fail(function(error) {
+			console.log(JSON.stringify(error));
+		});
+	} else {
+		alert("취소하였습니다");
+	}
 }
 
 function rowAdd() {
@@ -45,7 +66,6 @@ function rowAdd() {
   var curName = curID + "newName";
   var curCount = curID + "newCount";
   var curDiv = curID + "div";
-  // alert(curItem + " "+curName + " "+curCount);
   var innerHtml = "";
   innerHtml += "<tr id="+curID+" class='default_item'>";
   innerHtml += "<th class='item'><select class='request-item' id="+curItem+" onchange='alert_select_value(this, "+curCnt+",1);'>";
@@ -136,7 +156,6 @@ function numberWithCommas(curObj) {
 
 function checkMoney(me, rcNum) {
 	// rcNum은 내가 응답한 아이템 개수를 제외한 다른 사람들이 이미 등록한 개수
-	//console.log(rcNum);
 	var curValue = document.getElementById(me.id).value;
 
 	var rItemId = me.id;

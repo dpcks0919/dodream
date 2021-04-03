@@ -79,48 +79,7 @@ table td {
 							<button id="rq_search" style="background-color:white; border:1px solid black; outline:none; display:none;" onclick="goPopup();">검색</button>
 						</div>
 					</div>
-				</div>
-				
-				<!-- 
-					<table class="info-table" style="border-top: none; margin-top: 0;">
-						<tr>
-							<td style="width: 17.5%;"><b>등록번호</b></td>
-							<td style="width: 27.5%;"><input id="rq_id"  type="text" style="border-style:none;" disabled/></td>
-							<td style="width: 17.5%;"><b>등록날짜</b></td>
-							<td id="" style="width: 37.5%;"><input id="rq_date" type="text" style="border-style:none;" disabled/></td>
-						</tr>
-						<tr>
-							<td><b>상태</b></td>
-							<td id=""><input id="rq_status" type="text" style="border-style:none;" disabled/></td>
-							<td><b>주소</b></td>
-							<td id="">
-								<input class="text-input" type="text" name="roadAddrPart1" style="width:50%;" id="roadAddrPart1" disabled>			
-								<input type="text" name="roadLongitude" id="roadLongitude" hidden />
-								<input type="text" name="roadLatitude" id="roadLatitude" hidden />
-								<button id="rq_search" style="background-color:white; border:1px solid black; outline:none; display:none;" onclick="goPopup();">검색</button>
-							</td>
-						</tr>
-						<tr>
-							<td style="width: 17.5%;"><b>요청대상</b></td>
-							<td style="width: 27.5%;">
-								<select class="request-period" name="type" id="rq_clientType" style="outline:none;" disabled>
-									<option value="ELDERLY">노인</option>
-									<option value="CHILD">아이</option>
-									<option value="DISABLED">장애인</option>
-									<option value="OTHERS">기타</option>
-								</select>
-							</td>
-							<td style="width: 17.5%;"><b>기간 설정</b></td>
-							<td id="" style="width: 37.5%;">
-								<select class="request-period" name="period" id="rq_urgentLevel" style="outline:none;" disabled>
-									<option value="3">보통(한 달 이내)</option>
-									<option value="2">긴급(7~14일 이내)</option>
-									<option value="1">매우 긴급(3일 이내)</option>
-								</select>
-							</td>
-						</tr>
-					</table>
-				 -->			
+				</div>	
 				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="summernoteDiv" id="rq_contents_summernotes" style="display:none;">
@@ -162,21 +121,15 @@ table td {
 					<i class="fas fa-chevron-up"></i>
 				</div>
 			</div>
-			<!-- 
-			1. request.id 에 해당하는 모든 replyList을 불러옴. (ajax로 Controller-Service-replyRepository.findById)
-			2. reply.id, reply.title, reply.item, reply.status 별로 List 정렬 (
-			3. reply.id에 해당하는 title, content, replyItem들을 다 불러옴.
-			4. replyItem
-			
-			-->
 			<div class="content-info" id="response-info" style="display: block;">
 				<div class="content-needs" id="content-responseList"></div>
 			</div>
 			<div>
 			</div>
 		</div>
-		<div class="" style="width:100%; padding-top:0.25rem;">
-			<div class="btn-close2 " onclick="closeModal_request();">창 닫기</div>					
+		<div class="" style="display:flex; justify-content:space-between; width:100%; padding-top:0.25rem;">
+			<div class="btn-close2 " onclick="closeModal_request();">창 닫기</div>
+			<div class="btn-close2 " onclick="deleteRequest();">삭제하기</div>										
 		</div>
 	</div>
 
@@ -256,6 +209,9 @@ table td {
 								<c:set var="status" value="대기"/>
 							</c:when>
 							<c:when test="${request.status == 'CLOSED'}" >
+								<c:set var="status" value="마감"/>
+							</c:when>
+							<c:when test="${request.status == 'DELETED'}" >
 								<c:set var="status" value="마감"/>
 							</c:when>
 						</c:choose>

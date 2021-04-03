@@ -70,7 +70,10 @@ public class Reply {
 	
 	@UpdateTimestamp 
 	private Timestamp updateDate; // update 시 시간 자동 저장
-
+	
+	@Column(columnDefinition = "int default 0")
+	private int deleteFlag;
+	
 	public void setStatus(Enum _status) {
 		// TODO Auto-generated method stub
 		status = (StatusType) _status;

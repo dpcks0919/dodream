@@ -13,7 +13,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Request[] findAllByClientType(ClientType clientType);
 
 	Request[] findAllByDeleteFlag(int i);
-
+	
 	Page<Request> findById(int id, Pageable pageable);
 
 	Page<Request> findByTitleContaining(String id, Pageable pageable);
@@ -53,5 +53,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Page<Request> readInterestRequestByUserId(int userId, Pageable pageable);
 
 	Page<Request> findByUser(User user, Pageable pageable);
+
+	Page<Request> findAllByDeleteFlag(int flag, Pageable pageable);
+
+	Page<Request> findByDeleteFlagAndUser(int flag, User user, Pageable pageable);
 
 }

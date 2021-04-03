@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -77,6 +78,31 @@ public class ReplyService {
 	}
 	
 	@Transactional
+	public void replyDelete(Reply reply) {
+		Reply persistance = replyRepository.findById(reply.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("요청 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+		persistance.setDeleteFlag(1);
+		persistance.setStatus(StatusType.DELETED);	
+		
+		List<ReplyItem> replyItemList = reply.getReplyItem();
+		for(int i=0; i<replyItemList.size(); i++) {
+			int reply_num = replyItemList.get(i).getReplyNum();
+			
+			RequestItem req_persistance = replyItemList.get(i).getRequestItem();
+			if(reply_num > 0) {
+				int result_num = req_persistance.getReceivedNum() - reply_num;
+				req_persistance.setReceivedNum(result_num);				
+			}
+			
+			// 일단 기본적으로, reply_num만큼 received_num에서 빼는 것은 맞는데,
+			// 삭제한 응답에 대해서 0으로 만들어놓을지를 고민중 (어떤 것을 했었는지 기록용)
+			// ReplyItem rep_persistance = replyItemList.get(i);
+			// rep_persistance.setReplyNum(0);
+		}	
+	}
+	
+	@Transactional
 	public Reply[] readReplyList(Request request) {
 		// TODO Auto-generated method stub
 		return replyRepository.findByRequest(request);
@@ -96,7 +122,6 @@ public class ReplyService {
 	
 	@Transactional
 	public Reply saveReply(Reply reply, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
 		reply.setRequest(requestService.getRequest(reply.getRequest().getId()));
 		reply.setUser(principalDetails.getUser());
 		reply.setStatus(StatusType.WAITING);
@@ -125,7 +150,6 @@ public class ReplyService {
 		persistance.setComment(comment);
 		persistance.setStatus((StatusType) _status);
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
-		System.out.println("submitMessage");
 	}
 	
 	// myreply에서 응답 내역 수정
@@ -155,19 +179,6 @@ public class ReplyService {
 		persistance.setReplyNum(replyItem.getReplyNum());
 	}
 	
-	
-
-	/*
-	@Transactional
-	public ReplyItem saveReplyItem(ReplyItem replyItem ) {
-		
-		replyItem.setRequestItem( requestService.getRequestItem(replyItem.getRequestItem().getId()) );
-		
-		replyItemRepository.save(replyItem);
-		
-		return replyItem;
-	}
-	*/
 	@Transactional
 	public void saveReplyItem(ReplyItemDto replyItem, Reply newReply ) {
 				
@@ -236,18 +247,10 @@ public class ReplyService {
         mimeMessageHelper.setText(msg, true);
 
         // 메일 발송 
-        helpSender.send(message);
-		
-		System.out.println("수신자메일: " + rcvEmail);
-		System.out.println("메일 제목: " + title);
-		System.out.println("메일 내용: " +msg);		
+        helpSender.send(message);	
 	}
 
 	public void saveUserInterest(User user, Request request) {
-		System.out.println("ADDING USERINTEREST");		
-		System.out.println("USERID: "+ user.getId());		
-		System.out.println("REQUESTID: "+ request.getId());
-		
 		UserInterest newUserInterest = new UserInterest();
 		newUserInterest.setUser(user);
 		newUserInterest.setRequest(request);
@@ -255,11 +258,8 @@ public class ReplyService {
 		userInterestRepository.save(newUserInterest);
 	}
 
-	public void deleteUserInterest(int userId, int requestId) {
-		System.out.println("DELETING USERINTEREST");		
-		
+	public void deleteUserInterest(int userId, int requestId) {		
 		UserInterest deletingUserInterest = userInterestRepository.findByUserIdAndRequestId(userId, requestId);
-		System.out.println("DELETE USERINTEREST ID: "+ deletingUserInterest.getId());		
 		userInterestRepository.deleteById(deletingUserInterest.getId());
 		
 	}
@@ -269,7 +269,6 @@ public class ReplyService {
 	}
 	
 	public Page<Reply> readMyReply(User user, Pageable pageable) {
-		System.out.println("service");
 		return replyRepository.findByUser(user, pageable);
 	}
 
