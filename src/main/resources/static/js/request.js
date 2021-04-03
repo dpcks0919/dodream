@@ -3,7 +3,6 @@ var prevMarker;
 
 // user_Interest에 추가하는 함수
 function addUserInterest(requestId){
-	//console.log(requestId);
 	$.ajax({
 		type: "POST",
 		url: "/addUserInterestProc",
@@ -21,7 +20,6 @@ function addUserInterest(requestId){
 
 // user_Interest 삭제하는 함수
 function deleteUserInterest(requestId){
-	//console.log(requestId);
 	$.ajax({
 		type: "POST",
 		url: "/deleteUserInterestProc",
@@ -137,7 +135,6 @@ function rowAdd() {
   var curName = curID + "name";
   var curCount = curID + "count";
   var curDiv = curID + "div";
-  // alert(curItem + " "+curName + " "+curCount);
   var innerHtml = "";
   innerHtml += "<tr id="+curID+">";
   innerHtml += "<th class='item'><select class='request-item' id="+curItem+" onchange='alert_select_value(this, "+curCnt+");'>";
@@ -179,44 +176,6 @@ function plusCount(_current) {
   document.getElementById(target).value=cnt*1 + 1;
 }
 
-// 임시 저장 (db에 올리기)
-/*
-function save() {
-  // 제목
-  var title = document.getElementById('requestTitle').value;
-  var period = document.getElementById('requestPeriod').value;
-  // 기간(텍스트)
-  var period_text = period;
-  if(period_text == '보통(한 달 이내)') period = 3;
-  else if(period_text == '긴급(7~14일 이내)') period = 2;
-  else if(period_text == '매우 긴급(3일 이내)') period = 1;
-  // 내용 : 사연
-  var contents = document.getElementById('requestContents').value;
-  // 아이템 총 개수
-  var totalCnt = $('#myTable tbody tr').length-1;
-  // 세부 아이템들 itemList에 객체를 요소로 가지는 배열로 저장될거고, db에 올릴 때 itemList 사용하면 됨.
-  if(totalCnt > 0) {
-    var itemList = [];
-    for(var i = 1; i<=totalCnt; i++) {
-      var _item = 'tr'+i+'item';
-      var _name = 'tr'+i+'name';
-      var _count = 'tr'+i+'count';
-      itemList.push({
-        //item : document.getElementById(_item).value,
-        //name : document.getElementById(_name).value,
-        //count : document.getElementById(_count).value
-        requestType : document.getElementById(_item).value,
-        itemName : document.getElementById(_name).value,
-        itemNum : document.getElementById(_count).value
-      });
-    }
-
-    // DB에 올릴 함수 실행 (임시로 함수 만들어놓음-이름 수정하면됨)
-    // saveItem();
-
-  }
-}
-*/
 // 최종 제출 (db에 올리기)
 function upload(step) {
   var title = document.getElementById('requestTitle').value;
@@ -237,17 +196,17 @@ function upload(step) {
     return 0;
   }
   var totalCnt = $('#myTable tbody tr').length-1;
-  // alert(totalCnt);
   if(totalCnt > 0) {
     var itemList = [];
     for(var i = 1; i<=totalCnt; i++) {
       var _item = 'tr'+i+'item';
       var _name = 'tr'+i+'name';
       var _count = 'tr'+i+'count';
+	  if(document.getElementById(_count).value == 0) {
+		alert("수량을 입력해주세요!");
+		return 0;
+	  }
       itemList.push({
-        //item : document.getElementById(_item).value,
-        //name : document.getElementById(_name).value,
-        //count : document.getElementById(_count).value
         requestType : document.getElementById(_item).value,
         itemName : document.getElementById(_name).value,
         itemNum : document.getElementById(_count).value,
@@ -383,6 +342,7 @@ function saveReply(items) {
 						//$(".request-table").empty();
 						paging(curPage);
 						closeModal();
+						location.reload();
 					}	
 				}
 			}		
@@ -509,14 +469,6 @@ let requestInit = {
 		  else if(type_text == '장애인') type = "DISABLED";
 		  else if(type_text == '기타') type = "OTHERS";
 
-			for(var i=0; i<itemList.length; i++) {
-				if (itemList[i].itemNum == 0 ){
-					alert("수량을 입력하여 주시기 바랍니다!");
-					return;
-				}
-			}
-
-
 		//주소 입력했는지 체크
 		if(document.getElementById('roadAddrPart1').value == "") alert("주소를 검색해주세요.");
 		else{
@@ -532,7 +484,6 @@ let requestInit = {
 				showFlag : 1
 			};
 			
-			//console.log(data);
 			$.ajax({
 				type: "POST",
 				url: "/requestSaveProc",
@@ -540,8 +491,6 @@ let requestInit = {
 				contentType: "application/json; charset = utf-8 ",
 				dataType: "json"
 			}).done(function(resp){
-				//console.log(data);
-				//console.log(resp);
 				if(resp.status == 500) {
 					alert("업로드 실패하였습니다. ");
 				}else {

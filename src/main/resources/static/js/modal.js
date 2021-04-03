@@ -40,7 +40,6 @@ function openMenu() {
     document.getElementById("menu-back").style.filter = "blur(5px)";
     document.getElementById("Wrapper").style.filter = "blur(5px)";
 	
-	//console.log(rq);
     var date = rq.dueDate;
 	date = date.split(' ')[0];
     var d_date = new Date(date.valueOf());
@@ -49,7 +48,8 @@ function openMenu() {
     var c_time = cur.getTime();
 	var org_name = rq.userName;
     var status = "";
-    if(c_time <= d_time) status = "응답 대기중";
+    if(c_time <= d_time && rq.status != 'DELETED') status = "응답 대기중";
+	else if(rq.status == 'DELETED') status = "<span style='color:red'>삭제됨</span>";
     else status = "<span style='color: red'>  마감 </span>";
 
     let regDate = rq.regDate.substring(0,10);
@@ -87,12 +87,16 @@ function openMenu() {
 
 	$(".btn-res").off("click");	
 	$(".btn-res").removeAttr('onclick');
-
+	
 	if( status.includes('마감')) {
 		$(".btn-res").on("click", () => {
 			alert("마감되었습니다.");
-	});
-	}else{
+		});
+	} else if( rq.status == 'DELETED') {
+		$(".btn-res").on("click", () => {
+			alert("마감되었습니다.");
+		});
+	} else{
 		$(".btn-res").on("click", () => {
 			goResponse();
 	});
@@ -169,7 +173,6 @@ function openMenu() {
 		if (resp.status == 500) {
 			alert("checkUserInterestProc 에러발생");
 		} else {
-			//console.log(resp.data);
 			if(resp.data == true){	// 관심목록에 추가되어 있다면
 				$("#btn-heart").hide();
 				$("#btn-heart2").show();
@@ -202,7 +205,6 @@ function openMenu() {
     let pid = "#response_num" + i;
     let num = Number($(pid).val());
     if($(pid).val() > 0) $(pid).val(num -= 1);
-    //else alert($(pid).val());
   }
   
   function rp_plus(i, max) {
@@ -329,7 +331,6 @@ function goDetail_myrequest(rq) {
 	$("#roadLongitude").val(rq.longitude);
 	$("#roadLatitude").val(rq.latitude);
 	
-	//console.log("기존 위경도 : " + $("#roadLongitude").val() +", " + $("#roadLatitude").val());
     $("#rq_contents").html(rq.description);
 	
 	// 수정하기로 변경시에 전달될 객체
@@ -458,6 +459,11 @@ function goDetail_myreply(rp, _state) {
 		$("#rp-back").prop("visibility","hidden");
 		$("#rp-edit").prop("hidden","hidden");
 		$("#rp-save").prop("hidden","hidden");
+	} else	if(rp.status == 'DELETED') {
+		$("#rp_status").html("삭제됨");
+		$("#rp-back").prop("visibility","hidden");
+		$("#rp-edit").prop("hidden","hidden");
+		$("#rp-save").prop("hidden","hidden");
 	}
 
 	$("#rp_org").val(rp.org);
@@ -470,7 +476,7 @@ function goDetail_myreply(rp, _state) {
 	}
 
 	$("#rp_content").val(rp.content);
-
+	
 	//요청자 회신란 넣기
 	if(rp.comment != ""){// comment가 달려있으면 보여주기(아니면 안보여줌)
 		$("#response-content").html(rp.comment);
@@ -480,7 +486,14 @@ function goDetail_myreply(rp, _state) {
 		$("#response-content").hide();
 		$("#response-content-nothing").show();
 	}
-		
+	
+	if(rp.status == 'DELETED') {
+		$("#response-content").show();
+		$("#response-content-nothing").hide();
+		$("#response-content").prop("disabled", "disabled");
+		$("#response-content").html("요청이 삭제된 응답 혹은 응답자에 의해 삭제된 응답입니다.\n문의 사항이 있다면 dodream.touch@gmail.com(054-262-1070)로 문의해주시면 감사하겠습니다.");
+	}
+
 	$.ajax({
 		type : "GET",
 		traditional : true,

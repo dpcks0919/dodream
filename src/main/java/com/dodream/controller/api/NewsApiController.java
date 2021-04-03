@@ -20,7 +20,6 @@ public class NewsApiController {
 	
 	@PostMapping("/admin/newsSaveProc")
 	public ResponseDto<Integer> newsSave(@RequestBody News news, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		System.out.println(news);
 		newsService.saveNews(news, principalDetails);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}

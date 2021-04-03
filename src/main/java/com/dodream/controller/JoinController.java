@@ -35,7 +35,6 @@ public class JoinController {
 	
 	@GetMapping("/joinForm/{type}")
 	public String joinForm(@PathVariable(value="type") String type) {
-		System.out.println(type);
 		return "join/reg_"+type; 
 	}
 	

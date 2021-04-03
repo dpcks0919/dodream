@@ -93,27 +93,9 @@ public class RequestApiController {
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
 	
-//	@PostMapping("/heart")
-//	public ResponseDto<Integer> heartSave(@RequestBody UserInterest userInterest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-//		requestService.saveHeart(userInterest, principalDetails);
-//		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
-//	}
-	
-	
-//	@ResponseBody
-//	@RequestMapping(value="/requestUpdateProc", method = RequestMethod.GET)
-//	public ResponseDto<Integer> requestUpdate(@RequestBody Request request, HttpServletRequest httpServletRequest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-//		
-//		Request _request = requestService.getRequest(id);
-//		
-//		requestService.update(request);
-//		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
-//	}
-	
 	// 기존 request update
 	@PostMapping("/requestUpdateProc")
 	public ResponseDto<Integer> requestUpdate(@RequestBody Request request) {
-		System.out.println("요청 업데이트");
 		requestService.updateRequest(request);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
@@ -121,16 +103,20 @@ public class RequestApiController {
 	// 기존 request update
 	@PostMapping(value="/requestItemUpdateProc")
 	public ResponseDto<Integer> requestItemUpdate(@RequestBody RequestItem requestItem) {
-		System.out.println("기존 아이템 업데이트");
 		requestService.updateItem(requestItem);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
+	}
+	
+	@GetMapping("user/deleteRequest")
+	public ResponseDto<Integer> deleteRequest(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		Request request = requestService.getRequest(Integer.parseInt(id));
+		requestService.requestDelete(request);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
 
 	// 기존 request update : myrequest에서 사용
 	@PostMapping(value="/requestItemSaveProc_myrequest")
 	public ResponseDto<Integer> saveRequestItem_myrequest(@RequestBody RequestItem requestItem) {		
-		// request id를 받아와서, requestItem.request에 입력해야하기때문에 임시로 ReceivedNum에 값을 입력받아와서
-		// setRequest를 설정하고, ReceivedNum은 다시 0으로 초기화시켜주었다.
 		requestItem.setRequest(requestService.getRequest(requestItem.getReceivedNum()));
 		requestItem.setReceivedNum(0);
 		requestService.saveRequestItem(requestItem);
@@ -168,7 +154,6 @@ public class RequestApiController {
 	@GetMapping("user/ManagerViewRequest")
 	public RequestDto ManagerViewRequest(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		Request request = requestService.getRequest(Integer.parseInt(id));
-		System.out.println("requestAPI Controller");
 		return new RequestDto (request);
 	}
 	
