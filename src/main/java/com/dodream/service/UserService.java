@@ -66,7 +66,7 @@ public class UserService {
 	
 	@Transactional
 	public Page<User> readUserList(Pageable pageable) {
-		return userRepository.findAll(pageable); 
+		return userRepository.findAllByDeleteFlag(pageable); 
 	}
 	
 	
