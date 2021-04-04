@@ -286,7 +286,11 @@ public class UserService {
 	@Transactional
 	public void userDelete(User user) {
 		User persistance = userRepository.findByLoginId(user.getLoginId());
+		int randNum = (int)(Math.random() * 100000);
+		String encodedPw = encoder.encode(String.valueOf(randNum));
 		
+		persistance.setLoginId("0");
+		persistance.setLoginPassword(encodedPw);
 		persistance.setUserName("0");
 		persistance.setUserSex(0);
 		persistance.setUserPhone("0");
