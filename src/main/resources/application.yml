@@ -42,7 +42,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
     username: root
-    password: root
+    password: rootroot
     
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -65,8 +65,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 995380518815-6u3ulp46ahsdckqnra5kee07mufcfuiq.apps.googleusercontent.com
-            client-secret: -EIOhv8qi6YYgX2PnzidY8I-
+            client-id: 1033840457298-rlc273i8h93141vrn48lf5570fanfdh3.apps.googleusercontent.com #995380518815-6u3ulp46ahsdckqnra5kee07mufcfuiq.apps.googleusercontent.com
+            client-secret: nptt-UU2Js1aetc81vqFWXz3 #-EIOhv8qi6YYgX2PnzidY8I-
             scope:
             - email
             - profile
@@ -79,24 +79,26 @@ spring:
             - public_profile
           
           naver:
-            client-id: fr8s0Pzz2AAFa6VMgoyT
-            client-secret: Fk__UWIsxX
+            client-id: V2w3AgJchgKhycTL7zo5 #fr8s0Pzz2AAFa6VMgoyT
+            client-secret: QwOBG8I4aX #Fk__UWIsxX
             scope:
             - name
             - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
+            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            #redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
 
           kakao:
-            client-id: ccd2c184a87ab5205b193da983dd46f4
-            client-secret: 8hNvy0iNQqpNJTuzNZ4QevAsZReZ91Hw
+            client-id: 75934403dc0faf5d40216188a499879a #ccd2c184a87ab5205b193da983dd46f4
+            client-secret: ovA9LfSsiW9pUXcKla2olfSe9UFXXPV4 #8hNvy0iNQqpNJTuzNZ4QevAsZReZ91Hw
             scope:
             - profile
-            - account_email
+            #- account_email
             client-name: kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao # localhost
+            #redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao # dodreamtouch.com
             client-authentication-method: POST
             
         provider:
@@ -124,4 +126,4 @@ api:
 
 summernote:
   #upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/  
-  upload: /Users/wltjd/Desktop/Dodream/dodream-boot/dodream/src/main/resources/static/image/summernote/
+  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/
