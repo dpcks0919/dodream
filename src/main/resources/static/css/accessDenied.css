@@ -1,0 +1,78 @@
+@charset "UTF-8";
+@font-face {
+  src : url("../fonts/NanumSquareR.ttf");
+  font-family: "NanumSquareR";
+}
+
+html, body {
+  font-family: "NanumSquareR";
+  overflow-x:none;
+  height: 100%;
+}
+
+.title-info {
+  height:15rem;
+}
+
+.reg-info {
+  width:100%;
+  margin-top:9rem;
+}
+.reg-info-small {
+  width: 100%;
+  margin-top:10rem;
+}
+
+.gradient-bgcolor {
+  background: linear-gradient(to right, rgb(175, 218, 231), #ed7e95);
+}
+.reg-info {
+  width:100%;
+  margin-top:18.5vh;
+}
+
+
+@media (max-width: 1200px) {
+
+
+  .reg-info {
+    width:100%;
+    margin-top:7rem;
+  }
+  .reg-info-small {
+    width: 100%;
+    margin-top:9rem
+  }
+
+}
+
+@media (max-width: 992px) {
+ .sec3-middle-left, .sec3-middle-right {
+    display:block!important;
+    width:100%!important;
+    padding-left:5%;
+    padding-right:5%;
+    padding-bottom:1vh;
+  }
+  .sec3-middle-left {
+    border-style : none!important;
+  }	
+
+}
+
+@media (max-width: 768px) {
+
+  .reg-info-small {
+  	margin-top:7rem;
+  }
+  .reg-info-small h4{
+   	font-size: 1.2rem !important;
+  }
+  .title-info{
+  	height: 11rem;
+  }
+  .reg-info{
+  	margin-top: 3rem;
+  }
+}
+
