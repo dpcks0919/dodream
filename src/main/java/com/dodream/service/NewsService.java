@@ -53,8 +53,6 @@ public class NewsService {
 	
 	@Transactional
 	public void update(News news) {
-		System.out.println("id : " + news.getId());
-		System.out.println(news);
 		News persistance = newsRepository.findById(news.getId()).orElseThrow(() -> {
 			return new IllegalArgumentException("소식 가져오기 실패 : 아이디를 찾을 수 없습니다.");
 		});

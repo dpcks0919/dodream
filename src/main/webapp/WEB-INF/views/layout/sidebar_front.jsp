@@ -16,6 +16,11 @@
 		 		<a class="menu-item-top" href="/social/request">요청하기</a>
 				<a class="menu-item" href="/requestMap">요청보기</a>
 		 	</c:when>
+			<c:when test="${principal.user.userType eq 'ADMIN' }">
+				<a href="/user/manager" class="menu-item-top">관리자 페이지</a>
+				<a class="menu-item" href="/requestMap">요청보기</a>
+				<a class="menu-item" href="/social/request">요청하기</a> 
+			</c:when>
 		 	<c:otherwise>
 		 		<a class="menu-item-top" href="/requestMap">요청보기</a>
 		 	</c:otherwise>

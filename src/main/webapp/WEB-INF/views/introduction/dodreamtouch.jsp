@@ -336,14 +336,6 @@
 				<p class="intro1-section4-text4 ">전화번호 : 054-262-1070<br>E-mail : dodreamtouch@gmail.com</p>
 			</div>
 		</section>
-		
-		
-		
-		
-		
-		
-		
-	
 		<!-- Footer-->
 		<%@include file="../layout/footer.jsp"%>
 	</div>

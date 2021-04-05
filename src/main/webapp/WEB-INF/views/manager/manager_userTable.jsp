@@ -20,76 +20,72 @@
 		<c:set var="userCount" value="0" />
 		<c:set var="currentPage" value="${users.pageable.pageNumber}"></c:set>
 		<c:forEach var="user" items="${users.content}">
-			<c:choose>
-				<c:when test="${user.userType == 'INDIVIDUAL'}">
-					<c:set var="usertype" value="개인" />
-				</c:when>
-				<c:when test="${user.userType == 'GROUP'}">
-					<c:set var="usertype" value="단체" />
-				</c:when>
-				<c:when test="${user.userType == 'SOCIAL_WORKER'}">
-					<c:set var="usertype" value="사회복지사" />
-				</c:when>
-				<c:when test="${user.userType == 'INSTITUTION'}">
-					<c:set var="usertype" value="기관" />
-				</c:when>
-			</c:choose>
-			<script>
-				var usr${user.id} = {
-					id: ${user.id},
-					uaddr: '${user.address}',
-					uemail_flag: ${user.emailFlag},
-					umsg_flag: ${user.msgFlag},
-					uradius: ${user.notificationRadius},
-					uid: '${user.loginId}',
-					usex: ${user.userSex},
-					utype: '${user.userType}',
-					udob: '${user.userDob}',
-					uemail: '${user.userEmail}',
-					uname: '${user.userName}',
-					uphone: '${user.userPhone}',
-					uorg: '${user.orgName}',
-					uorg_role: '${user.orgUserRole}',
-					uorg_phone: '${user.orgPhone}',
-					ushow_flag: ${user.showFlag},
-					ustate_flag: '${user.stateFlag}',
-					is_social: ${user.isSocial},
-				};
-			</script>
-			<!-- 여기서 tr 클릭하면 -->
-			<tr onclick="openModal_manager(usr${user.id}, 0)" style="cursor:pointer;">
-				<td class="table-num">${user.id}</td>
-				<td class="table-name">${user.userName}</td>
-				<td class="table-userPhone">${user.userPhone}</td>
-				<td class="table-userType">${usertype}</td>
+			<c:if test="${user.userType != 'DELETED'}">
 				<c:choose>
-					<c:when test="${user.stateFlag == 'APPROVED'}">
-						<c:set var="state" value="승인" />
-						<td class="table-state">${state}</td>
+					<c:when test="${user.userType == 'INDIVIDUAL'}">
+						<c:set var="usertype" value="개인" />
 					</c:when>
-					<c:when test="${user.stateFlag == 'NON_APPROVED' or user.stateFlag == 'WAITING'}">
-						<c:set var="state" value="미승인" />
-						<td class="table-state" style="color:red;">${state}</td>
+					<c:when test="${user.userType == 'GROUP'}">
+						<c:set var="usertype" value="단체" />
+					</c:when>
+					<c:when test="${user.userType == 'SOCIAL_WORKER'}">
+						<c:set var="usertype" value="사회복지사" />
+					</c:when>
+					<c:when test="${user.userType == 'INSTITUTION'}">
+						<c:set var="usertype" value="기관" />
 					</c:when>
 				</c:choose>
-				<td class="table-date">${fn:substring(user.regDate, 0, 10)}</td>
-			</tr>
-			<c:set var="userCount" value="${userCount + 1}" />
+				<script>
+					var usr${user.id} = {
+						id: ${user.id},
+						uaddr: '${user.address}',
+						uemail_flag: ${user.emailFlag},
+						umsg_flag: ${user.msgFlag},
+						uradius: ${user.notificationRadius},
+						uid: '${user.loginId}',
+						usex: ${user.userSex},
+						utype: '${user.userType}',
+						udob: '${user.userDob}',
+						uemail: '${user.userEmail}',
+						uname: '${user.userName}',
+						uphone: '${user.userPhone}',
+						uorg: '${user.orgName}',
+						uorg_role: '${user.orgUserRole}',
+						uorg_phone: '${user.orgPhone}',
+						ushow_flag: ${user.showFlag},
+						ustate_flag: '${user.stateFlag}',
+						is_social: ${user.isSocial},
+					};
+				</script>
+				<!-- 여기서 tr 클릭하면 -->
+				<tr onclick="openModal_manager(usr${user.id}, 0)" style="cursor:pointer;">
+					<td class="table-num">${user.id}</td>
+					<td class="table-name">${user.userName}</td>
+					<td class="table-userPhone">${user.userPhone}</td>
+					<td class="table-userType">${usertype}</td>
+					<c:choose>
+						<c:when test="${user.stateFlag == 'APPROVED'}">
+							<c:set var="state" value="승인" />
+							<td class="table-state">${state}</td>
+						</c:when>
+						<c:when test="${user.stateFlag == 'NON_APPROVED' or user.stateFlag == 'WAITING'}">
+							<c:set var="state" value="미승인" />
+							<td class="table-state" style="color:red;">${state}</td>
+						</c:when>
+					</c:choose>
+					<td class="table-date">${fn:substring(user.regDate, 0, 10)}</td>
+				</tr>
+				<c:set var="userCount" value="${userCount + 1}" />
+			</c:if>
 		</c:forEach>
 	</tbody>
 </table>
-<!-- 
-<c:if test="${userCount == 0}">
-	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">유저 정보가 존재하지 않습니다.</div>
-</c:if>
- -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">
 		<!-- searech line -->
 		<br>
-		<!-- 페이징할때 주의할 점 : users.number는 0부터 시작하기 때부터 그걸 고려해서 밑에 다 수정했음. 
-				그래서 화면에 보이는 것만 1부터 보이게 설정함. -->
+
 		<c:set var="page" value="${users.number}" />
 		<!-- 첫번째 페이지 -->
 		<c:set var="startNum" value="${page - (page) % 5}" />

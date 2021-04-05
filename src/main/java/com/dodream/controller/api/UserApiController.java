@@ -67,11 +67,7 @@ public class UserApiController {
 	}
 	
 	@PostMapping("/loginProc")
-	public ResponseDto<Integer> login(@RequestBody User loginInfo, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
-		System.out.println("loginProc 진입");
-		System.out.println(principalDetails);
-		
+	public ResponseDto<Integer> login(@RequestBody User loginInfo, @AuthenticationPrincipal PrincipalDetails principalDetails) {		
 		if(userService.loginService(loginInfo, principalDetails)) {	// true 리턴시 로그인 처리 
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
 			SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
@@ -79,28 +75,6 @@ public class UserApiController {
 		else {	// false 리턴시 에러 송출
 			return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
 		}
-//				
-//		// 로그인이 안되어 있는 경우
-//		if(principalDetails != null && principalDetails.getUser().getLoginCount() == 0) {	// 소셜 계정 세션은 유지되는데, 회원가입은 하지 않고 일반계정 로그인으로 진행하는 경우 
-//			if(userService.loginService(loginInfo)) {
-//				Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
-//				SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
-//			}
-//			else {	// 계정이 존재하지 않을때(500에러 리턴) 
-//				return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
-//			}
-//		}
-//		else if(principalDetails == null) {	// 소셜 세션이 아예 없는 경우 
-//			if(userService.loginService(loginInfo)) {	// 계정이 존재할때
-//				Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
-//				SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
-//			}
-//			else {	// 계정이 존재하지 않을때(500에러 리턴) 
-//				return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
-//			}
-//			
-//			System.out.println("loginProc 완료");
-//		}
 	
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);	// 로그인 성공
 	}
@@ -152,6 +126,12 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	@PutMapping("/deleteUserProc")
+	public ResponseDto<Integer> deleteUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
+		userService.userDelete(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
 	@PutMapping("/updateUserProc")
 	public ResponseDto<Integer> updateUser(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails){
 		StatusType getStatus = user.getStateFlag();
@@ -181,20 +161,17 @@ public class UserApiController {
 	
 	@PutMapping("/updateUserPwProc")
 	public ResponseDto<Integer> managerUpdateUserpw(@RequestParam(value = "id") String id, @RequestParam(value = "password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails){
-	
 		userService.updatepw(id, password);		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	@PostMapping("/findIdProc")
 	public ResponseDto<Boolean> findIdProc(@RequestParam(value = "email") String email) throws UnsupportedEncodingException, MessagingException{
-		System.out.println("Input EMAIL: " + email);
 		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.findIdService(email));
 	}
 	
 	@PostMapping("/findPwProc")
 	public ResponseDto<Boolean> findPwProc(@RequestParam(value = "id") String id, @RequestParam(value = "email") String email) throws UnsupportedEncodingException, MessagingException{
-		System.out.println("Input ID: " + id);
 		return new ResponseDto<Boolean>(HttpStatus.OK.value(), userService.findPwService(id, email));
 	}
 	

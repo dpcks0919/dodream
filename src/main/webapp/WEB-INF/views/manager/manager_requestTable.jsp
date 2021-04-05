@@ -18,7 +18,7 @@
 		<tr style="border-bottom: 3px solid #d3d3d3;">
 			<th class="table-num" style="width:10%;">등록 번호</th>
 			<th class="table-title" style="width:25%;">요청 제목</th>
-			<th class="table-status" style="width:12.5%;">승인여부</th>
+			<th class="table-status" style="width:12.5%;">상태</th>
 			<th class="table-name" style="width:10%;">요청자</th>
 			<th class="table-regdate" style="width:10%;">등록일</th>
 			<th class="table-duedate" style="width:10%;">마감일</th>
@@ -73,6 +73,9 @@
 				<c:when test="${request.status == 'CLOSED'}">
 					<c:set var="requesttype" value="마감" />
 				</c:when>
+				<c:when test="${request.status == 'DELETED'}">
+					<c:set var="requesttype" value="삭제" />
+				</c:when>
 			</c:choose>
 			<tr class="info-table-tr" onclick="openModal_manager(${request.id}, 1)">
 				<td class="table-num">${request.id}</td>
@@ -86,12 +89,6 @@
 		</c:forEach>
 	</tbody>
 </table>
-<!-- 
-<c:if test="${requestCount == 0}">
-	<div style="width:100%; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem;" class="test">요청글이 존재하지 않습니다.</div>
-</c:if>
-
- -->
 
 <section class="mypage-section2" id="about" style="text-align: center;">
 	<div class="container">
