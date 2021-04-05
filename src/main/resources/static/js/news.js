@@ -49,7 +49,6 @@ let newsInit = {
 				content : document.getElementById('news-content').value,
 				newsType : newsType
 			};
-			console.log(data);
 			$.ajax({
 				type:"POST",
 				url: "/admin/newsSaveProc",
@@ -57,8 +56,6 @@ let newsInit = {
 				contentType: "application/json; charset = utf-8 ",
 				dataType: "json"
 			}).done(function(resp) {
-				console.log(data);
-				console.log(resp);
 				if(resp.status == 500) {
 					alert("업로드 실패");
 				} else {
@@ -98,8 +95,6 @@ let newsInit = {
 				contentType: "application/json; charset = utf-8 ",
 				dataType: "json"
 			}).done(function(resp) {
-				console.log(data);
-				console.log(resp);
 				if(resp.status == 500) {
 					alert("수정 실패");
 				} else {

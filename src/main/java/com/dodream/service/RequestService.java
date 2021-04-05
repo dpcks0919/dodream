@@ -28,6 +28,7 @@ import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.RequestType;
+import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.ReplyRepository;
 import com.dodream.repository.RequestItemRepository;
@@ -92,7 +93,6 @@ public class RequestService {
 			cal.add(Calendar.MONTH, 1);
 		}
 		request.setDueDate(java.sql.Timestamp.valueOf(df.format(cal.getTime()) ));
-		System.out.println("saveRequest");
 		requestRepository.save(request);
 		return request;
 	}
@@ -101,16 +101,7 @@ public class RequestService {
 	@Transactional
 	public void saveRequestItem(RequestItem requestItem) {
 		requestItemRepository.save(requestItem);
-		System.out.println("saveRequestItem(아이템 저장됨)");
 	}
-	
-//	@Transactional
-//	public void saveHeart(UserInterest userInterest, @AuthenticationPrincipal PrincipalDetails principalDetails)
-//		userInterest.setUser(principalDetails.getUser());
-//		
-//		userInterestRepository.save();
-//	}
-	
 	
 	//new
 	@Transactional
@@ -125,10 +116,15 @@ public class RequestService {
 			return 0;
 		}
 	}
-
+	
 	@Transactional(readOnly = true)
 	public Page<Request> readRequestList(Pageable pageable) {
 		return requestRepository.findAll(pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<Request> readRequestList(int flag, Pageable pageable) {
+		return requestRepository.findAllByDeleteFlag(flag, pageable);
 	}
 	
 	@Transactional
@@ -142,6 +138,22 @@ public class RequestService {
 		Request[] requestList = requestRepository.findAllByClientType(ClientType.valueOf(clientType));
 		return requestList;
 	}
+	
+	@Transactional
+	public void requestDelete(Request request) {
+		Request persistance = requestRepository.findById(request.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("요청 가져오기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+		persistance.setDeleteFlag(1);
+		persistance.setStatus(StatusType.DELETED);	
+		
+		Reply[] replyList = replyRepository.findByRequest(request);
+		for(int i=0; i<replyList.length; i++) {
+			Reply rep_persistance = replyList[i];
+			rep_persistance.setStatus(StatusType.DELETED);
+		}	
+	}
+	
 
 	@Transactional
 	public Request getRequest(int id) {
@@ -158,8 +170,8 @@ public class RequestService {
 	}
 	
 	@Transactional
-	public Page<Request> readMyRequest(User user, Pageable pageable) {
-		return requestRepository.findByUser(user, pageable);
+	public Page<Request> readMyRequest(int flag, User user, Pageable pageable) {
+		return requestRepository.findByDeleteFlagAndUser(flag, user, pageable);
   }
 
 	@Transactional
@@ -188,9 +200,6 @@ public class RequestService {
 //			System.out.println(e.getCode()); 
 //			System.out.println("Request Send Text Error!");
 //		}
-		
-		System.out.println("발송번호: " + params.get("to"));
-		System.out.println("문자 내용: " + params.get("text"));
 		}
 	
 	//해당 request 정보 email 전송하는 메소드 
@@ -219,10 +228,7 @@ public class RequestService {
 
         // 메일 발송 
         helpSender.send(message);
-
-		System.out.println("수신자메일: " + rcvEmail);
-		System.out.println("메일 제목: " + title);
-		System.out.println("메일 내용: " +msg);		
+	
 	}
 	
 	@Transactional

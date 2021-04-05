@@ -66,8 +66,7 @@ public class UserService {
 	
 	@Transactional
 	public Page<User> readUserList(Pageable pageable) {
-		System.out.println("유저서비스");
-		return userRepository.findAll(pageable); 
+		return userRepository.findAllByDeleteFlag(pageable); 
 	}
 	
 	
@@ -80,13 +79,11 @@ public class UserService {
 	public void joinIndividual(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
 		if( principalDetails != null ) {
-			System.out.println("(개인),소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setUserName(principalDetails.getUser().getUserName());
 			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
-			System.out.println("(개인)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
 			String encPassword =  encoder.encode(rawPassword);
 			user.setLoginPassword(encPassword);
@@ -102,12 +99,10 @@ public class UserService {
 	public void joinGroup(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {	
 
 		if( principalDetails != null ) {
-			System.out.println("(그룹)소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
-			System.out.println("(그룹)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
 			String encPassword =  encoder.encode(rawPassword);
 			user.setLoginPassword(encPassword);
@@ -118,10 +113,6 @@ public class UserService {
 		user.setOrgName(user.getUserName());
 		user.setStateFlag(StatusType.APPROVED);
 		user.setLoginCount(1);
-		
-		System.out.println("OrgPhone: " + user.getOrgPhone());
-		System.out.println("OrgName: " + user.getOrgName());
-
 		userRepository.save(user);
 	}
 	
@@ -129,13 +120,11 @@ public class UserService {
 	public void joinSocialWorker(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		if( principalDetails != null ) {
-			System.out.println("(사복)소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setUserName(principalDetails.getUser().getUserName());
 			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
-			System.out.println("(사복)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
 			String encPassword =  encoder.encode(rawPassword);
 			user.setLoginPassword(encPassword);
@@ -144,12 +133,6 @@ public class UserService {
 		// 공통 사항 
 		user.setStateFlag(StatusType.WAITING);
 		user.setLoginCount(1);
-		
-		System.out.println("UserName: " + user.getUserName());
-		System.out.println("UserPhone: " + user.getUserPhone());
-		System.out.println("OrgName: " + user.getOrgName());
-		System.out.println("OrgPhone: " + user.getOrgPhone());
-
 		userRepository.save(user);
 		
 	}
@@ -158,12 +141,10 @@ public class UserService {
 	public void joinInstitution(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		if( principalDetails != null ) {
-			System.out.println("(기관)소설 회원가입"); 
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
 			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
-			System.out.println("(기관)그냥 회원가입"); 
 			String rawPassword = user.getLoginPassword();
 			String encPassword =  encoder.encode(rawPassword);
 			user.setLoginPassword(encPassword);
@@ -174,18 +155,10 @@ public class UserService {
 		user.setOrgName(user.getUserName()); // orgName = userName
 		user.setStateFlag(StatusType.WAITING);
 		user.setLoginCount(1);
-		
-		System.out.println("UserName: " + user.getUserName());
-		System.out.println("UserPhone: " + user.getUserPhone());
-		System.out.println("OrgName: " + user.getOrgName());
-		System.out.println("OrgPhone: " + user.getOrgPhone());
-
 		userRepository.save(user);
 	}
 	
 	public String sendTextService(String userPhone) {	 //랜덤으로 verifyCode 생성 후 문자 발송 및 리턴하는 메소드 
-		System.out.println("코드 생성 후 문자 발송"); 
-		
 		// rand verifyCode 생성 
 		Random rand = new Random();
 		String randNum = "";
@@ -311,6 +284,38 @@ public class UserService {
 	}
 	
 	@Transactional
+	public void userDelete(User user) {
+		User persistance = userRepository.findByLoginId(user.getLoginId());
+		int randNum = (int)(Math.random() * 100000);
+		String encodedPw = encoder.encode(String.valueOf(randNum));
+		
+		persistance.setLoginId("0");
+		persistance.setLoginPassword(encodedPw);
+		persistance.setUserName("0");
+		persistance.setUserSex(0);
+		persistance.setUserPhone("0");
+		persistance.setUserEmail("0");
+		persistance.setOrgName("0");
+		persistance.setOrgUserRole("0");
+		persistance.setNotificationRadius(0);
+		persistance.setMsgFlag(0);
+		persistance.setEmailFlag(0);
+		persistance.setOrgPhone("0");
+		persistance.setShowFlag(0);
+		persistance.setAddress("0");
+		persistance.setLatitude(0);
+		persistance.setLongitude(0);
+		persistance.setIsSocial(0);
+		persistance.setRegDate(null);
+		persistance.setUserDob(null);
+		persistance.setLoginCount(0);
+		
+		persistance.setStateFlag(StatusType.DELETED);
+		persistance.setUserType(RoleType.DELETED);
+
+	}
+	
+	@Transactional
 	public void updatepw(String currentId, String password) {		
 		User persistance = userRepository.findByLoginId(currentId);
 		String encPassword =  encoder.encode(password);
@@ -346,7 +351,6 @@ public class UserService {
 		else {
 			String randRawPw = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다.
 			randRawPw = randRawPw.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
-		    System.out.println("RAND PW: " + randRawPw);
 		    
 			String encPassword =  encoder.encode(randRawPw);
 			user.setLoginPassword(encPassword);	// 비밀번호 저장
@@ -379,11 +383,7 @@ public class UserService {
         mimeMessageHelper.setText(msg, true);
 
         // 메일 발송 
-        deskSender.send(message);
-        
-		System.out.println("수신자메일: " + rcvEmail);
-		System.out.println("메일 제목: " + title);
-		System.out.println("메일 내용: " +msg);		
+        deskSender.send(message);	
 	}
 
 }
