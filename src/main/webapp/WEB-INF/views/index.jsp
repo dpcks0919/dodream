@@ -43,9 +43,9 @@
 						<div class="carousel-caption2 d-md-block mainImage-web">
 							<a class="py-2 rounded js-scroldl-trigger main3-register " href="/dodreamtouch">자세히 보기</a>
 						</div>
-						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
+						<!-- <div class="carousel-caption3_mobile d-md-block mainImage-mobile">
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/dodreamtouch">자세히 보기</a>
-						</div>
+						</div> -->
 						<iframe class="carousel-youtube" src="https://www.youtube.com/embed/9Yfaj0oTw18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowfullscreen></iframe>
 					</div>
@@ -56,13 +56,6 @@
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/requestMap">요청 보기</a>
 						</div>
 						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
-						<!-- 
-							<h3 style="font-size:1rem; font-weight:bold; color:#ed7e95;">두드림이 있는 곳에 손길을</h3>
-							<p style="font-size:0.75rem;">돕는다는 것은,<br>함께 하는 것입니다.</p>
-							<p style="font-size:0.75rem;">아름다운 세상을 위한 변화,<br>당신의 손길로 시작됩니다.</p>
-							<p style="font-size:0.75rem;">"네 이웃을 네 몸과 같이 사랑하라"</p>
-						
-						 -->
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/requestMap">요청 보기</a>
 						</div>
 					</div>
