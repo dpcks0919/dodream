@@ -93,9 +93,10 @@
 		<div class="modal-ftr">
 			<c:choose>
 				<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
-					<div class="" style="width:100%; display:flex; justify-content:space-between;">
+					<!-- <div class="" /* style="width:100%; display:flex; justify-content:space-between;" > -->
+					<div class="">
 						<div class="btn-close " onclick="closeModal();">창 닫기</div>
-						<div class="btn-res" onclick="alert('로그인이 필요합니다!')">응답하기</div>				
+						<div class="btn-notlogin" onclick="alert('로그인이 필요합니다!')">응답하기</div>				
 					</div>
 				</c:when>
 				<c:otherwise>
