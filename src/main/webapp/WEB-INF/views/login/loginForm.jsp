@@ -56,7 +56,7 @@
                       <div class="divider-custom-line"></div>
                   </div>
                   <img class="snslgbtn" src="/image/kakao.png" alt="" onclick="javascript:location.href='/oauth2/authorization/kakao'"/>
-                  <img class="snslgbtn" src="/image/naver.PNG" alt="" onclick="javascript:location.href='/oauth2/authorization/naver'"/>
+                  <img class="snslgbtn" src="/image/naver.png" alt="" onclick="javascript:location.href='/oauth2/authorization/naver'"/>
                   <img class="snslgbtn" src="/image/google.png" alt="" onclick="javascript:location.href='/oauth2/authorization/google'"/>
               </div>
             </div>

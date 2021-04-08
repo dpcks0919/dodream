@@ -126,6 +126,7 @@ public class RequestApiController {
 	// 새로운 요청 아이템 등록
 	@PostMapping("/requestItemSaveProc")
 	public ResponseDto<Integer> saveRequestItem(@RequestBody RequestItem requestItem) {
+
 		requestService.saveRequestItem(requestItem);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
