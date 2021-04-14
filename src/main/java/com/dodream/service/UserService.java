@@ -8,7 +8,6 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,10 +27,12 @@ import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class UserService {
+	
+	@Autowired
+	private SecurityService securityService;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -81,40 +82,47 @@ public class UserService {
 		if( principalDetails != null ) {
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
-			user.setUserName(principalDetails.getUser().getUserName());
+			user.setUserName(securityService.cleanXSS(principalDetails.getUser().getUserName()));
 			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
 			String rawPassword = user.getLoginPassword();
 			String encPassword =  encoder.encode(rawPassword);
+			user.setUserName(securityService.cleanXSS(user.getUserName()));
 			user.setLoginPassword(encPassword);
 		}
 		
 		user.setStateFlag(StatusType.APPROVED);
 		user.setLoginCount(1);
+		user.setUserPhone(securityService.cleanXSS(user.getUserPhone()));
+		user.setUserEmail(securityService.cleanXSS(user.getUserEmail()));
+		user.setAddress(securityService.cleanXSS(user.getAddress()));
+		user.setOrgName(securityService.cleanXSS(user.getOrgName()));
+		user.setOrgPhone(securityService.cleanXSS(user.getOrgPhone()));
+		user.setOrgUserRole(securityService.cleanXSS(user.getOrgUserRole()));
 
 		userRepository.save(user);
 	}
 	
-	@Transactional
-	public void joinGroup(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {	
-
-		if( principalDetails != null ) {
-			user.setLoginId(principalDetails.getUser().getLoginId());
-			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
-			user.setIsSocial(principalDetails.getUser().getIsSocial());
-		}else {
-			String rawPassword = user.getLoginPassword();
-			String encPassword =  encoder.encode(rawPassword);
-			user.setLoginPassword(encPassword);
-		}
-		
-		// 공통 사항 
-		user.setOrgPhone(user.getUserPhone());
-		user.setOrgName(user.getUserName());
-		user.setStateFlag(StatusType.APPROVED);
-		user.setLoginCount(1);
-		userRepository.save(user);
-	}
+//	@Transactional
+//	public void joinGroup(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {	
+//
+//		if( principalDetails != null ) {
+//			user.setLoginId(principalDetails.getUser().getLoginId());
+//			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
+//			user.setIsSocial(principalDetails.getUser().getIsSocial());
+//		}else {
+//			String rawPassword = user.getLoginPassword();
+//			String encPassword =  encoder.encode(rawPassword);
+//			user.setLoginPassword(encPassword);
+//		}
+//		
+//		// 공통 사항 
+//		user.setOrgPhone(user.getUserPhone());
+//		user.setOrgName(user.getUserName());
+//		user.setStateFlag(StatusType.APPROVED);
+//		user.setLoginCount(1);
+//		userRepository.save(user);
+//	}
 	
 	@Transactional
 	public void joinSocialWorker(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -122,41 +130,49 @@ public class UserService {
 		if( principalDetails != null ) {
 			user.setLoginId(principalDetails.getUser().getLoginId());
 			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
-			user.setUserName(principalDetails.getUser().getUserName());
+			user.setUserName(securityService.cleanXSS(principalDetails.getUser().getUserName()));
 			user.setIsSocial(principalDetails.getUser().getIsSocial());
 		}else {
 			String rawPassword = user.getLoginPassword();
 			String encPassword =  encoder.encode(rawPassword);
+			user.setUserName(securityService.cleanXSS(user.getUserName()));
 			user.setLoginPassword(encPassword);
 		}
 		
 		// 공통 사항 
 		user.setStateFlag(StatusType.WAITING);
 		user.setLoginCount(1);
+		user.setUserPhone(securityService.cleanXSS(user.getUserPhone()));
+		user.setUserEmail(securityService.cleanXSS(user.getUserEmail()));
+		user.setAddress(securityService.cleanXSS(user.getAddress()));
+		user.setOrgName(securityService.cleanXSS(user.getOrgName()));
+		user.setOrgPhone(securityService.cleanXSS(user.getOrgPhone()));
+		user.setOrgUserRole(securityService.cleanXSS(user.getOrgUserRole()));
+		
 		userRepository.save(user);
 		
 	}
 
-	@Transactional
-	public void joinInstitution(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		
-		if( principalDetails != null ) {
-			user.setLoginId(principalDetails.getUser().getLoginId());
-			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
-			user.setIsSocial(principalDetails.getUser().getIsSocial());
-		}else {
-			String rawPassword = user.getLoginPassword();
-			String encPassword =  encoder.encode(rawPassword);
-			user.setLoginPassword(encPassword);
-		}
-		
-		// 공통 사항 
-		user.setOrgPhone(user.getUserPhone());
-		user.setOrgName(user.getUserName()); // orgName = userName
-		user.setStateFlag(StatusType.WAITING);
-		user.setLoginCount(1);
-		userRepository.save(user);
-	}
+//	@Transactional
+//	public void joinInstitution(User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		
+//		if( principalDetails != null ) {
+//			user.setLoginId(principalDetails.getUser().getLoginId());
+//			user.setLoginPassword(principalDetails.getUser().getLoginPassword());
+//			user.setIsSocial(principalDetails.getUser().getIsSocial());
+//		}else {
+//			String rawPassword = user.getLoginPassword();
+//			String encPassword =  encoder.encode(rawPassword);
+//			user.setLoginPassword(encPassword);
+//		}
+//		
+//		// 공통 사항 
+//		user.setOrgPhone(user.getUserPhone());
+//		user.setOrgName(user.getUserName()); // orgName = userName
+//		user.setStateFlag(StatusType.WAITING);
+//		user.setLoginCount(1);
+//		userRepository.save(user);
+//	}
 	
 	public String sendTextService(String userPhone) {	 //랜덤으로 verifyCode 생성 후 문자 발송 및 리턴하는 메소드 
 		// rand verifyCode 생성 
@@ -218,21 +234,21 @@ public class UserService {
 				
 		User persistance = userRepository.findByLoginId(user.getLoginId());
 		
-		persistance.setUserName(user.getUserName());
+		persistance.setUserName(securityService.cleanXSS(user.getUserName()));
 		persistance.setUserSex(user.getUserSex());
 		persistance.setUserDob(user.getUserDob());
-		persistance.setUserPhone(user.getUserPhone());
-		persistance.setUserEmail(user.getUserEmail());
-		persistance.setOrgName(user.getOrgName());
-		persistance.setOrgUserRole(user.getOrgUserRole());
+		persistance.setUserPhone(securityService.cleanXSS(user.getUserPhone()));
+		persistance.setUserEmail(securityService.cleanXSS(user.getUserEmail()));
+		persistance.setOrgName(securityService.cleanXSS(user.getOrgName()));
+		persistance.setOrgUserRole(securityService.cleanXSS(user.getOrgUserRole()));
 		persistance.setNotificationRadius(user.getNotificationRadius());
 		persistance.setMsgFlag(user.getMsgFlag());
 		persistance.setEmailFlag(user.getEmailFlag());
-		persistance.setOrgPhone(user.getOrgPhone());
+		persistance.setOrgPhone(securityService.cleanXSS(user.getOrgPhone()));
 		persistance.setShowFlag(user.getShowFlag());
 		
 		if( ! user.getAddress().trim().equals(persistance.getAddress().trim())) {
-			persistance.setAddress(user.getAddress());
+			persistance.setAddress(securityService.cleanXSS(user.getAddress()));
 			persistance.setLatitude(user.getLatitude());
 			persistance.setLongitude(user.getLongitude());
 		}
@@ -244,21 +260,21 @@ public class UserService {
 				
 		User persistance = userRepository.findByLoginId(user.getLoginId());
 		
-		persistance.setUserName(user.getUserName());
+		persistance.setUserName(securityService.cleanXSS(user.getUserName()));
 		persistance.setUserSex(user.getUserSex());
 		persistance.setUserDob(user.getUserDob());
-		persistance.setUserPhone(user.getUserPhone());
-		persistance.setUserEmail(user.getUserEmail());
-		persistance.setOrgName(user.getOrgName());
-		persistance.setOrgUserRole(user.getOrgUserRole());
+		persistance.setUserPhone(securityService.cleanXSS(user.getUserPhone()));
+		persistance.setUserEmail(securityService.cleanXSS(user.getUserEmail()));
+		persistance.setOrgName(securityService.cleanXSS(user.getOrgName()));
+		persistance.setOrgUserRole(securityService.cleanXSS(user.getOrgUserRole()));
 		persistance.setNotificationRadius(user.getNotificationRadius());
 		persistance.setMsgFlag(user.getMsgFlag());
 		persistance.setEmailFlag(user.getEmailFlag());
-		persistance.setOrgPhone(user.getOrgPhone());
+		persistance.setOrgPhone(securityService.cleanXSS(user.getOrgPhone()));
 		persistance.setShowFlag(user.getShowFlag());
 		
 		if( ! user.getAddress().trim().equals(persistance.getAddress().trim())) {
-			persistance.setAddress(user.getAddress());
+			persistance.setAddress(securityService.cleanXSS(user.getAddress()));
 			persistance.setLatitude(user.getLatitude());
 			persistance.setLongitude(user.getLongitude());
 		}

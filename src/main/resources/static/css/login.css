@@ -140,8 +140,11 @@
 	}
 }
 
-@media (max-width: 576px) {
+@media (max-width: 500px) {
 	.login-container {
 		width: 20rem;
+	}
+	.login-wrapper{
+		width:85% !important
 	}
 }

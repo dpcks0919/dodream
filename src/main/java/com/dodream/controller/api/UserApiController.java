@@ -3,7 +3,6 @@ package com.dodream.controller.api;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,10 +53,10 @@ public class UserApiController {
 		
 		//4가지 경우 나눠서 분리 
 		if(user.getUserType().equals(RoleType.INDIVIDUAL)) userService.joinIndividual(user, principalDetails);
-		else if(user.getUserType().equals(RoleType.GROUP)) userService.joinGroup(user, principalDetails);
+		//else if(user.getUserType().equals(RoleType.GROUP)) userService.joinGroup(user, principalDetails);
 		else if(user.getUserType().equals(RoleType.SOCIAL_WORKER)) userService.joinSocialWorker(user, principalDetails);
-		else if(user.getUserType().equals(RoleType.INSTITUTION)) userService.joinInstitution(user, principalDetails);
-		else if(user.getUserType().equals(RoleType.ADMIN)) userService.joinGroup(user, principalDetails);
+		//else if(user.getUserType().equals(RoleType.INSTITUTION)) userService.joinInstitution(user, principalDetails);
+		//else if(user.getUserType().equals(RoleType.ADMIN)) userService.joinGroup(user, principalDetails);
 		
 		Authentication authentication = authenticationManager.
 				authenticate(new UsernamePasswordAuthenticationToken(user.getLoginId(), password));

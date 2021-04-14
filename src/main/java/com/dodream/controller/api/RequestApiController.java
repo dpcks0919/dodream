@@ -38,7 +38,7 @@ import com.dodream.service.RequestService;
 public class RequestApiController {
 	@Autowired
 	private RequestService requestService;
-	
+
 	@Value("${summernote.upload}")
 	private String uploadFilePath;
 	
@@ -126,7 +126,6 @@ public class RequestApiController {
 	// 새로운 요청 아이템 등록
 	@PostMapping("/requestItemSaveProc")
 	public ResponseDto<Integer> saveRequestItem(@RequestBody RequestItem requestItem) {
-
 		requestService.saveRequestItem(requestItem);
 		return new ResponseDto<Integer> (HttpStatus.OK.value(), 1);
 	}
@@ -161,18 +160,14 @@ public class RequestApiController {
 	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
 	public FileUploadDto uploadSummernoteImageFile(HttpServletRequest request, @RequestParam("file") MultipartFile multipartFile) {
 		
-		//JsonObject jsonObject = new JsonObject();
 		FileUploadDto fileuploadDto = new FileUploadDto();
 		
-		//String root_path = request.getSession().getServletContext().getRealPath("/"); 
-		//String fileRoot = "../resources/static/image/request/";	//저장될 외부 파일 경로
 		String localRoot = uploadFilePath;
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
 				
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
 		
-		//File targetFile = new File(root_path + fileRoot + savedFileName);	
 		File targetFile = new File( localRoot + savedFileName);
 		
 		try {
@@ -181,12 +176,10 @@ public class RequestApiController {
 
 			fileuploadDto.setUrl("/image/summernote/"+savedFileName);
 			fileuploadDto.setResponseCode("success");
-			//jsonObject.addProperty("url", "/image/request/"+savedFileName);
-			//jsonObject.addProperty("responseCode", "success");		
+	
 		}catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
 			fileuploadDto.setResponseCode("error");
-			//jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
 		
