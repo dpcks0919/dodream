@@ -116,7 +116,3 @@
 		<div class="btn-res" onclick="update();">수정하기</div>
 	</div>
 </div>
-<!-- <div class="modal-ftr" style="float:bottom;width:100%;display:flex;flex-direction:row;justify-content:space-between;height:2rem!important;margin-top:2.5rem;border:1px solid red;">
-	<div class="btn-res" onclick="withdraw();">삭제하기</div>
-	<div class="btn-res" onclick="update();">수정하기</div>
-</div> -->
