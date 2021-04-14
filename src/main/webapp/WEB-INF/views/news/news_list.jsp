@@ -62,7 +62,7 @@
 									var realImg = "/image/news2.jpeg";
 									var fullStr = '${top.content}';
 									var strArray = fullStr.split('<p>');
-									if(fullStr.includes('<img')){
+									if(fullStr.includes('<img')){							
 										for(var i=0; i<strArray.length; i++) {
 											if(strArray[i].includes('<img')) {
 												var strDetail = strArray[i].split('src="')[1];
