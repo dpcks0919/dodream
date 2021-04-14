@@ -265,6 +265,25 @@ input[type='radio']:checked {
   border: 1px solid lightgray;
 }
 
+.radio-wrapper {
+	display:inline-block;
+}
+
+#privacy_submit {
+  display:inline-block;
+  border:2px solid #e95378;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 4px;
+  color: #e95378;
+  font-weight:bold;
+  cursor: pointer;
+  line-height:inherit;
+}
+
 @media (max-width: 992px) {
 /*   .reg-container {
     display: block;

@@ -27,10 +27,27 @@
 		<section class="page-section-join" id="join">
 			<div class="flex-center">
 				<div class="flex-column" style="width: 400px; padding: 30px;">
-					<div class="sns-card" onclick="document.location.href='/joinFormMain'">
+					<div class="sns-card" onclick="document.location.href='/joinForm_privacy/1'">
 						<div class="sns-logo" style="background-image: url('/image/Logo2.png');">로고</div>
 						<div class="sns-title">이메일로 회원가입</div>
 					</div>
+					<div class="sns-card" onclick="document.location.href='/joinForm_privacy/2'">
+						<div class="sns-logo" style="background-image: url('/image/kakaologo.png');">로고</div>
+						<div class="sns-title">카카오톡으로 회원가입</div>
+					</div>
+					<div class="sns-card" onclick="document.location.href='/joinForm_privacy/3'">
+						<div class="sns-logo" style="background-image: url('/image/naverlogo.png');">로고</div>
+						<div class="sns-title">네이버로 회원가입</div>
+					</div>
+					<div class="sns-card" onclick="document.location.href='/joinForm_privacy/4'">
+						<div class="sns-logo" style="background-image: url('/image/googlelogo.png');">로고</div>
+						<div class="sns-title">구글로 회원가입</div>
+					</div>
+					<!-- 
+						<div class="sns-card" onclick="document.location.href='/joinFormMain'">
+							<div class="sns-logo" style="background-image: url('/image/Logo2.png');">로고</div>
+							<div class="sns-title">이메일로 회원가입</div>
+						</div>					
 					<div class="sns-card" onclick="document.location.href='/oauth2/authorization/kakao'">
 						<div class="sns-logo" style="background-image: url('/image/kakaologo.png');">로고</div>
 						<div class="sns-title">카카오톡으로 회원가입</div>
@@ -43,6 +60,7 @@
 						<div class="sns-logo" style="background-image: url('/image/googlelogo.png');">로고</div>
 						<div class="sns-title">구글로 회원가입</div>
 					</div>
+				  	-->
 				</div>
 			</div>
 		</section>
