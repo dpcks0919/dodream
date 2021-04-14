@@ -321,14 +321,42 @@ let myInit = {
 		var birthdob = new Date(birthyear+ "/" + birthmonth + "/" + birthdate);				
 		var fullAddr = $("#roadAddrPart1").val()+ " " + $("#addrDetail").val();
 		
+		// userEmail 체크
+		if($("#useremail").length){
+			if(!$("#useremail").val()){
+				alert("이메일을 입력해주세요.");
+				return false;
+			}
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(!regex.test($("#useremail").val())){
+				alert("이메일 형식에 맞게 작성해주세요.");
+				return false;
+			}
+		}
+		var userEmail = $("#useremail").val().trim();
+		
+		// userPhone 체크
+		if($("#userphone").length){	// userEmail
+			if(!$("#userphone").val()){
+				alert("연락처를 입력해주세요.");
+				return false;
+			}
+			var regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+			if(!regex.test($("#userphone").val())){
+				alert("연락처를 형식에 맞게 작성해주세요.");
+				return false;
+			}
+		}	
+		var userPhone = $("#userphone").val();
+		
 		let data = {
 			loginId : $("#loginId").val(),
 			userName : $("#username").val(),
 			userSex : $("#input_sex").val(),
 			userDob : birthdob,
-			userEmail: $("#useremail").val(),
+			userEmail: userEmail,
 			emailFlag: $("input[name='mail_rcv']:checked").val(),
-			userPhone: $("#userphone").val(),
+			userPhone: userPhone,
 			msgFlag: $("input[name='sms_rcv']:checked").val(),
 			showFlag: $("input[name='show_flag']:checked").val(),
 			address : fullAddr,
