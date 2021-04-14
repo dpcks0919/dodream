@@ -64,7 +64,6 @@ public class NewsService {
 		persistance.setTitle(news.getTitle());
 		persistance.setContent(news.getContent());
 		persistance.setNewsType(news.getNewsType());
-		persistance.setCount(news.getCount());
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
 	}
 
