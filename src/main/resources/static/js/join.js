@@ -480,3 +480,69 @@ let joinInit = {
 
 joinInit.init();
 
+
+let privacy =  {
+	init: function(){
+		$("input:radio[name=privacy]").click(function(){
+			if($("#agree").prop("disabled") == false) {
+				$('input[name="privacy"]').each(function() {
+					var checked = $(this).prop('checked');
+					if(checked) {
+						$(this).css("background-color", "black");
+					} else {
+						$(this).css("background-color", "white");
+					}
+				});
+				if($("input:radio[name=privacy]:checked").val()=='agree'){
+					$("#privacy_submit").css("color", "#e95378");
+					$("#privacy_submit").css("border", "1px solid #e95378");
+					if($("#input-page").val() == 1) {
+						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/joinFormMain'");
+					} else if($("#input-page").val() == 2) {
+						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/kakao'");						
+					} else if($("#input-page").val() == 3) {
+						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/naver'");
+					} else if($("#input-page").val() == 4) {
+						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/facebook'");
+					}
+				} else {
+					$("#privacy_submit").css("color", "#e3e3e3");
+					$("#privacy_submit").css("border", "1px solid #e3e3e3");
+					document.getElementById("privacy_submit").setAttribute("onClick", "alert('약관 동의 후 이용 가능합니다.')");
+				}
+			}
+		});
+
+
+		
+		$("#privacy_scroll").scroll(function(){
+			var scrollTop = $(this).scrollTop();
+			var innerHeight = $(this).innerHeight();
+			var scrollHeight = $(this).prop('scrollHeight');
+			
+			if (scrollTop + innerHeight * 2 >= scrollHeight) {
+				$("#agree").removeAttr("disabled");
+				$("#disagree").removeAttr("disabled");
+				$("#privacy-text1").css("color","black");
+				$("#privacy-text2").css("color","black");
+				$("#privacy_submit").attr("disabled");
+				$("#agree").css("border", "1px solid black");
+				$("#disagree").css("border", "1px solid black");
+				$('input[name="privacy"]').each(function() {
+					var checked = $(this).prop('checked');
+					if(checked) {
+						$(this).css("background-color", "black");
+					} else {
+						$(this).css("background-color", "white");
+					}
+				});
+			}
+		});
+	},
+	submit: function() {
+		$()
+	}
+}
+
+
+
