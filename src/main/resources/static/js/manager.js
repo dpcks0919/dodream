@@ -1113,12 +1113,12 @@ function withdraw() {
 	var conf = confirm("삭제하시겠습니까?")
 	var idNum = $("#input_id").val();
 	var uid = $("#input_uid").val();
-	var udob = new Date();
+	var updateDate = new Date();
 	
 	let data = {
 		id: idNum,
 		loginId: uid,
-		userDob: udob,
+		updateDate: updateDate,
 	};	
 	
 	if(conf == true) {
