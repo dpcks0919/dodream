@@ -233,7 +233,7 @@ let joinInit = {
 			userName : $("#username").val(),
 			userSex : $("#input_sex").val(),
 			userDob : birthdob,
-			userEmail: $("#useremail").val(),
+			userEmail: $("#useremail").val().trim(),
 			emailFlag: $("input[name='mail_rcv']:checked").val(),
 			userPhone: $("#userphone").val(),
 			msgFlag: $("input[name='sms_rcv']:checked").val(),
@@ -351,7 +351,7 @@ let joinInit = {
 		$.ajax({
 			type: "POST",
 			url: "/emailCheckProc",
-			data: {useremail: useremail},
+			data: {useremail: useremail.trim()},
 			async: false,
 		}).done(function(resp){ 
 			if(resp.status == 500){
