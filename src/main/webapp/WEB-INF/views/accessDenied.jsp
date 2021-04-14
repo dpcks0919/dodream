@@ -18,7 +18,8 @@
 		<header class="bg-primary text-white text-center gradient-bgcolor">
 			<div class="d-flex flex-column title-info">
 				<div class="reg-info-small">
-					<h4>도움 요청은 승인된 사회복지사만 사용하실 수 있습니다.</h4>
+					<!-- <h4>도움 요청은 승인된 사회복지사만 사용하실 수 있습니다.</h4> -->
+					<h4>권한이 필요한 페이지입니다.</h4>
 				</div>
 			</div>
 		</header>
