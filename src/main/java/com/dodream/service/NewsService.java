@@ -24,9 +24,14 @@ public class NewsService {
 	@Autowired
 	private NewsRepository newsRepository;
 	
+	@Autowired
+	private SecurityService securityService;
+	
 	@Transactional
 	public void saveNews(News news, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		news.setUser(principalDetails.getUser());
+		news.setTitle(securityService.cleanXSS(news.getTitle()));
+		news.setContent(securityService.cleanXSSSummerNote(news.getContent()));
 		newsRepository.save(news);
 	}
 	
@@ -38,7 +43,6 @@ public class NewsService {
 			return newsRepository.findByNewsTypeAndDeleteFlag(NewsType.valueOf(type), 0,pageable);
 		}
 	}
-	
 	
 	public List<News> recentNewsList() {
 		return newsRepository.findAllByDeleteFlagAndOrderByRegDateDesc(0);
@@ -61,8 +65,8 @@ public class NewsService {
 		cal.setTime(new Date());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		persistance.setTitle(news.getTitle());
-		persistance.setContent(news.getContent());
+		persistance.setTitle(securityService.cleanXSS(news.getTitle()));
+		persistance.setContent(securityService.cleanXSSSummerNote(news.getContent()));
 		persistance.setNewsType(news.getNewsType());
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
 	}

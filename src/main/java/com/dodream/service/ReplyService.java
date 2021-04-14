@@ -54,6 +54,9 @@ public class ReplyService {
 	private UserInterestRepository userInterestRepository;
 	
 	@Autowired
+	private SecurityService securityService;
+	
+	@Autowired
 	@Qualifier("helpSender") // Help(요청응답 관련 계정)
     private JavaMailSender helpSender;
 	
@@ -125,6 +128,10 @@ public class ReplyService {
 		reply.setRequest(requestService.getRequest(reply.getRequest().getId()));
 		reply.setUser(principalDetails.getUser());
 		reply.setStatus(StatusType.WAITING);
+		reply.setReplyUser(securityService.cleanXSS(reply.getReplyUser()));
+		reply.setReplyOrg(securityService.cleanXSS(reply.getReplyOrg()));
+		reply.setReplyPhone(securityService.cleanXSS(reply.getReplyPhone()));
+		reply.setReplyContent(securityService.cleanXSS(reply.getReplyContent()));
 
 		replyRepository.save(reply);
 		return reply;
@@ -147,7 +154,7 @@ public class ReplyService {
 		cal.setTime(new Date());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		persistance.setComment(comment);
+		persistance.setComment(securityService.cleanXSS(comment));
 		persistance.setStatus((StatusType) _status);
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
 	}
@@ -159,10 +166,10 @@ public class ReplyService {
 			return new IllegalArgumentException("응답 내역을 찾을 수 없습니다.");
 		});
 				
-		persistance.setReplyUser(reply.getReplyUser());
-		persistance.setReplyOrg(reply.getReplyOrg());
-		persistance.setReplyContent(reply.getReplyContent());
-		persistance.setReplyPhone(reply.getReplyPhone());
+		persistance.setReplyUser(securityService.cleanXSS(reply.getReplyUser()));
+		persistance.setReplyOrg(securityService.cleanXSS(reply.getReplyOrg()));
+		persistance.setReplyContent(securityService.cleanXSS(reply.getReplyContent()));
+		persistance.setReplyPhone(securityService.cleanXSS(reply.getReplyPhone()));
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

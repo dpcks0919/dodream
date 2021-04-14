@@ -10,7 +10,6 @@ import java.util.HashMap;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +26,6 @@ import com.dodream.model.ClientType;
 import com.dodream.model.Reply;
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
-import com.dodream.model.RequestType;
 import com.dodream.model.StatusType;
 import com.dodream.model.User;
 import com.dodream.repository.ReplyRepository;
@@ -37,7 +35,6 @@ import com.dodream.repository.UserInterestRepository;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class RequestService {
@@ -56,6 +53,9 @@ public class RequestService {
 	
 	@Autowired
 	private UserInterestRepository userInterestRepository;
+	
+	@Autowired
+	private SecurityService securityService;
 	
 	@Autowired
 	@Qualifier("helpSender") // Help(요청응답 관련 계정)
@@ -81,7 +81,10 @@ public class RequestService {
 		
 		int urgentLevel = request.getUrgentLevel();
 		
+		request.setTitle(securityService.cleanXSS(request.getTitle()));
+		request.setDescription(securityService.cleanXSSSummerNote(request.getDescription()));
 		request.setUser(principalDetails.getUser());
+		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -97,9 +100,11 @@ public class RequestService {
 		return request;
 	}
 
-	// @Transactional(readOnly = true)
 	@Transactional
 	public void saveRequestItem(RequestItem requestItem) {
+		
+		requestItem.setItemName(securityService.cleanXSS(requestItem.getItemName()));
+		
 		requestItemRepository.save(requestItem);
 	}
 	
@@ -237,7 +242,7 @@ public class RequestService {
 			return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
 		});
 		
-		persistance.setItemName(requestItem.getItemName());
+		persistance.setItemName(securityService.cleanXSS(requestItem.getItemName()));
 		persistance.setItemNum(requestItem.getItemNum());
 		persistance.setReceivedNum(requestItem.getReceivedNum());
 		persistance.setRequestType(requestItem.getRequestType());
@@ -249,11 +254,11 @@ public class RequestService {
 			return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
 		});
 				
-		persistance.setTitle(request.getTitle());
+		persistance.setTitle(securityService.cleanXSS(request.getTitle()));
 		persistance.setRequestAddress(request.getRequestAddress());
 		persistance.setLatitude(request.getLatitude());
 		persistance.setLongitude(request.getLongitude());
-		persistance.setDescription(request.getDescription());		
+		persistance.setDescription(securityService.cleanXSSSummerNote(request.getDescription()));		
 		persistance.setClientType(request.getClientType());
 		
 		persistance.setUrgentLevel(request.getUrgentLevel());
