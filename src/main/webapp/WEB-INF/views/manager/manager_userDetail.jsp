@@ -14,7 +14,7 @@
 		<div class="btn-cng" id="pw_change_btn" onclick="pwChange();">변경</div>
 	</div>
 </div>
-<div style="display: flex; flex-direction: row; justify-content: space-around;padding-top:1.5rem;border-bottom:2px solid black;">
+<div class="user-modal" style="display: flex; flex-direction: row; justify-content: space-around;padding-top:1.5rem;border-bottom:2px solid black;overflow:auto;height:75%;">
 <div class="user_flex_left">
 	<div class="input-container" id="input_ustate_flag_container">
 		<div class="userInfoTitle">승인 여부: </div>
@@ -110,7 +110,13 @@
 	</div>
 </div>
 </div>
-<div class="modal-ftr" style="width:100%;position:absolute;bottom:0;right:0;display:flex;flex-direction:row;justify-content:space-between;">
+<div style="margin-top:3rem;">
+	<div style="width:100%; display:flex; justify-content:space-between;" class="">	
+		<div class="btn-res" onclick="withdraw();">삭제하기</div>
+		<div class="btn-res" onclick="update();">수정하기</div>
+	</div>
+</div>
+<!-- <div class="modal-ftr" style="float:bottom;width:100%;display:flex;flex-direction:row;justify-content:space-between;height:2rem!important;margin-top:2.5rem;border:1px solid red;">
 	<div class="btn-res" onclick="withdraw();">삭제하기</div>
 	<div class="btn-res" onclick="update();">수정하기</div>
-</div>
+</div> -->

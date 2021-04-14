@@ -47,6 +47,10 @@
 .modal-content::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
+.user-modal::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
 .modal-ftr {
   display: flex;
   flex-direction: row-reverse;
