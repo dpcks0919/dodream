@@ -15,7 +15,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 
 	Request[] findAllByDeleteFlag(int i);
 	
-	Request[] findAllByStatus(StatusType approved);
+	Request[] findAllByStatus(StatusType approved); 
 		
 	Page<Request> findById(int id, Pageable pageable);
 
