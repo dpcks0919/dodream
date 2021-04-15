@@ -16,7 +16,7 @@ public class RequestCloseScheduler {	//automaticall CLOSE requests which are out
 	@Autowired
 	RequestRepository requestRepository;
 	 
-	@Transactional
+	@Transactional 
 	@Scheduled(fixedDelay = 1000 * 60 * 60)
 	public void requestClose() {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());

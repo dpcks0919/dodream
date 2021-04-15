@@ -22,7 +22,7 @@ public class RequestItemListener {
 					isClosed = false;
 					break;
 				}
-			}
+			} 
 		}
 		else isClosed = false;
 		
