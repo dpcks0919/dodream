@@ -1,5 +1,6 @@
 package com.dodream.listener;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.PostUpdate;
