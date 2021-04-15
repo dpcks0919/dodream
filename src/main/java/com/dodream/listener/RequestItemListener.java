@@ -1,5 +1,6 @@
 package com.dodream.listener;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.PostUpdate;
@@ -21,7 +22,7 @@ public class RequestItemListener {
 					isClosed = false;
 					break;
 				}
-			}
+			} 
 		}
 		else isClosed = false;
 		
