@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.dodream.model.ClientType;
 import com.dodream.model.Request;
+import com.dodream.model.StatusType;
 import com.dodream.model.User;
 // 사회복지사의 요청 Form
 public interface RequestRepository extends JpaRepository<Request, Integer>{
@@ -14,6 +15,8 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 
 	Request[] findAllByDeleteFlag(int i);
 	
+	Request[] findAllByStatus(StatusType approved); 
+		
 	Page<Request> findById(int id, Pageable pageable);
 
 	Page<Request> findByTitleContaining(String id, Pageable pageable);

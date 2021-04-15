@@ -291,14 +291,34 @@ function saveReply(items) {
 		let requestId = {
 			id: $("#rq_id").text(),
 		};
-
-		let reply = {
-			replyContent: $("#reply_content").val(),
-			replyUser: $("#reply_user").val(),
-			replyOrg: $("#reply_org").val(),
-			replyPhone: $("#reply_phone").val(),
-			request: requestId
-		};
+		
+		if($("#reply_user").val().trim().length == 0){
+			alert("이름을 입력해주세요!");
+			return;
+		}
+		
+		if($("#reply_org").val().trim().length == 0){
+			alert("소속을 입력해주세요!");
+			return;
+		}
+		
+		// userPhone 체크
+		if($("#reply_phone").val().trim().length == 0){
+			alert("연락처를 입력해주세요.");
+			return;
+		}
+		else{
+			var regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+			if(!regex.test($("#reply_phone").val())){
+				alert("연락처를 형식에 맞게 작성해주세요.");
+				return;
+			}
+		}
+		
+		if($("#reply_content").val().trim().length == 0){
+			alert("내용을 입력해주세요!");
+			return;
+		}
 	
 		for(var i=0; i<items.length; i++) {
 			var rid = "#response_num" + i;
@@ -311,6 +331,14 @@ function saveReply(items) {
 			alert("수량을 설정해주세요!");
 			return;
 		}
+		
+		let reply = {
+			replyContent: $("#reply_content").val(),
+			replyUser: $("#reply_user").val(),
+			replyOrg: $("#reply_org").val(),
+			replyPhone: $("#reply_phone").val(),
+			request: requestId
+		};
 					
 		var allData = {
 			reply : reply,

@@ -336,7 +336,7 @@ let myInit = {
 		var userEmail = $("#useremail").val().trim();
 		
 		// userPhone 체크
-		if($("#userphone").length){	// userEmail
+		if($("#userphone").length){
 			if(!$("#userphone").val()){
 				alert("연락처를 입력해주세요.");
 				return false;
