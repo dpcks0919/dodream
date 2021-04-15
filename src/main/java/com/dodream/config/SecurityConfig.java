@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		http.csrf().disable();
+		http.csrf().disable();		
 		http.authorizeRequests()
 			.antMatchers("/user/**").access("hasRole('ROLE_INDIVIDUAL_APPROVED') or hasRole('ROLE_GROUP_APPROVED') or hasRole('ROLE_SOCIAL_WORKER_APPROVED') or hasRole('ROLE_INSTITUTION_APPROVED') or hasRole('ROLE_ADMIN_APPROVED')")
 			.antMatchers("/social/**").access("hasRole('ROLE_SOCIAL_WORKER_APPROVED') or hasRole('ROLE_INSTITUTION_APPROVED') or hasRole('ROLE_ADMIN_APPROVED')")
