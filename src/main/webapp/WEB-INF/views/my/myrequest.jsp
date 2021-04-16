@@ -79,7 +79,9 @@ table td {
 							<button id="rq_search" style="background-color:white; border:1px solid black; outline:none; display:none;" onclick="goPopup();">검색</button>
 						</div>
 					</div>
-				</div>	
+				</div>
+					
+				<input type="hidden" id="rq_statusType" value=""/>
 				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="summernoteDiv" id="rq_contents_summernotes" style="display:none;">
@@ -107,6 +109,7 @@ table td {
 					</table>
 				</div>
 				<div style="width:100%; display:flex; justify-content:space-between;" class="">
+					<div class="btn-res btn-edit" id="rq_delete" onclick="deleteRequest();">삭제하기</div>										
 					<div class="btn-res btn-edit" id="rq_back" style="visibility:hidden;" onclick="request_back();">뒤로가기</div>
 					<div class="btn-res btn-edit" id="rq_edit">수정하기</div>
 					<div class="btn-res btn-edit" style="display:none;" id="rq_save" onclick="request_edit_save();">저장하기</div>				
@@ -129,7 +132,6 @@ table td {
 		</div>
 		<div class="" style="display:flex; justify-content:space-between; width:100%; padding-top:0.25rem;">
 			<div class="btn-close2 " onclick="closeModal_request();">창 닫기</div>
-			<div class="btn-close2 " onclick="deleteRequest();">삭제하기</div>										
 		</div>
 	</div>
 
@@ -194,6 +196,7 @@ table td {
 									description: '${request.description}',
 									longitude: '${request.longitude}',
 									latitude: '${request.latitude}',
+									status: '${request.status}',
 									requestItem: arr,
 								};
 							</script>
@@ -496,6 +499,7 @@ table td {
 
 				var client_type = $("#rq_clientType").val();
 				var urgent_level = $("#rq_urgentLevel").val();
+				var rqStatus = $("#rq_statusType").val();
 				
 				let data3 = {
 					id : rqID,
@@ -505,9 +509,10 @@ table td {
 					latitude : rqLat,
 					clientType : client_type,
 					urgentLevel : urgent_level,
-					description : rqContents
+					description : rqContents,
+					status: rqStatus
 				};
-				
+				console.log(data3);
 				$.ajax({
 					type : "POST",
 					url : "/requestUpdateProc",
@@ -525,11 +530,6 @@ table td {
 				}).fail(function(error) {
 					console.log(JSON.stringify(error));
 				});
-				
-					
-				
-			  	
-				
 			}
 		
 		// 1. rq_title, rq_status, rq_addr readonly 없애기
@@ -541,6 +541,7 @@ table td {
 			$('#rq_title').prop('readonly', false);
 			$("#rq_clientType").prop('disabled', false);
 			$("#rq_urgentLevel").prop('disabled', false);
+			$("#rq_delete").prop("hidden", true);
 			
 			$('#rq_title').css('border-style', 'double');
 			$('#roadAddrPart1').css('border-style', 'double');
@@ -631,7 +632,8 @@ table td {
 			$('#rq_title').prop('readonly', true);
 			$("#rq_clientType").prop('disabled', true);
 			$("#rq_urgentLevel").prop('disabled', true);
-			
+			$("#rq_delete").prop("hidden", false);
+
 			
 			$('#rq_title').css('border-style', 'none');
 			$('#roadAddrPart1').css('border-style', 'none');

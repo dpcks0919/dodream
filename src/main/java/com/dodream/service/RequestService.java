@@ -261,6 +261,7 @@ public class RequestService {
 		persistance.setLongitude(request.getLongitude());
 		persistance.setDescription(securityService.cleanXSSSummerNote(request.getDescription()));		
 		persistance.setClientType(request.getClientType());
+		persistance.setStatus(request.getStatus());
 		
 		persistance.setUrgentLevel(request.getUrgentLevel());
 		Calendar cal = Calendar.getInstance();

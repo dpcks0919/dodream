@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.dodream.model.ClientType;
 import com.dodream.model.Request;
+import com.dodream.model.StatusType;
 import com.dodream.model.User;
 // 사회복지사의 요청 Form
 public interface RequestRepository extends JpaRepository<Request, Integer>{
@@ -20,6 +21,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	
 	@Query(value = "SELECT * FROM request where id= ?1 and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
 	Page<Request> findById(int id, int interval, Pageable pageable);
+	Request[] findAllByStatus(StatusType approved); 
 
 	@Query(value = "SELECT * FROM request where title like %?1% and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
 	Page<Request> findByTitleContaining(String title, int interval, Pageable pageable);

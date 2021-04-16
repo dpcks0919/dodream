@@ -303,6 +303,8 @@ function goDetail_myrequest(rq) {
     var cur = new Date(); // 현재시간
     var c_time = cur.getTime();
 	var org_name = rq.userName;
+	var statusType = rq.status;
+	
     var status = "";
     if(c_time <= d_time) status = "응답 대기중";
     else status = "마감";
@@ -326,6 +328,8 @@ function goDetail_myrequest(rq) {
 	$("#rq_status").val(status);
 	$("#rq_clientType").val(client_type).prop("selected", true);
 	$("#rq_urgentLevel").val(level).prop("selected", true);
+	
+	$("#rq_statusType").val(statusType);
 	
     $("#roadAddrPart1").val(rq.requestAddress);
 	$("#roadLongitude").val(rq.longitude);
