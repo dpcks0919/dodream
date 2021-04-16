@@ -1000,7 +1000,7 @@ function manager_editRequest(rid) {
 					description : rqContents,
 					status : rq_status
 				};
-				
+				console.log(data3);
 				$.ajax({
 					type : "POST",
 					url : "/requestUpdateProc",
