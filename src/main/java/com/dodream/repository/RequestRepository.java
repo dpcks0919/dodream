@@ -11,41 +11,60 @@ import com.dodream.model.User;
 // 사회복지사의 요청 Form
 public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Request[] findAllByClientType(ClientType clientType);
-
-	Request[] findAllByDeleteFlag(int i);
 	
-	Page<Request> findById(int id, Pageable pageable);
+	@Query(value = "SELECT * FROM request where date(reg_date) >= date(subdate(now(), INTERVAL ?1 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findRequestByInterval(int interval, Pageable pageable);
+	
+	@Query(value = "SELECT * FROM request where date(reg_date) >= date(subdate(now(), INTERVAL ?1 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Request[] findRequestByInterval(int interval);
+	
+	@Query(value = "SELECT * FROM request where id= ?1 and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findById(int id, int interval, Pageable pageable);
 
-	Page<Request> findByTitleContaining(String id, Pageable pageable);
+	@Query(value = "SELECT * FROM request where title like %?1% and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByTitleContaining(String title, int interval, Pageable pageable);
 
-	Page<Request> findByRequestAddressContaining(String searchText, Pageable pageable);
+	@Query(value = "SELECT * FROM request where request_address like %?1% and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByRequestAddressContaining(String searchText, int interval, Pageable pageable);
 
-	Page<Request> findByUrgentLevelAndId(int urgentLevel, int id, Pageable pageable);
+	@Query(value = "SELECT * FROM request where urgent_level = ?1 and id = ?2 and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByUrgentLevelAndId(int urgentLevel, int id, int interval, Pageable pageable);
 
-	Page<Request> findByUrgentLevelAndTitleContaining(int urgentLevel, String searchText, Pageable pageable);
+	@Query(value = "SELECT * FROM request where urgent_level = ?1 and title like %?2% and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByUrgentLevelAndTitleContaining(int urgentLevel, String searchText, int interval, Pageable pageable);
 
-	Page<Request> findByUrgentLevelAndRequestAddressContaining(int urgentLevel, String searchText, Pageable pageable);
+	@Query(value = "SELECT * FROM request where urgent_level = ?1 and request_address like %?2% and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByUrgentLevelAndRequestAddressContaining(int urgentLevel, String searchText, int interval, Pageable pageable);
 
-	Page<Request> findByUrgentLevel(int urgentLevel, Pageable pageable);
+	@Query(value = "SELECT * FROM request where urgent_level = ?1 and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByUrgentLevel(int urgentLevel, int interval, Pageable pageable);
 
-	Page<Request> findByClientTypeAndId(ClientType client, int id, Pageable pageable);
+	@Query(value = "SELECT * FROM request where client_type like %?1% and id = ?2 and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByClientTypeAndId(ClientType client, int id, int interval, Pageable pageable);
 
-	Page<Request> findByClientTypeAndTitleContaining(ClientType client, String searchText, Pageable pageable);
+	@Query(value = "SELECT * FROM request where client_type like %?1% and title like %?2% and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByClientTypeAndTitleContaining(ClientType client, String searchText, int interval, Pageable pageable);
 
-	Page<Request> findByClientTypeAndRequestAddressContaining(ClientType client, String searchText, Pageable pageable);
+	@Query(value = "SELECT * FROM request where client_type like %?1% and request_address like %?2% and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByClientTypeAndRequestAddressContaining(ClientType client, String searchText, int interval, Pageable pageable);
 
-	Page<Request> findByClientType(ClientType client, Pageable pageable);
+	@Query(value = "SELECT * FROM request where client_type like %?1% and date(reg_date) >= date(subdate(now(), INTERVAL ?2 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByClientType(ClientType client, int interval, Pageable pageable);
 
+	@Query(value = "SELECT * FROM request where client_type like %?1% and urgent_level = ?2 and id = ?3 and date(reg_date) >= date(subdate(now(), INTERVAL ?4 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
 	Page<Request> findByClientTypeAndUrgentLevelAndId(ClientType client, int urgentLevel, int id,
-			Pageable pageable);
+			int interval, Pageable pageable);
 
+	@Query(value = "SELECT * FROM request where client_type like %?1% and urgent_level = ?2 and title like %?3% and date(reg_date) >= date(subdate(now(), INTERVAL ?4 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
 	Page<Request> findByClientTypeAndUrgentLevelAndTitleContaining(ClientType client, int urgentLevel,
-			String searchText, Pageable pageable);
+			String searchText, int interval, Pageable pageable);
 
+	@Query(value = "SELECT * FROM request where client_type like %?1% and urgent_level = ?2 and request_address like %?3% and date(reg_date) >= date(subdate(now(), INTERVAL ?4 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
 	Page<Request> findByClientTypeAndUrgentLevelAndRequestAddressContaining(ClientType client, int urgentLevel,
-			String searchText, Pageable pageable);
+			String searchText, int interval, Pageable pageable);
 
-	Page<Request> findByClientTypeAndUrgentLevel(ClientType client, int urgentLevel, Pageable pageable);
+	@Query(value = "SELECT * FROM request where client_type like %?1% and urgent_level = ?2 and date(reg_date) >= date(subdate(now(), INTERVAL ?3 DAY)) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	Page<Request> findByClientTypeAndUrgentLevel(ClientType client, int urgentLevel, int interval, Pageable pageable);
 
 	Request[] findByUser(User user);
 	
@@ -53,9 +72,5 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	Page<Request> readInterestRequestByUserId(int userId, Pageable pageable);
 
 	Page<Request> findByUser(User user, Pageable pageable);
-
-	Page<Request> findAllByDeleteFlag(int flag, Pageable pageable);
-
-	Page<Request> findByDeleteFlagAndUser(int flag, User user, Pageable pageable);
-
+	
 }
