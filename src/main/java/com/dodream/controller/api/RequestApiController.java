@@ -134,6 +134,10 @@ public class RequestApiController {
 	@PostMapping("/requestSaveProc")
 	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		Request newRequest = requestService.saveRequest(request, principalDetails);
+		
+		if( principalDetails == null  )
+			return new ResponseDto<Request> ( HttpStatus.INTERNAL_SERVER_ERROR.value() , null);
+		
 		return new ResponseDto<Request> (HttpStatus.OK.value(), newRequest);
 	}
 	

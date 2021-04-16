@@ -27,7 +27,7 @@ public class MapApiController {
 	@Value("${social.password}")
 	private String socialPassword;
 	
-	private int interval = 30;
+	private int interval = 60;
 
 	
 	@PostMapping("/requestListProc")
