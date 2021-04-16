@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dodream.dto.ResponseDto;
 import com.dodream.model.Request;
-import com.dodream.model.RoleType;
 import com.dodream.model.User;
 import com.dodream.service.RequestService;
 import com.dodream.service.UserService;
@@ -27,11 +26,13 @@ public class MapApiController {
 	
 	@Value("${social.password}")
 	private String socialPassword;
+	
+	private int interval = 30;
 
 	
 	@PostMapping("/requestListProc")
 	public ResponseDto<Request[]> requestListProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
-		return new ResponseDto<Request[]>(HttpStatus.OK.value(), requestService.requestListProcService());
+		return new ResponseDto<Request[]>(HttpStatus.OK.value(), requestService.requestListProcService(interval));
 	}
 	
 	@PostMapping("/groupListProc")

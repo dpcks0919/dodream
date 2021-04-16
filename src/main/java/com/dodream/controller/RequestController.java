@@ -9,7 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dodream.config.auth.PrincipalDetails;
@@ -22,10 +21,12 @@ public class RequestController {
 	@Autowired
 	private RequestService requestService;
 	
+	private int interval = 30;
+	
 	//	요청 페이지 지도
 	@GetMapping("requestMap")
 	public String requestMap(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		model.addAttribute("requests", requestService.readRequestList(pageable));
+
 		if(principalDetails != null)
 			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_map";
@@ -42,7 +43,7 @@ public class RequestController {
 	//	요청 목록 불러오기
 	@GetMapping("requestTable")
 	public String requestTable(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		model.addAttribute("requests", requestService.readRequestList(0, pageable));
+		model.addAttribute("requests", requestService.readRequestListByInterval(interval, pageable));
 		if(principalDetails != null)
 			model.addAttribute("user", principalDetails.getUser());
 		return "request/request_table";
@@ -73,66 +74,68 @@ public class RequestController {
 			if(urgentLevel == 0) {
 				if(searchItem.compareTo("id") == 0) {
 					// 등록번호로만 검색
-					searchList = requestService.searchRequestById(searchText, pageable);
+					searchList = requestService.searchRequestById(searchText, interval, pageable);
 				}else if(searchItem.compareTo("title") == 0){
 					// 제목으로만 검색
-					searchList = requestService.searchRequestByTitle(searchText, pageable);
+					searchList = requestService.searchRequestByTitle(searchText, interval, pageable);
 				}else if(searchItem.compareTo("address") == 0) {
 					// 위치로만 검색
-					searchList = requestService.searchRequestByAddress(searchText, pageable);
+					searchList = requestService.searchRequestByAddress(searchText, interval, pageable);
 				}else {
-					searchList = requestService.readRequestList(pageable);
+					searchList = requestService.readRequestListByInterval(interval, pageable);
 				}
 			}else {
 				if(searchItem.compareTo("id") == 0) {
 					// 기간과 등록번호로 검색
-					searchList = requestService.searchRequestByUrgentLevelAndId(urgentLevel, searchText, pageable);
+					searchList = requestService.searchRequestByUrgentLevelAndId(urgentLevel, searchText, interval, pageable);
 				}else if(searchItem.compareTo("title") == 0){
 					// 기간과 제목으로 검색
-					searchList = requestService.searchRequestByUrgentLevelAndTitle(urgentLevel, searchText, pageable);
+					searchList = requestService.searchRequestByUrgentLevelAndTitle(urgentLevel, searchText, interval, pageable);
 				}else if(searchItem.compareTo("address") == 0) {
 					// 기간과 위치로 검색
-					searchList = requestService.searchRequestByUrgentLevelAndAddress(urgentLevel, searchText, pageable);
+					searchList = requestService.searchRequestByUrgentLevelAndAddress(urgentLevel, searchText, interval, pageable);
 				}else {
 					// 기간으로만 검색
-					searchList = requestService.searchRequestByUrgentLevel(urgentLevel, pageable);
+					searchList = requestService.searchRequestByUrgentLevel(urgentLevel, interval, pageable);
 				}
 			}
 		}else {
 			if(urgentLevel == 0) {
 				if(searchItem.compareTo("id") == 0) {
 					// 도움받는 대상과 등록번호로 검색
-					searchList = requestService.searchRequestByClientTypeAndId(clientType, searchText, pageable);
+					searchList = requestService.searchRequestByClientTypeAndId(clientType, searchText, interval, pageable);
 				}else if(searchItem.compareTo("title") == 0){
 					// 도움받는 대상과 제목으로 검색
-					searchList = requestService.searchRequestByClientTypeAndTitle(clientType, searchText, pageable);					
+					searchList = requestService.searchRequestByClientTypeAndTitle(clientType, searchText, interval, pageable);					
 				}else if(searchItem.compareTo("address") == 0) {
 					// 도움받는 대상과 위치로 검색
-					searchList = requestService.searchRequestByClientTypeAndAddress(clientType, searchText, pageable);					
+					searchList = requestService.searchRequestByClientTypeAndAddress(clientType, searchText, interval, pageable);					
 				}else {
 					// 도움받는 대상으로만 검색
-					searchList = requestService.searchRequestByClientType(clientType, pageable);
+					searchList = requestService.searchRequestByClientType(clientType, interval, pageable);
 				}
 			}else {
 				if(searchItem.compareTo("id") == 0) {
 					// 도움받는 대상과 기간과 등록번호로 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndId(clientType, urgentLevel, searchText, pageable);
+					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndId(clientType, urgentLevel, searchText, interval, pageable);
 				}else if(searchItem.compareTo("title") == 0){
 					// 도움받는 대상과 기간과 제목으로 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndTitle(clientType, urgentLevel, searchText, pageable);
+					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndTitle(clientType, urgentLevel, searchText, interval, pageable);
 				}else if(searchItem.compareTo("address") == 0) {
 					// 도움받는 대상과 기간과 위치로 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndAddress(clientType, urgentLevel, searchText, pageable);
+					searchList = requestService.searchRequestByClientTypeAndUrgentLevelAndAddress(clientType, urgentLevel, searchText, interval, pageable);
 				}else {
 					// 도움받는 대상과 기간으로만 검색
-					searchList = requestService.searchRequestByClientTypeAndUrgentLevel(clientType, urgentLevel, pageable);
+					searchList = requestService.searchRequestByClientTypeAndUrgentLevel(clientType, urgentLevel, interval, pageable);
 				}
 			}
 		}
 
 		model.addAttribute("requests", searchList);
+		
 		if(principalDetails != null)
 			model.addAttribute("user", principalDetails.getUser());
+		
 		return "request/request_table";
 	}
 	
