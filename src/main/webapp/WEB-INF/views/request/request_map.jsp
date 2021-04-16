@@ -48,55 +48,7 @@
 					<div class="div-table-wrapper">
 						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="rq_addr"></span>
 					</div>				
-				</div>
-				
-				<!-- 
-				<table class="info-table">
-					<tr class="responsive-big">
-						<td style="width: 17.5%;"><b>등록번호</b></td>
-						<td id="rq_id" style="width: 27.5%;"></td>
-						<td style="width: 17.5%;"><b>등록날짜</b></td>
-						<td id="rq_date" style="width: 37.5%;"></td>
-					</tr>
-					<tr class="responsive-big">
-						<td><b>상태</b></td>
-						<td id="rq_status"></td>
-						<td><b>주소</b></td>
-						<td id="rq_addr"></td>
-					</tr>
-					<tr class="responsive-big">
-						<td><b>기간</b></td>
-						<td id="rq_level"></td>
-						<td><b>요청기관</b></td>
-						<td id="rq_user"></td>
-					</tr>
-						<tr class="responsive-small">
-							<td style="width: 17.5%;"><b>등록번호</b></td>
-							<td id="rq_id" style="width: 27.5%;"></td>
-						</tr>
-						<tr class="responsive-small">
-							<td style="width: 17.5%;"><b>등록날짜</b></td>
-							<td id="rq_date" style="width: 37.5%;"></td>
-						</tr>
-						<tr class="responsive-small">
-							<td><b>상태</b></td>
-							<td id="rq_status"></td>
-						</tr>
-						<tr class="responsive-small">
-							<td><b>주소</b></td>
-							<td id="rq_addr"></td>					
-						</tr>
-						<tr class="responsive-small">
-							<td><b>기간</b></td>
-							<td id="rq_level"></td>
-						</tr>
-						<tr class="responsive-small">
-							<td><b>요청기관</b></td>
-							<td id="rq_user"></td>
-						</tr>
-				</table>
-				-->
-				
+				</div>		
 				
 				<div class="content-text" id="rq_contents"></div>
 				<div class="content-needs">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import com.dodream.config.auth.PrincipalDetails;
 import com.dodream.service.ReplyService;
 import com.dodream.service.RequestService;
@@ -44,7 +45,7 @@ public class UserController {
 	@GetMapping("user/myrequest")
 	public String myrequest(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails, @PageableDefault(size=5, sort="id", direction= Sort.Direction.DESC) Pageable pageable) {
 		model.addAttribute("user", principalDetails.getUser());
-		model.addAttribute("myrequestList", requestService.readMyRequest(0, principalDetails.getUser(), pageable));
+		model.addAttribute("myrequestList", requestService.readMyRequest( principalDetails.getUser(), pageable));
 		return "my/myrequest";
 	}
 	
