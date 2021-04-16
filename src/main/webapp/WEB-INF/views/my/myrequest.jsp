@@ -93,7 +93,7 @@ table td {
 							<th style="width: 17.5%;">종류</th>
 							<th style="width: 25.5%;">내역</th>
 							<th style="width: 25%;" id="current_td">현재 수량</th>
-							<th style="width: 25%;" id="default_td">현재 수량</th>
+							<th style="width: 25%;" id="default_td">목표 수량</th>
 							<th style="width: 15%;" id="edit_td" hidden>목표 수량</th>
 							<th style="width: 5%;" id="delete_td" hidden>삭제</th>
 							
@@ -431,6 +431,7 @@ table td {
 						id : id,
 						itemNum : parseInt(curCount.replace(",","")),
 						itemName : curName,
+						//receivedNum : 
 						requestType : curItem.toUpperCase(),
 					};
 					$.ajax({
