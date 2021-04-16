@@ -245,7 +245,6 @@ public class RequestService {
 		
 		persistance.setItemName(securityService.cleanXSS(requestItem.getItemName()));
 		persistance.setItemNum(requestItem.getItemNum());
-		persistance.setReceivedNum(requestItem.getReceivedNum());
 		persistance.setRequestType(requestItem.getRequestType());
 	}
 	
