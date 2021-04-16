@@ -275,9 +275,12 @@ let mapInit = {
 	      var cur = new Date(); // 현재시간
 		  var c_time = cur.getTime();
 	      var status = "";
-		  if(c_time <= d_time) status = "응답 대기중";
-	      else status = "마감";
-		 $("#marker-info-status").text(status);
+
+		if(InputRequest.status == 'DELETED') status = "삭제됨";
+		else if(c_time > d_time || InputRequest.status == 'CLOSED') status = "마감";
+	    else status = "응답 대기중";
+
+	      $("#marker-info-status").text(status);
 	
 		 // 긴급정도 나타내기
 		 if(InputRequest.urgentLevel == 1) var urgentLevel = "매우 긴급(24시간 이내)";

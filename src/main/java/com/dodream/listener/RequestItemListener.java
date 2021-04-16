@@ -1,17 +1,19 @@
 package com.dodream.listener;
 
-import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.PostUpdate;
+import javax.persistence.PreUpdate;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dodream.model.Request;
 import com.dodream.model.RequestItem;
 import com.dodream.model.StatusType;
 
 public class RequestItemListener {
-	@PostUpdate
-    public void postPersist(RequestItem requestItem) {
+	@Transactional
+	@PreUpdate
+    public void preUpdate(RequestItem requestItem) {
 		boolean isClosed = true;
 		Request request = requestItem.getRequest();
 		List<RequestItem> requestItemList = request.getRequestItem();
