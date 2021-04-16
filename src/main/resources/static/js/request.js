@@ -165,7 +165,7 @@ function minusCount(_current) {
     document.getElementById(target).value=cnt*1 - 1;
   }
   else {
-    alert("0이상의 수를 입력하세요.");
+    alert("0 이상의 수를 입력하세요.");
   }
 }
  
@@ -308,9 +308,9 @@ function saveReply(items) {
 			return;
 		}
 		else{
-			var regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+			var regex = /^\d{2,3}\d{3,4}\d{4}$/;
 			if(!regex.test($("#reply_phone").val())){
-				alert("연락처를 형식에 맞게 작성해주세요.");
+				alert("하이픈(-) 없이 번호만 입력해주세요.");
 				return;
 			}
 		}
@@ -488,7 +488,6 @@ let requestInit = {
 		  if(period_text == '보통(한 달 이내)') period = 3;
 		  else if(period_text == '긴급(7~14일 이내)') period = 2;
 		  else if(period_text == '매우 긴급(3일 이내)') period = 1;
-		  var contents = document.getElementById('requestContents').value;
 		 
 		  var type = document.getElementById('requestType').value; 
 		  var type_text = type;
@@ -499,6 +498,7 @@ let requestInit = {
 
 		//주소 입력했는지 체크
 		if(document.getElementById('roadAddrPart1').value == "") alert("주소를 검색해주세요.");
+		
 		else{
 			let data = {
 				title: document.getElementById('requestTitle').value,

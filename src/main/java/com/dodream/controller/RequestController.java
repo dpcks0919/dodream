@@ -21,7 +21,7 @@ public class RequestController {
 	@Autowired
 	private RequestService requestService;
 	
-	private int interval = 30;
+	private int interval = 60;
 	
 	//	요청 페이지 지도
 	@GetMapping("requestMap")
