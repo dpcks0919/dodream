@@ -48,9 +48,10 @@ function openMenu() {
     var c_time = cur.getTime();
 	var org_name = rq.userName;
     var status = "";
-    if(c_time <= d_time && rq.status != 'DELETED') status = "응답 대기중";
-	else if(rq.status == 'DELETED') status = "<span style='color:red'>삭제됨</span>";
-    else status = "<span style='color: red'>  마감 </span>";
+
+	if(rq.status == 'DELETED') status = "<span style='color:red'>삭제됨</span>";
+	else if(c_time > d_time || rq.status == 'CLOSED') status = "<span style='color:red'>마감</span>";
+    else status = "응답 대기중";
 
     let regDate = rq.regDate.substring(0,10);
     let level = rq.urgentLevel;
@@ -306,8 +307,9 @@ function goDetail_myrequest(rq) {
 	var statusType = rq.status;
 	
     var status = "";
-    if(c_time <= d_time) status = "응답 대기중";
-    else status = "마감";
+    if(rq.status == 'DELETED') status = "삭제됨";
+	else if(c_time > d_time || rq.status == 'CLOSED') status = "마감";
+    else status = "응답 대기중";
 
 	var client_type = rq.clientType;
     var level = rq.urgentLevel;

@@ -59,28 +59,31 @@
 			};
 		</script>
 		
-		
-			<c:choose>
-				<c:when test="${request.status == 'APPROVED'}">
-					<c:set var="requesttype" value="승인" />
-				</c:when>
-				<c:when test="${request.status == 'NON_APPROVED'}">
-					<c:set var="requesttype" value="미승인" />
-				</c:when>
-				<c:when test="${request.status == 'WAITING'}">
-					<c:set var="requesttype" value="대기" />
-				</c:when>
-				<c:when test="${request.status == 'CLOSED'}">
-					<c:set var="requesttype" value="마감" />
-				</c:when>
-				<c:when test="${request.status == 'DELETED'}">
-					<c:set var="requesttype" value="삭제" />
-				</c:when>
-			</c:choose>
 			<tr class="info-table-tr" onclick="openModal_manager(${request.id}, 1)">
 				<td class="table-num">${request.id}</td>
 				<td class="table-title">${request.title}</td>
-				<td class="table-status"><b>${requesttype}</b></td>
+				<c:choose>
+					<c:when test="${request.status == 'APPROVED'}">
+						<c:set var="requesttype" value="승인" />
+						<td class="table-status">${requesttype}</td>
+					</c:when>
+					<c:when test="${request.status == 'NON_APPROVED'}">
+						<c:set var="requesttype" value="미승인" />
+						<td class="table-status" style="color:red;">${requesttype}</td>
+					</c:when>
+					<c:when test="${request.status == 'WAITING'}">
+						<c:set var="requesttype" value="대기" />
+						<td class="table-status">${requesttype}</td>
+					</c:when>
+					<c:when test="${request.status == 'CLOSED'}">
+						<c:set var="requesttype" value="마감" />
+						<td class="table-status">${requesttype}</td>
+					</c:when>
+					<c:when test="${request.status == 'DELETED'}">
+						<c:set var="requesttype" value="삭제" />
+						<td class="table-status">${requesttype}</td>
+					</c:when>
+				</c:choose>					
 				<td class="table-name">${request.user.userName}</td>
 				<td class="table-regdate">${fn:substring(request.regDate, 0, 10)}</td>
 				<td class="table-duedate">${fn:substring(request.dueDate, 0, 10)}</td>
