@@ -88,7 +88,7 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 }
 
 // 모달
-function goRequestDetail(title, type, date, address, period_text, contents, totalCnt, itemList) {
+function goRequestDetail(title, type, date, duedate, address, period_text, contents, totalCnt, itemList) {
   document.getElementById("modal-bg").style.display="block";
   document.getElementById("view-detail").style.display="block";
   document.getElementById("page-top").style.overflow="hidden";
@@ -99,7 +99,7 @@ function goRequestDetail(title, type, date, address, period_text, contents, tota
   document.getElementById("modal-date").innerHTML = date;
   document.getElementById("modal-address").innerHTML = address;
   document.getElementById("modal-contents").innerHTML = contents;
-  document.getElementById("modal-period").innerHTML = period_text;
+  document.getElementById("modal-period").innerHTML = duedate + ' ( ' + period_text + ' ) ';
   document.getElementById("modal-reset").innerHTML = "";
   for(var i=0; i<totalCnt; i++) {
     var _item = itemList[i].requestType;
@@ -181,8 +181,9 @@ function upload(step) {
   var title = document.getElementById('requestTitle').value;
   var date_str = new Date();
   var date = date_str.getFullYear() +'.' + (date_str.getMonth()+1) + '.' + date_str.getDate();
+  var duedate = $('#requestDueYear').val() + '.' + $('#requestDueMonth').val() + '.' + $('#requestDueDay').val();
   var type = document.getElementById('requestType').value; 
-  var period = document.getElementById('requestPeriod').value;
+  var period = urgentLevelCalc($('#requestDueYear').val(), $('#requestDueMonth').val(), $('#requestDueDay').val());
   var period_text = period;
   var address = document.getElementById('roadAddrPart1').value;
   var contents = document.getElementById('requestContents').value;	
@@ -214,7 +215,7 @@ function upload(step) {
     }
 	// Modal 창 켜짐 
 	if(step == 1) {
-    	goRequestDetail(title, type, date, address, period_text, contents, totalCnt, itemList);
+    	goRequestDetail(title, type, date, duedate, address, period_text, contents, totalCnt, itemList);
 	}
 	// 바로 upload
 	else if(step == 2) {
@@ -398,7 +399,6 @@ function saveReply(items) {
 	};
 
 let requestInit = {
-
 	// 범위 안의 유저들에게 문자, 이메일을 보내는 함수
 	notifyUser: function(requestLat, requestLng, request){		
 		$.ajax({
@@ -483,11 +483,16 @@ let requestInit = {
 	
 	saveRequest:function(totalCnt, itemList) {
 		
-		  var period = document.getElementById('requestPeriod').value;
+		  var period = urgentLevelCalc($('#requestDueYear').val(), $('#requestDueMonth').val(), $('#requestDueDay').val());
 		  var period_text = period;
-		  if(period_text == '보통(한 달 이내)') period = 3;
-		  else if(period_text == '긴급(7~14일 이내)') period = 2;
-		  else if(period_text == '매우 긴급(3일 이내)') period = 1;
+		  if(period_text == '보통') period = 3;
+		  else if(period_text == '긴급') period = 2;
+		  else if(period_text == '매우 긴급') period = 1;
+		  
+		  var inputYear = $("#requestDueYear").val();
+		  var inputMonth =  $("#requestDueMonth").val();
+		  var inputDate =  $("#requestDueDay").val();	
+		  var duedate = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
 		 
 		  var type = document.getElementById('requestType').value; 
 		  var type_text = type;
@@ -507,6 +512,7 @@ let requestInit = {
 				latitude : Lat,
 				longitude : Lng,
 				urgentLevel : period,
+				dueDate : duedate,
 				description : document.getElementById('requestContents').value,
 				status : "NON_APPROVED",			
 				showFlag : 1
@@ -561,4 +567,82 @@ let requestInit = {
 		});		
 	},
 	
+}
+
+function dueDateSetUp() {
+	let today = new Date()
+    let year = today.getFullYear();
+    let limit = year + 5;
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+  
+    for(var i = year; i <= limit; i++) {
+       $("#requestDueYear").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    for(var i = 1; i <= 12; i++) {
+       $("#requestDueMonth").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    for(var i = 1; i <= 31; i++) {
+       $("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    $('#requestDueYear').val(year).attr('selected', 'selected');
+    $('#requestDueMonth').val(month).attr('selected', 'selected');
+	$('#requestDueDay').val(day).attr('selected', 'selected');
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+
+}
+dueDateSetUp();
+
+$('#requestDueYear').change(function() {
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	dueDateValidation(inputYear, inputMonth, inputDate);
+});
+$('#requestDueMonth').change(function() {
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	dueDateValidation(inputYear, inputMonth, inputDate);
+});
+$('#requestDueDay').change(function() {
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	dueDateValidation(inputYear, inputMonth, inputDate);
+});
+
+
+function dueDateValidation(inputYear, inputMonth, inputDate) {
+	let today = new Date();
+	let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+	let diffDay = (inputDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+
+	if(diffDay <= 1) {
+	    alert("오늘 이후 날짜를 선택하세요.");
+		$('#requestDueYear').val(year).attr('selected', 'selected');
+	    $('#requestDueMonth').val(month).attr('selected', 'selected');
+		$('#requestDueDay').val(day).attr('selected', 'selected');
+	}
+}
+
+function urgentLevelCalc(inputYear, inputMonth, inputDate) {
+	let today = new Date()
+    let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+    let diffDay = (inputDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+    
+    let diff = Math.floor(diffDay);
+    let level;
+    
+ 	if(diff <= 3) level = "매우 긴급";
+ 	else if(diff <= 14) level = "긴급"; 
+ 	else level = "보통";
+ 	
+ 	return level;
 }

@@ -79,23 +79,23 @@ public class RequestService {
 	@Transactional
 	public Request saveRequest(Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		int urgentLevel = request.getUrgentLevel();
+		//int urgentLevel = request.getUrgentLevel();
 		
 		request.setTitle(securityService.cleanXSS(request.getTitle()));
 		request.setDescription(securityService.cleanXSSSummerNote(request.getDescription()));
 		request.setUser(principalDetails.getUser());
 		
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		if(urgentLevel == 1 ) {
-			cal.add(Calendar.DATE, 5);
-		}else if(urgentLevel == 2 ) {
-			cal.add(Calendar.DATE, 14);
-		}else if(urgentLevel == 3 ) {
-			cal.add(Calendar.MONTH, 1);
-		}
-		request.setDueDate(java.sql.Timestamp.valueOf(df.format(cal.getTime()) ));
+		//Calendar cal = Calendar.getInstance();
+		//cal.setTime(new Date());
+		//DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//if(urgentLevel == 1 ) {
+		//	cal.add(Calendar.DATE, 5);
+		//}else if(urgentLevel == 2 ) {
+		//	cal.add(Calendar.DATE, 14);
+		//}else if(urgentLevel == 3 ) {
+		//	cal.add(Calendar.MONTH, 1);
+		//}
+		//request.setDueDate(java.sql.Timestamp.valueOf(df.format(cal.getTime()) ));
 		requestRepository.save(request);
 		return request;
 	}
