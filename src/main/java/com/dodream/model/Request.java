@@ -1,6 +1,7 @@
 package com.dodream.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -83,7 +84,7 @@ public class Request {
 	@UpdateTimestamp
 	private Timestamp updateDate;
 	
-	private Timestamp dueDate;
+	private Date dueDate;
 	
 	@Column(columnDefinition = "int default 0")
 	private int deleteFlag;
