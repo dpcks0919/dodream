@@ -1,6 +1,7 @@
 package com.dodream.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,7 +22,8 @@ public class RequestController {
 	@Autowired
 	private RequestService requestService;
 	
-	private int interval = 60;
+	@Value("${request.interval}")
+	private int interval;
 	
 	//	요청 페이지 지도
 	@GetMapping("requestMap")
