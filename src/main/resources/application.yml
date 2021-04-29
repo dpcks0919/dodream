@@ -86,8 +86,8 @@ spring:
             - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/naver
-            #redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
+            #redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
 
           kakao:
             client-id: 75934403dc0faf5d40216188a499879a #ccd2c184a87ab5205b193da983dd46f4
@@ -97,8 +97,8 @@ spring:
             #- account_email
             client-name: kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao # localhost
-            #redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao # dodreamtouch.com
+            #redirect-uri: http://localhost:8080/login/oauth2/code/kakao # localhost
+            redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao # dodreamtouch.com
             client-authentication-method: POST
             
         provider:
@@ -127,3 +127,6 @@ api:
 summernote:
   #upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/  
   upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/
+  
+request:
+  interval: 60
