@@ -27,8 +27,9 @@ public class MapApiController {
 	@Value("${social.password}")
 	private String socialPassword;
 	
-	private int interval = 60;
-
+	@Value("${request.interval}")
+	private int interval;
+	
 	
 	@PostMapping("/requestListProc")
 	public ResponseDto<Request[]> requestListProc() {  // (기관,단체,요청) 주소리스트 string 으로 리턴
