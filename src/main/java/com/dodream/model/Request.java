@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.dodream.listener.RequestItemListener;
+import com.dodream.listener.RequestListener;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +34,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
+@EntityListeners(RequestListener.class)	// Reqeust 리스너
 public class Request {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
