@@ -57,7 +57,7 @@ function openMenu() {
     let level = rq.urgentLevel;
     if(level == 1) level = "매우 긴급(3일 이내)";
     else if(level == 2) level = "긴급(14일 이내)";
-    else if(level == 3) level = "보통(한 달 이내)";
+    else if(level == 3) level = "보통(14일 이상)";
     
     $("#rq_title").html("<h5>" + rq.title + "</h5>");
     $("#rq_id").html(rq.id);

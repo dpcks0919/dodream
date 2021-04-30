@@ -283,9 +283,9 @@ let mapInit = {
 	      $("#marker-info-status").text(status);
 	
 		 // 긴급정도 나타내기
-		 if(InputRequest.urgentLevel == 1) var urgentLevel = "매우 긴급(24시간 이내)";
-		 else if(InputRequest.urgentLevel == 2) var urgentLevel = "긴급(일주일 이내)";
-		 else if(InputRequest.urgentLevel == 3) var urgentLevel = "보통(한달 이내)";
+		 if(InputRequest.urgentLevel == 1) var urgentLevel = "매우 긴급(3일 이내)";
+		 else if(InputRequest.urgentLevel == 2) var urgentLevel = "긴급(14일 이내)";
+		 else if(InputRequest.urgentLevel == 3) var urgentLevel = "보통(14일 이상)";
 		 else var urgentLevel = "기타";
 		 $("#marker-info-urgentlevel").text(urgentLevel); 
 		 $("#marker-info-address").text(InputRequest.requestAddress); 

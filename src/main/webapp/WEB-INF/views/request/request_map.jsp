@@ -218,7 +218,7 @@
 							상태 <span class="help-status" id="marker-info-status">응답 대기중</span>
 						</p>
 						<p class="help-limit">
-							기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span>
+							기간 <span class="help-term" id="marker-info-urgentlevel">보통(14일 이상)</span>
 						</p>
 					</div>
 					<div class="map-mid ">
@@ -235,10 +235,10 @@
 
 					<div class="responsive-help-div">
 						<div class="responsive-help-div-left "><b>상태 </b><span class="help-status" id="marker-info-status" style="">응답 대기중</span></div>
-						<div>기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span></div>						
+						<div>기간 <span class="help-term" id="marker-info-urgentlevel">보통(14일 이상)</span></div>						
 					</div>
 					<div class="responsive-help-div responsive-help-hidden-mobile">
-						<div>기간 <span class="help-term" id="marker-info-urgentlevel">보통(한 달 이내)</span></div>
+						<div>기간 <span class="help-term" id="marker-info-urgentlevel">보통(14일 이상)</span></div>
 						<div>문의 <span class="help-term" id="marker-info-phone">010-1234-5678</span></div>
 					</div>
 					
