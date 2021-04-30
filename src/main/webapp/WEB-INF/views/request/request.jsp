@@ -81,11 +81,6 @@
 						<div class="responsive-map-wrapper" style="width:45%; margin:0; display:inline-block;">
 							<div class="map-div1" style="margin-bottom:1rem;">
 								<span>요청 마감 : </span>
-								<!-- <select class="request-period" name="period" id="requestPeriod" style="outline:none;">
-									<option name="p1">보통(한 달 이내)</option>
-									<option name="p2">긴급(7~14일 이내)</option>
-									<option name="p3">매우 긴급(3일 이내)</option>
-								</select> -->
 								<select class="requestDue-year" name="year" id="requestDueYear"></select>
 								<select class="requestDue-month" name="month" id="requestDueMonth"></select>
 								<select class="requestDue-day" name="day" id="requestDueDay"></select>

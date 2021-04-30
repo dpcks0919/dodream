@@ -189,8 +189,8 @@
 						</select>
 						<select name="search-period" id="search-period" class="search-box-mid">
 							<option value="0" selected="selected">기간</option>
-							<option value="3">보통(한 달 이내)</option>
-							<option value="2">긴급(7~14일 이내)</option>
+							<option value="3">보통(14일 이상)</option>
+							<option value="2">긴급(14일 이내)</option>
 							<option value="1">매우 긴급(3일 이내)</option>
 						</select>
 					</div>
