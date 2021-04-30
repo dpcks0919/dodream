@@ -98,7 +98,7 @@
 										<div style="height: 5px;"></div>
 										<div class="flex-center">
 											<div id="sms_check" style="width: calc(100% - 50px);">
-												<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(30초)">
+												<input class="text-input" type="text" name="verify-input" id="verify-input" placeholder="코드입력(120초)">
 											</div>
 											<div class="input-check" id="btn-code-verify" style="width: 50px;">확인</div>
 										</div>

@@ -1,5 +1,5 @@
 
-var Lat, Lng, idFlag = 0, verifyCode; 
+var Lat, Lng, idFlag = 0, verifyCode, smsVerifyFlag = false; 
 let smsFlag = 0;
 
 function goPopup(){
@@ -320,7 +320,13 @@ let joinInit = {
 				return false;
 			}
 		}  
-		if($("#type").val() != "INSTITUTION" && !$("#userphone").attr('disabled')){	// userPhone
+		if($("#userphone").length){	// 이름
+			if(!$("#userphone").val()){
+				alert("전화번호를 입력해주세요."); 
+				return false;
+			}
+		}
+		if($("#type").val() != "INSTITUTION" && smsVerifyFlag == false){	// userPhone
 			alert("문자 인증을 진행해 주세요."); 
 			return false;
 		}
@@ -470,6 +476,7 @@ let joinInit = {
 			$("#btn-send-text").off("click");	// div 추가 클릭 방지
 			$("#btn-code-verify").off("click");	 // div 추가 클릭 방지
 			$('#smstimer').css('display', 'none');
+			smsVerifyFlag = true;
 			alert("휴대폰 인증 성공!");
 		}
 		else{
