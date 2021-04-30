@@ -266,14 +266,8 @@ public class RequestService {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		if(request.getUrgentLevel() == 1 ) {
-			cal.add(Calendar.DATE, 5);
-		}else if(request.getUrgentLevel() == 2 ) {
-			cal.add(Calendar.DATE, 14);
-		}else if(request.getUrgentLevel() == 3 ) {
-			cal.add(Calendar.MONTH, 1);
-		}
-		request.setDueDate(java.sql.Timestamp.valueOf(df.format(cal.getTime()) ));
+		
+		persistance.setDueDate(request.getDueDate());
 		persistance.setUpdateDate(java.sql.Timestamp.valueOf(df.format(cal.getTime())));
 		
 	}

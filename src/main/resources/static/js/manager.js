@@ -36,6 +36,48 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 
 }
 
+//duedate 수정 dropbox 관련 함수들
+function dueDateSetUp() {	// 마감 날짜 duedate dropbox 관련 초기설정 함수
+	let today = new Date()
+    let year = today.getFullYear();
+    let limit = year + 10;
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+  
+    for(var i = year; i <= limit; i++) {
+       $("#requestDueYear").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    for(var i = 1; i <= 12; i++) {
+       $("#requestDueMonth").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    for(var i = 1; i <= 31; i++) {
+       $("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    $('#requestDueYear').val(year).attr('selected', 'selected');
+    $('#requestDueMonth').val(month).attr('selected', 'selected');
+	$('#requestDueDay').val(day).attr('selected', 'selected');
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+}
+
+function dueDateValidation(inputYear, inputMonth, inputDate) {
+	let today = new Date();
+	let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+	let diffDay = (inputDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+
+	if(diffDay <= 1) {
+	    alert("오늘 이후 날짜를 선택하세요.");
+		$('#requestDueYear').val(year).attr('selected', 'selected');
+	    $('#requestDueMonth').val(month).attr('selected', 'selected');
+		$('#requestDueDay').val(day).attr('selected', 'selected');
+	}
+}
+
 
 // id는 user면 user id, request면 request id, reply면 reply id
 // num은 user : 0, request : 1, reply : 2
@@ -382,13 +424,21 @@ function manager_viewRequest(rid) {
 			    $("#rq_userName").val(req.user.userName);
 				$("#rq_status").val(req.status).prop("selected", true);
 				$("#rq_clientType").val(client_type).prop("selected", true);
-				$("#rq_urgentLevel").val(level).prop("selected", true);
+				//$("#rq_urgentLevel").val(level).prop("selected", true);
 			    $("#roadAddrPart1").val(req.requestAddress);
 				$("#roadLongitude").val(req.longitude);
 				$("#roadLatitude").val(req.latitude);
 				$('#rq_contents_summernotes').css('display', 'block');
 				$('.summernote').summernote('code', req.description);
 				
+				// duedate dropbox 관련
+				dueDateSetUp();
+				var localDate = new Date(date);	//gmt 변환을 위한 임시방편
+				
+				$("#requestDueYear").val(localDate.getFullYear());
+				$("#requestDueMonth").val(localDate.getMonth()+1);
+				$("#requestDueDay").val(localDate.getDate());
+							
 			    let items = req.requestItem;
 
 			    items.sort(function(a, b) {
@@ -442,7 +492,7 @@ function manager_viewRequest(rid) {
 					$("#rq_title").prop("disabled","disabled");
 					$("#rq_clientType").prop("disabled","disabled");
 					$("#rq_status").prop("disabled","disabled");
-					$("#rq_urgentLevel").prop("disabled","disabled");
+					//$("#rq_urgentLevel").prop("disabled","disabled");
 					$('.summernote').summernote('disable');
 					$("#rq_search").prop("disabled","disabled");
 					$(".add_item-button").prop("disabled","disabled");
@@ -986,8 +1036,9 @@ function manager_editRequest(rid) {
 				var rqLat = $("#roadLatitude").val();
 
 				var client_type = $("#rq_clientType").val();
-				var urgent_level = $("#rq_urgentLevel").val();
+				//var urgent_level = $("#rq_urgentLevel").val();
 				var rq_status = $("#rq_status").val();
+				var duedate = new Date($('#requestDueYear').val(), $('#requestDueMonth').val()-1, $('#requestDueDay').val(), 0, 0, 0);
 				
 				let data3 = {
 					id : rqID,
@@ -996,7 +1047,8 @@ function manager_editRequest(rid) {
 					longitude : rqLong,
 					latitude : rqLat,
 					clientType : client_type,
-					urgentLevel : urgent_level,
+					urgentLevel : 3,	// 임시 숫자(추후 JPA listner로 자동 바꿔짐)
+					dueDate : duedate,
 					description : rqContents,
 					status : rq_status
 				};

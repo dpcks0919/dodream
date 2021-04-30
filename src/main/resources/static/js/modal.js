@@ -269,6 +269,66 @@ function heartClick() {
 	}
 }
 
+function dueDateSetUp() {	// 마감 날짜 duedate dropbox 관련 초기설정 함수
+	let today = new Date()
+    let year = today.getFullYear();
+    let limit = year + 10;
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+  
+    for(var i = year; i <= limit; i++) {
+       $("#requestDueYear").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    for(var i = 1; i <= 12; i++) {
+       $("#requestDueMonth").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    for(var i = 1; i <= 31; i++) {
+       $("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    }
+    $('#requestDueYear').val(year).attr('selected', 'selected');
+    $('#requestDueMonth').val(month).attr('selected', 'selected');
+	$('#requestDueDay').val(day).attr('selected', 'selected');
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+}
+
+$('#requestDueYear').change(function() {
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	dueDateValidation(inputYear, inputMonth, inputDate);
+});
+$('#requestDueMonth').change(function() {
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	dueDateValidation(inputYear, inputMonth, inputDate);
+});
+$('#requestDueDay').change(function() {
+	let inputYear =  $('#requestDueYear').val();
+	let inputMonth =  $('#requestDueMonth').val();
+	let inputDate =  $('#requestDueDay').val();
+	dueDateValidation(inputYear, inputMonth, inputDate);
+});
+
+function dueDateValidation(inputYear, inputMonth, inputDate) {
+	let today = new Date();
+	let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+	let diffDay = (inputDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+
+	if(diffDay <= 1) {
+	    alert("오늘 이후 날짜를 선택하세요.");
+		$('#requestDueYear').val(year).attr('selected', 'selected');
+	    $('#requestDueMonth').val(month).attr('selected', 'selected');
+		$('#requestDueDay').val(day).attr('selected', 'selected');
+	}
+}
+
 function goDetail_myrequest(rq) {
     $('.rq_item').remove();
 	$('#default_item').remove();
@@ -277,6 +337,9 @@ function goDetail_myrequest(rq) {
 
     $('.default_item').remove();
 	request_back();
+	$('#requestDueYear').prop('disabled', true);
+    $('#requestDueMonth').prop('disabled', true);
+	$('#requestDueDay').prop('disabled', true);
 	
 	document.getElementById("modal-bg").style.display="block";
 	document.getElementById("view-detail").style.display="block";
@@ -329,9 +392,14 @@ function goDetail_myrequest(rq) {
     //$("#rq_status").html(status);
 	$("#rq_status").val(status);
 	$("#rq_clientType").val(client_type).prop("selected", true);
-	$("#rq_urgentLevel").val(level).prop("selected", true);
+	//$("#rq_urgentLevel").val(level).prop("selected", true);
 	
 	$("#rq_statusType").val(statusType);
+	dueDateSetUp();
+	alert(date);
+	$("#requestDueYear").val(parseInt(date.substring(0,4)));
+	$("#requestDueMonth").val(parseInt(date.substring(5,7)));
+	$("#requestDueDay").val(parseInt(date.substring(8,10)));
 	
     $("#roadAddrPart1").val(rq.requestAddress);
 	$("#roadLongitude").val(rq.longitude);

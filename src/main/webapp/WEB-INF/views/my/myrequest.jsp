@@ -62,12 +62,10 @@ table td {
 							</select>
 						</div>
 						<div class="div-table-right">
-							<div class="div-table-title"><b>기간설정</b></div>
-							<select class="request-period" name="period" id="rq_urgentLevel" style="outline:none;" disabled>
-								<option value="3">보통(한 달 이내)</option>
-								<option value="2">긴급(7~14일 이내)</option>
-								<option value="1">매우 긴급(3일 이내)</option>
-							</select>						
+							<div class="div-table-title"><b>요청마감</b></div>
+								<select class="requestDue-year" name="year" id="requestDueYear"></select>
+								<select class="requestDue-month" name="month" id="requestDueMonth"></select>
+								<select class="requestDue-day" name="day" id="requestDueDay"></select>	
 						</div>
 					</div>
 					<div class="div-table-wrapper">
@@ -497,9 +495,8 @@ table td {
 				// 위도 경도가 잘 안잡힘. 
 				var rqLong = $("#roadLongitude").val();
 				var rqLat = $("#roadLatitude").val();
-
+				var duedate = new Date($('#requestDueYear').val(), $('#requestDueMonth').val()-1, $('#requestDueDay').val(), 0, 0, 0);
 				var client_type = $("#rq_clientType").val();
-				var urgent_level = $("#rq_urgentLevel").val();
 				var rqStatus = $("#rq_statusType").val();
 				
 				let data3 = {
@@ -509,7 +506,8 @@ table td {
 					longitude : rqLong,
 					latitude : rqLat,
 					clientType : client_type,
-					urgentLevel : urgent_level,
+					dueDate: duedate,
+					urgentLevel : 3, // 임시값(추후 JPA Listener가 자동으로 바꿈)
 					description : rqContents,
 					status: rqStatus
 				};
@@ -541,7 +539,9 @@ table td {
 			alert("수정 후 저장하시면 됩니다.");
 			$('#rq_title').prop('readonly', false);
 			$("#rq_clientType").prop('disabled', false);
-			$("#rq_urgentLevel").prop('disabled', false);
+			$('#requestDueYear').prop('disabled', false);
+   			$('#requestDueMonth').prop('disabled', false);
+			$('#requestDueDay').prop('disabled', false);
 			$("#rq_delete").prop("hidden", true);
 			
 			$('#rq_title').css('border-style', 'double');
@@ -632,7 +632,9 @@ table td {
 		function request_back() {
 			$('#rq_title').prop('readonly', true);
 			$("#rq_clientType").prop('disabled', true);
-			$("#rq_urgentLevel").prop('disabled', true);
+			$('#requestDueYear').prop('disabled', true);
+	    	$('#requestDueMonth').prop('disabled', true);
+			$('#requestDueDay').prop('disabled', true);
 			$("#rq_delete").prop("hidden", false);
 
 			

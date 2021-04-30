@@ -46,13 +46,10 @@
 				<input type="text" name="userName" id="rq_userName" style="border-style:none" disabled />
 			</div>
 			<div class="div-table-right">
-				<div class="div-table-title"><b>기간설정</b></div>
-				<select class="request-period" name="period" id="rq_urgentLevel" style="outline:none;">
-					<option value="3">보통(한 달 이내)</option>
-					<option value="2">긴급(7~14일 이내)</option>
-					<option value="1">매우 긴급(3일 이내)</option>
-				</select>
-				
+				<div class="div-table-title"><b>마감일</b></div>
+				<select class="requestDue-year" name="year" id="requestDueYear"></select>
+				<select class="requestDue-month" name="month" id="requestDueMonth"></select>
+				<select class="requestDue-day" name="day" id="requestDueDay"></select>	
 			</div>			
 		</div>
 		<div class="div-table-wrapper">
