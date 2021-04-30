@@ -396,7 +396,6 @@ function goDetail_myrequest(rq) {
 	
 	$("#rq_statusType").val(statusType);
 	dueDateSetUp();
-	alert(date);
 	$("#requestDueYear").val(parseInt(date.substring(0,4)));
 	$("#requestDueMonth").val(parseInt(date.substring(5,7)));
 	$("#requestDueDay").val(parseInt(date.substring(8,10)));
