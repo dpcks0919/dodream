@@ -269,10 +269,10 @@ function heartClick() {
 	}
 }
 
-function dueDateSetUp() {	// 마감 날짜 duedate dropbox 관련 초기설정 함수
+function dueDateSetUp() {
 	let today = new Date()
     let year = today.getFullYear();
-    let limit = year + 10;
+    let limit = year + 5;
     let month = today.getMonth() + 1;
     let day = today.getDate();
   
@@ -282,9 +282,19 @@ function dueDateSetUp() {	// 마감 날짜 duedate dropbox 관련 초기설정 �
     for(var i = 1; i <= 12; i++) {
        $("#requestDueMonth").append("<option value='" + i + "'>" + i + "</option>");
     }
-    for(var i = 1; i <= 31; i++) {
-       $("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
-    }
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+		for(var i = 1; i <= 31; i++) {
+    		$("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    	}
+	} else if(month == 4 || month == 6 || month == 9 || month == 11) {
+		for(var i = 1; i <= 30; i++) {
+    		$("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    	}
+	} else if(month == 2) {
+		for(var i = 1; i <= 29; i++) {
+    		$("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    	}
+	}
     $('#requestDueYear').val(year).attr('selected', 'selected');
     $('#requestDueMonth').val(month).attr('selected', 'selected');
 	$('#requestDueDay').val(day).attr('selected', 'selected');
@@ -292,6 +302,7 @@ function dueDateSetUp() {	// 마감 날짜 duedate dropbox 관련 초기설정 �
 	let inputMonth =  $('#requestDueMonth').val();
 	let inputDate =  $('#requestDueDay').val();
 	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
+
 }
 
 $('#requestDueYear').change(function() {
@@ -303,6 +314,20 @@ $('#requestDueYear').change(function() {
 $('#requestDueMonth').change(function() {
 	let inputYear =  $('#requestDueYear').val();
 	let inputMonth =  $('#requestDueMonth').val();
+	$('#requestDueDay option').remove();
+	if(inputMonth == 1 || inputMonth == 3 || inputMonth == 5 || inputMonth == 7 || inputMonth == 8 || inputMonth == 10 || inputMonth == 12) {
+		for(var i = 1; i <= 31; i++) {
+    		$("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    	}
+	} else if(inputMonth == 4 || inputMonth == 6 || inputMonth == 9 || inputMonth == 11) {
+		for(var i = 1; i <= 30; i++) {
+    		$("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    	}
+	} else if(inputMonth == 2) {
+		for(var i = 1; i <= 29; i++) {
+    		$("#requestDueDay").append("<option value='" + i + "'>" + i + "</option>");
+    	}
+	}
 	let inputDate =  $('#requestDueDay').val();
 	dueDateValidation(inputYear, inputMonth, inputDate);
 });
