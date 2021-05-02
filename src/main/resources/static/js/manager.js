@@ -1037,6 +1037,11 @@ function update(){
 	var uid = $("#input_uid").val();
 	var uname = $("#input_uname").val();
 	var uphone = $("#input_uphone").val();
+	var regex = /^\d{2,3}\d{3,4}\d{4}$/;
+	if(!regex.test( uphone )){
+		alert("하이픈(-) 없이 번호만 입력해주세요.");
+		return;
+	}
 	var msgflag;
 	if($("#input_umsg_flag_y").is(":checked")) {
 		msgflag = 1;
