@@ -169,14 +169,43 @@ let joinInit = {
               for(var i = 1; i <= 12; i++) {
                  $("#selectmonth").append("<option value='" + i + "'>" + i + "</option>");
               }
-              for(var i = 1; i <= 31; i++) {
-                 $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
-              }
+              if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+			    for(var i = 1; i <= 31; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  } else if(month == 4 || month == 6 || month == 9 || month == 11) {
+			    for(var i = 1; i <= 30; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  } else if(month == 2) {
+				for(var i = 1; i <= 29; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  }
+              
 			$('#selectmonth').val(month).attr('selected', 'selected');
 			$('#selectdate').val(day).attr('selected', 'selected');
 			$('#birthyear').val($('#selectyear').val());
 			$('#birthmonth').val($('#selectmonth').val());
 			$('#birthdate').val($('#selectdate').val());
+			
+			$('#selectmonth').change(function() {
+			  let inputMonth =  $('#selectmonth').val();
+			  $('#selectdate option').remove();
+		      if(inputMonth == 1 || inputMonth == 3 || inputMonth == 5 || inputMonth == 7 || inputMonth == 8 || inputMonth == 10 || inputMonth == 12) {
+				for(var i = 1; i <= 31; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+		      } else if(inputMonth == 4 || inputMonth == 6 || inputMonth == 9 || inputMonth == 11) {
+				for(var i = 1; i <= 30; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  } else if(inputMonth == 2) {
+				for(var i = 1; i <= 29; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			     }
+			  }
+			});
 	},
 	
 	radiusInputSetUp:function(){
