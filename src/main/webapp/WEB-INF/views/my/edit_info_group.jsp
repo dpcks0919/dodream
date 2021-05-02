@@ -47,7 +47,7 @@
 								<span class="input-title">대표 전화번호</span><span>&nbsp;<em>*</em></span><br>
 								<div class="flex-center">
 									<div id="sms_confirm" style="width: calc(100%);">
-										<input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+										<input class="text-input" type="text" name="userphone" id="userphone" placeholder="- 없이 전화번호만 입력">
 									</div>
 								</div>
 								<div style="height: 5px;"></div>
