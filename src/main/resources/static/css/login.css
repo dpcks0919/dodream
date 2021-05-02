@@ -87,11 +87,18 @@
 }
 
 .divider-custom .divider-custom-line {
+	/*
 	width: 30%;
 	height: 0.1rem;
 	background-color: #CACACA;
 	border-radius: 1rem;
 	border-color: #CACACA !important;
+	*/
+	width: 30%;
+	height: 0.1rem;
+	background-color: black;
+	border-radius: 1rem;
+	border-color: black !important;
 }
 
 .login-container {
