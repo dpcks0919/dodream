@@ -553,10 +553,11 @@ let privacy =  {
 		
 		$("#privacy_scroll").scroll(function(){
 			var scrollTop = $(this).scrollTop();
-			var innerHeight = $(this).innerHeight();
-			var scrollHeight = $(this).prop('scrollHeight');
+			//var scrollHeight = $(this).prop('scrollHeight');
 			
-			if (scrollTop + innerHeight * 2 >= scrollHeight) {
+			
+			//if (scrollTop + 350 > scrollHeight) {  -> 스크롤 다 내려야 하는 경우
+			if (scrollTop > 0) {
 				$("#agree").removeAttr("disabled");
 				$("#disagree").removeAttr("disabled");
 				$("#privacy-text1").css("color","black");

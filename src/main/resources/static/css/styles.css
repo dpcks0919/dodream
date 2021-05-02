@@ -4695,9 +4695,20 @@ input[type=button].btn-block {
 }
 
 .selected_page {
+	/*
 	background-color: #ed7e95;
 	color: white;
-	border: 1px solid #ed7e95;
+	border: 1px solid #ed7e95;	
+	*/
+	
+	background-color: white;
+	color: #ed7e95!important;
+	border: 1px solid #ed7e95!important;
+}
+.selected_page:hover {
+	background-color: #ed7e95!important;
+	color: white!important;
+	border: 1px solid #ed7e95!important;
 }
 
 .badge {
@@ -10615,4 +10626,3 @@ form .row:first-child .floating-label-form-group {
   	display:none!important;
   }
 }
-

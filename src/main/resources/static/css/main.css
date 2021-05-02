@@ -120,6 +120,7 @@
 .page-section3 {
   padding: 3vw 0;
   height:auto;
+  padding-top:3rem;
 }
 
 .page-section3-title {
@@ -202,7 +203,7 @@
 .sec3-middle-left, .sec3-middle-right {
   position:relative;
   /* left:50%; */
-  transform: translateX(25%);
+  transform: translateX(20%);
   padding-left:5%;
   padding-right:5%;
 }
@@ -211,7 +212,8 @@
 }
 
 .sec3-text1 {
-  font-size:0.9rem;
+  font-size:1rem;
+  margin-right:1rem;
 }
 
 .main-map {
@@ -227,14 +229,13 @@
   float:none;
 }
 .sec3-bottom-left {
-  width : 45%!important;
-  height: 45%!important;
-  padding-bottom:2vw;
+  width : 48%!important;
+  height: 48%!important;
   float:left!important;
 }
 .sec3-bottom-right {
-  width : 55%;
-  height:45%;
+  width : 48%;
+  height:48%;
   padding-left:2vw;
   padding-top : 6vw;
   text-align:left;
@@ -285,8 +286,8 @@
 }
 
 .fbox-image {
-  width : 4rem;
-  height: 4rem;
+  width : 3rem;
+  height: 3rem;
   margin-top : 1.5vw;
   /* margin-bottom:0.2vw; */
   object-fit:cover;
@@ -297,7 +298,7 @@
   margin-bottom:0.5vw!important;
 }
 .fbox-content {
-  font-size : 0.4vw;
+  font-size : 0.75rem;
   margin : 0!important;
 }
 .news-title {
@@ -314,6 +315,7 @@
   padding : 1rem 12vw;
   padding-bottom:0;
   text-align: center;
+  padding-top:3rem;
 }
 .container-news {
   width:75vw;
@@ -374,7 +376,7 @@
   overflow:hidden;
   white-space: nowrap;
   text-overflow : ellipsis;
-  font-size:0.8vw;
+  font-size:1rem;
   margin-bottom:0.8vw;
   cursor:pointer;
 }
@@ -585,6 +587,10 @@ padding-top:0!important;
   width: 1.5rem!important;
   margin-left:1vh;
   cursor:pointer;
+}
+
+header {
+	padding-top:4rem!important;
 }
 
 @media (max-width: 1200px) {

@@ -77,7 +77,7 @@
 				</section>			
 				<section class="intro1-section2">
 					<div class="mission-top"><img src="/image/mission-top.png" /></div>
-					<p class="text-dodream" style="width:100%; text-align:center; margin-bottom:0.5rem;"><b>두드림터치는 이웃과 공동체를 연결합니다.</b></p>
+					<p class="text-dodream" style="width:100%; text-align:center; margin-bottom:0.5rem; font-size:1.25rem;"><b>두드림터치는 이웃과 공동체를 연결합니다.</b></p>
 					<p style="width:100%; text-align:center; margin-bottom:2rem;">사회복지사/기관이 이웃의 필요성을 발견하면 지역 커뮤니티로 사연을 전달하는 사회복지 기술 플랫폼입니다.</p>
 					<div class="mission-mid-wrapper">
 						<div class="mission-mid">
@@ -118,14 +118,14 @@
 								<p>실질적으로 어려운 이웃을 돕고 싶다는 마음이 간절했는데, 쉽지 않더라고요. 그러던 중 우연히 팸플릿을 통해 두드림터치를 알게 되었고, 나의 생각과 딱 맞는 일을 하고 있다는 생각을 하게 되었어요. 복지 사각지대에 계신 분들이 정말 많아요. 제 주변에도 수급자 선정이 되지 못했지만 자녀가 있으셔서 힘들어하시는 분이 계시거든요. 이렇게 사각지대에 계신 분들을 잘 찾아주셔서, 감사하고 저희도 정말 조그마한 것이지만 저희의 손길을 통해서 그분들이 힘을 얻을 수 있으면 좋겠습니다.</p>
 							</div>
 							<div class="intro1-section3-image">
-								<p class="text-white-hidden">something</p>
-								<img src="/image/intro-right.jpeg"/>
+								<p class="text-white-hidden" hidden>something</p>
+								<img class="intro1-section3-image-margin" src="/image/intro-right.jpeg"/>
 							</div>
 						</div>
 						<div class="intro1-section3-bottom ">
 							<div class="intro1-section3-image">
-								<p class="text-white-hidden">something</p>
-								<img src="/image/intro-left.jpeg" />
+								<p class="text-white-hidden" hidden>something</p>
+								<img class="intro1-section3-image-margin" src="/image/intro-left.jpeg" />
 							</div>
 							<div class="intro1-section3-div">
 								<h4 class="intro1-section3-title text-dodream">좋은 이웃 노인복지센터</h4>
@@ -150,17 +150,17 @@
 						<div class="intro2-section2-wrapper">
 							<div class="intro2-image-wrapper"><img class="intro2-image" src="/image/growth1.png" /></div>
 							<p>신규배포</p>
-							<h4>+ 120 건</h4>
+							<h4 id="x1">+ 120 건</h4>
 						</div>
 						<div class="intro2-section2-wrapper">
 							<div class="intro2-image-wrapper"><img class="intro2-image" src="/image/growth2.png" /></div>
 							<p>경제적효과</p>
-							<h4>+ 1,032,910 원</h4>						
+							<h4 id="x2">+ 1,032,910 원</h4>						
 						</div>
 						<div class="intro2-section2-wrapper">
 							<div class="intro2-image-wrapper"><img class="intro2-image" src="/image/growth3.png" /></div>
 							<p>응답률</p>
-							<h4>85%</h4>
+							<h4 id="x3">85%</h4>
 						</div>
 					</div>
 					<div class="intro2-section3">

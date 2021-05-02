@@ -159,9 +159,9 @@
 
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container">
-				<div class="request-menu">
-					<a class="request-menu-button request-menu-button-selected" href="/requestMap">지도로 보기</a> 
-					<a class="request-menu-button" href="/requestList">목록으로 보기</a>
+				<div class="intro-menubar">
+					<div class="intro-menu selected-menu" onclick="location.href='/requestMap';">지도로 보기</div>
+					<div class="intro-menu" onclick="location.href='/requestList';">목록으로 보기</div>
 				</div>
 				<div class="" style="text-align: right;">
 					<input type="text" class="tbox-center tbox-big" id="input-addr" onkeyup="enterkey();" placeholder="위치를 검색하세요.">

@@ -12,11 +12,9 @@ body {
 <body id="page-top">
 	<div id="menu-back" onclick="closeNav()"></div>
 	<%@include file="../layout/sidebar_front.jsp"%>
-
-
 	<div id="Wrapper">
 		<!-- Navigation-->
-		<%@include file="../layout/navbar_join.jsp"%>
+		<%@include file="../layout/navbar.jsp"%>
 
 		<section class="page-section text-white text-center" id="contact">
 			<div class="container d-flex flex-column">
