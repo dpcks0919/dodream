@@ -94,32 +94,36 @@
 			</div>
 		</section>
 		
-		<div class="news-section2-menu-wrapper">
-			<div class="news-section2-menu">
-				<a class="news-menu-title"><b>최신 콘텐츠</b></a>
-				<c:if test="${ntype}">		
-				</c:if>
-				<c:choose>
-					<c:when test="${ntype == 'ALL'}">
-						<a class="news-menu-button news-section2-menu-selected" onclick="goNews('ALL');">모든 소식</a>
-						<a class="news-menu-button" onclick="goNews('NEIGHBOR');">이웃 소식</a>
-						<a class="news-menu-button" onclick="goNews('DODREAM');">두드림 소식</a>					
-					</c:when>
-					<c:when test="${ntype == 'NEIGHBOR'}">
-						<a class="news-menu-button" onclick="goNews('ALL');">모든 소식</a>
-						<a class="news-menu-button news-section2-menu-selected" onclick="goNews('NEIGHBOR');">이웃 소식</a>
-						<a class="news-menu-button" onclick="goNews('DODREAM');">두드림 소식</a>								</c:when>
-					<c:when test="${ntype == 'DODREAM'}">
-						<a class="news-menu-button" onclick="goNews('ALL');">모든 소식</a>
-						<a class="news-menu-button" onclick="goNews('NEIGHBOR');">이웃 소식</a>
-						<a class="news-menu-button news-section2-menu-selected" onclick="goNews('DODREAM');">두드림 소식</a>								</c:when>
-				</c:choose>
-			</div>
-		</div>
-		
 		<!-- news Section-->		
 		<section class="news-section2 ">
 			<div class="news-section2-wrapper">
+				<div class="container">
+					<c:if test="${ntype}">		
+					</c:if>
+					<c:choose>
+						<c:when test="${ntype == 'ALL'}">
+							<div class="intro-menubar">
+								<div class="intro-menu selected-menu" onclick="goNews('ALL');">모든 소식</div>
+								<div class="intro-menu" onclick="goNews('NEIGHBOR');">이웃 소식</div>
+								<div class="intro-menu" onclick="goNews('DODREAM');">두드림 소식</div>
+							</div>					
+						</c:when>
+						<c:when test="${ntype == 'NEIGHBOR'}">
+							<div class="intro-menubar">
+								<div class="intro-menu" onclick="goNews('ALL');">모든 소식</div>
+								<div class="intro-menu selected-menu" onclick="goNews('NEIGHBOR');">이웃 소식</div>
+								<div class="intro-menu" onclick="goNews('DODREAM');">두드림 소식</div>
+							</div>												</c:when>
+						<c:when test="${ntype == 'DODREAM'}">
+							<div class="intro-menubar">
+								<div class="intro-menu" onclick="goNews('ALL');">모든 소식</div>
+								<div class="intro-menu " onclick="goNews('NEIGHBOR');">이웃 소식</div>
+								<div class="intro-menu selected-menu" onclick="goNews('DODREAM');">두드림 소식</div>
+							</div>
+						</c:when>
+					</c:choose>
+				</div>
+			
 				<c:set var="bottomCount" value="0" />
 				<c:forEach var="news" items="${newsList.content}">
 					<c:set var="strNewsType" value="[이웃 소식]" />

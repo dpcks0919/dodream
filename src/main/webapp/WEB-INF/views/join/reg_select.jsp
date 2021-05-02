@@ -11,7 +11,7 @@
 
 	<div id="Wrapper">
 		<!-- Navigation-->
-		<%@include file="../layout/navbar_join.jsp"%>
+		<%@include file="../layout/navbar.jsp"%>
 
 		<!-- Masthead-->
 		<header class="bg-primary text-white text-center gradient-bgcolor">

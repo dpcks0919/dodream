@@ -41,7 +41,7 @@
 						<img src="image/Main2.png" class="d-block w-100 mainImage-web" alt="...">
 						<img src="image/Main2_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption2 d-md-block mainImage-web">
-							<a class="py-2 rounded js-scroldl-trigger main3-register " href="/dodreamtouch">자세히 보기</a>
+							<a class="py-2 rounded js-scroldl-trigger main3-register " style="border:2px solid white; color: white;" href="/dodreamtouch">자세히 보기</a>
 						</div>
 						<!-- <div class="carousel-caption3_mobile d-md-block mainImage-mobile">
 							<a class="py-2 rounded js-scroll-trigger main3-register" href="/dodreamtouch">자세히 보기</a>
@@ -53,10 +53,10 @@
 						<img src="image/Main3.png" class="d-block w-100 mainImage-web" alt="...">					
 						<img src="image/Main3_mobile.png" class="d-block w-100 mainImage-mobile" alt="...">
 						<div class="carousel-caption3 d-md-block mainImage-web">
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="/requestMap">요청 보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" style="border:2px solid white; color: white;" href="/requestMap">요청 보기</a>
 						</div>
 						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
-							<a class="py-2 rounded js-scroll-trigger main3-register" href="/requestMap">요청 보기</a>
+							<a class="py-2 rounded js-scroll-trigger main3-register" style="border:2px solid white; color: white;" href="/requestMap">요청 보기</a>
 						</div>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 		<!-- map Section -->
 		<section class="page-section3 help text-center " id="portfolio">
 			<p class="text-center text-uppercase text-secondary mb-0 page-section3-title">
-				내 주변에는 어떤 이웃이 도움을 필요로 할까요?<br>지금 바로 지도를 통해 확인해 보세요!
+				<b>내 주변에는 어떤 이웃이 도움을 필요로 할까요?</b><br><b>지금 바로 지도를 통해 확인해 보세요!</b>
 			</p>
 			<div class="container">
 				<div style="text-align: right;">
@@ -83,14 +83,14 @@
 					</div>
 				</div>
 				<div class="sec3-middle ">
-					<div class="left sec3-middle-left">
+					<div class="left sec3-middle-left ">
 						<span class="sec3-text1">돕고 싶은 이웃</span>
 						<button class="tbox-center tbox-small" id="btn-elderly">노인</button>
 						<button class="tbox-center tbox-small" id="btn-child">아이</button>
 						<button class="tbox-center tbox-small" id="btn-disabled">장애인</button>
 						<button class="tbox-center tbox-small" id="btn-others">기타</button>
 					</div>
-					<div class="left sec3-middle-right">
+					<div class="left sec3-middle-right ">
 						<span class="sec3-text1">돕고 싶은 재화</span>
 						<button class="tbox-center tbox-small" id="btn-stuff">물품</button>
 						<button class="tbox-center tbox-small" id="btn-finance">재정</button>
@@ -127,7 +127,7 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<div class="sec3-bottom-left left ">
+					<div class="sec3-bottom-left left">
 						<div class="four_box">
 							<img class="fbox-image" src="image/product.png">
 							<p class="fbox-title">물품</p>

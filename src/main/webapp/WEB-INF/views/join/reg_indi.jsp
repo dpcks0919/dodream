@@ -16,7 +16,7 @@
 
 
 	<div id="Wrapper">
-		<%@include file="../layout/navbar_join.jsp"%>
+		<%@include file="../layout/navbar.jsp"%>
 
 		<section class="page-section text-white text-center" id="contact">
 			<div class="container d-flex flex-column">

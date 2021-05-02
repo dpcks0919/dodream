@@ -16,7 +16,7 @@ body {
 
 	<div id="Wrapper">
 		<!-- Navigation-->
-		<%@include file="../layout/navbar_join.jsp"%>
+		<%@include file="../layout/navbar.jsp"%>
 
 
 		<section class="page-section text-white text-center" id="contact">
