@@ -43,7 +43,7 @@
 					requestType: "${item.requestType}",
 				});
 			</c:forEach>
-			const rq${request.id} = {
+			var rq${request.id} = {
 				id: ${request.id},
 				title: '${request.title}',
 				regDate: '${request.regDate}',
