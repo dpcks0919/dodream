@@ -435,6 +435,13 @@ let joinInit = {
 		let userPhone;
 
 		userPhone = $("#userphone").val();
+		
+		var regex = /^\d{2,3}\d{3,4}\d{4}$/;
+		if(!regex.test( userPhone )){
+			alert("하이픈(-) 없이 번호만 입력해주세요.");
+			return;
+		}
+		
 		window.alert("수신번호: " + userPhone);
 		
 		$.ajax({

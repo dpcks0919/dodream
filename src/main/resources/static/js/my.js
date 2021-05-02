@@ -341,12 +341,13 @@ let myInit = {
 				alert("연락처를 입력해주세요.");
 				return false;
 			}
-			var regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+			var regex = /^\d{2,3}\d{3,4}\d{4}$/;
 			if(!regex.test($("#userphone").val())){
-				alert("연락처를 형식에 맞게 작성해주세요.");
+				alert("하이픈(-) 없이 번호만 입력해주세요.");
 				return false;
 			}
 		}	
+		
 		var userPhone = $("#userphone").val();
 		
 		let data = {

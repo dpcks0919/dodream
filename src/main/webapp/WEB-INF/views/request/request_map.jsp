@@ -109,12 +109,12 @@
 				</div>
 				<div class="response-info">
 					<div class="info-title">전화번호</div>
-					<input class="info-phone info-text" name="response-phone" id="reply_phone" type="text" value="${user.userPhone}" placeholder="전화번호 입력"></input>
+					<input class="info-phone info-text" name="response-phone" id="reply_phone" type="text" value="${user.userPhone}" placeholder="- 없이 전화번호만 입력"></input>
 				</div>
 				<!-- 공간 맞추기 여백 -->
 				<div class="response-info margin-info" style="visibility: hidden !important;">
 					<div class="info-title">전화번호</div>
-					<input class="info-text" type="text" placeholder="전화번호 입력"></input>
+					<input class="info-text" type="text" placeholder="- 없이 전화번호만 입력"></input>
 				</div>
 				<br>
 				<textarea class="response-info-content" name="response-content" id="reply_content"></textarea>

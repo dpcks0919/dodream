@@ -90,7 +90,7 @@ body {
 										<span class="input-title">전화번호</span><span>&nbsp;<em>*</em></span><br>
 										<div class="flex-center">
 											<div id="sms_confirm" style="width: calc(100% - 50px);">
-												<input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+												<input class="text-input" type="text" name="userphone" id="userphone" placeholder="- 없이 전화번호만 입력">
 											</div>
 											<div class="input-check" id="btn-send-text" style="width: 50px;">인증</div>
 										</div>
