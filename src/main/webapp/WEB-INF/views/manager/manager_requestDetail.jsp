@@ -47,9 +47,9 @@
 			</div>
 			<div class="div-table-right">
 				<div class="div-table-title"><b>마감일</b></div>
-				<select class="requestDue-year" name="year" id="requestDueYear"></select>
-				<select class="requestDue-month" name="month" id="requestDueMonth"></select>
-				<select class="requestDue-day" name="day" id="requestDueDay"></select>	
+				<select class="requestDue-year" name="year" id="requestDueYear" onchange="yearChange()"></select>
+				<select class="requestDue-month" name="month" id="requestDueMonth" onchange="monthChange()"></select>
+				<select class="requestDue-day" name="day" id="requestDueDay" onchange="dayChange()"></select>	
 			</div>			
 		</div>
 		<div class="div-table-wrapper">

@@ -20,8 +20,6 @@ public class RequestListener {
 		
 		Date currDate = new Date();
 		Date dueDate = request.getDueDate();
-		System.out.println(request.getUrgentLevel());
-
 		
 		long diffInMillies = dueDate.getTime() - currDate.getTime();
 		long diffDays = TimeUnit.DAYS.convert(Math.abs(diffInMillies),  TimeUnit.MILLISECONDS);
