@@ -173,12 +173,11 @@
 		</header>
 		<section class="page-section-map text-center " id="portfolio">
 			<div class="container">
-				<div class="request-menu">
-					<a class="request-menu-button" href="/requestMap">지도로 보기</a> <a
-						class="request-menu-button request-menu-button-selected"
-						href="/requestList">목록으로 보기</a>
+				<div class="intro-menubar">
+					<div class="intro-menu " onclick="location.href='/requestMap';">지도로 보기</div>
+					<div class="intro-menu selected-menu" onclick="location.href='/requestList';">목록으로 보기</div>
 				</div>
-				<form class="search-div ">
+				<form class="search-div">
 					<div class="extra-search" >
 						<select name="search-client" id="search-client" class="search-box-mid">
 							<option value="all" selected="selected">도움받는 대상</option>

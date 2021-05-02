@@ -29,7 +29,7 @@
 	<%@include file="../layout/sidebar_front.jsp"%>
 
 	<div id="Wrapper" style="height: auto; overflow: visible;">
-		<%@include file="../layout/navbar_join.jsp"%>
+		<%@include file="../layout/navbar.jsp"%>
 		<%@include file="../layout/sidebar_back.jsp"%>
 
 		<!-- Masthead-->
@@ -39,8 +39,8 @@
               <h4 align="left" style="color:#e95378;margin-top:0.25rem;">로그인</h4>
               <form method="post">
                 <div class="idpw-container" style="margin-top:2vh;color:black;">
-                    <input class="input-id" type="text" name="userid" placeholder="아이디 입력" style="width:100%;height:2.5rem;border:none;border-bottom:2px solid lightgray;" id="loginid">
-                    <input class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" onkeydown="enterkey();" style="width:100%;height:2.5rem;border:none;border-bottom:2px solid lightgray;" id="loginpw"><br>
+                    <input class="input-id" type="text" name="userid" placeholder="아이디 입력" style="width:100%;height:2.5rem;border:none;border-bottom:1px solid lightgray;" id="loginid">
+                    <input class="input-pw" type="password" name="userpw" placeholder="패스워드 입력" onkeydown="enterkey();" style="width:100%;height:2.5rem;border:none;border-bottom:1px solid lightgray;" id="loginpw"><br>
                 </div>
                 <div class="find-container" style="width:100%;text-align:right;font-size:9pt;margin-top:1vh;">
                   <a class="sign-up" href="joinForm" style="color: black;"><U>회원가입  <br></U></a>
@@ -52,7 +52,7 @@
               <div class="login-sns" style="margin-top:2vw;">
                   <div class="divider-custom">
                       <div class="divider-custom-line"></div>
-                      <div style="font-size:10pt;color:#CACACA;">간편 로그인</div>
+                      <div style="font-size:10pt;color:black;">간편 로그인</div>
                       <div class="divider-custom-line"></div>
                   </div>
                   <img class="snslgbtn" src="/image/kakao.png" alt="" onclick="javascript:location.href='/oauth2/authorization/kakao'"/>
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div style="width:10%;"></div>
-            <div class="login-explain" style="margin-top:27%;color:white;">
+            <div class="login-explain" style="margin-top: 18%;color:white;">
               <h4>주변 이웃의 도움을<br>확인해볼까요?</h4>
               <p>먼저 로그인이 필요합니다 :)</p><br>
               <p>아직 가입하지 않으셨습니까?</p>
