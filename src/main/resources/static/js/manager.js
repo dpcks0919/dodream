@@ -316,7 +316,6 @@ function menuToggle(num) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				
 				$("#table-wrapper").html(resp);			
 			}
 		}).fail(function(error) {
@@ -333,7 +332,7 @@ function menuToggle(num) {
 			if (resp.status == 500) {
 				alert("에러발생");
 			} else {
-				$("#table-wrapper").html(resp);			
+				$("#table-wrapper").html(resp);		
 			}
 		}).fail(function(error) {
 			console.log(JSON.stringify(error));
