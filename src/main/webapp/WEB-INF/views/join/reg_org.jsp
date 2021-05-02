@@ -72,7 +72,7 @@ body {
 										<span class="input-title">대표 전화번호</span><span>&nbsp;<em>*</em></span><br>
 										<div class="flex-center">
 											<div style="width: calc(100%);">
-												<input class="text-input" type="text" name="userphone" id="userphone" placeholder="전화번호 입력">
+												<input class="text-input" type="text" name="userphone" id="userphone" placeholder="- 없이 전화번호만 입력">
 											</div>
 										</div>
 										<span class="extra-info"> 주변 이웃들의 필요를 문자로 받으실 수 있습니다. <br>SMS 수신 동의&nbsp;&nbsp; <span> <label><input type="radio" name="sms_rcv" value="1" id="sms_rcv" checked>
