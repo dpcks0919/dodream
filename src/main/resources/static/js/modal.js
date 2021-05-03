@@ -64,7 +64,7 @@ function openMenu() {
     $("#rq_date").html(regDate);
     $("#rq_status").html(status);
     $("#rq_addr").html(rq.requestAddress);
-    $("#rq_level").html(level);
+    $("#rq_level").html(rq.dueDate.substring(0,10));
  	if( typeof(rq.user) === 'object' ) {
  	    $("#rq_user").html(rq.user.orgName);
  	}else if( typeof(rq.user) === 'string' ) {
