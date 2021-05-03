@@ -287,7 +287,7 @@ let mapInit = {
 		 else if(InputRequest.urgentLevel == 2) var urgentLevel = "긴급(14일 이내)";
 		 else if(InputRequest.urgentLevel == 3) var urgentLevel = "보통(14일 이상)";
 		 else var urgentLevel = "기타";
-		 $("#marker-info-urgentlevel").text(urgentLevel); 
+		 $("#marker-info-urgentlevel").text(InputRequest.dueDate.substring(0,10)); 
 		 $("#marker-info-address").text(InputRequest.requestAddress); 
 		 $("#marker-info-phone").text(InputRequest.user.userPhone); 
 		$("#marker-info-container").css('display', 'block');

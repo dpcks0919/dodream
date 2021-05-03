@@ -15,6 +15,7 @@
 			<th class="table-num">등록번호</th>
 			<th class="table-title">요청 내용</th>
 			<th class="table-date">등록일</th>
+			<th class="table-date">긴급도</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -56,6 +57,7 @@
 				style="<c:if test='${ today >= duedate }'>color: gray </c:if>">
 				${request.title} </td>
 				<td class="table-date">${regdate}</td>
+				<td class="table-urgentLevel"><c:if test='${ request.urgentLevel == 1 }'>매우 긴급(3일 이내) </c:if><c:if test='${ request.urgentLevel == 2 }'>긴급(14일 이내) </c:if><c:if test='${ request.urgentLevel > 14 }'>보통(14일 이상) </c:if></td>
 			</tr>
 		</c:forEach>
 	</tbody>

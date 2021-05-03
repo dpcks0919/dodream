@@ -137,11 +137,14 @@ td, th {
 }
 
 .table-title {
-  width:60%;
+  width:50%;
   padding-left:15px;
   cursor:pointer;
 }
 .table-date {
+	width:20%;
+}
+.table-urgentLevel {
 	width:20%;
 }
 .fbold {
