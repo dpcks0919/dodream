@@ -55,9 +55,11 @@
 						<div class="carousel-caption3 d-md-block mainImage-web">
 							<a class="py-2 rounded js-scroll-trigger main3-register" style="border:2px solid white; color: white;" href="/requestMap">요청 보기</a>
 						</div>
-						<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
+						<!-- 
+							<div class="carousel-caption3_mobile d-md-block mainImage-mobile">
 							<a class="py-2 rounded js-scroll-trigger main3-register" style="border:2px solid white; color: white;" href="/requestMap">요청 보기</a>
 						</div>
+						 -->
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev"> 
