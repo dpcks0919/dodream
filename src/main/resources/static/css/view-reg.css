@@ -777,7 +777,7 @@ td, th {
 
 @media (max-width: 768px) {
 	.intro-menubar div {
-		font-size:0.75rem;
+		font-size:1rem;
 		padding-bottom:0.3rem;
 	}
 	.selected-menu {
