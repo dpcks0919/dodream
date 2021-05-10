@@ -21,7 +21,7 @@
 					</div>
 					<div class="div-table-wrapper">
 						<div class="div-table-left">
-							<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="modal-period"></span>
+							<div class="div-table-title"><b>마감<span style="visibility:hidden;">마감</span></span></b></div><span class="input-span" id="modal-period"></span>
 						</div>
 					</div>
 					<div class="div-table-wrapper">
