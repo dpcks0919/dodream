@@ -265,7 +265,7 @@
   padding-bottom:1vw;
 }
 .sec3-bottom-right-title {
-  font-size : 1.25vw;
+  font-size : 0.75rem!important;
 }
 .sec3-bottom-right-content {
   font-size : 2vw;
@@ -972,7 +972,7 @@ header {
   .carousel-youtube {
     width:45vw;
     height:40vw;
-    bottom:50px!important;
+    bottom:30px!important;
     position: absolute;
     right: 15%;
     z-index: 10;
@@ -982,14 +982,14 @@ header {
     text-align: center;
   }
   .sec3-bottom-right-title {
-    font-size : 1.25vw;
+    font-size : 1.25rem;
   }
   .sec3-bottom-right-content {
     font-size : 3vw;
     margin-bottom:1rem!important;
   }
   .main4-register {
-    padding: 0.5vh 4vh!important;
+    padding: 0.15rem 1.5rem!important;
     font-size:1.5vh!important;
     font-weight:bold;
     border:1px solid white;
@@ -1018,6 +1018,12 @@ header {
 
   .fbox-content {
     display : none;
+  }
+  .fbox-image {
+    margin-top : 0rem!important; 
+    width : 1.5rem!important;
+  	height: 1.5rem!important;
+  	margin-bottom:0.5rem;
   }
 
   .line {
@@ -1095,7 +1101,8 @@ header {
     background-color: rgba(255,255,255, 0.2);
   }
   .page-section3-title {
-    margin-top:1vh!important;
+    margin-top:1.25rem!important;
+    margin-bottom:1.5rem!important;
     font-size:0.8rem!important;
     font-weight:bold;
   }
