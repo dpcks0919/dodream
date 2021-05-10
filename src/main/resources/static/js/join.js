@@ -546,7 +546,7 @@ let privacy =  {
 					} else if($("#input-page").val() == 3) {
 						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/naver'");
 					} else if($("#input-page").val() == 4) {
-						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/facebook'");
+						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/google'");
 					}
 				} else {
 					$("#privacy_submit").css("color", "#e3e3e3");
