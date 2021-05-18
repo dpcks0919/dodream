@@ -26,7 +26,7 @@
 		<section class="page-section-join" id="join">
 			<div class="container d-flex flex-column">
 				<div class="flex-center reg-container">
-					<div class="reg-response" style="height: 55vh;">
+					<div class="reg-response" style="height: 25rem;">
 						<div class="reg-title response-bgcolor">이웃을 돕고 싶은 경우</div>
 						<div style="height: 2.5%;"></div>
 						<div class="flex-center reg-content">
@@ -53,7 +53,7 @@
 					</div>
 					<!-- <div style="width: 1.25%;"></div> -->
 					<div style="width: 5%;"></div>
-					<div class="reg-request" style="height: 55vh;">
+					<div class="reg-request" style="height: 25rem;">
 						<div class="reg-title request-bgcolor">이웃의 도움을 요청하고 싶은 경우</div>
 						<div style="height: 2.5%;"></div>
 						<div class="flex-center reg-content">
