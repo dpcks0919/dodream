@@ -191,7 +191,7 @@
 				<c:otherwise>
 					<div class="pagination">
 						<c:if test="${startNum >= 5}">
-							<a href="?page=${startNum - 1}" style="float: left;" class="btn btn-prev paging-left">&laquo;</a>
+							<a href="?page=${startNum - 1}&type=${ntype}" style="float: left;" class="btn btn-prev paging-left">&laquo;</a>
 						</c:if>
 			
 						<c:if test="${startNum == 0}">
@@ -206,17 +206,17 @@
 						<c:forEach var="i" begin="0" end="${isLast-1}">
 							<c:choose>
 								<c:when test="${i eq page%5}">
-									<a class="-text- orange bold selected_page" href="?page=${startNum + i}">${startNum + i + 1}</a>
+									<a class="-text- orange bold selected_page" href="?page=${startNum + i}&type=${ntype}">${startNum + i + 1}</a>
 								</c:when>
 								<c:otherwise>
-									<a class="-text- orange bold" href="?page=${startNum + i}">${startNum + i + 1}</a>
+									<a class="-text- orange bold" href="?page=${startNum + i}&type=${ntype}">${startNum + i + 1}</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 			
 						<!-- 마지막번호는 DB레코드 수와 연관이 있다! 우선은 lastpage 개수를 임의로 지정. -->
 						<c:if test="${startNum + 4 <= lastNum }">
-							<a href="?page=${startNum + 5}" class="btn btn-next paging-right">&raquo;</a>
+							<a href="?page=${startNum + 5}&type=${ntype}" class="btn btn-next paging-right">&raquo;</a>
 						</c:if>
 						<c:if test="${startNum + 4 > lastNum }">
 							<span class="btn btn-next" style="color: #e3e3e3; cursor: initial;" disabled>&raquo;</span>
