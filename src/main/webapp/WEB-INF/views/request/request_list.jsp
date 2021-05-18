@@ -39,11 +39,14 @@
 						<div class="div-table-left">
 							<div class="div-table-title"><b>상태<span style="visibility:hidden;">상태</span></b></div><span class="input-span" id="rq_status"></span>
 						</div>
-						<div class="div-table-left">
+						<div class="div-table-right">
 							<div class="div-table-title"><b>마감<span style="visibility:hidden;">마감</span></span></b></div><span class="input-span" id="rq_level"></span>
 						</div>
 					</div>
 					<div class="div-table-wrapper">
+						<div class="div-table-left">
+							<div class="div-table-title"><b>요청대상</b></div><span class="input-span" id="rq_clientType"></span>
+						</div>
 						<div class="div-table-right">
 							<div class="div-table-title"><b>요청기관</b></div><span class="input-span" id="rq_user"></span>
 						</div>
