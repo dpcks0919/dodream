@@ -59,7 +59,7 @@
 
 		<div class="modal-ftr">
 			<div class="btn-res" onclick="goResponse()">응답하기</div>
-			<div class="btn-icon" onclick="heartClick();">
+			<div class="btn-icon" onclick="heartClick('my');">
 				<i class="far fa-heart" id="btn-heart"></i>
 				<i class="fas fa-heart" id="btn-heart2" style="display:none"></i>
 			</div>
@@ -189,7 +189,6 @@
 			});
 		}
 		
-
 
 		$(document).ready(function() {
 			initPage();					

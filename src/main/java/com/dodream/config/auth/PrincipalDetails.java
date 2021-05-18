@@ -50,7 +50,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 		// TODO Auto-generated method stub
 		return user.getLoginPassword();
 	}
-
+	
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub

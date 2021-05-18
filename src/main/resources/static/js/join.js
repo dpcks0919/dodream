@@ -368,6 +368,12 @@ let joinInit = {
 			return false;
 		}
 		if($("#type").val() == "SOCIAL_WORKER"){	// 사회복지사의 경우
+		
+			if(!$("#userpos").val()){
+				alert("사회복지사 자격증 번호를 적어주세요!");
+				return false;
+			}
+		
 			if(!$("#orgname").val()){
 				alert("소속 기관을 적어주세요!");
 				return false;
