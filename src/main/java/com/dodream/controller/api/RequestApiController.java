@@ -155,7 +155,7 @@ public class RequestApiController {
 	}
 	
 	
-	@GetMapping("user/ManagerViewRequest")
+	@GetMapping("manager/ManagerViewRequest")
 	public RequestDto ManagerViewRequest(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		Request request = requestService.getRequest(Integer.parseInt(id));
 		return new RequestDto (request);

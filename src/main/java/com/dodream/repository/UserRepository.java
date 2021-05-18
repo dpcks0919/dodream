@@ -2,11 +2,11 @@ package com.dodream.repository;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import com.dodream.model.RoleType;
 import com.dodream.model.User;
@@ -33,5 +33,10 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query(value = "SELECT * FROM user WHERE user_type <> 'DELETED'", nativeQuery = true)
 	public Page<User> findAllByDeleteFlag(Pageable pageable);
+
+	@Transactional
+	@Modifying
+	@Query(value = " update user set login_count = login_count + 1 where login_id = ?1 ", nativeQuery = true)
+	public void increaseLoginCount(String loginId);
 
 }

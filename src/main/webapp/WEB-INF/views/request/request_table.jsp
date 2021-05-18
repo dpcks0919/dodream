@@ -58,11 +58,10 @@
 				style="<c:if test='${ today >= duedate }'>color: #e5e5e5 </c:if>">
 				${request.title} </td>
 				<td class="table-date">${regdate}</td>
+        <!-- 
 				<td class="table-date">${duedate.substring(0,4)}.${duedate.substring(4,6)}.${duedate.substring(6,8)}</td>
-				<!-- 
-				<td class="table-urgentLevel"><c:if test='${ request.urgentLevel == 1 }'>매우 긴급(3일 이내) </c:if><c:if test='${ request.urgentLevel == 2 }'>긴급(14일 이내) </c:if><c:if test='${ request.urgentLevel > 14 }'>보통(14일 이상) </c:if></td>
-				
-				 -->
+				-->
+        <td class="table-urgentLevel"><c:if test='${ request.urgentLevel == 1 }'>매우 긴급(3일 이내) </c:if><c:if test='${ request.urgentLevel == 2 }'>긴급(14일 이내) </c:if><c:if test='${ request.urgentLevel > 2 }'>보통(14일 이상) </c:if></td>
 			</tr>
 		</c:forEach>
 	</tbody>

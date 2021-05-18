@@ -271,7 +271,7 @@
 					<p style="margin-bottom:2rem;">두드림터치와 함께 이웃을 돕고 싶으신 분들을 찾습니다.</p>
 					<c:choose>
 						<c:when test="${principal.user.loginCount == 0 || empty principal.user.loginCount}">
-							<a class=" rounded join-btn" href="/loginForm">가입하기</a>
+							<a class=" rounded join-btn" href="/joinForm">가입하기</a>
 					</c:when>
 					<c:otherwise>
 							<a class=" rounded join-btn" href="/requestList">요청보기</a>

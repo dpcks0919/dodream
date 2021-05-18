@@ -17,7 +17,6 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
 
 	$("#roadAddrPart1").val(roadAddrPart1);
 	$("#addrDetail").val(addrDetail);
-	document.regForm.addrDetail.value = addrDetail;
 	
 	var geocoder = new daum.maps.services.Geocoder();
 	var x, y = "";
