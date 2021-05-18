@@ -382,7 +382,6 @@ function saveReply(items) {
 	
 	//(기부자가) 요청보기 모달창에서 '완료하기' 버튼 누를때 해당 사회복지사에게 email 알림 보내기
 	function notifySocialWorkerByEmail(reply){
-		alert("사회복지사에게 이메일 전송");
 		$.ajax({
 			type: "POST",
 			url: "/notifySocialWorkerByEmailProc",
@@ -453,7 +452,7 @@ let requestInit = {
 			if(resp.status == 500) {
 				alert("notifyByEmailProc 문제 발생!");
 			}else{
-				alert("요청 등록 후 주변 이웃들에게 이메일 전송");
+				//alert("요청 등록 후 주변 이웃들에게 이메일 전송");
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -474,7 +473,7 @@ let requestInit = {
 			if(resp.status == 500) {
 				alert("notifyByTextProc 문제 발생!");
 			}else{
-				alert("요청 등록 후 주변 이웃들에게 문자 전송");
+				//alert("요청 등록 후 주변 이웃들에게 문자 전송");
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
