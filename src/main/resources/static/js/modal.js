@@ -514,6 +514,9 @@ function goDetail_myrequest(rq) {
 
 //myrespose 나의 응답용 JS
 function goDetail_myreply(rp, _state) {
+	var html_text = "<tr><th style='width:17.5%;'>종류</th><th style='width:15.5%;'>내역</th><th style='width:35%'>내 응답량</th><th style='width:10%;'>현재량</th><th style='width:10%;'>목표량</th></tr>";
+	html_text += "<tr class='needs-category' id='rp_item0'></tr>";
+	$(".info-table").html(html_text);
 	$("#rp-back").css("visibility", "hidden");
 	$("#rp-edit").removeAttr("hidden");
 	$("#rp-save").prop("hidden", "hidden");

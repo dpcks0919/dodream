@@ -52,7 +52,7 @@
               <div class="login-sns" style="margin-top:2vw;">
                   <div class="divider-custom">
                       <div class="divider-custom-line"></div>
-                      <div style="font-size:10pt;color:black;">간편 로그인</div>
+                      <div class="login-subtitle">간편 로그인</div>
                       <div class="divider-custom-line"></div>
                   </div>
                   <img class="snslgbtn" src="/image/kakao.png" alt="" onclick="javascript:location.href='/oauth2/authorization/kakao'"/>

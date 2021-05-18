@@ -329,7 +329,10 @@ td, th {
   text-align:center;
 }
 
-
+.requestTr:hover {
+	color:black!important;
+	
+}
 
 @media (max-width: 992px) {
 	.newsWrite-section-wrapper {	

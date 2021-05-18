@@ -8,6 +8,7 @@
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
 %>
+
 <c:set var = "today" value= "<%=sf.format(nowTime)%>"></c:set>
 <table style="table-layout: fixed">
 	<thead>
@@ -15,7 +16,7 @@
 			<th class="table-num">등록번호</th>
 			<th class="table-title">요청 내용</th>
 			<th class="table-date">등록일</th>
-			<th class="table-date">긴급도</th>
+			<th class="table-date">마감일</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -51,13 +52,16 @@
 					requestItem: arr,
 				};
 			</script>
-			<tr>
+			<tr class="requestTr" style="<c:if test='${request.status == "CLOSED"}'>color:#e5e5e5;</c:if>" >
 				<td class="table-num">${request.id}</td>
 				<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold" 
-				style="<c:if test='${ today >= duedate }'>color: gray </c:if>">
+				style="<c:if test='${ today >= duedate }'>color: #e5e5e5 </c:if>">
 				${request.title} </td>
 				<td class="table-date">${regdate}</td>
-				<td class="table-urgentLevel"><c:if test='${ request.urgentLevel == 1 }'>매우 긴급(3일 이내) </c:if><c:if test='${ request.urgentLevel == 2 }'>긴급(14일 이내) </c:if><c:if test='${ request.urgentLevel > 2 }'>보통(14일 이상) </c:if></td>
+        <!-- 
+				<td class="table-date">${duedate.substring(0,4)}.${duedate.substring(4,6)}.${duedate.substring(6,8)}</td>
+				-->
+        <td class="table-urgentLevel"><c:if test='${ request.urgentLevel == 1 }'>매우 긴급(3일 이내) </c:if><c:if test='${ request.urgentLevel == 2 }'>긴급(14일 이내) </c:if><c:if test='${ request.urgentLevel > 2 }'>보통(14일 이상) </c:if></td>
 			</tr>
 		</c:forEach>
 	</tbody>
