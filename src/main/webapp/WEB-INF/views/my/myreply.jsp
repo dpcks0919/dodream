@@ -55,14 +55,7 @@
 				</div>
 				<div class="content-needs ">
 					<table class="info-table ">
-						<tr>
-							<th style="width: 17.5%;">종류</th>
-							<th style="width: 15.5%;">내역</th>
-							<th style="width: 35%;">내 응답량</th>
-							<th style="width: 10%;">현재량</th>
-							<th style="width: 10%;">목표량</th>
-						</tr>
-						<tr class="needs-category" id="rp_item0"></tr>
+
 					</table>
 				</div>
 			</div>
@@ -237,7 +230,6 @@
 		*/
 		
 		function myreply_edit(rp, rid) {
-			console.log(rp);
 			$("#rp_item0").empty();
 			$(".other-rpitem").remove();
 			alert("수정 후 저장하시면 됩니다.");
@@ -290,7 +282,7 @@
 					      let needs = items[i].itemNum - items[i].receivedNum;
 					      if(i == 0) {
 					           if(items[i].requestType == "재정") {
-					             $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span>원</td>");
+					             $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' min='0' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span>원</td>");
 					          } else {
 					            $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>" + items[i].itemNum + "</span></td>");
 					          }
@@ -299,13 +291,13 @@
 					        let pid = "#rp_item" + (i-1);
 					        if(items[i].requestType === items[i-1].requestType) {
 					          if(items[i].requestType == "재정") { 
-					              $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');
+					              $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' min='0' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');
 					          } else {
 								  $(pid).after('<tr class="other-rpitem" id="rp_item' + i + '"><td>' + "</td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span></td></tr>');				
 					          }
 					        } else {
 					          if(items[i].requestType == "재정") {
-								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');				
+								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><input type='number' min='0' id='"+rItemId+"' class='response-item-big' value='"+ items[i].replyNum +"' onkeyup='checkMoney(this, "+rcNum+")'/>원</td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span>원</td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span>원</td></tr>');				
 					          } else {
 								  $(pid).after('<tr class="other-rpitem" style="border-top: 2px solid black;" id="rp_item' + i + '"><td><b>' + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td><i class='fas fa-minus minus-icon' id='"+curID+"' onclick='minusCount(this, 2, 0);'></i><input type='text' id='"+rItemId+"' class='response-item-count' value='"+ items[i].replyNum +"' readonly/><i class='fas fa-plus plus-icon' id='"+curID+"' onclick='plusCount(this, 2);'></i></td><td><span id='"+rcItemId+"'>" + items[i].receivedNum + "</span></td><td><span style='font-weight:bold;' id='"+tItemId+"'>"+ items[i].itemNum +'</span></td></tr>');				
 					          }
@@ -320,6 +312,12 @@
 			
 		}
 		function myreply_edit_save(rp, rid) {
+			var regex = /^\d{2,3}\d{3,4}\d{4}$/;
+			if(!regex.test($("#rp_phone").val())){
+				alert("하이픈(-) 없이 번호만 입력해주세요.");
+				return 0;
+			}
+			
 			// replyItem Update
 			$.ajax({
 				type : "GET",
