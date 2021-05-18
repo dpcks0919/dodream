@@ -114,6 +114,8 @@
 	<script>
 		$(document).ready(function() {
 			
+			var today = new Date();
+			var currYear = today.getFullYear();
 		 	var birthday = '${user.userDob}'
 		 	var substring = "-";  
 		 	var dob, year, month, date;
@@ -127,12 +129,26 @@
 		 		dob = birthday.split(' ');
 		 		year = dob[5];
 		 		month = getMonth(dob[1]);
-		 		date = dob[2];
+		 		date = parseInt(dob[2]);
 		 	}
+		 	var limit = currYear - 90;
 		 	
-		 	$('#selectyear').val(year);
-			$('#selectmonth').val(month);
-			$('#selectdate').val(date);
+		 	for(var i = currYear; i >= limit; i--) {
+                $("#selectyear").append("<option value='" + i + "'>" + i + "</option>");
+            }
+            for(var i = 1; i <= 12; i++) {
+                $("#selectmonth").append("<option value='" + i + "'>" + i + "</option>");
+            }
+            for(var i = 1; i <= 31; i++) {
+                $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+            }
+		 	
+		 	$('#selectyear').val(year).attr('selected', 'selected');
+			$('#selectmonth').val(month).attr('selected', 'selected');
+			$('#selectdate').val(date).attr('selected', 'selected');
+			$('#birthyear').val($('#selectyear').val());
+			$('#birthmonth').val($('#selectmonth').val());
+			$('#birthdate').val($('#selectdate').val());
 			
 			$('#loginId').val('${user.loginId}');
 			$('#username').val('${user.userName}');

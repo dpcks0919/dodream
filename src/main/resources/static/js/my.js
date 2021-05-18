@@ -16,6 +16,8 @@ function goPopup(){
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 
 	$("#roadAddrPart1").val(roadAddrPart1);
+	$("#addrDetail").val(addrDetail);
+	document.regForm.addrDetail.value = addrDetail;
 	
 	var geocoder = new daum.maps.services.Geocoder();
 	var x, y = "";
@@ -235,7 +237,7 @@ let myInit = {
 	
 	init: function(){
 	
-		this.dobInputSetup();
+		//this.dobInputSetup();
 		this.selectBirth();
 		this.radiusInputSetUp();
 	
@@ -277,7 +279,7 @@ let myInit = {
 			  $("#input_sex").val("2");	// 2: female
 		}
 	},
-		
+	/*	
 	dobInputSetup:function(){
               let today = new Date()
               let year = today.getFullYear();
@@ -300,7 +302,7 @@ let myInit = {
 			$('#birthmonth').val($('#selectmonth').val());
 			$('#birthdate').val($('#selectdate').val());
 	},
-	
+	*/
 	radiusInputSetUp:function(){
 		$('#selectradius').append("<option value='3'>3</option>");
 		$('#selectradius').append("<option value='5'>5</option>");
