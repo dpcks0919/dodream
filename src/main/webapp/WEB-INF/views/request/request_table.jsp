@@ -49,6 +49,7 @@
 					user: '${request.user.orgName}', //기관 이름
 					description: '${request.description}',
 					status: '${request.status}',
+					clientType: '${request.clientType}',
 					requestItem: arr,
 				};
 			</script>

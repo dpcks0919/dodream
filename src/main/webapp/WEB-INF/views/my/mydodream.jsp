@@ -37,7 +37,12 @@
 						</div>
 					</div>					
 					<div class="div-table-wrapper">
-						<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="rq_level"></span>
+						<div class="div-table-left">
+							<div class="div-table-title"><b>기간<span style="visibility:hidden;">기간</span></span></b></div><span class="input-span" id="rq_level"></span>
+						</div>
+						<div class="div-table-right">
+							<div class="div-table-title"><b>요청대상<span style="visibility:hidden;"></span></span></b></div><span class="input-span" id="rq_clientType"></span>
+						</div>
 					</div>								
 					<div class="div-table-wrapper">
 						<div class="div-table-title"><b>주소<span style="visibility:hidden;">주소</span></b></div><span class="input-span" id="rq_addr"></span>

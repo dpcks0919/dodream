@@ -48,6 +48,8 @@ function openMenu() {
     var c_time = cur.getTime();
 	var org_name = rq.userName;
     var status = "";
+ 	var clientType = "";
+
 
 	if(rq.status == 'DELETED') status = "<span style='color:red'>삭제됨</span>";
 	else if(c_time > d_time || rq.status == 'CLOSED') status = "<span style='color:red'>마감</span>";
@@ -58,6 +60,12 @@ function openMenu() {
     if(level == 1) level = "매우 긴급(3일 이내)";
     else if(level == 2) level = "긴급(14일 이내)";
     else if(level == 3) level = "보통(14일 이상)";
+
+	console.log(rq);
+	if(rq.clientType == 'ELDERLY')  clientType = "노인";
+	else if(rq.clientType == 'CHILD') clientType = "아이";
+	else if(rq.clientType == 'DISABLED') clientType = "장애인";
+	else if(rq.clientType == 'OTHERS') clientType = "기타";
     
     $("#rq_title").html("<h5>" + rq.title + "</h5>");
     $("#rq_id").html(rq.id);
@@ -65,6 +73,7 @@ function openMenu() {
     $("#rq_status").html(status);
     $("#rq_addr").html(rq.requestAddress);
     $("#rq_level").html(rq.dueDate.substring(0,10));
+    $("#rq_clientType").html(clientType);
  	if( typeof(rq.user) === 'object' ) {
  	    $("#rq_user").html(rq.user.orgName);
  	}else if( typeof(rq.user) === 'string' ) {
