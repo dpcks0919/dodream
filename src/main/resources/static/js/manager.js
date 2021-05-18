@@ -211,11 +211,14 @@ function openModal_manager(id, num) {
 					let dob = (user.udob).substring(0, 10);
 					let year = dob.substring(0, 4);
 					let month = dob.substring(5, 7);
+					let date = dob.substring(8, 10); 
 					if(month.substring(0, 1) == '0') {
 						month = month.substring(1);
+					}          
+					if(date.substring(0, 1) == '0') {
+						date = date.substring(1);
 					}
-					let date = dob.substring(8, 10);           
-	              	for(var i = year; i >= limit; i--) {
+	              	for(var i = fullYear; i >= limit; i--) {
 	                	$("#selectyear").append("<option value='" + i + "'>" + i + "</option>");
 	              	}
 	             	for(var i = 1; i <= 12; i++) {
@@ -230,6 +233,15 @@ function openModal_manager(id, num) {
 					$('#dob_year').val($('#selectyear').val());
 					$('#dob_month').val($('#selectmonth').val());
 					$('#dob_date').val($('#selectdate').val());
+					$('#selectyear').change(function() {
+			    		$('#dob_year').val($('#selectyear').val());
+			    	});
+			    	$('#selectmonth').change(function() {
+			    		$('#dob_month').val($('#selectmonth').val());
+			    	});
+			    	$('#selectdate').change(function() {
+			    		$('#dob_date').val($('#selectdate').val());
+			    	});
 				} else {
 					$("#input_udob_container").css("display", "none");
 				}

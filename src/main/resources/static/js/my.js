@@ -236,7 +236,7 @@ let myInit = {
 	
 	init: function(){
 	
-		this.dobInputSetup();
+		//this.dobInputSetup();
 		this.selectBirth();
 		this.radiusInputSetUp();
 	
@@ -278,7 +278,7 @@ let myInit = {
 			  $("#input_sex").val("2");	// 2: female
 		}
 	},
-		
+	/*	
 	dobInputSetup:function(){
               let today = new Date()
               let year = today.getFullYear();
@@ -301,7 +301,7 @@ let myInit = {
 			$('#birthmonth').val($('#selectmonth').val());
 			$('#birthdate').val($('#selectdate').val());
 	},
-	
+	*/
 	radiusInputSetUp:function(){
 		$('#selectradius').append("<option value='3'>3</option>");
 		$('#selectradius').append("<option value='5'>5</option>");
