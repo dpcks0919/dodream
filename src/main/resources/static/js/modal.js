@@ -256,14 +256,14 @@ function openMenu() {
     document.getElementById("view-responseForm").style.display="none";
   }
 
-function heartClick() {
+function heartClick(page) {
 	if($("#btn-heart").css("display") == "none"){
-		deleteUserInterest($("#rq_id").html());
+		deleteUserInterest($("#rq_id").html(), page);
 		$("#btn-heart2").hide();
 		$("#btn-heart").show();
 	}
 	else if($("#btn-heart2").css("display") == "none"){
-		addUserInterest($("#rq_id").html());
+		addUserInterest($("#rq_id").html(), page);
 		$("#btn-heart").hide();
 		$("#btn-heart2").show();
 	}

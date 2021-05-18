@@ -89,7 +89,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 		}else {
 			userService.increaseLoginCount(userEntity.getId());
 		}
-				
+		
 		return new PrincipalDetails(userEntity, oauth2User.getAttributes()); //이제 얘가 authentication세션 안에 들어감!
 	}
 }

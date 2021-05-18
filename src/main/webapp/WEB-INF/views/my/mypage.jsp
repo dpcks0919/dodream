@@ -167,7 +167,7 @@
 								<p class="section2-text1">관리자 페이지</p>
 							</div>
 							<div class="section2-box-right">
-								<a class="section2-text2" href="/user/manager">더 보기 <i class="fas fa-chevron-right"></i></a>
+								<a class="section2-text2" href="/manager/manager">더 보기 <i class="fas fa-chevron-right"></i></a>
 							</div>
 						</div>
 					</c:when>

@@ -66,10 +66,11 @@ public class UserApiController {
 	}
 	
 	@PostMapping("/loginProc")
-	public ResponseDto<Integer> login(@RequestBody User loginInfo, @AuthenticationPrincipal PrincipalDetails principalDetails) {		
+	public ResponseDto<Integer> login(@RequestBody User loginInfo, @AuthenticationPrincipal PrincipalDetails principalDetails) {	
 		if(userService.loginService(loginInfo, principalDetails)) {	// true 리턴시 로그인 처리 
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginInfo.getLoginId(), loginInfo.getLoginPassword()));
 			SecurityContextHolder.getContext().setAuthentication(authentication); 		//세션 등록.
+			userService.increaseLoginCount(authentication.getName());
 		}
 		else {	// false 리턴시 에러 송출
 			return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
