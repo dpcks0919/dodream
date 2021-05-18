@@ -260,6 +260,22 @@ let myInit = {
     	});
     	$('#selectmonth').change(function() {
     		$('#birthmonth').val($('#selectmonth').val());
+    		let inputMonth =  $('#selectmonth').val();
+			  $('#selectdate option').remove();
+		      if(inputMonth == 1 || inputMonth == 3 || inputMonth == 5 || inputMonth == 7 || inputMonth == 8 || inputMonth == 10 || inputMonth == 12) {
+				for(var i = 1; i <= 31; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+		      } else if(inputMonth == 4 || inputMonth == 6 || inputMonth == 9 || inputMonth == 11) {
+				for(var i = 1; i <= 30; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  } else if(inputMonth == 2) {
+				for(var i = 1; i <= 29; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			     }
+			  }
+			  $('#birthdate').val($('#selectdate').val());
     	});
     	$('#selectdate').change(function() {
     		$('#birthdate').val($('#selectdate').val());
