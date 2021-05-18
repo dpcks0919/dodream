@@ -19,7 +19,7 @@ function addUserInterest(requestId){
 }
 
 // user_Interest 삭제하는 함수
-function deleteUserInterest(requestId){
+function deleteUserInterest(requestId, page){
 	$.ajax({
 		type: "POST",
 		url: "/deleteUserInterestProc",
@@ -29,6 +29,8 @@ function deleteUserInterest(requestId){
 			alert("관심 목록 삭제에 실패하였습니다. ");
 		}else {		
 			alert("관심 목록에서 삭제하였습니다. ");
+			if( page == "my")
+				location.href = "/user/mydodream";
 		} 
 	}).fail(function(error){
 		console.log(JSON.stringify(error));
@@ -145,7 +147,7 @@ function rowAdd() {
   innerHtml += "</select></th>";                  
   innerHtml += "<th><input type='text' class='request-item-name' placeholder='이름 입력' id='"+curName+"'/></th>";
   innerHtml += "<th><div id='"+curDiv+"'>";
-  innerHtml += "<i class='fas fa-minus minus-icon responsive-disappear' id='"+curID+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+  innerHtml += "<i class='fas fa-minus minus-icon responsive-disappear' id='"+"tr"+curCnt+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"' onkeyup='numberWithCommas(this)'/>";
   innerHtml += "<i class='fas fa-plus plus-icon responsive-disappear' id='"+curID+"' onclick='plusCount(this);'></i>";
   innerHtml += "</div></th>";
   innerHtml += "<th><div class='del-btn' id="+curID+" onclick='rowDelete(this);'>X</div></th>";
@@ -192,7 +194,7 @@ function upload(step) {
     alert("제목을 입력해주세요!");
     return 0;
   }
-  else if(contents == '') {
+  if(contents == ''   || contents == '<p><br></p>') {
     alert('내용을 입력해주세요!');
     return 0;
   }
@@ -249,7 +251,7 @@ var alert_select_value = function (select_obj, curCnt) {
     newHtml += "<input type='text' class='response-item-count-big' name='request' value='0' id='"+curCount+"' onkeyup='numberWithCommas(this)'/>원";
   }
   else {
-    newHtml += "<i class='fas fa-minus minus-icon' id='"+"tr"+curCnt+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"'/>";
+    newHtml += "<i class='fas fa-minus minus-icon' id='"+"tr"+curCnt+"' onclick='minusCount(this);'></i><input type='text' class='response-item-count' name='request' placeholder='0' value='0' id='"+curCount+"' onkeyup='numberWithCommas(this)'/>";
     newHtml += "<i class='fas fa-plus plus-icon' id='"+"tr"+curCnt+"' onclick='plusCount(this);'></i>";
   }
   document.getElementById(curDiv).innerHTML = newHtml;
@@ -612,6 +614,7 @@ $('#requestDueYear').change(function() {
 	let inputDate =  $('#requestDueDay').val();
 	dueDateValidation(inputYear, inputMonth, inputDate);
 });
+
 $('#requestDueMonth').change(function() {
 	let inputYear =  $('#requestDueYear').val();
 	let inputMonth =  $('#requestDueMonth').val();
@@ -632,6 +635,7 @@ $('#requestDueMonth').change(function() {
 	let inputDate =  $('#requestDueDay').val();
 	dueDateValidation(inputYear, inputMonth, inputDate);
 });
+
 $('#requestDueDay').change(function() {
 	let inputYear =  $('#requestDueYear').val();
 	let inputMonth =  $('#requestDueMonth').val();
@@ -647,8 +651,8 @@ function dueDateValidation(inputYear, inputMonth, inputDate) {
     let day = today.getDate();
 	let inputDay = new Date(inputYear + '/' + inputMonth + '/' + inputDate + " 23:59:59");
 	let diffDay = (inputDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
-
-	if(diffDay <= 1) {
+	
+	if(diffDay < 0) {
 	    alert("오늘 이후 날짜를 선택하세요.");
 		$('#requestDueYear').val(year).attr('selected', 'selected');
 	    $('#requestDueMonth').val(month).attr('selected', 'selected');

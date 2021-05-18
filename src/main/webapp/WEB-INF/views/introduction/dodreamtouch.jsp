@@ -332,7 +332,7 @@
 					<p>현재 포항시 전역을 목표로 하고 있으며, 앞으로 전국으로 확대될 계획입니다.</p>
 					<p>두드림터치 플랫폼 정착과 운영, 확대과정에 함께해 주세요.</p>				
 				</div>
-				<p class="intro1-section4-text3 "><b>두드림터치<br>농협은행 301-0267-4835</b></p>
+				<p class="intro1-section4-text3 "><b>두드림터치<br>농협은행 301-0267-483531</b></p>
 				<p class="intro1-section4-text4 ">전화번호 : 054-262-1070<br>E-mail : dodreamtouch@gmail.com</p>
 			</div>
 		</section>

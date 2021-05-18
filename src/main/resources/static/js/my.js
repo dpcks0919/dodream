@@ -16,6 +16,7 @@ function goPopup(){
 function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 
 	$("#roadAddrPart1").val(roadAddrPart1);
+	$("#addrDetail").val(addrDetail);
 	
 	var geocoder = new daum.maps.services.Geocoder();
 	var x, y = "";
