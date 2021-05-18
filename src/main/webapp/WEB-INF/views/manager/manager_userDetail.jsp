@@ -35,7 +35,7 @@
 	</div>
 	<div class="input-container" id="input_uid_container">
 		<span class="userInfoTitle">사용자 아이디: </span>
-		<input class="userInfoInput" type="text" id="input_uid">
+		<input class="userInfoInput" type="text" id="input_uid" readonly>
 	</div>
 	<div class="input-container" id="input_uname_container">
 		<span class="userInfoTitle">사용자 이름: </span>

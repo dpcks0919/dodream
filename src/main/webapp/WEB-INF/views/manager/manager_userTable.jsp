@@ -34,6 +34,9 @@
 					<c:when test="${user.userType == 'INSTITUTION'}">
 						<c:set var="usertype" value="기관" />
 					</c:when>
+					<c:when test="${user.userType == 'ADMIN'}">
+						<c:set var="usertype" value="관리자" /> 
+					</c:when>
 				</c:choose>
 				<script>
 					var usr${user.id} = {
