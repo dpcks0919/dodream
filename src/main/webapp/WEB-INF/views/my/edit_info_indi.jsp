@@ -136,12 +136,22 @@
 		 	for(var i = currYear; i >= limit; i--) {
                 $("#selectyear").append("<option value='" + i + "'>" + i + "</option>");
             }
-            for(var i = 1; i <= 12; i++) {
+		 	for(var i = 1; i <= 12; i++) {
                 $("#selectmonth").append("<option value='" + i + "'>" + i + "</option>");
-            }
-            for(var i = 1; i <= 31; i++) {
-                $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
-            }
+             }
+             if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+			    for(var i = 1; i <= 31; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  } else if(month == 4 || month == 6 || month == 9 || month == 11) {
+			    for(var i = 1; i <= 30; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  } else if(month == 2) {
+				for(var i = 1; i <= 29; i++) {
+			      $("#selectdate").append("<option value='" + i + "'>" + i + "</option>");
+			    }
+			  }
 		 	
 		 	$('#selectyear').val(year).attr('selected', 'selected');
 			$('#selectmonth').val(month).attr('selected', 'selected');
