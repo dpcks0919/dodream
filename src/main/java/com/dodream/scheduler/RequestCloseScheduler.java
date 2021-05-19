@@ -1,6 +1,8 @@
 package com.dodream.scheduler;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,14 +19,16 @@ public class RequestCloseScheduler {	//automaticall CLOSE requests which are out
 	RequestRepository requestRepository;
 	 
 	@Transactional 
-	@Scheduled(fixedDelay = 1000 * 60 * 60)
-	public void requestClose() {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		
+	@Scheduled(cron = "0 0 0 * * *")	 //매일 0시에 실행
+	public void requestClose() {		
+		Timestamp curTimestamp = new Timestamp(System.currentTimeMillis());
+        Timestamp compareTimestamp = new Timestamp(curTimestamp.getYear(), curTimestamp.getMonth(), curTimestamp.getDate(), 0, 0, 0, 0);	// 날짜 기준으로 
+
 		Request[] approvedRequestList = requestRepository.findAllByStatus(StatusType.APPROVED);
+		System.out.println(compareTimestamp);
 				
 		for(Request request : approvedRequestList) {
-			if(timestamp.after(request.getDueDate())) request.setStatus(StatusType.CLOSED);
+			if(compareTimestamp.after(request.getDueDate())) request.setStatus(StatusType.CLOSED);
 		}
 	}
 }

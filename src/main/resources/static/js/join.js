@@ -382,6 +382,12 @@ let joinInit = {
 				alert("소속 기관 연락처를 적어주세요!");
 				return false;
 			}
+			
+			var regex = /^\d{2,3}\d{3,4}\d{4}$/;
+			if(!regex.test( $("#orgphone").val() )){
+				alert("기관 전화번호를 정확하게 입력해주세요.(하이픈(-)은 제거해주세요)");
+				return false;
+			}
 		}	
 		return true;
 	},
@@ -443,7 +449,7 @@ let joinInit = {
 		
 		var regex = /^\d{2,3}\d{3,4}\d{4}$/;
 		if(!regex.test( userPhone )){
-			alert("하이픈(-) 없이 번호만 입력해주세요.");
+			alert("전화번호를 정확하게 입력해주세요.(하이픈(-)은 제거해주세요)");
 			return;
 		}
 		

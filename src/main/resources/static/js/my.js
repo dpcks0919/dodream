@@ -331,7 +331,7 @@ let myInit = {
 	},
 		
 	update:function(){
-			
+					
 		var birthyear = $("#birthyear").val();
 		var birthmonth =  $("#birthmonth").val();
 	 	var birthdate =  $("#birthdate").val();	
@@ -349,6 +349,11 @@ let myInit = {
 				alert("이메일 형식에 맞게 작성해주세요.");
 				return false;
 			}
+			
+			if($("#useremail").val() != $("#originalEmail").val() && !myInit.emailCheck($("#useremail").val())){
+				alert("중복되는 이메일이 존재합니다. 다시 한번 확인해주세요.");
+				return false;
+			}
 		}
 		var userEmail = $("#useremail").val().trim();
 		
@@ -360,13 +365,27 @@ let myInit = {
 			}
 			var regex = /^\d{2,3}\d{3,4}\d{4}$/;
 			if(!regex.test($("#userphone").val())){
-				alert("하이픈(-) 없이 번호만 입력해주세요.");
+				alert("전화번호를 정확하게 입력해주세요.(하이픈(-)은 제거해주세요)");
+				return false;
+			}
+		}	
+		var userPhone = $("#userphone").val();
+
+		// orgPhone 체크
+		if($("#orgphone").length){
+			if(!$("#orgphone").val()){
+				alert("기관 연락처를 입력해주세요.");
+				return false;
+			}
+			var regex = /^\d{2,3}\d{3,4}\d{4}$/;
+			if(!regex.test($("#orgphone").val())){
+				alert("기관 전화번호를 정확하게 입력해주세요.(하이픈(-)은 제거해주세요)");
 				return false;
 			}
 		}	
 		
-		var userPhone = $("#userphone").val();
-		
+		var orgPhone = $("#orgphone").val();
+				
 		let data = {
 			loginId : $("#loginId").val(),
 			userName : $("#username").val(),
@@ -460,7 +479,27 @@ let myInit = {
 				location.href = "/user/mypage";
 			}
 		});
-	}
+	},
+	
+	emailCheck:function(useremail){	// email 중복 체크
+		var emailCheckFlag = false;
+		$.ajax({
+			type: "POST",
+			url: "/emailCheckProc",
+			data: {useremail: useremail.trim()},
+			async: false,
+		}).done(function(resp){ 
+			if(resp.status == 500){
+				alert("emailCheck 에러");
+			}else{
+				emailCheckFlag = resp.data;
+			}
+		}).fail(function(error){
+			console.log("emailCheck에러: " + JSON.stringify(error));
+		}); 
+		return emailCheckFlag;
+	},
+	
 	
 }
 

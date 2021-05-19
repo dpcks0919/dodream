@@ -52,7 +52,7 @@ function openMenu() {
 
 
 	if(rq.status == 'DELETED') status = "<span style='color:red'>삭제됨</span>";
-	else if(c_time > d_time || rq.status == 'CLOSED') status = "<span style='color:red'>마감</span>";
+	else if(rq.status == 'CLOSED') status = "<span style='color:red'>마감</span>";
     else status = "응답 대기중";
 
     let regDate = rq.regDate.substring(0,10);
@@ -104,7 +104,7 @@ function openMenu() {
 		});
 	} else if( rq.status == 'DELETED') {
 		$(".btn-res").on("click", () => {
-			alert("마감되었습니다.");
+			alert("삭제되었습니다.");
 		});
 	} else{
 		$(".btn-res").on("click", () => {
@@ -405,7 +405,7 @@ function goDetail_myrequest(rq) {
 	
     var status = "";
     if(rq.status == 'DELETED') status = "삭제됨";
-	else if(c_time > d_time || rq.status == 'CLOSED') status = "마감";
+	else if(rq.status == 'CLOSED') status = "마감";
     else status = "응답 대기중";
 
 	var client_type = rq.clientType;

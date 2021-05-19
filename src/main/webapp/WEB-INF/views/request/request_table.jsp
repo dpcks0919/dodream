@@ -53,10 +53,10 @@
 					requestItem: arr,
 				};
 			</script>
-			<tr class="requestTr" style="<c:if test='${request.status == "CLOSED"}'>color:#e5e5e5;</c:if>" >
+			<tr class="requestTr" style="<c:if test='${request.status == "CLOSED" || request.status == "DELETED"}'>color:#e5e5e5;</c:if>" >
 				<td class="table-num">${request.id}</td>
-				<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold" 
-				style="<c:if test='${ today >= duedate }'>color: #e5e5e5 </c:if>">
+				<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold" >
+				<%-- style="<c:if test='${ today >= duedate }'>color: #e5e5e5 </c:if>" --%>
 				${request.title} </td>
 				<td class="table-date">${regdate}</td>
         <!-- 

@@ -59,7 +59,7 @@
 								</div>
 							</div>
 							<div class="input-content">
-								<span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br> <input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력"> <span
+								<span class="input-title">이메일주소</span><span>&nbsp;<em>*</em></span><br> <input class="text-input" type="email" name="usermail" id="useremail" placeholder="이메일주소 입력"> <input id="originalEmail" style="display:none"><span
 									class="extra-info">주변 이웃들의 필요를 메일로 받으실 수 있습니다. <br>메일 수신 동의&nbsp;&nbsp; <span> <label><input type="radio" name="mail_rcv" value="1" id="mail_rcv" checked> 예</label>&nbsp;&nbsp;
 										<label><input type="radio" name="mail_rcv" value="0" id="mail_rcv"> 아니요</label>
 								</span></span>
@@ -187,6 +187,7 @@
 			}
 			
 			$('#useremail').val('${user.userEmail}');
+			$('#originalEmail').val('${user.userEmail}');// to be used for update() function
 			$('#userphone').val('${user.userPhone}');
 			$('#roadAddrPart1').val('${user.address}');
 			$('#orgname').val('${user.orgName}');
