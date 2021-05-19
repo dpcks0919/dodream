@@ -213,7 +213,7 @@ table td {
 								<c:set var="status" value="마감"/>
 							</c:when>
 							<c:when test="${request.status == 'DELETED'}" >
-								<c:set var="status" value="마감"/>
+								<c:set var="status" value="삭제"/>
 							</c:when>
 						</c:choose>
 												
