@@ -25,7 +25,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     	PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
     	
     	if( principal.getUser().getLoginCount() == 0 ) {
-            getRedirectStrategy().sendRedirect(request, response, "/joinFormMain_s");
+            getRedirectStrategy().sendRedirect(request, response, "/joinForm_privacy_s");
     	}else {
             getRedirectStrategy().sendRedirect(request, response, targetUrl);
     	}
