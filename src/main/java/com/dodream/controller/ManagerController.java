@@ -26,44 +26,44 @@ public class ManagerController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("manager/manager")
+	@GetMapping("admin/admin")
 	public String managerPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		return "manager/main";
 	}
 	
 	//	User list
-	@GetMapping("manager/managerUserTable")
+	@GetMapping("admin/adminUserTable")
 	public String managerUserList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("users", userService.readUserList(pageable));
 		return "manager/manager_userTable";
 	}
 	//	User detail
-	@GetMapping("manager/managerUserDetail")
+	@GetMapping("admin/adminUserDetail")
 	public String managerUserDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		return "manager/manager_userDetail";
 	}
 	
 	//	Request list
-	@GetMapping("manager/managerRequestTable")
+	@GetMapping("admin/adminRequestTable")
 	public String managerRequestList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("requests", requestService.readRequestList(pageable));
 		return "manager/manager_requestTable";
 	}
 	
 	//	Request detail
-	@GetMapping("manager/managerRequestDetail")
+	@GetMapping("admin/adminRequestDetail")
 	public String managerRequestDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		return "manager/manager_requestDetail";
 	}
 	
 	//	Reply list
-	@GetMapping("manager/managerReplyTable")
+	@GetMapping("admin/adminReplyTable")
 	public String managerReplyList(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		model.addAttribute("replys", replyService.readReplyList_manager(pageable));
 		return "manager/manager_replyTable";
 	}
 	//	Reply detail
-	@GetMapping("manager/managerReplyDetail")
+	@GetMapping("admin/adminReplyDetail")
 	public String managerReplyDetail(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		return "manager/manager_replyDetail";
 	}
