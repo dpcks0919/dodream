@@ -16,6 +16,9 @@ public class RequestItemListener {
     public void preUpdate(RequestItem requestItem) {
 		boolean isClosed = true;
 		Request request = requestItem.getRequest();
+		
+		if(request.getStatus() == StatusType.NON_APPROVED) return;	// non_approved일 경우 변화 없음
+		
 		List<RequestItem> requestItemList = request.getRequestItem();
 		
 		if(requestItem.getItemNum() == requestItem.getReceivedNum()) {
