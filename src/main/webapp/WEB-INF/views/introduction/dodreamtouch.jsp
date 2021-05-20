@@ -250,6 +250,10 @@
 									<td class="text-white-hidden">이종민</td>
 									<td style="padding-top:0.75rem;">(현) 흥해교회 전도사</td>
 								</tr>
+								<tr>
+									<td class="text-white-hidden">이종민</td>
+									<td style="padding-top:0.75rem;">(현) VATECH 플랫폼사업팀 연구원</td>
+								</tr>
 							</table>
 						</div>
 					</div>
