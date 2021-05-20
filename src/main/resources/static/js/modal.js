@@ -523,6 +523,7 @@ function goDetail_myrequest(rq) {
 
 //myrespose 나의 응답용 JS
 function goDetail_myreply(rp, _state) {
+	$("#rp_item0").empty();
 	var html_text = "<tr><th style='width:17.5%;'>종류</th><th style='width:15.5%;'>내역</th><th style='width:35%'>내 응답량</th><th style='width:10%;'>현재량</th><th style='width:10%;'>목표량</th></tr>";
 	html_text += "<tr class='needs-category' id='rp_item0'></tr>";
 	$(".info-table").html(html_text);
@@ -636,10 +637,9 @@ function goDetail_myreply(rp, _state) {
 			var count = 0;
 			  for(var i = 0; i < items.length; i++) {
 			      let needs = items[i].itemNum - items[i].receivedNum;
-				if(items[i].replyNum != 0) {
 					count++;
 			      if(i == 0) {
-			           if(items[i].requestType == "재정") {
+			          if(items[i].requestType == "재정") {
 			             $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum + "</td><td>" + items[i].receivedNum + "원</td><td><b>" + items[i].itemNum + "원</b></td>");
 			          } else {
 			            $("#rp_item0").html("<td><b>" + items[i].requestType + "</b></td><td>" + items[i].itemName + "</td><td>" + items[i].replyNum + "</td><td>" + items[i].receivedNum + "</td><td><b>" + items[i].itemNum + "</b></td>");
@@ -661,7 +661,6 @@ function goDetail_myreply(rp, _state) {
 			          }
 			        }
 			      }
-				}
 		    }
 		if(count == 0) {
 			$("#rp_item0").html("<td Colspan='5' style='text-align:center; padding-top:1.5rem!important; '><p>현재 응답한 아이템이 없습니다.</p></td>");
