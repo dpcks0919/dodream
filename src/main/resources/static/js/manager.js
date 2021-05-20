@@ -116,7 +116,7 @@ function openModal_manager(id, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerUserDetail",
+			url : "/admin/adminUserDetail",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -281,7 +281,7 @@ function openModal_manager(id, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerRequestDetail",
+			url : "/admin/adminRequestDetail",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -300,7 +300,7 @@ function openModal_manager(id, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerReplyDetail",
+			url : "/admin/adminReplyDetail",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -323,7 +323,7 @@ function menuToggle(num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerUserTable",
+			url : "/admin/adminUserTable",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -339,7 +339,7 @@ function menuToggle(num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerRequestTable",
+			url : "/admin/adminRequestTable",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -355,7 +355,7 @@ function menuToggle(num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerReplyTable",
+			url : "/admin/adminReplyTable",
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -375,7 +375,7 @@ function paging(page, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerUserTable?page=" + page
+			url : "/admin/adminUserTable?page=" + page
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -391,7 +391,7 @@ function paging(page, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerRequestTable?page=" + page
+			url : "/admin/adminRequestTable?page=" + page
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -407,7 +407,7 @@ function paging(page, num) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/managerReplyTable?page=" + page
+			url : "/admin/adminReplyTable?page=" + page
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러발생");
@@ -425,7 +425,7 @@ function manager_viewRequest(rid) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/ManagerViewRequest?id=" + rid
+			url : "/admin/adminViewRequest?id=" + rid
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러 발생!");
@@ -603,7 +603,7 @@ function manager_viewReply(rid) {
 		$.ajax({
 		type : "GET",
 		traditional : true,
-		url : "/manager/ManagerViewReply?id=" + rid
+		url : "/admin/adminViewReply?id=" + rid
 	}).done(function(resp) {
 		if (resp.status == 500) {
 			alert("에러 발생!");
@@ -989,7 +989,7 @@ function manager_editRequest(rid) {
 		$.ajax({
 			type : "GET",
 			traditional : true,
-			url : "/manager/ManagerViewRequest?id=" + rid
+			url : "/admin/adminViewRequest?id=" + rid
 		}).done(function(resp) {
 			if (resp.status == 500) {
 				alert("에러 발생!");
@@ -1199,7 +1199,7 @@ function update(){
 			alert("수정에 실패하였습니다.");
 		}else{
 			alert("수정이 완료되었습니다.");
-			location.href = "manager";
+			location.href = "admin";
 		}
 	}).fail(function(error){
 		console.log(JSON.stringify(error));
@@ -1230,7 +1230,7 @@ function withdraw() {
 				alert("삭제에 실패하였습니다.");
 			}else{
 				alert("삭제되었습니다.");
-				location.href = "manager";
+				location.href = "admin";
 			}
 		}).fail(function(error){
 			alert(error);

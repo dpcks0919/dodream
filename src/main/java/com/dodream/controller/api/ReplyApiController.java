@@ -88,7 +88,7 @@ public class ReplyApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);		
 	}
 	
-	@GetMapping("manager/ManagerViewReply")
+	@GetMapping("admin/adminViewReply")
 	public ReplyDto ManagerViewReply(Model model, @RequestParam("id") String id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		Reply reply = replyService.getReply(Integer.parseInt(id));
 		return new ReplyDto (reply, null);
