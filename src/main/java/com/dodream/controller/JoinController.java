@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JoinController {
@@ -43,6 +42,11 @@ public class JoinController {
 	public String joinForm_privacy(Model model, @PathVariable(value="page") String page) {
 		model.addAttribute("page", page);
 		return "join/privacy";
+	}
+	
+	@GetMapping("/joinForm_privacy_s")
+	public String joinForm_privacy_s(Model model) {
+		return "join/privacy_s";
 	}
 	
 }

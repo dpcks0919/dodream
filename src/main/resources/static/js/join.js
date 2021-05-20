@@ -574,7 +574,6 @@ let privacy =  {
 			//var scrollHeight = $(this).prop('scrollHeight');
 			
 			
-			//if (scrollTop + 350 > scrollHeight) {  -> 스크롤 다 내려야 하는 경우
 			if (scrollTop > 0) {
 				$("#agree").removeAttr("disabled");
 				$("#disagree").removeAttr("disabled");
@@ -593,11 +592,58 @@ let privacy =  {
 				});
 			}
 		});
+		
 	},
-	submit: function() {
-		$()
+	
+	init_s: function(){
+		$("input:radio[name=privacy]").click(function(){
+			if($("#agree").prop("disabled") == false) {
+				$('input[name="privacy"]').each(function() {
+					var checked = $(this).prop('checked');
+					if(checked) {
+						$(this).css("background-color", "black");
+					} else {
+						$(this).css("background-color", "white");
+					}
+				});
+				if($("input:radio[name=privacy]:checked").val()=='agree'){
+					$("#privacy_submit").css("color", "#e95378");
+					$("#privacy_submit").css("border", "1px solid #e95378");
+					document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/joinFormMain_s'");
+				} else {
+					$("#privacy_submit").css("color", "#e3e3e3");
+					$("#privacy_submit").css("border", "1px solid #e3e3e3");
+					document.getElementById("privacy_submit").setAttribute("onClick", "alert('약관 동의 후 이용 가능합니다.')");
+				}
+			}
+		});
+		
+		$("#privacy_scroll").scroll(function(){
+			var scrollTop = $(this).scrollTop();
+			//var scrollHeight = $(this).prop('scrollHeight');
+			
+			
+			if (scrollTop > 0) {
+				$("#agree").removeAttr("disabled");
+				$("#disagree").removeAttr("disabled");
+				$("#privacy-text1").css("color","black");
+				$("#privacy-text2").css("color","black");
+				$("#privacy_submit").attr("disabled");
+				$("#agree").css("border", "1px solid black");
+				$("#disagree").css("border", "1px solid black");
+				$('input[name="privacy"]').each(function() {
+					var checked = $(this).prop('checked');
+					if(checked) {
+						$(this).css("background-color", "black");
+					} else {
+						$(this).css("background-color", "white");
+					}
+				});
+			}
+		});
+		
 	}
-}
+};
 
 
 
