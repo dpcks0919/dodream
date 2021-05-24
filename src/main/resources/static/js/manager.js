@@ -122,6 +122,7 @@ function openModal_manager(id, num) {
 				alert("에러발생");
 			} else {
 				let user = id;
+
 				document.getElementById("Wrapper").style.filter = "blur(5px)";
 				$("#view-detail").css("display", "block");
 				$("#modal-bg").css("display", "block");
@@ -163,6 +164,7 @@ function openModal_manager(id, num) {
 				$("#input_uid").val(user.uid);
 				if(user.is_social == 1) {
 					$("#input_uid_container").css("display", "none");
+					$("#input_upw_container").css("display", "none");
 				}
 				$("#input_uname").val(user.uname);
 				$("#input_uphone").val(user.uphone);
@@ -532,6 +534,9 @@ function manager_viewRequest(rid) {
 					$("#rq_title").prop("disabled","disabled");
 					$("#rq_clientType").prop("disabled","disabled");
 					$("#rq_status").prop("disabled","disabled");
+					$("#requestDueYear").prop("disabled","disabled");
+					$("#requestDueMonth").prop("disabled","disabled");
+					$("#requestDueDay").prop("disabled","disabled");
 					//$("#rq_urgentLevel").prop("disabled","disabled");
 					$('.summernote').summernote('disable');
 					$("#rq_search").prop("disabled","disabled");
