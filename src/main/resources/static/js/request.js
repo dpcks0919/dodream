@@ -194,7 +194,7 @@ function upload(step) {
     alert("제목을 입력해주세요!");
     return 0;
   }
-  if(contents == ''   || contents == '<p><br></p>') {
+  if(contents == ''   || contents == '<p><br></p>' || contents == '<br>') {
     alert('내용을 입력해주세요!');
     return 0;
   }
