@@ -98,7 +98,7 @@
 					<table style="table-layout: fixed">
 						<thead>
 							<tr style="border-bottom: 3px solid #d3d3d3;">
-								<th class="table-num">등록번호</th>
+								<th class="table-num">No</th>
 								<th class="table-title">응답 내용</th>
 								<th class="table-date">등록일</th>
 								<th class="table-status">상태</th>
