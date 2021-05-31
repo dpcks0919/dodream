@@ -542,7 +542,7 @@ function manager_viewRequest(rid) {
 					$("#rq_search").prop("disabled","disabled");
 					$(".add_item-button").prop("disabled","disabled");
 				} else {
-					$("#rq_save").attr("onclick", ("manager_editRequest('"+ req.id +"')"));
+					$("#rq_save").attr("onclick", ("manager_editRequest('"+ req.id + "-" + req.status +"')"));
 					$("#rq_delete").attr("onclick", ("manager_deleteRequest('"+ req.id +"')"));					
 				}
 			}
@@ -990,7 +990,9 @@ function checkMoney(me) {
 	});
 }
 
-function manager_editRequest(rid) {
+function manager_editRequest(input) {
+		var rid = input.split('-')[0];
+		var old_status = input.split('-')[1];	// old status value
 		$.ajax({
 			type : "GET",
 			traditional : true,
@@ -1084,6 +1086,26 @@ function manager_editRequest(rid) {
 				//var urgent_level = $("#rq_urgentLevel").val();
 				var rq_status = $("#rq_status").val();
 				var duedate = new Date($('#requestDueYear').val(), $('#requestDueMonth').val()-1, $('#requestDueDay').val(), 0, 0, 0);
+				
+				// data for notifyUser(text, email)
+				let notifyData = {
+					title: rqTitle,
+					clientType: client_type,
+					requestAddress : rqAddress,
+					latitude : rqLat,
+					longitude : rqLong,
+					urgentLevel : 3,
+					dueDate : duedate,
+					description : rqContents,
+					status : "APPROVED",			
+					showFlag : 0,
+				};
+				
+				if(old_status != 'APPROVED' && rq_status == 'APPROVED'){	// when the request is approved by the manager
+					alert("OLD: " + old_status + ", NEW: " + rq_status);
+					alert(rqLat + " : " +  rqLong);
+					notifyUser(rqLat, rqLong, notifyData);
+				}
 				
 				let data3 = {
 					id : rqID,
@@ -1272,5 +1294,96 @@ function pwChange(){
 				}
 			});
 		}
+	}
+	
+	function notifyUser(requestLat, requestLng, request){		
+		$.ajax({
+			type: "POST",
+			url: "/getValidUserListProc",
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("getValidUserListProc 문제 발생!");
+			}
+			else{
+				// 1. validUserList 받기
+				var validUserList = resp.data;	
+				var notifyTextUserList = [];	// notify text할 유저들 리스트
+				var notifyEmailUserList = [];	// notify email할 유저들 리스트
+				
+				// 2. for문 돌면서 user의 notification_radius 안에 있는지 확인
+				validUserList.forEach(function(list, index) { 
+					if(list.notificationRadius >= getDistance(list.latitude, list.longitude, requestLat, requestLng) / 1000){
+						// 2-1. emailFlag == 1 이면 emailList에 넣음 
+						if(list.emailFlag == 1) {
+							notifyEmailUserList.push(list);
+						}
+						
+						// 2-2. msgFlag == 1 이면 msgList에 넣음 
+						if(list.msgFlag == 1){
+							notifyTextUserList.push(list);
+						}
+					}
+				});				
+				// 3. 각각 msg, email 보내기
+				notifyByEmail(notifyEmailUserList, request);
+				notifyByText(notifyTextUserList, request);
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});		
+	}
+	
+	function notifyByEmail(userList, request){
+		$.ajax({
+			type: "POST",
+			data: {
+				stringUserList: JSON.stringify(userList),
+				stringRequest: JSON.stringify(request)
+			},
+			dataType : 'json',
+			traditional: true,
+			url: "/notifyByEmailProc",
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("notifyByEmailProc 문제 발생!");
+			}else{
+				//alert("요청 등록 후 주변 이웃들에게 이메일 전송");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});			
+	}
+	
+	function notifyByText(userList, request){	
+		$.ajax({
+			type: "POST",
+			data: {
+				stringUserList: JSON.stringify(userList),
+				stringRequest: JSON.stringify(request)
+			},
+			dataType : 'json',
+			traditional: true,
+			url: "/notifyByTextProc",
+		}).done(function(resp){
+			if(resp.status == 500) {
+				alert("notifyByTextProc 문제 발생!");
+			}else{
+				//alert("요청 등록 후 주변 이웃들에게 문자 전송");
+			}
+		}).fail(function(error){
+			console.log(JSON.stringify(error));
+		});			
+	}
+	
+	var polyline=new daum.maps.Polyline();
+	// 두 좌표 사이의 거리를 구하는 함수
+	function getDistance(firstLongi, firstLati, secondLongi, secondLati){
+		var path = [
+			new kakao.maps.LatLng(firstLati, firstLongi),
+			new kakao.maps.LatLng(secondLati, secondLongi)
+		];
+		polyline.setPath(path);
+		
+		return polyline.getLength();
 	}
 	
