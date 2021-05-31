@@ -15,10 +15,10 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
 	
 	//date( DATE_ADD(due_date), INTERVAL ?1 DAY ) ) >=  date(now())
 	
-	@Query(value = "SELECT * FROM request where date( DATE_ADD(due_date, INTERVAL ?1 DAY ) ) >=  date(now()) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	@Query(value = "SELECT * FROM request where date( DATE_ADD(due_date, INTERVAL ?1 DAY ) ) >=  date(now()) and ( status = 'APPROVED' or status = 'CLOSED' ) order by due_date asc", nativeQuery = true)
 	Page<Request> findRequestByInterval(int interval, Pageable pageable);
 	
-	@Query(value = "SELECT * FROM request where date( DATE_ADD(due_date , INTERVAL ?1 DAY ) ) >=  date(now()) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)
+	@Query(value = "SELECT * FROM request where date( DATE_ADD(due_date , INTERVAL ?1 DAY ) ) >=  date(now()) and ( status = 'APPROVED' or status = 'CLOSED' ) order by due_date asc", nativeQuery = true)
 	Request[] findRequestByInterval(int interval);
 	
 	@Query(value = "SELECT * FROM request where id= ?1 and date( DATE_ADD(due_date, INTERVAL ?2 DAY ) ) >=  date(now()) and ( status = 'APPROVED' or status = 'CLOSED' )", nativeQuery = true)

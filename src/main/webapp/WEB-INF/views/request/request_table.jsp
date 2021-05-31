@@ -13,17 +13,17 @@
 <table style="table-layout: fixed">
 	<thead>
 		<tr style="border-bottom: 3px solid #d3d3d3;">
-			<th class="table-num">등록번호</th>
+			<th class="table-num">No </th>
 			<th class="table-title">요청 내용</th>
-			<th class="table-date">등록일</th>
 			<th class="table-date">마감일</th>
+			<th class="table-date">상태</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:set var="currentPage" value="${requests.pageable.pageNumber}"></c:set>
 		<c:forEach var="request" items="${requests.content}">
 			<fmt:formatDate value="${request.regDate}" pattern="yyyy.MM.dd" var="regdate" />
-			<fmt:formatDate value="${request.dueDate}" pattern="yyyyMMdd" var="duedate" />
+			<fmt:formatDate value="${request.dueDate}" pattern="yyyy.MM.dd" var="duedate" />
 			<script>
 				var arr = new Array();
 				<c:forEach items="${request.requestItem}" var="item">
@@ -58,11 +58,11 @@
 				<td onclick="goDetail_request(rq${request.id});" href="/user/" class="table-title fbold" >
 				<%-- style="<c:if test='${ today >= duedate }'>color: #e5e5e5 </c:if>" --%>
 				${request.title} </td>
-				<td class="table-date">${regdate}</td>
-				<td class="table-date">${duedate.substring(0,4)}.${duedate.substring(4,6)}.${duedate.substring(6,8)}</td>
-        		<!--  
-        		<td class="table-urgentLevel"><c:if test='${ request.urgentLevel == 1 }'>매우 긴급(3일 이내) </c:if><c:if test='${ request.urgentLevel == 2 }'>긴급(14일 이내) </c:if><c:if test='${ request.urgentLevel > 2 }'>보통(14일 이상) </c:if></td>
-        		 -->
+				<td class="table-date">${duedate}</td>
+				<td class="table-status">
+				<c:if test='${ request.status == "APPROVED" }'>응답 대기중 </c:if>
+				<c:if test='${ request.status == "CLOSED" }'>마감 </c:if>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
