@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +36,7 @@ import com.dodream.repository.UserInterestRepository;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class RequestService {
