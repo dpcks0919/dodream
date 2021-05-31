@@ -432,8 +432,6 @@ let requestInit = {
 				// 3. 각각 msg, email 보내기
 				requestInit.notifyByEmail(notifyEmailUserList, request);
 				requestInit.notifyByText(notifyTextUserList, request);
-				//끝나면 화면 전환
-				location.href = "/requestMap";
 			}
 		}).fail(function(error){
 			console.log(JSON.stringify(error));
@@ -535,9 +533,8 @@ let requestInit = {
 						requestInit.saveRequestItem(itemList[i], resp.data);
 					}
 					closeModal_request();
-					// 해당 request 정보 user에게 notify하기 (JS 미리 실행 방지용)
-
-					requestInit.notifyUser(Lat, Lng, data);
+					
+					location.href = "/requestMap";
 				} 
 			}).fail(function(error){
 				console.log(JSON.stringify(error));

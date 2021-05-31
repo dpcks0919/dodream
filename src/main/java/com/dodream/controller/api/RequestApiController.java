@@ -132,11 +132,10 @@ public class RequestApiController {
 	
 	// 새로운 요청 등록
 	@PostMapping("/requestSaveProc")
-	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		Request newRequest = requestService.saveRequest(request, principalDetails);
+	public ResponseDto<Request> requestSave(@RequestBody Request request, @AuthenticationPrincipal PrincipalDetails principalDetails) {		
+		if( principalDetails == null  ) return new ResponseDto<Request> ( HttpStatus.INTERNAL_SERVER_ERROR.value() , null);
 		
-		if( principalDetails == null  )
-			return new ResponseDto<Request> ( HttpStatus.INTERNAL_SERVER_ERROR.value() , null);
+		Request newRequest = requestService.saveRequest(request, principalDetails);
 		
 		return new ResponseDto<Request> (HttpStatus.OK.value(), newRequest);
 	}
