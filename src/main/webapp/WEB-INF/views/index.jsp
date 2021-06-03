@@ -96,7 +96,7 @@
 						<span class="sec3-text1">돕고 싶은 재화</span>
 						<button class="tbox-center tbox-small" id="btn-stuff">물품</button>
 						<button class="tbox-center tbox-small" id="btn-finance">재정</button>
-						<button class="tbox-center tbox-small" id="btn-service">서비스</button>
+						<button class="tbox-center tbox-small" id="btn-service">봉사</button>
 						<button class="tbox-center tbox-small" id="btn-etc">기타</button>
 					</div>
 					<br>
