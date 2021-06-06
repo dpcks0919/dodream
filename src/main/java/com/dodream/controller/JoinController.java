@@ -46,6 +46,7 @@ public class JoinController {
 	
 	@GetMapping("/joinForm_privacy_s")
 	public String joinForm_privacy_s(Model model) {
+		model.addAttribute("page", 5);
 		return "join/privacy_s";
 	}
 	

@@ -558,6 +558,8 @@ let privacy =  {
 						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/naver'");
 					} else if($("#input-page").val() == 4) {
 						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/oauth2/authorization/google'");
+					} else if($("#input-page").val() == 5) {
+						document.getElementById("privacy_submit").setAttribute("onClick", "document.location.href='/joinFormMain_s'");
 					}
 				} else {
 					$("#privacy_submit").css("color", "#e3e3e3");
