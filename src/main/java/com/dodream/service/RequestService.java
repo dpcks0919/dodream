@@ -200,14 +200,14 @@ public class RequestService {
 		params.put("text", "[두드림터치] 새로운 요청이 등록되었습니다: " + requestTitle); //메시지 내용 
 		params.put("app_version", "test app 1.2"); 
 		
-//		try { 
-//			JSONObject obj = (JSONObject) coolsms.send(params); 
-//			System.out.println("전송 결과: " + obj.toString()); //전송 결과 출력 
-//		} catch (CoolsmsException e) {
-//			System.out.println(e.getMessage()); 
-//			System.out.println(e.getCode()); 
-//			System.out.println("Request Send Text Error!");
-//		}
+			try { 
+				JSONObject obj = (JSONObject) coolsms.send(params); 
+				System.out.println("전송 결과: " + obj.toString()); //전송 결과 출력 
+			} catch (CoolsmsException e) {
+				System.out.println(e.getMessage()); 
+				System.out.println(e.getCode()); 
+				System.out.println("Request Send Text Error!");
+			}
 		}
 	
 	//해당 request 정보 email 전송하는 메소드 

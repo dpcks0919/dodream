@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,7 @@ import com.dodream.model.User;
 import com.dodream.repository.UserRepository;
 
 import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class UserService {
@@ -196,14 +198,14 @@ public class UserService {
 		params.put("text", "[두드림터치]\n인증코드: " + randNum); //메시지 내용 
 		params.put("app_version", "test app 1.2"); 
 		
-//		try { 
-//			JSONObject obj = (JSONObject) coolsms.send(params); 
-//			System.out.println("전송 결과: " + obj.toString()); //전송 결과 출력 
-//		} catch (CoolsmsException e) {
-//			System.out.println(e.getMessage()); 
-//			System.out.println(e.getCode()); 
-//			return null;	//발송불가 시 null 리턴 
-//		}
+		try { 
+			JSONObject obj = (JSONObject) coolsms.send(params); 
+			System.out.println("전송 결과: " + obj.toString()); //전송 결과 출력 
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage()); 
+			System.out.println(e.getCode()); 
+			return null;	//발송불가 시 null 리턴 
+		}
 //		System.out.println(randNum);
 		
 		return randNum; // 최종적으로 verifyCode 리턴 
