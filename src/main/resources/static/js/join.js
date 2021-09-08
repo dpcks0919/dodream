@@ -465,7 +465,7 @@ let joinInit = {
 					}
 					else{
 			    		verifyCode = data.data;	// assigning the rand number(verification code): 전역 변수에 할당 
-						alert("할당된 확인코드: " + verifyCode);
+						//alert("할당된 확인코드: " + verifyCode);
 						/* TimeOut */
 						let count = 120;
 						let min = 0;
