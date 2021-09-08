@@ -32,17 +32,17 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://www.dodreamtouch.com/dodream777?serverTimezone=Asia/Seoul 
-#    username: dodream777 
-#    password: tomleegood77 
-    
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
-    username: root
-    password: rootroot
+    url: jdbc:mysql://www.dodreamtouch.co.kr/dodream777?serverTimezone=Asia/Seoul 
+    username: dodream777 
+    password: tomleegood77 
+    
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/dodream?serverTimezone=Asia/Seoul
+#    username: root
+#    password: rootroot
     
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -65,18 +65,19 @@ spring:
       client:
         registration:
           google:
-            client-id: 1033840457298-rlc273i8h93141vrn48lf5570fanfdh3.apps.googleusercontent.com #995380518815-6u3ulp46ahsdckqnra5kee07mufcfuiq.apps.googleusercontent.com
-            client-secret: nptt-UU2Js1aetc81vqFWXz3 #-EIOhv8qi6YYgX2PnzidY8I-
+            client-id: 468483821039-ofginhbfm4edc44f643v8m9mupbj8eaq.apps.googleusercontent.com
+            client-secret: eARAiupOcUj_6jvUtjNr9Z7p
+            redirect-uri: https://dodreamtouch.co.kr/login/oauth2/code/google
             scope:
             - email
             - profile
             
-          facebook:
-            client-id: 447966159676824
-            client-secret: c8fe2c944384b01df522fcea40c3b603
-            scope:
-            - email
-            - public_profile
+#          facebook:
+#            client-id: 447966159676824
+#            client-secret: c8fe2c944384b01df522fcea40c3b603
+#            scope:
+#            - email
+#            - public_profile
           
           naver:
             client-id: V2w3AgJchgKhycTL7zo5 #fr8s0Pzz2AAFa6VMgoyT
@@ -87,7 +88,7 @@ spring:
             client-name: Naver
             authorization-grant-type: authorization_code
             #redirect-uri: http://localhost:8080/login/oauth2/code/naver
-            redirect-uri: http://dodreamtouch.com/login/oauth2/code/naver
+            redirect-uri: https://dodreamtouch.co.kr/login/oauth2/code/naver
 
           kakao:
             client-id: 75934403dc0faf5d40216188a499879a #ccd2c184a87ab5205b193da983dd46f4
@@ -98,7 +99,7 @@ spring:
             client-name: kakao
             authorization-grant-type: authorization_code
             #redirect-uri: http://localhost:8080/login/oauth2/code/kakao # localhost
-            redirect-uri: http://dodreamtouch.com/login/oauth2/code/kakao # dodreamtouch.com
+            redirect-uri: https://dodreamtouch.co.kr/login/oauth2/code/kakao # dodreamtouch.com
             client-authentication-method: POST
             
         provider:
@@ -125,8 +126,8 @@ api:
     send-phone: '0542621070'
 
 summernote:
-  #upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/  
-  upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/
+  upload: /dodream777/tomcat/webapps/ROOT/WEB-INF/classes/static/image/summernote/  
+  #upload: /Users/yechankim/git/dodream/src/main/resources/static/image/summernote/
   
 request:
   interval: 60
